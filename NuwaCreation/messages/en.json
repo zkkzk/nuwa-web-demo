@@ -39,12 +39,12 @@
   },
   "Metadata": {
     "description": "Sweet as Honey",
-    "title": "Character Editor | CyberWaifu"
+    "title": "Character Editor | Nuwa"
   },
   "Navigation": {
     "character": "Character",
     "communityediton": "Community Edition",
-    "cyberwaifu": "CyberWaifu",
+    "Nuwa": "Nuwa",
     "github": "GitHub",
     "greetings": "Alternative Greetings",
     "help": "Help",

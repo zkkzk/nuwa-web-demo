@@ -20,11 +20,7 @@ export default function Character() {
         }}
       >
         <Tab key="inforMation" title={t('Character.information')}>
-          <Card>
-            <CardBody>
-              <InforMation/>
-            </CardBody>
-          </Card>  
+          <InforMation/>
         </Tab>
         <Tab key="description" title={t('Character.description')}>
           <Card>

@@ -64,7 +64,7 @@ export function useChara() {
             "id": 1,
             "keys": [],
             "secondary_keys": [],
-            "comment": "CyberWaifu.org",
+            "comment": "Nuwa.org",
             "content": "",
             "constant": true,
             "selective": true,

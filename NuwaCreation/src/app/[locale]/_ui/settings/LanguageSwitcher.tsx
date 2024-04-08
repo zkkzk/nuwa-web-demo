@@ -50,13 +50,13 @@ function LanguageSwitcher() {
             </>
           </ModalContent>
         </Modal>
-      <button
+      <Button
         onClick={onOpen}
-        type="button"
-        className="font-semibold text-indigo-600 hover:text-indigo-500"
+        color="primary"
+        variant="flat"
       >
         {t('Settings.changelanguage')}
-      </button>
+      </Button>
     </>
   );
 }

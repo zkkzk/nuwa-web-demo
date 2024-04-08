@@ -75,9 +75,9 @@ function Previews() {
           if(data.data.character_book){
             setCharacter_Book(data.data.character_book)
           }
-          setCover(data.CyberWaifu_ORG_cover)
+          setCover(data.Nuwa_ORG_cover)
           delete data.data.character_book;
-          delete data.CyberWaifu_ORG_cover;
+          delete data.Nuwa_ORG_cover;
           data.data.extensions.world = '';
           setChara(data)
           setIsReadCharLoding(false)

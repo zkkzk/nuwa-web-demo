@@ -31,7 +31,7 @@ export async function POST(request: Request) {
   const charaText = charaChunks[0].chara.text;
   const decodedCharaText = JSON.parse(Buffer.from(charaText, "base64").toString("utf8"));
 
-  decodedCharaText.CyberWaifu_ORG_cover = fullBase64Data;
+  decodedCharaText.Nuwa_ORG_cover = fullBase64Data;
 
   const modifiedCharaText = JSON.stringify(decodedCharaText);
   

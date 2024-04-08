@@ -25,12 +25,14 @@ const navigation = [
   { name: 'Navigation.previews', href: '/previews', icon: IdentificationIcon, current: false },
   { name: 'Navigation.settings', href: '/settings', icon: Cog6ToothIcon, current: false },
 ]
-const teams = [
-  { id: 1, name: 'Navigation.help', href: 'https://help.cyberwaifu.org', initial: 'H', current: false },
-  { id: 2, name: 'Navigation.serverstatus', href: 'https://status.cyberwaifu.org', initial: 'S', current: false },
-  { id: 3, name: 'Navigation.github', href: 'https://github.com/CyberWaifu-org/CharacterEditor', initial: 'G', current: false },
-  { id: 4, name: 'Navigation.dog', href: '/CC', initial: '🐕', current: false },
+const teams: any[] = [
 ]
+// const teams = [
+//   { id: 1, name: 'Navigation.help', href: '', initial: 'H', current: false },
+//   { id: 2, name: 'Navigation.serverstatus', href: '', initial: 'S', current: false },
+//   { id: 3, name: 'Navigation.github', href: '', initial: 'G', current: false },
+//   { id: 4, name: 'Navigation.dog', href: '', initial: '🐕', current: false },
+// ]
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
@@ -131,8 +133,9 @@ export default function Sidebar() {
                             ))}
                           </ul>
                         </li>
-                        <li>
-                          <div className="text-xs font-semibold leading-6 text-gray-400">{t('Navigation.cyberwaifu')}</div>
+                        {teams.length > 0 && (
+                          <li>
+                          <div className="text-xs font-semibold leading-6 text-gray-400">{t('Navigation.Nuwa')}</div>
                           <ul role="list" className="-mx-2 mt-2 space-y-1">
                             {teams.map((team) => (
                               <li key={team.name}>
@@ -162,6 +165,7 @@ export default function Sidebar() {
                             ))}
                           </ul>
                         </li>
+                        )}
                       </ul>
                     </nav>
                   </div>
@@ -213,37 +217,39 @@ export default function Sidebar() {
                     ))}
                   </ul>
                 </li>
-                <li>
-                  <div className="text-xs font-semibold leading-6 text-gray-400">{t('Navigation.cyberwaifu')}</div>
-                  <ul role="list" className="-mx-2 mt-2 space-y-1">
-                    {teams.map((team) => (
-                      <li key={team.name}>
-                        <Link
-                          target='_blank'
-                          href={team.href}
-                          className={classNames(
-                            team.current
-                              ? 'bg-neutral-900 text-white dark:bg-gray-800 dark:text-white'
-                              : 'text-black hover:text-white hover:bg-neutral-900 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800',
-                            'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-normal'
-                          )}
-                        >
-                          <span
+                {teams.length > 0 && (
+                  <li>
+                    <div className="text-xs font-semibold leading-6 text-gray-400">{t('Navigation.Nuwa')}</div>
+                    <ul role="list" className="-mx-2 mt-2 space-y-1">
+                      {teams.map((team) => (
+                        <li key={team.name}>
+                          <Link
+                            target='_blank'
+                            href={team.href}
                             className={classNames(
                               team.current
-                                ? 'text-indigo-600 border-indigo-600'
-                                : 'text-gray-400 border-gray-200 dark:bg-gray-800 dark:text-gray-50 group-hover:border-indigo-600 group-hover:text-indigo-600 dark:group-hover:text-gray-50 dark:group-hover:border-white',
-                              'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white'
+                                ? 'bg-neutral-900 text-white dark:bg-gray-800 dark:text-white'
+                                : 'text-black hover:text-white hover:bg-neutral-900 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-800',
+                              'group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-normal'
                             )}
                           >
-                            {team.initial}
-                          </span>
-                          <span className="truncate">{t(team.name)}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
+                            <span
+                              className={classNames(
+                                team.current
+                                  ? 'text-indigo-600 border-indigo-600'
+                                  : 'text-gray-400 border-gray-200 dark:bg-gray-800 dark:text-gray-50 group-hover:border-indigo-600 group-hover:text-indigo-600 dark:group-hover:text-gray-50 dark:group-hover:border-white',
+                                'flex h-6 w-6 shrink-0 items-center justify-center rounded-lg border text-[0.625rem] font-medium bg-white'
+                              )}
+                            >
+                              {team.initial}
+                            </span>
+                            <span className="truncate">{t(team.name)}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </li>
+                )}
                 <li className="-mx-6 mt-auto">
 
                 </li>

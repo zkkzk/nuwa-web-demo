@@ -15,7 +15,7 @@ export default function App() {
 
   return (
     <>
-      <Button color="danger" onPress={onOpen}>{t('Settings.idecidedtotry')}</Button>
+      <Button color="danger" variant="flat" onPress={onOpen}>{t('Settings.idecidedtotry')}</Button>
       <Modal  isOpen={isOpen} onOpenChange={onOpenChange}>
         <ModalContent >
           {(onClose) => (
