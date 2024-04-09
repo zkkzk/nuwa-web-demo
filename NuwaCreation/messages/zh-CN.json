@@ -43,6 +43,11 @@
     "protocol": "开源协议",
     "codeAddress": "开源地址"
   },
+  "Header": {
+    "nuwaLabs": "女娲实验室",
+    "roleai": "数字生命互动平台",
+    "BRC-1111": "BRC-1111"
+  },
   "Metadata": {
     "description": "甘之若饴",
     "title": "数字生命编辑器 | Nuwa"
