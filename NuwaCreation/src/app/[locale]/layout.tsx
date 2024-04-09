@@ -43,15 +43,18 @@ export default function RootLayout({
             <Sidebar/>
           </NextIntlClientProvider>
           <main className="lg:pl-72">
-            <NextIntlClientProvider messages={messages}>
-              <Header locale={locale} />
-            </NextIntlClientProvider>
-            <div className="px-4 sm:px-6 lg:px-8 min-w-[1080px] pt-4">{children}</div>
-            <div className="pb-10 pt-10">
+            <div className="min-w-[1080px]">
               <NextIntlClientProvider messages={messages}>
-                <Footer />
+                <Header locale={locale} />
               </NextIntlClientProvider>
+              <div className="px-4 sm:px-6 lg:px-8 pt-4">{children}</div>
+              <div className="pb-10 pt-10">
+                <NextIntlClientProvider messages={messages}>
+                  <Footer />
+                </NextIntlClientProvider>
+              </div>
             </div>
+            
           </main>
         </Providers>
       </body>
