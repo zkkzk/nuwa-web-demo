@@ -27,7 +27,7 @@
     "zipcover": "JPG|PNG|WEBP images will be automatically compressed"
   },
   "Greetings": {
-    "deletegreetings": "Delete Greetings",
+    "deletegreetings": "Delete",
     "thisoperationcannotbewithdrawn": "This operation cannot be withdrawn!"
   },
   "HomePage": {

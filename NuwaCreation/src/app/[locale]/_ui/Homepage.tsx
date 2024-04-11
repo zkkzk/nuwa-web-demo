@@ -18,7 +18,7 @@ function Homepage() {
       </Link> */}
       <div className="min-w-full bg-[#110F0E] text-white min-h-80 rounded-[40px] px-8 w-full relative" style={{minHeight: 320}}>
         <div className="pt-16 text-base font-semibold mb-6">{t('HomePage.title1')}</div>
-        <div className="text-4xl font-semibold mb-7 mr-72 min-h-6">{t('HomePage.title2')}</div>
+        <div className="text-4xl font-semibold mb-7 mr-[400px] min-h-6">{t('HomePage.title2')}</div>
         <div className="text-base pb-8">powered by {t('HomePage.nuwaLabs')}</div>
         <Image
           className="absolute bottom-0 right-0"
