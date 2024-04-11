@@ -8,7 +8,7 @@ import { useTranslations } from "next-intl";
 function Homepage() {
   const t = useTranslations();
   return (
-    <div className="mx-auto max-w-7xl pb-32 flex px-8 flex-col">
+    <div className="mx-auto max-w-7xl pb-32 flex px-8 flex-col min-w-[1080px]">
       
       {/* <Link
         href="/character"

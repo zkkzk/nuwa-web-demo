@@ -47,7 +47,6 @@ function InforMation_Description() {
       >
         {t('Character.description')}
       </label>
-      {/* <div className="absolute top-1 right-10 border border-solid border-[#D8D8D8] h-10 w-50">打开PList生成器</div> */}
       <div className="flex flex-row mt-2 grow">  
         <div className="mr-4 grow">
           <textarea

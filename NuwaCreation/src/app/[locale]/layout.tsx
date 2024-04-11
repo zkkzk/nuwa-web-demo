@@ -43,7 +43,7 @@ export default function RootLayout({
             <Sidebar/>
           </NextIntlClientProvider>
           <main className="lg:pl-72">
-            <div className="min-w-[1080px]">
+            <div className="">
               <NextIntlClientProvider messages={messages}>
                 <Header locale={locale} />
               </NextIntlClientProvider>
