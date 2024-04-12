@@ -24,6 +24,7 @@ import NuwaTextareaWrapper from "../components/NuwaTextareaWrapper";
 import { isEmpty } from "lodash-es";
 import NuwaRadioWrapper from "../components/NuwaRadioWrapper";
 import NuwaFormWrapper from "../components/NuwaFormWrapper";
+import { PlusCircleIcon } from "@heroicons/react/24/solid";
 
 export default function WorldBook() {
   const t = useTranslations();
@@ -55,7 +56,10 @@ export default function WorldBook() {
 
   const handleAddNewBookClick = () => {
     // Determine the next available id and display_index based on existing entries
-    const nextId = (character_book.entries || []).length + 1;
+    let nextId = (character_book.entries || []).length + 1;
+    if(character_book.entries[character_book.entries.length - 1].id >= nextId) {
+      nextId = character_book.entries[character_book.entries.length - 1].id + 1;
+    }
     const nextDisplayIndex = nextId;
 
     // Default template for new entries
@@ -84,6 +88,8 @@ export default function WorldBook() {
       ...prevChara,
       entries: [...(prevChara.entries || []), defaultTemplate],
     }));
+    setSelectedEntry(defaultTemplate)
+
   };
   
   const [selectedEntry, setSelectedEntry] = React.useState({});
@@ -101,7 +107,17 @@ export default function WorldBook() {
       <div>
         <div className="flex flex-row">
           
-          <div className="flex flex-col shrink-0 gap-y-4 w-[200px] bg-[#D9D9D9]/30 rounded-[14px] py-12 mt-32 -mr-2 h-[570px] pl-1">
+          <div className="relative flex flex-col shrink-0 gap-y-4 w-[200px] bg-[#D9D9D9]/30 rounded-[14px] py-12 mt-32 -mr-2 h-[570px] pl-1">
+            <Button
+              onClick={handleAddNewBookClick}
+              className="absolute top-2 right-4 bg-transparent p-0 z-40"
+              type="button"
+              color="default"
+              variant="flat"
+              isIconOnly
+            >
+              <PlusCircleIcon className="h-12 w-12" aria-hidden="true" />
+            </Button>
             {character_book.entries?.map((entry) => (
               <div
                 key={entry.id}
@@ -116,10 +132,22 @@ export default function WorldBook() {
               </div>
             ))}
           </div>
-          <div className="grow">
+          <div className="grow z-40">
             <div
-              className="-mb-9 pb-9 w-5/12 h-[132px] rounded-[40px] flex justify-center items-center bg-[#313131] text-white font-semibold text-[20px]"
-            >{character_book.name}世界书名称</div>
+              className="-mb-9 pb-9 px-2 w-5/12 h-[132px] rounded-[40px] flex justify-center items-center bg-[#313131] text-white font-semibold text-[20px]"
+            >
+              <input
+                value={character_book.name}
+                onChange={(e) => {
+                  const newValue = e.target.value;
+                  setCharacter_Book((prevChara) => ({
+                    ...prevChara,
+                    name: newValue,
+                  }))
+                }}
+                className="w-full h-full bg-transparent outline-none"
+              />
+            </div>
             {character_book?.entries.map((entrys) => (
               <div  key={entrys.id}>
                 {selectedEntry.id === entrys.id && (
