@@ -2,6 +2,9 @@
 import React, { useEffect, useRef } from "react";
 import {
   Button,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
 } from "@nextui-org/react";
 import { useCharacterBook } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
@@ -9,11 +12,13 @@ import NuwaTextareaWrapper from "../components/NuwaTextareaWrapper";
 import { isEmpty } from "lodash-es";
 import NuwaRadioWrapper from "../components/NuwaRadioWrapper";
 import NuwaFormWrapper from "../components/NuwaFormWrapper";
-import { PlusCircleIcon } from "@heroicons/react/24/solid";
+import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
+import NuwaButton from "../components/NuwaButton";
 
 export default function WorldBook() {
   const t = useTranslations();
   const { character_book, setCharacter_Book } = useCharacterBook();
+  const [isDeletePopoverOpen, setIsDeletePopoverOpen] = React.useState(false);
 
   const handleDeleteButtonClick = (id: any) => {
     // Implement the logic to delete the entry with the given id
@@ -37,6 +42,9 @@ export default function WorldBook() {
         entries: updatedEntriesWithIds,
       };
     });
+    if (selectedEntry.id === id) {
+      setSelectedEntry(character_book?.entries[0])
+    }
   };
 
   const handleAddNewBookClick = () => {
@@ -104,7 +112,7 @@ export default function WorldBook() {
               <PlusCircleIcon className="h-12 w-12" aria-hidden="true" />
             </Button>
             {character_book.entries?.map((entry) => (
-              <div
+              <NuwaButton
                 key={entry.id}
                 className={`${
                   selectedEntry.id === entry.id ? "h-12" : "h-7"
@@ -112,9 +120,51 @@ export default function WorldBook() {
                 onClick={() => {
                   setSelectedEntry(entry);
                 }}
+                endContent={
+                  <Popover key={`${entry.id}-${character_book?.entries.length}`} placement="top" color="warning">
+                  <PopoverTrigger>
+                    <Button className="h-4 w-4 bg-transparent" size="sm" isIconOnly>
+                      <XMarkIcon className="h-4 w-4 text-white" />
+                    </Button>
+                  </PopoverTrigger>
+                  <PopoverContent>
+                    <div className="px-1 py-2">
+                      <Popover placement="top" color="warning">
+                        <PopoverTrigger>
+                          <Button size="sm" color="warning">
+                            {t('Greetings.thisoperationcannotbewithdrawn')}
+                          </Button>
+                        </PopoverTrigger>
+                        <PopoverContent>
+                          <Popover placement="top" color="danger">
+                            <PopoverTrigger>
+                              <Button size="sm" color="warning">
+                                {t('Previews.mymindismadeup')}
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent>
+                              <Button
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  handleDeleteButtonClick(entry.id)
+                                }}
+                                size="sm"
+                                color="danger"
+                              >
+                                {t('WorldBook.delete')}
+                              </Button>
+                            </PopoverContent>
+                          </Popover>
+                        </PopoverContent>
+                      </Popover>
+                    </div>
+                  </PopoverContent>
+                </Popover>
+                
+                }
               >
                 <div className="mx-2 overflow-x-scroll">{entry.comment || t('WorldBook.untitledbook')}</div>
-              </div>
+              </NuwaButton>
             ))}
           </div>
           <div className="grow z-40">
