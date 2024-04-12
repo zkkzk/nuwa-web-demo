@@ -38,6 +38,7 @@ export function useChara() {
             world: "",
             depth_prompt: { prompt: "", depth: 4 },
           },
+          character_book: null,
         },
         create_date: "",
       };
@@ -172,14 +173,20 @@ export function useChara() {
     const { chara, setChara } = useChara();
     const { character_book, setCharacter_Book } = useCharacterBook();
   
+    const updateChara = usePostCharaFun(chara, character_book)
+  
+    return { updateChara };
+  };
+
+  export const usePostCharaFun = (chara: TypeChara, character_book: TypeCharacterBook,) => {
     const updatedCharacterBook = {
       ...character_book,
-      entries: character_book.entries?.map(entry => ({
+      entries: character_book.entries?.map((entry:any) => ({
         ...entry,
         keys: entry.keys !== undefined ? [entry.keys].flat() : [],                    
         secondary_keys: entry.secondary_keys !== undefined ? [entry.secondary_keys].flat() : [],
       })) || [],
-      name: chara.data.name + chara.data.character_version,
+      // name: chara.data.name + chara.data.character_version,
     };
   
     const updateChara = {
@@ -193,7 +200,7 @@ export function useChara() {
         character_book: {
           ...character_book,
           entries: updatedCharacterBook.entries,
-          name: chara.data.name + chara.data.character_version,
+          // name: chara.data.name + chara.data.character_version,
         },
       },
     };

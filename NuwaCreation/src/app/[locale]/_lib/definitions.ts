@@ -35,31 +35,32 @@ export type TypeChara = {
         depth: string;
       };
     };
-    // character_book: {
-    //   entries: [
-    //     {
-    //       id: number;
-    //       keys: string[];
-    //       scondary_keys: string[];
-    //       comment: string;
-    //       content: string;
-    //       constant: boolean;
-    //       selective: boolean;
-    //       insertion_order: number;
-    //       enable: boolean;
-    //       position: string;
-    //       extensions: {
-    //         position: number;
-    //         exclude_recursion: boolean;
-    //         display_index: number;
-    //         probability: number;
-    //         useProbability: boolean;
-    //         depth: number;
-    //         selectiveLogic: number;
-    //       };
-    //     }
-    //   ];
-    // };
+    character_book: {
+      name: string,
+      entries: [
+        {
+          id: number;
+          keys: string[];
+          scondary_keys: string[];
+          comment: string;
+          content: string;
+          constant: boolean;
+          selective: boolean;
+          insertion_order: number;
+          enable: boolean;
+          position: string;
+          extensions: {
+            position: number;
+            exclude_recursion: boolean;
+            display_index: number;
+            probability: number;
+            useProbability: boolean;
+            depth: number;
+            selectiveLogic: number;
+          };
+        }
+      ];
+    } | null;
   };
   create_date: string;
 };
