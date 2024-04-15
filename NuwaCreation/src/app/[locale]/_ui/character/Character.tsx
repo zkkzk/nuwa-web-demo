@@ -39,17 +39,13 @@ export default function Character() {
             <Tab key="scenario" title={t('Character.scenario')}>
               <Scenario/>
             </Tab>
+            <Tab key="mes_example" title={t('Character.mesexample')}>
+              <Mes_Example/>
+            </Tab>
             <Tab key="prompt_overrides" title={t('Character.promptoverrdies')}>
               <Card>
                 <CardBody>
                   <Prompt_Overrides/>
-                </CardBody>
-              </Card>  
-            </Tab>
-            <Tab key="mes_example" title={t('Character.mesexample')}>
-              <Card>
-                <CardBody>
-                  <Mes_Example/>
                 </CardBody>
               </Card>  
             </Tab>
