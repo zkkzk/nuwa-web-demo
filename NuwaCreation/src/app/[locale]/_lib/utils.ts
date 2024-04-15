@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { TypeChara, TypeCharacterBook } from "./definitions";
+import { TypeChara, TypeCharacterBook, TypeCharacterBookEntriy } from "./definitions";
 import defaultCoverBase64 from "./defalutCover";
 export function useChara() {
     const [chara, setChara] = useState<TypeChara>(() => {
@@ -38,7 +38,6 @@ export function useChara() {
             world: "",
             depth_prompt: { prompt: "", depth: 4 },
           },
-          character_book: null,
         },
         create_date: "",
       };
@@ -181,15 +180,15 @@ export function useChara() {
   export const usePostCharaFun = (chara: TypeChara, character_book: TypeCharacterBook,) => {
     const updatedCharacterBook = {
       ...character_book,
-      entries: character_book.entries?.map((entry:any) => ({
+      entries: character_book.entries?.map((entry:TypeCharacterBookEntriy) => ({
         ...entry,
-        keys: entry.keys !== undefined ? [entry.keys].flat() : [],                    
+        key: entry.keys !== undefined ? [entry.keys].flat() : [],                    
         secondary_keys: entry.secondary_keys !== undefined ? [entry.secondary_keys].flat() : [],
       })) || [],
       // name: chara.data.name + chara.data.character_version,
     };
   
-    const updateChara = {
+    const updateChara: TypeChara = {
       ...chara,
       data: {
         ...chara.data,

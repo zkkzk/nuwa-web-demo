@@ -6,6 +6,7 @@ import { LinkIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
 import NuwaButton from "../components/NuwaButton";
 import Scenario_CreateWorldBook from "./Scenario_CreateWorldBook";
+import { TypeCharacterBook } from "../../_lib/definitions";
 
 const worldbookList = [{
   name: "一本世界书1",
@@ -49,20 +50,20 @@ function Scenario_WorldBook() {
 
   const selectWorldBookModal = useDisclosure();
   const createWorldBookModal = useDisclosure();
-  const [myWorldBooks , setMyWorldBooks] = useState([...worldbookList]);
+  const [myWorldBooks , setMyWorldBooks] = useState([] as Array<TypeCharacterBook>);
   const isLogin = false;
 
   const handleRemoveSelectedWorldBook = () => {
     setChara({
       ...chara,
-      data: { ...chara.data, character_book: null },
+      data: { ...chara.data, character_book: undefined },
     });
   };
 
   const handleCloseCreateWorldBookModal = () => {
     let character_book = null
     if(typeof window !== "undefined" ){
-      const character_booked = localStorage.getItem('character_book');
+      const character_booked = localStorage.getItem('character_book') || '';
       character_book = JSON.parse(character_booked);
     }
     
@@ -131,10 +132,7 @@ function Scenario_WorldBook() {
                     <div
                       key={`${worldbook.name}+${index}`}
                       onClick={() => {
-
-
                         const {updateChara} = usePostCharaFun(chara, worldbook);
-                        debugger
                         setChara(updateChara)
                         onClose();
                       }}
@@ -142,7 +140,7 @@ function Scenario_WorldBook() {
                     >
                       <div className="border-y border-solid border-white text-white font-semibold text-2xl overflow-hidden text-overflow-ellipsis">{worldbook.name}</div>
                       <div className="pt-14 pb-4 h-full overflow-y-scroll w-auto text-white break-words">
-                      {worldbook.entries.map((entry, index) => (
+                      {worldbook.entries && worldbook.entries.map((entry, index) => (
                         <p>{entry.comment}</p>
                       ))}
                       </div>

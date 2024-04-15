@@ -33,9 +33,11 @@ const originalPersonalityData = [
 const personalityData = originalPersonalityData.map((item) => {
   return {
     name: item.name,
+    isCustomer: false,
     list: item.list.map((item2) => {
       return {
         name: item2.name,
+        isCustomer: false,
         list: item2.list.map((item3) => {
           return {
             name: item3,
@@ -57,7 +59,15 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
   const [pListIndex, usePListIndex] = useState(-1);
   const [pListProps, usePListProps] = useState('');
   const [errorMessage, useErrorMessage] = useState('');
-  const [customerPersonalityDataList, useCustomerPersonalityDataList] = useState([] as Array<any>);
+  const [customerPersonalityDataList, useCustomerPersonalityDataList] = useState([] as Array<{
+    name: string,
+    list: Array<{
+      list: Array<{
+        name: string,
+        selected: boolean,
+      }>
+    }>
+  }>);
 
   const getFruitSelectedLength = (list: Array<any>) => {
     let length = 0;
@@ -105,6 +115,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
         isCustomer: true,
         list: [{
           name: 'customerCategory',
+          isCustomer: true,
           list: pListProps.split(',').map((item) => {
             return {
               name: item,

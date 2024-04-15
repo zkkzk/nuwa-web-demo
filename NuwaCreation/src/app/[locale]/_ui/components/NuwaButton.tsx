@@ -18,7 +18,7 @@ const NuwaButton = extendVariants(Button, {
   },
   compoundVariants: [ // <- modify/add compound variants
     {
-      isDisabled: true,
+      isDisabled: "true",
       color: "black",
       class: "bg-[#84cc16]/80 opacity-100",
     },

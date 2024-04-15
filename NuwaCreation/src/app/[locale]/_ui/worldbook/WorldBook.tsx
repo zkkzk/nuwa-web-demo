@@ -14,11 +14,13 @@ import NuwaRadioWrapper from "../components/NuwaRadioWrapper";
 import NuwaFormWrapper from "../components/NuwaFormWrapper";
 import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import NuwaButton from "../components/NuwaButton";
+import { TypeCharacterBook, TypeCharacterBookEntriy } from "../../_lib/definitions";
 
 export default function WorldBook() {
   const t = useTranslations();
   const { character_book, setCharacter_Book } = useCharacterBook();
   const [isDeletePopoverOpen, setIsDeletePopoverOpen] = React.useState(false);
+  const [selectedEntry, setSelectedEntry] = React.useState(character_book?.entries[0]);
 
   const handleDeleteButtonClick = (id: any) => {
     // Implement the logic to delete the entry with the given id
@@ -50,13 +52,13 @@ export default function WorldBook() {
   const handleAddNewBookClick = () => {
     // Determine the next available id and display_index based on existing entries
     let nextId = (character_book.entries || []).length + 1;
-    if(character_book.entries[character_book.entries.length - 1].id >= nextId) {
-      nextId = character_book.entries[character_book.entries.length - 1].id + 1;
-    }
+    // if(character_book.entries[character_book.entries.length - 1].id >= nextId) {
+    //   nextId = character_book.entries[character_book.entries.length - 1].id + 1;
+    // }
     const nextDisplayIndex = nextId;
 
     // Default template for new entries
-    const defaultTemplate = {
+    const defaultTemplate: TypeCharacterBookEntriy = {
       id: nextId,
       keys: [],
       secondary_keys: [],
@@ -77,15 +79,13 @@ export default function WorldBook() {
       },
     };
 
-    setCharacter_Book((prevChara) => ({
+    setCharacter_Book((prevChara: TypeCharacterBook):TypeCharacterBook => ({
       ...prevChara,
       entries: [...(prevChara.entries || []), defaultTemplate],
     }));
     setSelectedEntry(defaultTemplate)
 
   };
-  
-  const [selectedEntry, setSelectedEntry] = React.useState({});
 
   useEffect(() => {
     isEmpty(selectedEntry) && setSelectedEntry(character_book?.entries[0])
@@ -113,7 +113,7 @@ export default function WorldBook() {
             </Button>
             {character_book.entries?.map((entry) => (
               <NuwaButton
-                key={entry.id}
+                key={`${entry.id}`}
                 className={`${
                   selectedEntry.id === entry.id ? "h-12" : "h-7"
                 } w-full rounded-l-[12px] bg-black text-white flex justify-center items-center cursor-pointer`}
@@ -184,7 +184,7 @@ export default function WorldBook() {
               />
             </div>
             {character_book?.entries.map((entrys) => (
-              <div  key={entrys.id}>
+              <div key={`${entrys.id}`}>
                 {selectedEntry.id === entrys.id && (
                 <div className="grid grid-cols-2 gap-y-4 gap-x-4">
                   <div className="h-[620px] rounded-[40px] bg-white flex flex-col divide-y">
@@ -193,7 +193,7 @@ export default function WorldBook() {
                         label={t('WorldBook.titlememo')}
                         textareaProps={{
                           value: entrys.comment,
-                          onChange: (e) => (
+                          onChange: (e: { target: { value: any; }; }) => (
                             setCharacter_Book((prevChara) => ({
                               ...prevChara,
                               entries: (prevChara.entries || []).map((entry) =>
@@ -212,7 +212,7 @@ export default function WorldBook() {
                         label={t('WorldBook.content')}
                         textareaProps={{
                           value: entrys.content,
-                          onChange: (e) => (
+                          onChange: (e: { target: { value: any; }; }) => (
                             setCharacter_Book((prevChara) => ({
                               ...prevChara,
                               entries: (prevChara.entries || []).map((entry) =>
@@ -231,7 +231,7 @@ export default function WorldBook() {
                         label={t('WorldBook.primarykeywords')}
                         textareaProps={{
                           value: entrys.keys,
-                          onChange: (e) => (
+                          onChange: (e: { target: { value: any; }; }) => (
                             setCharacter_Book((prevChara) => ({
                               ...prevChara,
                               entries: (prevChara.entries || []).map((entry) =>
@@ -252,7 +252,7 @@ export default function WorldBook() {
                         label={t('WorldBook.optionalfilter')}
                         textareaProps={{
                           value: entrys.secondary_keys,
-                          onChange: (e) => (
+                          onChange: (e: { target: { value: any; }; }) => (
                             setCharacter_Book((prevChara) => ({
                               ...prevChara,
                               entries: (prevChara.entries || []).map((entry) =>
@@ -277,11 +277,11 @@ export default function WorldBook() {
                             className="grow border-none outline-none "
                             color="primary"
                             autoComplete="off"
-                            value={entrys.insertion_order}
+                            value={entrys.insertion_order as number}
                             onChange={(e) =>
-                              setCharacter_Book((prevChara) => ({
+                              setCharacter_Book((prevChara: any) => ({
                                 ...prevChara,
-                                entries: (prevChara.entries || []).map((entry) =>
+                                entries: (prevChara.entries || []).map((entry: { id: Number; }) =>
                                   entry.id === entrys.id
                                     ? { ...entry, insertion_order: e.target.value }
                                     : entry
@@ -296,11 +296,11 @@ export default function WorldBook() {
                           <input
                             className="grow border-none outline-none text-right"
                             autoComplete="off"
-                            value={entrys.extensions.depth}
+                            value={entrys.extensions.depth as number}
                             onChange={(e) =>
-                              setCharacter_Book((prevChara) => ({
+                              setCharacter_Book((prevChara: any) => ({
                                 ...prevChara,
-                                entries: (prevChara.entries || []).map((entry) =>
+                                entries: (prevChara.entries || []).map((entry: { id: Number; extensions: any; }) =>
                                   entry.id === entrys.id
                                     ? { ...entry, extensions: { ...entry.extensions, depth: e.target.value } }
                                     : entry
@@ -342,7 +342,7 @@ export default function WorldBook() {
                         ]}
                         radioProps={{
                           value: String(entrys.extensions.position),
-                          onChange: (e) => (
+                          onChange: (e: { target: { value: any; }; }) => (
                             setCharacter_Book((prevChara) => ({
                               ...prevChara,
                               entries: (prevChara.entries || []).map((entry) =>
@@ -371,7 +371,7 @@ export default function WorldBook() {
                         ]}
                         radioProps={{
                           value: String(entrys.constant),
-                          onChange: (e) => (
+                          onChange: (e: { target: { value: string; }; }) => (
                             setCharacter_Book((prevChara) => ({
                               ...prevChara,
                               entries: (prevChara.entries || []).map((entry) =>
