@@ -60,13 +60,13 @@ function InforMation_Description() {
         <div className="w-32 h-32 flex flex-col bg-[#D5D5D5] text-center rounded-xl text-[10px] cursor-pointer">
           <div
             onClick={() => {
-              insertTextAtCursor('{玩家名称}');
+              insertTextAtCursor('{{user}}');
             }}
             className="h-1/2 rounded-xl leading-[64px] text-[#272727]"
           >插入玩家名称</div>
           <div
             onClick={() => {
-              insertTextAtCursor('{数字生命名称}');
+              insertTextAtCursor('{{char}}');
             }}
             className="h-1/2 rounded-xl leading-[64px] bg-black text-white"
           >
