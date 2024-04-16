@@ -7,6 +7,8 @@ import InforMation_Name from "./InforMation_Name";
 import InforMation_Personality from "./InforMation_Personality";
 import InforMation_Description from "./InforMation_Description"
 import InforMation_AlternateGreetings from "./InforMation_AlternateGreetings"
+import { Link } from "@/navigation";
+import Image from "next/image";
 
 function InforMation() {
   
@@ -137,8 +139,17 @@ function InforMation() {
 
       </div>
       <div>
-        <InforMation_FirstMessage />
-        <InforMation_AlternateGreetings />
+
+      <div className="relative">
+        <div className="w-11/12">
+          <InforMation_FirstMessage />
+        </div>
+        
+        <Link href='/character/scenario'>
+          <Image className=" absolute -right-1 top-1 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
+        </Link>
+      </div>
+      <InforMation_AlternateGreetings />
       </div>
     </>
   );

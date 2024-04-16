@@ -5,6 +5,8 @@ import { useTranslations } from "next-intl";
 import { trim } from "lodash-es";
 import NuwaButton from "../components/NuwaButton";
 import { XMarkIcon } from "@heroicons/react/20/solid";
+import { Link } from "@/navigation";
+import Image from "next/image";
 
 export default function Mes_Example() {
   const descTextareaRefs = useRef<{ [key: string]: RefObject<HTMLElement> | null }>({});
@@ -171,6 +173,14 @@ export default function Mes_Example() {
           </div> 
         </div>
       )})}
+
+
+      <div className="flex justify-end mt-10 w-full">
+        <Link href='/character/avatar'>
+          <Image className="cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
+        </Link> 
+      </div>
+     
     </>
   );
 }

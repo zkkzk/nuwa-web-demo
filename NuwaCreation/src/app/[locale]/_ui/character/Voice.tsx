@@ -7,6 +7,7 @@ import { NoSymbolIcon, PlayCircleIcon } from "@heroicons/react/24/outline";
 import MicrosoftTTSIcon from "../icons/MicrosoftTTSIcon";
 import Image from "next/image";
 import { Divider, Listbox, ListboxItem, Tab, Tabs } from "@nextui-org/react";
+import { Link } from "@/navigation";
 
 enum TypeVoiceType {
   None = 'None',
@@ -227,6 +228,10 @@ export default function Voice() {
           ref={audioRef}
           preload="none"
         />
+
+        <Link href='/character/avatar'>
+          <Image className=" absolute right-10 -bottom-1 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
+        </Link>
       </div>
     </>
   );

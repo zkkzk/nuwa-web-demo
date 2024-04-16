@@ -3,10 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import { useChara, useCharacterBook, usePostCharaFun } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import { LinkIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
+import { Button, Divider, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
 import NuwaButton from "../components/NuwaButton";
 import Scenario_CreateWorldBook from "./Scenario_CreateWorldBook";
 import { TypeCharacterBook } from "../../_lib/definitions";
+import { Link } from "@/navigation";
+import Image from "next/image";
 
 // const worldbookList = [{
 //   name: "一本世界书1",
@@ -215,7 +217,11 @@ function Scenario_WorldBook() {
                 </div>
               </div>
             )}
-        </div> 
+        </div>
+        <Divider />
+        <Link href='/character/mesexample'>
+          <Image className=" absolute -right-2 -bottom-3 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
+        </Link> 
       </div>
     </div>
   );
