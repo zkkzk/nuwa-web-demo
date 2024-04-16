@@ -14,6 +14,7 @@ import Avatar from "./Avatar";
 import {
   PaperAirplaneIcon
 } from '@heroicons/react/24/outline'
+import Voice from "./Voice";
 
 export default function Character() {
   const t = useTranslations();
@@ -45,6 +46,9 @@ export default function Character() {
             </Tab>
             <Tab key="avatar" title={t('Character.avatar')}>
               <Avatar />
+            </Tab>
+            <Tab key="voice" title={t('Character.voice')}>
+              <Voice />
             </Tab>
             <Tab key="prompt_overrides" title={t('Character.promptoverrdies')}>
               <Card>

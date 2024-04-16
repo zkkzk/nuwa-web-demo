@@ -34,6 +34,11 @@ export type TypeChara = {
         prompt: string;
         depth: string;
       };
+      voice: {
+        type: string,
+        sex: string,
+        name: string,
+      } | undefined | null
     };
     character_book: TypeCharacterBook | undefined;
   };

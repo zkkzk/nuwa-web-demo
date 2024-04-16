@@ -26,7 +26,16 @@
     "tagstoembed": "Tags to Embed",
     "talkativeness": "Talkativeness",
     "zipcover": "JPG|PNG|WEBP images will be automatically compressed",
-    "avatar": "avatar"
+    "avatar": "avatar",
+    "voice": "voice",
+    "voicetab": {
+      "desc": "Select voice technology you want to integrate",
+      "sex": "Voice Sex",
+      "male": "Male",
+      "female": "Female",
+      "type": "Voice Type"
+    }
+    
   },
   "Greetings": {
     "deletegreetings": "Delete",
