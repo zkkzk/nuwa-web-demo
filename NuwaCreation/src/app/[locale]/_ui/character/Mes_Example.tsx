@@ -98,8 +98,17 @@ export default function Mes_Example() {
         onClick={() => {
           insertNewMesExamplePlist();
         }}
-        className=" cursor-pointer text-xl border border-black border-solid rounded-[30px] w-full h-[236px] flex items-center justify-center bg-no-repeat bg-[bottom_0.5rem_right_1rem] bg-white bg-[url('/character-mesExample-add-first-bg.png')]">
-        添加对话示例
+        className=" relative cursor-pointer text-xl border border-black border-solid rounded-[30px] w-full h-[236px] flex items-center justify-center bg-no-repeat bg-[bottom_0.5rem_right_1rem] bg-white bg-[url('/character-mesExample-add-first-bg.png')]">
+
+        <div className=" absolute left-4 text-sm">
+          <p>Tips：请按玩家、数字生命的顺序依次添加对话。</p> 
+          <p>例如：</p>
+          <p>{`{{user}}:你好`}</p>
+          <p>{`{{char}}:我很好谢谢！`}</p>
+        </div>
+        <div className="shrink-0">
+          添加对话示例
+        </div>
       </div>
 
 

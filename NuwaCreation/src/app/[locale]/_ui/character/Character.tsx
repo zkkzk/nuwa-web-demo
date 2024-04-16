@@ -10,6 +10,7 @@ import Prompt_Overrides from "./Prompt_Overrides";
 import { useTranslations } from "next-intl";
 import Mes_Example from "./Mes_Example";
 import Depth_Prompt from "./Depth_Prompt";
+import Avatar from "./Avatar";
 import {
   PaperAirplaneIcon
 } from '@heroicons/react/24/outline'
@@ -41,6 +42,9 @@ export default function Character() {
             </Tab>
             <Tab key="mes_example" title={t('Character.mesexample')}>
               <Mes_Example/>
+            </Tab>
+            <Tab key="avatar" title={t('Character.avatar')}>
+              <Avatar />
             </Tab>
             <Tab key="prompt_overrides" title={t('Character.promptoverrdies')}>
               <Card>

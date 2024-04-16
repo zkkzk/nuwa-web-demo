@@ -25,7 +25,8 @@
     "scenarioWorldbookTitle": "包含世界书",
     "tagstoembed": "嵌入标签",
     "talkativeness": "健谈程度",
-    "zipcover": "JPG|PNG|WEBP 图片将自动压缩"
+    "zipcover": "JPG|PNG|WEBP 图片将自动压缩",
+    "avatar": "形象"
   },
   "Greetings": {
     "deletegreetings": "删除",
