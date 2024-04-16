@@ -1,7 +1,8 @@
+"use client"
+
 import React, { createRef, RefObject, useEffect, useRef } from "react";
 import { useChara } from "../../_lib/utils";
 import { useTranslations, useMessages, useLocale } from "next-intl";
-import Character from "./Character";
 import { NoSymbolIcon, PlayCircleIcon } from "@heroicons/react/24/outline";
 import MicrosoftTTSIcon from "../icons/MicrosoftTTSIcon";
 import Image from "next/image";
