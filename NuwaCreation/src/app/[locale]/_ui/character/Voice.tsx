@@ -22,6 +22,7 @@ function classNames(...classes:any) {
 }
 
 type TypeVoiceName = {
+  audio: string;
   name: string;
   value: string,
 }
@@ -35,16 +36,29 @@ const locales = ["en", "zh-CN"];
 
 const voiceNameListData : any= {
   "en": {
-    "male": [{ "name": "xiaoming", "value": "ming"}, { "name": "xiaohei", "value": "hei"}],
-    "female": [{ "name": "xiaohong", "value": "hong"}, { "name": "xiaomei", "value": "mei"}]
+    "male": [
+      { "name": "xiaoming", "value": "ming1", audio: "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"},
+      { "name": "xiaohei", "value": "hei2", audio: "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"}
+    ],
+    "female": [
+      { "name": "xiaohong", "value": "hong3",audio: "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"},
+      { "name": "xiaomei", "value": "mei4", audio: "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"}
+    ]
   },
   "zh-CN": {
-    "male": [{ "name": "小明", "value": "ming"}, { "name": "小黑", "value": "hei"}],
-    "female": [{ "name": "小红", "value": "hong"}, { "name": "小美", "value": "mei"}]
+    "male": [
+      { "name": "小明", "value": "ming5", audio: "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"},
+      { "name": "小黑", "value": "hei6", audio: "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/e8f4c1c0-c6f6-43d0-9885-8e0a87ebd9cb.wav"}
+    ],
+    "female": [
+      { "name": "小红", "value": "hong7", audio: "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"},
+      { "name": "小美", "value": "mei8", audio: "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"}
+    ]
   }
 }
 
 export default function Voice() {
+  const audioRef = useRef<HTMLAudioElement>(null);
   const t = useTranslations();
   const messsage = useMessages();
   const locale = useLocale();
@@ -172,8 +186,9 @@ export default function Voice() {
                     setSelectedVoiceName(key.currentKey)
                   }}
                 >
-                  {voiceNameList[selectedVoiceSex].map((item: TypeVoiceName) => (
-                    <ListboxItem 
+                  {voiceNameList[selectedVoiceSex].map((item: TypeVoiceName) => {
+                    return (
+                      <ListboxItem 
                       classNames={{
                         "base": classNames('w-[356px] h-[62px] text-end rounded-full px-4 hadow border border-black', (
                           selectedVoiceName === item.value ? 'text-white bg-black' : 'text-black bg-white'
@@ -191,18 +206,27 @@ export default function Voice() {
                             selectedVoiceName === item.value ? 'text-white' : 'text-black'
                           ))}
                           aria-hidden="true"
+                          onClick={() => {
+                            (audioRef.current as any).src = item.audio;
+                            (audioRef.current as any).play();
+                          }}
                         />
                       }
                     >
                       {item.name}
                     </ListboxItem>
-                  ))}
+                    )
+                  })}
                 </Listbox>
               </div>
             </div>
           </>
         )}
         
+        <audio
+          ref={audioRef}
+          preload="none"
+        />
       </div>
     </>
   );
