@@ -3,7 +3,7 @@
 import React, { createRef, RefObject, useEffect, useRef } from "react";
 import { useChara } from "../../_lib/utils";
 import { useTranslations, useMessages, useLocale } from "next-intl";
-import { NoSymbolIcon, PlayCircleIcon } from "@heroicons/react/24/outline";
+import { NoSymbolIcon, PlayCircleIcon, PauseCircleIcon } from "@heroicons/react/24/outline";
 import MicrosoftTTSIcon from "../icons/MicrosoftTTSIcon";
 import Image from "next/image";
 import { Divider, Listbox, ListboxItem, Tab, Tabs } from "@nextui-org/react";
@@ -60,6 +60,7 @@ const voiceNameListData : any= {
 
 export default function Voice() {
   const audioRef = useRef<HTMLAudioElement>(null);
+  const [isPlay, setIsPlay] = React.useState({name: '', isPlay: false} as {name: string, isPlay: boolean});
   const t = useTranslations();
   const messsage = useMessages();
   const locale = useLocale();
@@ -202,16 +203,33 @@ export default function Voice() {
                       key={item.value}
                       value={item.value}
                       startContent={
-                        <PlayCircleIcon
-                          className={classNames('h-8 w-8 font-black', (
-                            selectedVoiceName === item.value ? 'text-white' : 'text-black'
-                          ))}
-                          aria-hidden="true"
-                          onClick={() => {
-                            (audioRef.current as any).src = item.audio;
-                            (audioRef.current as any).play();
-                          }}
-                        />
+                        ((isPlay.name === item.value && isPlay.isPlay) ? (
+                          <PauseCircleIcon
+                            className={classNames('h-8 w-8 font-black', (
+                              selectedVoiceName === item.value ? 'text-white' : 'text-black'
+                            ))}
+                            aria-hidden="true"
+                            onClick={() => {
+                              (audioRef.current as any).src = item.audio;
+                              (audioRef.current as any).play();
+                            }}
+                          />
+                        ) : (
+                          <PlayCircleIcon
+                            className={classNames('h-8 w-8 font-black', (
+                              selectedVoiceName === item.value ? 'text-white' : 'text-black'
+                            ))}
+                            aria-hidden="true"
+                            onClick={() => {
+                              (audioRef.current as any).src = item.audio;
+                              (audioRef.current as any).play();
+                              setIsPlay({
+                                name: item.value,
+                                isPlay: true
+                              })
+                            }}
+                          />
+                        ))
                       }
                     >
                       {item.name}
@@ -227,6 +245,12 @@ export default function Voice() {
         <audio
           ref={audioRef}
           preload="none"
+          onPause={() => {
+            setIsPlay({
+              name: '',
+              isPlay: false
+            })
+          }}
         />
 
         <Link href='/character/avatar'>
