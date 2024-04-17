@@ -25,6 +25,9 @@
     "scenarioWorldbookTitle": "World Book",
     "tagstoembed": "Tags to Embed",
     "talkativeness": "Talkativeness",
+    "talkativeness0": "shy",
+    "talkativeness05": "normal",
+    "talkativeness1": "talkative",
     "zipcover": "JPG|PNG|WEBP images will be automatically compressed",
     "avatar": "avatar",
     "voice": "voice",
@@ -43,7 +46,7 @@
     "copyrighttip1": "Choose your CC license agreement[4.0]",
     "copyrighttip2": "For details, please visit：",
     "copyrighttip3": "How do I choose?",
-    "advanced": "advanced"
+    "advancedset": "advanced"
     
   },
   "Languages": [{
