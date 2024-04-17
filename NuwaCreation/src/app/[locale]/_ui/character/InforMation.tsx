@@ -29,42 +29,8 @@ function InforMation() {
           </div>
           
 
-          {/* <div className="">
-            <label
-              className="block text-sm font-medium leading-6"
-            >
-              {t('Character.createdby')}
-            </label>
-            <div className="mt-2">
-              <Input
-                value={chara.data.creator}
-                onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, creator: e.target.value } }))}
-                maxLength={64}
-                autoComplete="off"
-                type="text"
-                variant="underlined"
-              />
-            </div>
-          </div>
-
-          <div className="">
-            <label
-              className="block text-sm font-medium leading-6"
-            >
-              {t('Character.characterversion')}
-            </label>
-            <div className="mt-2">
-              <Input
-                value={chara.data.character_version}
-                onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, character_version: e.target.value } }))}
-                maxLength={64}
-                autoComplete="off"
-                type="text"
-                variant="underlined"
-              />
-            </div>
-          </div>
-
+          {
+          /*
           <div className="">
             <label
               className="block text-sm font-medium leading-6"
@@ -82,22 +48,6 @@ function InforMation() {
             </div>
           </div>
 
-          <div className="">
-            <label
-              className="block text-sm font-medium leading-6"
-            >
-              {t('Character.creatorsnotes')}
-            </label>
-            <div className="mt-2">
-              <Input
-                value={chara.data.creator_notes}
-                onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, creator_notes: e.target.value } }))}
-                autoComplete="off"
-                type="text"
-                variant="underlined"
-              />
-            </div>
-          </div>
 
           <div className="">
             <label
@@ -119,22 +69,7 @@ function InforMation() {
             </div>
           </div>
 
-          <div className="">
-            <label
-              className="block text-sm font-medium leading-6"
-            >
-              {t('Character.scenario')}
-            </label>
-            <div className="mt-2">
-              <Input
-                value={chara.data.scenario}
-                onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, scenario: e.target.value } }))}
-                autoComplete="off"
-                type="text"
-                variant="underlined"
-              />
-            </div>
-          </div> */}
+          */}
         </div>
 
       </div>

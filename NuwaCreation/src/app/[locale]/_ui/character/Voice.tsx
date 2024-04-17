@@ -5,8 +5,8 @@ import { useChara } from "../../_lib/utils";
 import { useTranslations, useMessages, useLocale } from "next-intl";
 import { NoSymbolIcon, PlayCircleIcon, PauseCircleIcon } from "@heroicons/react/24/outline";
 import MicrosoftTTSIcon from "../icons/MicrosoftTTSIcon";
-import Image from "next/image";
 import { Divider, Listbox, ListboxItem, Tab, Tabs } from "@nextui-org/react";
+import Image from "next/image";
 import { Link } from "@/navigation";
 
 enum TypeVoiceType {
@@ -253,7 +253,7 @@ export default function Voice() {
           }}
         />
 
-        <Link href='/character/avatar'>
+        <Link href='/character/creatorinfo'>
           <Image className=" absolute right-10 -bottom-1 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
         </Link>
       </div>

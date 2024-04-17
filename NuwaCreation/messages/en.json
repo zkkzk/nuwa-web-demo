@@ -34,9 +34,44 @@
       "male": "Male",
       "female": "Female",
       "type": "Voice Type"
-    }
+    },
+    "creatorinfo": "Creator’s Info",
+    "language": "Supported languages(multiple)",
+    "level": "level",
+    "leveltip": "If the content contains violence, pornography, or gore, select NSFW/ Restricted",
+    "copyright": "copyright",
+    "copyrighttip1": "Choose your CC license agreement[4.0]",
+    "copyrighttip2": "For details, please visit：",
+    "copyrighttip3": "How do I choose?",
+    "advanced": "advanced"
     
   },
+  "Languages": [{
+    "name": "English",
+    "value": "en"
+  }, {
+    "name": "Chinese",
+    "value": "zh-CN"
+  }, {
+    "name": "Japanese",
+    "value": "ja"
+  }, {
+    "name": "Korean",
+    "value": "ko"
+  }, {
+    "name": "spanish",
+    "value": "es"
+  }, {
+    "name": "French",
+    "value": "fr"
+  }],
+  "Levels": [{
+    "name": "SFW",
+    "value": "SFW"
+  }, {
+    "name": "NSFW",
+    "value": "NSFW"
+  }],
   "Greetings": {
     "deletegreetings": "Delete",
     "thisoperationcannotbewithdrawn": "This operation cannot be withdrawn!"

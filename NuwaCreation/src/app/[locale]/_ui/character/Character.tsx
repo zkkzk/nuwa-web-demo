@@ -5,15 +5,16 @@ import { Link } from '@/navigation';
 import { useTranslations, useLocale } from "next-intl";
 import {
   PaperAirplaneIcon
-} from '@heroicons/react/24/outline'
+} from '@heroicons/react/24/outline';
 import { usePathname } from "next/navigation";
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 
 const InforMation = dynamic(() => import('./InforMation'), { ssr: false })
 const Scenario = dynamic(() => import('./Scenario'), { ssr: false })
 const Mes_Example = dynamic(() => import('./Mes_Example'), { ssr: false })
 const Avatar = dynamic(() => import('./Avatar'), { ssr: false })
 const Voice = dynamic(() => import('./Voice'), { ssr: false })
+const CreatorInfo = dynamic(() => import('./CreatorInfo'), { ssr: false })
 const Prompt_Overrides = dynamic(() => import('./Prompt_Overrides'), { ssr: false })
 const Depth_Prompt = dynamic(() => import('./Depth_Prompt'), { ssr: false })
 
@@ -64,6 +65,11 @@ export default function Character() {
               <Link className="w-full h-full px-4 block leading-8" href={`/character/voice`}>{t('Character.voice')}</Link>
             }>
               <Voice />
+            </Tab>
+            <Tab key={`/${locale}/character/creatorinfo`} id="creatorinfo" title={
+              <Link className="w-full h-full px-4 block leading-8" href={`/character/creatorinfo`}>{t('Character.creatorinfo')}</Link>
+            }>
+              <CreatorInfo />
             </Tab>
             <Tab key={`/${locale}/character/promptoverrdies`} id="promptoverrdies" title={
               <Link className="w-full h-full px-4 block leading-8" href={`/character/promptoverrdies`}>{t('Character.promptoverrdies')}</Link>

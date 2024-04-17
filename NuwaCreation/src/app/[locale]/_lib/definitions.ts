@@ -38,7 +38,10 @@ export type TypeChara = {
         type: string,
         sex: string,
         name: string,
-      } | undefined | null
+      } | undefined | null,
+      languages: string[],
+      level: string,
+      cclicense: string,
     };
     character_book: TypeCharacterBook | undefined;
   };
