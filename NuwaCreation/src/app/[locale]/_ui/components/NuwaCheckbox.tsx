@@ -59,7 +59,7 @@ const CustomCheckbox = (props : any) => {
 export default function NuwaCheckbox({items, value, onChange}: {
   items: {name: string, value: string}[],
   value: string[],
-  onChange: (value: string[]) => void
+  onChange: (value: any) => void
 }) {
   return (
     <div className="flex flex-col gap-1 w-full">

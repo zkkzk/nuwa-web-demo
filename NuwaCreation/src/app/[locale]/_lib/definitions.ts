@@ -27,6 +27,7 @@ export type TypeChara = {
     character_version: string;
     alternate_greetings: string[];
     extensions: {
+      avatar: string | undefined;
       talkativeness: string;
       fav: Boolean;
       world: string;

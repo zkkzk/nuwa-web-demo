@@ -47,28 +47,7 @@ function InforMation() {
               />
             </div>
           </div>
-
-
-          <div className="">
-            <label
-              className="block text-sm font-medium leading-6"
-            >
-              {t('Character.talkativeness')}
-            </label>
-            <div className="mt-2">
-              <Input
-                value={chara.data.extensions.talkativeness}
-                onChange={(e) => setChara((prevChara) => ({...prevChara,data: {...prevChara.data,extensions: {...prevChara.data.extensions,talkativeness: e.target.value}}}))}
-                step={0.1}
-                max={1}
-                min={0}
-                autoComplete="off"
-                type="number"
-                variant="underlined"
-              />
-            </div>
-          </div>
-
+          
           */}
         </div>
 

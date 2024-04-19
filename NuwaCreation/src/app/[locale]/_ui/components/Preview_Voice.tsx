@@ -1,5 +1,4 @@
-"use client"
-
+"use client";
 import React, { createRef, RefObject, useEffect, useRef } from "react";
 import { useChara } from "../../_lib/utils";
 import { useTranslations, useMessages, useLocale } from "next-intl";
@@ -13,8 +12,11 @@ import { TypeVoiceName, TypeVoiceNameList, TypeVoiceType, voiceSex } from "../..
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
 }
+import PreviewTitle from "../components/PreviewTitle";
+import PreviewWrapper from "../components/PreviewWrapper";
 
-export default function Voice() {
+
+function Preview_Voice() {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlay, setIsPlay] = React.useState({name: '', isPlay: false} as {name: string, isPlay: boolean});
   const t = useTranslations();
@@ -65,30 +67,14 @@ export default function Voice() {
       },
     }));
   };
- 
-
+  
   return (
-    <>
-      <div className="relative bg-white h-full w-full py-20 rounded-[40px]">
-        <div className="px-7">
-          <h2 className="text-lg font-semibold">{t('Character.voice')}</h2>
-          <div className="text-stone-500 text-[8.50px] font-normal leading-none tracking-tight mt-2">{t('Character.voicetab.desc')}</div>
-          <div className="flex flex-row gap-[42px] mt-[20px]">
+    <div>   
+      <PreviewTitle>{t('Character.voice')}</PreviewTitle>
+      <div className="">
+        <PreviewWrapper>
+          <div className="w-full h-full flex flex-row items-center justify-between py-5 px-16">
             <div
-              onClick={() => handleSetSelectedVoiceType(TypeVoiceType.None)}
-              className={classNames('flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]', (
-                selectedVoiceType === TypeVoiceType.None ? 'bg-black': 'bg-white'
-              ))}
-            >
-              <NoSymbolIcon className={classNames('h-32 w-32  font-black', (
-                selectedVoiceType === TypeVoiceType.None ? 'text-white' : 'text-stone-950'
-              ))} aria-hidden="true" />
-              <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight', (
-                selectedVoiceType === TypeVoiceType.None ? 'text-white' : 'text-stone-950'
-              ))} >None</div>
-            </div>
-            <div
-              onClick={() => handleSetSelectedVoiceType(TypeVoiceType.Microsoft)}
               className={classNames('flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]', (
                 selectedVoiceType === TypeVoiceType.Microsoft ? 'bg-black': 'bg-white'
               ))}
@@ -98,37 +84,10 @@ export default function Voice() {
                 selectedVoiceType === TypeVoiceType.Microsoft ? 'text-white' : 'text-stone-950'
               ))} >Microsoft TTS API</div>
             </div>
-            <div className="flex flex-col items-center justify-center w-[174px] h-[206px] ">
-              <Image width={96} height={20} src="/character-voice-more.png" alt="" />
-              <div className="text-center text-stone-950 text-base font-normal leading-[29px] tracking-tight">MORE TO COME</div>
-            </div>
-          </div>
-        </div>
-        {selectedVoiceType !== TypeVoiceType.None && (
-          <>
-            <Divider className="my-4 px-2" />
-            <div className="py-8 px-7">
-              <div className="mb-5 text-black text-base font-semibold leading-[29px] tracking-tight">{t('Character.voicetab.sex')}</div>
-              <Tabs
-                aria-label="Options"         
-                selectedKey={selectedVoiceSex}
-                onSelectionChange={(key) => setSelectedVoiceSex(key as voiceSex)}
-                classNames={{
-                  base: "",
-                  tabList: "w-[313px] h-[62px] bg-black rounded-[17px] justify-center",
-                  
-                  tab:"w-[136px] h-[35px] bg-black rounded-[10px] group-data-[selected=true]:bg-white",
-                  tabContent: "text-zinc-800 text-white group-data-[selected=true]:text-black",
-                }}
-              >
-                  <Tab key={voiceSex.Male} title={t(`Character.voicetab.${voiceSex.Male}`)} />
-                  <Tab key={voiceSex.Female} title={t(`Character.voicetab.${voiceSex.Female}`)} />
-              </Tabs>
-            </div>
-            <Divider className="my-4 px-2" />
-            <div className="py-8 px-7">
-              <div className="mb-5 text-black text-base font-semibold leading-[29px] tracking-tight">{t('Character.voicetab.type')}</div>
-              <div  className="w-[260px] px-1 py-2">
+
+
+            {selectedVoiceType !== TypeVoiceType.None && (
+              <div className="w-[356px]">
                 <Listbox 
                   aria-label="Single selection example"
                   variant="light"
@@ -144,7 +103,7 @@ export default function Voice() {
                     setSelectedVoiceName(key.currentKey)
                   }}
                 >
-                  {voiceNameList[selectedVoiceSex].map((item: TypeVoiceName) => {
+                  {voiceNameList[selectedVoiceSex].filter((item) => (item.value === selectedVoiceName)).map((item: TypeVoiceName) => {
                     return (
                       <ListboxItem 
                       classNames={{
@@ -198,25 +157,24 @@ export default function Voice() {
                   })}
                 </Listbox>
               </div>
-            </div>
-          </>
-        )}
-        
-        <audio
-          ref={audioRef}
-          preload="none"
-          onPause={() => {
-            setIsPlay({
-              name: '',
-              isPlay: false
-            })
-          }}
-        />
-
-        <Link href='/character/creatorinfo'>
-          <Image className=" absolute right-10 -bottom-1 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
-        </Link>
+            )}
+          
+          <audio
+            ref={audioRef}
+            preload="none"
+            onPause={() => {
+              setIsPlay({
+                name: '',
+                isPlay: false
+              })
+            }}
+          />
+          </div>
+        </PreviewWrapper>
       </div>
-    </>
+    
+    </div>
   );
 }
+
+export default Preview_Voice;
