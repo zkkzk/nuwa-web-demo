@@ -1,8 +1,8 @@
 "use client"
 
-import React, { createRef, RefObject, useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import { useChara } from "../../_lib/utils";
-import { useTranslations, useMessages, useLocale } from "next-intl";
+import { useTranslations, useMessages } from "next-intl";
 import { NoSymbolIcon, PlayCircleIcon, PauseCircleIcon } from "@heroicons/react/24/outline";
 import MicrosoftTTSIcon from "../icons/MicrosoftTTSIcon";
 import { Divider, Listbox, ListboxItem, Tab, Tabs } from "@nextui-org/react";
@@ -72,28 +72,33 @@ export default function Voice() {
       <div className="px-7">
         <h2 className="text-lg font-semibold">{t('Character.voice')}</h2>
         <div className="text-stone-500 text-[8.50px] font-normal leading-none tracking-tight mt-2">{t('Character.voicetab.desc')}</div>
-        <div className="flex flex-row gap-[42px] mt-[20px]">
+        <div className="flex flex-row flex-wrap gap-[42px] mt-[20px]">
           <div
             onClick={() => handleSetSelectedVoiceType(TypeVoiceType.None)}
-            className={classNames('flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]', (
+            className={classNames('group hover:bg-black shrink-0 flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]', (
               selectedVoiceType === TypeVoiceType.None ? 'bg-black': 'bg-white'
             ))}
           >
-            <NoSymbolIcon className={classNames('h-32 w-32  font-black', (
+            <NoSymbolIcon className={classNames('h-32 w-32  font-black group-hover:text-white', (
               selectedVoiceType === TypeVoiceType.None ? 'text-white' : 'text-stone-950'
             ))} aria-hidden="true" />
-            <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight', (
+            <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight group-hover:text-white', (
               selectedVoiceType === TypeVoiceType.None ? 'text-white' : 'text-stone-950'
-            ))} >None</div>
+            ))} >{t('Character.none')}</div>
           </div>
           <div
             onClick={() => handleSetSelectedVoiceType(TypeVoiceType.Microsoft)}
-            className={classNames('flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]', (
+            className={classNames('group hover:bg-black shrink-0 flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]', (
               selectedVoiceType === TypeVoiceType.Microsoft ? 'bg-black': 'bg-white'
             ))}
           >
-            <MicrosoftTTSIcon color={selectedVoiceType === TypeVoiceType.Microsoft ? 'white' : 'black'} className={classNames('h-32 w-32')} aria-hidden="true" />
-            <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight', (
+            <MicrosoftTTSIcon
+              className={classNames('w-32 group-hover:fill-white', (
+                selectedVoiceType === TypeVoiceType.Microsoft ? 'fill-white' : 'fill-stone-950'
+              ))}
+              aria-hidden="true"
+            />
+            <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight group-hover:text-white', (
               selectedVoiceType === TypeVoiceType.Microsoft ? 'text-white' : 'text-stone-950'
             ))} >Microsoft TTS API</div>
           </div>
