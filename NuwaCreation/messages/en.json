@@ -33,6 +33,7 @@
     "avatartip": "Select voice technology you want to integrate",
     "avatartip2": "Please select the image you want to add",
     "avatartip3": "#{index} {type} avatar",
+    "avatartip4": "{type} avatar",
     "avatarmodalcancelbtn": "cancel",
     "avatarmodaladdbtn": "add",
     "LIVE2D": "LIVE2D",

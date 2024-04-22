@@ -33,6 +33,7 @@
     "avatartip": "选择需要集成的语音技术",
     "avatartip2": "请选择你要添加的形象",
     "avatartip3": "#{index} {type}形象",
+    "avatartip4": "{type}形象",
     "avatarmodalcancelbtn": "取消",
     "avatarmodaladdbtn": "添加",
     "LIVE2D": "LIVE2D",
