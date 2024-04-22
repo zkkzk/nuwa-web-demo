@@ -114,8 +114,11 @@
     "title2": "免费、开源的数字生命创造工具",
     "nuwaLabs": "女娲实验室",
     "quickstart": "快速开始",
+    "understandandlearn": "了解和学习",
     "createDigitalLife": "创建数字生命",
-    "createWorldBook": "创建世界书"
+    "createWorldBook": "创建世界书",
+    "readDigitalLife": "读取数字生命",
+    "readWorldBook": "读取世界书"
   },
   "Footer": {
     "nuwaLabs": "女娲实验室",
