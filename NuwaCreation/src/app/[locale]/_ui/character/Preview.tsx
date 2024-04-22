@@ -10,6 +10,7 @@ import {
 import NuwaButton from "../components/NuwaButton";
 import { TypeChara } from "../../_lib/definitions";
 import CharacterPreview from "../components/CharacterPreview";
+import AlterMessage from "../components/AlterMessage";
 
 function Preview() {
   const t = useTranslations();
@@ -19,7 +20,8 @@ function Preview() {
   const {cover,setCover} = useCover();
   const [isMakeCharLoding, setIsMakeCharLoding] = useState(false);
   const msgModal = useDisclosure();
-  const [errorMessage, useErrorMessage] = useState('');
+  const [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState('');
 
   const handleMakeChar = async (e: any) => {
     setIsMakeCharLoding(true)
@@ -28,20 +30,20 @@ function Preview() {
       chara: updateChara,
     };
     if (!chara?.data?.name) {
-      useErrorMessage(t("Previews.charactercardnamesmust"));
-      msgModal.onOpen();
+      setMessage(t("Previews.charactercardnamesmust"));
+      setIsOpen(true);
       setIsMakeCharLoding(false)
       return;
     }
     if (!chara?.data?.description) {
-      useErrorMessage(t("Previews.charactercarddescsmust"));
-      msgModal.onOpen();
+      setMessage(t("Previews.charactercarddescsmust"));
+      setIsOpen(true);
       setIsMakeCharLoding(false)
       return;
     }
     if (!chara?.data?.first_mes) {
-      useErrorMessage(t("Previews.charactercardfirstmessmust"));
-      msgModal.onOpen();
+      setMessage(t("Previews.charactercardfirstmessmust"));
+      setIsOpen(true);
       setIsMakeCharLoding(false)
       return;
     }
@@ -80,6 +82,9 @@ function Preview() {
   
   return (
     <>
+      <AlterMessage isOpen={isOpen} message={message} onClose={() => {
+        setIsOpen(false)
+      }} />
       <Button
         className="bg-black text-white" startContent={<PaperAirplaneIcon className="h-4 w-4"/>}
         onClick={() => {
@@ -88,17 +93,8 @@ function Preview() {
         }}
       >{t('Navigation.previews')}</Button>
 
-      <Modal placement={"top"} backdrop="blur" isOpen={msgModal.isOpen} onOpenChange={msgModal.onOpenChange}>
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalBody>{errorMessage}</ModalBody>
-              </>
-          )}
-        </ModalContent>
-      </Modal>
       <Modal
-        isDismissable={!msgModal.isOpen}
+        isDismissable={!isOpen}
         size="full"
         isOpen={previewModal.isOpen}
         placement={'bottom'}

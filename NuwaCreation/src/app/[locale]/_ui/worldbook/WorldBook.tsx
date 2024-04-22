@@ -8,7 +8,7 @@ import {
 } from "@nextui-org/react";
 import { useCharacterBook } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
-import { isEmpty } from "lodash-es";
+import { isEmpty, isNull } from "lodash-es";
 import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import NuwaButton from "../components/NuwaButton";
 import { TypeCharacterBook, TypeCharacterBookEntriy } from "../../_lib/definitions";
@@ -22,7 +22,12 @@ export default function WorldBook({characterBook, isPreview = false}: {
   const { character_book, setCharacter_Book } = useCharacterBook();
   const displayCharaterBook =characterBook || character_book;
 
-  const [selectedEntry, setSelectedEntry] = React.useState(displayCharaterBook?.entries[0]);
+  let initSelectedEntry = null;
+
+  if (displayCharaterBook?.entries && displayCharaterBook?.entries.length > 0) {
+    initSelectedEntry = displayCharaterBook.entries[0] 
+  }
+  const [selectedEntry, setSelectedEntry] = React.useState(initSelectedEntry);
 
   const handleDeleteButtonClick = (id: any) => {
     // Implement the logic to delete the entry with the given id
@@ -46,7 +51,7 @@ export default function WorldBook({characterBook, isPreview = false}: {
         entries: updatedEntriesWithIds,
       };
     });
-    if (selectedEntry.id === id) {
+    if (selectedEntry?.id === id) {
       setSelectedEntry(displayCharaterBook?.entries[0])
     }
   };
@@ -90,7 +95,7 @@ export default function WorldBook({characterBook, isPreview = false}: {
   };
 
   useEffect(() => {
-    isEmpty(selectedEntry) && setSelectedEntry(displayCharaterBook?.entries[0])
+    isNull(selectedEntry) && displayCharaterBook.entries && displayCharaterBook?.entries.length > 0 &&setSelectedEntry(displayCharaterBook?.entries[0])
   }, [displayCharaterBook])
   
   return (
@@ -115,7 +120,7 @@ export default function WorldBook({characterBook, isPreview = false}: {
               <NuwaButton
                 key={`${entry.id}`}
                 className={`${
-                  selectedEntry.id === entry.id ? "h-12" : "h-7"
+                  selectedEntry?.id === entry.id ? "h-12" : "h-7"
                 } w-full rounded-l-[12px] bg-black text-white flex justify-center items-center cursor-pointer`}
                 onClick={() => {
                   setSelectedEntry(entry);
@@ -163,9 +168,9 @@ export default function WorldBook({characterBook, isPreview = false}: {
                 className="w-full h-full bg-transparent outline-none disabled:bg-transparent"
               />
             </div>
-            {displayCharaterBook?.entries.map((entrys) => (
+            {displayCharaterBook.entries && displayCharaterBook?.entries.map((entrys) => (
               <div key={`${entrys.id}`}>
-                {selectedEntry.id === entrys.id && (
+                {selectedEntry?.id === entrys.id && (
                   <WorldBook_Entry
                     value={selectedEntry}
                     isPreview={isPreview}

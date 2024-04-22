@@ -1,6 +1,6 @@
 "use client";
 import { ChevronRightIcon } from "@heroicons/react/24/outline";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "@/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -10,6 +10,8 @@ import ModelSelectIcon from "./icons/ModelSelectIcon";
 import WorldBookIcon from "./icons/WorldBookIcon";
 import HotKeyIcon from "./icons/HotKeyIcon";
 import { Button } from "@nextui-org/react";
+import { useChara, useCharacterBook, useCover } from "../_lib/utils";
+import AlterMessage from "./components/AlterMessage";
 
 const understandandlearnList = [{
   url: '',
@@ -34,8 +36,74 @@ const understandandlearnList = [{
 }]
 function Homepage() {
   const t = useTranslations();
+  const [isReadCharLoding, setIsReadCharLoding] = useState(false);
+  const [isReadWorldBookLoding, setIsReadWorldBookLoding] = useState(false);
+  const {chara,setChara} = useChara();
+  const {character_book,setCharacter_Book} =  useCharacterBook()
+  const {cover,setCover} = useCover();
+  const [isOpen, setIsOpen] = useState(false);
+  const [message, setMessage] = useState(t('Previews.importok'))
+
+  const handleReadChar = async(e:any) =>{
+    if(typeof window !== "undefined"){
+      setIsReadCharLoding(true);
+      const file = e.target.files[0];
+      const res = await fetch("/api/readchar",{
+        method:"POST",
+        body:file,          
+      });
+      if(res.ok){
+        const data = await res.json();
+        // if(data.data.character_book){
+        //   setCharacter_Book(data.data.character_book)
+        // }
+        setCover(data.Nuwa_ORG_cover)
+        // delete data.data.character_book;
+        delete data.Nuwa_ORG_cover;
+        data.data.extensions.world = '';
+        setChara(data)
+        setIsReadCharLoding(false)
+        setMessage(t('Previews.importok'))
+        setIsOpen(true);
+      }else{
+        setIsReadCharLoding(false)
+      }
+    }else{
+      setIsReadCharLoding(false)
+    }
+  }
+
+  const handleReadWorldBook = async(e:any) =>{
+    if(typeof window !== "undefined"){
+      setIsReadWorldBookLoding(true);
+      const file = e.target.files[0];
+      const res = await fetch("/api/readworldbook",{
+        method:"POST",
+        body:file,          
+      });
+      if(res.ok){
+        const data = await res.json();
+        if(data){
+          setCharacter_Book({
+            entries: data.entries,
+            name: file.name.split(".json")[0]
+          })
+        }
+        setIsReadWorldBookLoding(false)
+        setMessage(t('Previews.importok'))
+        setIsOpen(true);
+      }else{
+        setIsReadWorldBookLoding(false)
+      }
+    }else{
+      setIsReadWorldBookLoding(false)
+    }
+  }
   return (
     <div className="mx-auto max-w-7xl pb-32 flex px-8 flex-col">
+    <AlterMessage isOpen={isOpen} message={message} onClose={() => {
+      setIsOpen(false)
+    }} />
       
       {/* <Link
         href="/character"
@@ -101,16 +169,45 @@ function Homepage() {
             </Link>
           </div>
           <div className="grid grid-cols-5 gap-4">
-            <div
+            <Button
+              isLoading={isReadCharLoding}
+              onClick={() => {
+                const ReadChar = document.getElementById("ReadChar");
+                if (ReadChar) {
+                  ReadChar.click();
+                }
+              }}
               className="col-span-3 bg-gray-200 h-[116px] relative rounded-lg flex items-center justify-center hover:scale-105"
             >
+              <input
+                accept=".png"
+                type="file"
+                id="ReadChar"
+                style={{ display: 'none' }}
+                onChange={handleReadChar}
+              />
               <div className="text-black text-xl sm:text-3xl font-semibold leading-[54.36px] tracking-tight">{t('HomePage.readDigitalLife')}</div>
-            </div>
-            <div
+            </Button>
+            
+            <Button
+              isLoading={isReadWorldBookLoding}
+              onClick={() => {
+                const ReadWorldBook = document.getElementById("ReadWorldBook");
+                if (ReadWorldBook) {
+                  ReadWorldBook.click();
+                }
+              }}
               className="col-span-2 bg-gray-200 h-[116px] relative rounded-lg flex items-center justify-center hover:scale-105"
             >
+              <input
+                accept=".json"
+                type="file"
+                id="ReadWorldBook"
+                style={{ display: 'none' }}
+                onChange={handleReadWorldBook}
+              />
               <div className="text-black text-xl sm:text-3xl font-semibold leading-[54.36px] tracking-tight">{t('HomePage.readWorldBook')}</div>
-            </div>
+            </Button>
           </div>
           </div>
           
