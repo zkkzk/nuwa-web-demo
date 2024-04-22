@@ -143,7 +143,12 @@
     "serverstatus": "服务器状态",
     "settings": "设置",
     "worldbook": "世界书",
-    "dog": "防倒狗"
+    "dog": "防倒狗",
+    "charabook": "我的数字生命"
+  },
+  "CharaBook": {
+    "character": "数字生命",
+    "worldbook": "世界书"
   },
   "Previews": {
     "addgreetings": "添加问候",

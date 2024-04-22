@@ -149,7 +149,12 @@
     "serverstatus": "Server Status",
     "settings": "Settings",
     "worldbook": "World Book",
-    "dog": "CC"
+    "dog": "CC",
+    "charabook": "My Digital Life"
+  },
+  "CharaBook": {
+    "character": "Digital Life",
+    "worldbook": "World Book"
   },
   "Previews": {
     "addgreetings": "Add Greetings",
