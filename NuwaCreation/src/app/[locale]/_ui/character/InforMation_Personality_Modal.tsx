@@ -217,6 +217,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
             打开PList生成器
         </Button>
         <Modal 
+          isDismissable={!msgModal.isOpen}
           isOpen={isOpen} 
           onOpenChange={onOpenChange}
           placement="bottom-center"

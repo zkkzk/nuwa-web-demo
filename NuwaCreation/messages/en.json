@@ -154,6 +154,8 @@
   "Previews": {
     "addgreetings": "Add Greetings",
     "charactercardnamesmust": "Character card names must",
+    "charactercarddescsmust": "Character card desc must",
+    "charactercardfirstmessmust": "Character card first message must",
     "export": "Export",
     "exportingcharactercards": "Exporting Character Cards",
     "import": "Import",

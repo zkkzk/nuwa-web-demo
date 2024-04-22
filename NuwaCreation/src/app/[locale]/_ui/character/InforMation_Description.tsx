@@ -25,7 +25,7 @@ function InforMation_Description() {
       <label
         className="block text-lg font-medium leading-8 mb-1"
       >
-        {t('Character.description')}
+        {t('Character.description')}*
       </label>
       <div className="flex flex-row mt-2 grow">  
         <div className="mr-4 grow">

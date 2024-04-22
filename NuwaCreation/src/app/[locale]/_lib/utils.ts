@@ -182,6 +182,18 @@ export const useCoverHandler = () => {
     setIsReadCharLoding(false)
   }
 
+
+  export const usePostCharaAll = () => {
+    const { chara, setChara } = useChara();
+  
+    if (!chara.data.character_book) {
+      return { chara }
+    }
+    
+    const updateChara = usePostCharaFun(chara, chara.data.character_book)
+    return { updateChara };
+  };
+
   export const usePostChara = () => {
     const { chara, setChara } = useChara();
     const { character_book, setCharacter_Book } = useCharacterBook();

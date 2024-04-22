@@ -148,6 +148,8 @@
   "Previews": {
     "addgreetings": "添加问候",
     "charactercardnamesmust": "数字生命卡名称必须",
+    "charactercarddescsmust": "数字生命卡描述必须",
+    "charactercardfirstmessmust": "数字生命卡首条消息必须",
     "export": "导出",
     "exportingcharactercards": "导出数字生命卡",
     "import": "导入",
