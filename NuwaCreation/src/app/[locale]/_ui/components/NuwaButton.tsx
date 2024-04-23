@@ -7,6 +7,7 @@ const NuwaButton = extendVariants(Button, {
     color: {
       black: "text-white bg-[#0D0D0D]",
       gray: "bg-[#D7D7D7] text-[#020202]",
+      white: "bg-white text-[#020202]",
     },
     isDisabled: {
     },

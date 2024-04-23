@@ -7,6 +7,7 @@ import {
   XMarkIcon,
   ArrowUpRightIcon,
   PlusIcon,
+  ArrowLongRightIcon,
 } from '@heroicons/react/24/outline';
 import NuwaInsertIcon from "../icons/NuwaInsertIcon";
 import NuwaButton from "../components/NuwaButton";
@@ -221,10 +222,11 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
           isOpen={isOpen} 
           onOpenChange={onOpenChange}
           placement="bottom-center"
-          size="5xl"
+          size="full"
           scrollBehavior="inside"
           classNames={{
-            body: "bg-transparent py-6 h-full",
+            wrapper: "h-full w-5/6 mx-auto",
+            body: "bg-transparent py-6 h-full w-full",
             backdrop: "h-full",
             base: "border-none shadow-none bg-transparent  text-[#a8b0d3] h-full",
             closeButton: "hover:bg-white/5 active:bg-white/10",
@@ -234,8 +236,8 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
             {(onClose) => (
               <>
                 <ModalBody>
-                  <div className="grid grid-cols-3 gap-4 h-full  rounded-[50px]">
-                    <div className="col-span-2 bg-white rounded-[50px] h-full py-16 px-8 relative">
+                  <div className="grid grid-cols-3 gap-4 h-full w-full rounded-[50px] relative">
+                    <div className="overflow-y-scroll col-span-2 bg-white rounded-[50px] h-full py-16 px-8 relative">
                       <Tabs
                         aria-label="Options"
                         variant="solid"
@@ -245,6 +247,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                           cursor: "w-full bg-[#0C0C0C] text-white",
                           tab:"group-data-[selected=true]:bg-[#0C0C0C]",
                           tabContent: "text-zinc-800 group-data-[selected=true]:text-white",
+                          panel: "overflow-y-scroll"
                         }}
                       >
                         {personalityDataList.filter((item) => !item.isCustomer).map((category1, index1) => (
@@ -326,7 +329,6 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                               </Modal>
                             </div>
                             
-
                             <Divider className="bg-[#171717]" />
                             {category1.list.filter((item) => item.name !== 'customerCategory').map((category2, index2) => (
                               <Card key={`${index1}+${index2}`} className="py-4 bg-transparent text-white border-none shadow-none">
@@ -349,7 +351,6 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                 </CardBody>
                               </Card>
                             ))}
-
                             <Button onPress={() => {
                               plistModal.onOpen();
                               usePListName(category1.name);
@@ -362,76 +363,76 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                       </Tabs>
                       
                     </div>
-                    <div className="bg-black rounded-[50px] h-full relative bg-[url('/character-inforMation-personality-model-bg.png')] bg-right-bottom bg-cover">
-                      <div className="p-4">
-                      {personalityDataList.map((category1, index1) => (
-                        <>
-                          {getFruitSelectedLength(category1.list) > 0 && <>
-                            <Card key={`${category1.name}${index1}`}className="py-4 bg-transparent text-white border-none shadow-none">
-                              <CardHeader className="pb-0 pt-2 flex-col items-start">
-                                <h4 className="font-bold text-large">{category1.name}</h4>
-                              </CardHeader>
-                              <CardBody className="overflow-visible py-6">
-                              <div className="flex flex-wrap gap-4">
-                                {category1.list.map((category2, index2) => (
-                                  <>
-                                  {category2.list.map((pitem, index3) => (
+                    <div className="bg-black overflow-y-scroll rounded-[50px] h-full relative bg-[url('/character-inforMation-personality-model-bg.png')] bg-right-bottom bg-cover">
+                      <div className="p-4 pb-16 grid grid-cols-1 divide-y">
+                        {personalityDataList.map((category1, index1) => (
+                          <div>
+                            {getFruitSelectedLength(category1.list) > 0 && <>
+                              <Card key={`${category1.name}${index1}`}className="py-4 bg-transparent text-white border-none shadow-none">
+                                <CardHeader className="pb-0 pt-2 flex-col items-start">
+                                  <h4 className="font-bold text-large">{category1.name}</h4>
+                                </CardHeader>
+                                <CardBody className="overflow-visible py-6">
+                                <div className="flex flex-wrap gap-4">
+                                  {category1.list.map((category2, index2) => (
                                     <>
-                                    {pitem.selected && <Chip
-                                      className="bg-white h-9 cursor-pointer px-4 w-auto "
-                                      key={`${category1.name}${index1}+${category2.name}${index2}+${index3}`}
-                                      endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
-                                      variant="flat"
-                                    >
-                                      {pitem.name}
-                                    </Chip>}
+                                    {category2.list.map((pitem, index3) => (
+                                      <>
+                                      {pitem.selected && <Chip
+                                        className="bg-white h-9 cursor-pointer px-4 w-auto "
+                                        key={`${category1.name}${index1}+${category2.name}${index2}+${index3}`}
+                                        endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
+                                        variant="flat"
+                                      >
+                                        {pitem.name}
+                                      </Chip>}
+                                      </>
+                                    ))}
                                     </>
                                   ))}
-                                  </>
-                                ))}
-                              </div>
-                            </CardBody>
-                          </Card>
-                          <Divider className="bg-white" />
-                          </>
-                          }
-                        </>
-                      ))}
-                      {customerPersonalityDataList.map((category1, index1) => (
-                        <>
-                          {getFruitSelectedLength(category1.list) > 0 && <>
-                            <Card key={index1} className="py-4 bg-transparent text-white border-none shadow-none">
-                              <CardHeader className="pb-0 pt-2 flex-col items-start">
-                                <h4 className="font-bold text-large">{category1.name}</h4>
-                              </CardHeader>
-                              <CardBody className="overflow-visible py-6">
-                              <div className="flex flex-wrap gap-4">
-                                {category1.list.map((category2, index2) => (
-                                  <>
-                                  {category2.list.map((pitem, index3) => (
+                                </div>
+                              </CardBody>
+                              </Card>
+                              </>
+                            }
+                          </div>
+                        ))}
+                        {customerPersonalityDataList.map((category1, index1) => (
+                          <div>
+                            {getFruitSelectedLength(category1.list) > 0 && <>
+                              <Card key={index1} className="py-4 bg-transparent text-white border-none shadow-none">
+                                <CardHeader className="pb-0 pt-2 flex-col items-start">
+                                  <h4 className="font-bold text-large">{category1.name}</h4>
+                                </CardHeader>
+                                <CardBody className="overflow-visible py-6">
+                                <div className="flex flex-wrap gap-4">
+                                  {category1.list.map((category2, index2) => (
                                     <>
-                                    {pitem.selected && <Chip
-                                      className="bg-white h-9 cursor-pointer px-4 w-auto "
-                                      key={`${index1}+${index2}+${index3}`}
-                                      endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
-                                      variant="flat"
-                                    >
-                                      {pitem.name}
-                                    </Chip>}
+                                    {category2.list.map((pitem, index3) => (
+                                      <>
+                                      {pitem.selected && <Chip
+                                        className="bg-white h-9 cursor-pointer px-4 w-auto "
+                                        key={`${index1}+${index2}+${index3}`}
+                                        endContent={<XMarkIcon className="h-4 w-4" onClick={() => handleFruitClick(index1, index2, index3)} />}
+                                        variant="flat"
+                                      >
+                                        {pitem.name}
+                                      </Chip>}
+                                      </>
+                                    ))}
                                     </>
                                   ))}
-                                  </>
-                                ))}
-                              </div>
-                            </CardBody>
-                          </Card>
-                          <Divider className="bg-white" />
-                          </>
-                          }
-                        </>
-                      ))}
+                                </div>
+                              </CardBody>
+                              </Card>
+                              </>
+                            }
+                          </div>
+                        ))}
                       </div>
-                      <Button
+                    </div>
+
+                    <Button
                         onClick={() => {
                           onClose();
                         }}
@@ -445,13 +446,12 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                       </Button>
                       <NuwaButton
                         color="gray"
-                        className="absolute bottom-4 right-4 h-16 w-52 z-10"
+                        className=" absolute bottom-4 right-4 z-10 w-32 h-12 text-base"
                         onClick={handleInsertPersonality}
+                        endContent={<ArrowLongRightIcon className="h-8 w-8 fill-white" />}
                       >
-                      插入
+                        插入
                       </NuwaButton>
-                    </div>
-
                   </div>
                 </ModalBody>
               </>

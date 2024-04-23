@@ -44,7 +44,7 @@ function CreatorInfo_Base() {
           />
         </div> 
       </div>
-      <div className="z-30 grow flex flex-col w-full py-7 px-7 rounded-[40px] bg-stone-300 bg-[url('/character-creatorinfo-bg.png')] bg-no-repeat bg-[bottom_1rem_right_3rem]">
+      <div className="z-20 grow flex flex-col w-full py-7 px-7 rounded-[40px] bg-stone-300 bg-[url('/character-creatorinfo-bg.png')] bg-no-repeat bg-[bottom_1rem_right_3rem]">
         <label
           className="text-neutral-950 text-lg font-semibold leading-loose tracking-tight"
         >

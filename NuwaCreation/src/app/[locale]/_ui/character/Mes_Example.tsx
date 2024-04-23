@@ -8,7 +8,7 @@ import { XMarkIcon } from "@heroicons/react/20/solid";
 import { Link } from "@/navigation";
 import Image from "next/image";
 import dynamic from 'next/dynamic';
-import { TrashIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 const InsertUserOrChar = dynamic(() => import("../components/InsertUserOrChar"), { ssr: false })
 
 export default function Mes_Example() {
@@ -51,7 +51,7 @@ export default function Mes_Example() {
   }
 
 
-  const insertNewMesExamplePlist = () => {
+  const insertNewMesExample = () => {
     descTextareaRefs.current[mesExampleList.length] = createRef<HTMLElement>();
     const newMesExampleList = [
       ...mesExampleList,
@@ -78,7 +78,7 @@ export default function Mes_Example() {
     <>
       <div
         onClick={() => {
-          insertNewMesExamplePlist();
+          insertNewMesExample();
         }}
         className=" relative cursor-pointer text-xl border border-black border-solid rounded-[30px] w-full h-[236px] flex items-center justify-center bg-no-repeat bg-[bottom_0.5rem_right_1rem] bg-white bg-[url('/character-mesExample-add-first-bg.png')]">
 
@@ -147,6 +147,9 @@ export default function Mes_Example() {
           </div>
         </div>
       )})}
+      <div className="flex flex-row-reverse mt-2">
+        <Button onClick={insertNewMesExample} variant="light" className="w-[200px]" endContent={<PlusIcon className="h-4 w-4 text-black"/>}>增加对话示例</Button> 
+      </div>   
 
 
       {/* <div className="flex justify-end mt-10 w-full">

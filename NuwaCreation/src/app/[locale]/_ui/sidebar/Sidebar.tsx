@@ -49,7 +49,7 @@ export default function Sidebar() {
   
   return (
     <>
-      <div className='z-50'>
+      <div className='z-50 fixed lg:block top-0 w-full'>
         <Transition.Root show={sidebarOpen} as={Fragment}>
           <Dialog as="div" className="relative z-50 lg:hidden" onClose={setSidebarOpen}>
             <Transition.Child
@@ -191,11 +191,12 @@ export default function Sidebar() {
           </button>
           <div className="flex-1 text-sm font-semibold leading-6">Nuwa</div>
 
-          <div className=' mr-8'>
+          <div className='mr-4'>
             <LangSwitcher />
           </div>
         </div>
       </div>
+      <div className='h-16 lg:hidden'></div>
     </>
   )
 }
