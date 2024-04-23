@@ -6,12 +6,9 @@ import { useTranslations, useMessages } from "next-intl";
 import { NoSymbolIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { Link } from "@/navigation";
-import LIVE2DIcon from "../icons/LIVE2DIcon";
 import { TypeAvatarType } from "../../_lib/definitions.avatar";
-import A3DIcon from "../icons/A3DIcon";
-import ImageIcon from "../icons/ImageIcon";
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, useDisclosure } from "@nextui-org/react";
-import IconCard, {IconCardType} from "../components/IconCard";
+import IconCard from "../components/IconCard";
 import NuwaButton from "../components/NuwaButton";
 
 function classNames(...classes:any) {
@@ -142,7 +139,7 @@ export default function Avatar() {
                     iconType={item.type}
                   />
 
-                <Popover placement="top" color='danger'>
+                <Popover placement="top" color='warning'>
                   <PopoverTrigger>
                     <Button
                       className=" absolute top-2 right-2 bg-white text-black opacity-0 group-hover:opacity-100"
@@ -154,7 +151,7 @@ export default function Avatar() {
                     <Button 
                       className="w-full" 
                       size="sm" 
-                      color="danger"
+                      color="warning"
                       onClick={() => {
                         handerRemoveAvatar(index);
                       }}
@@ -244,9 +241,9 @@ export default function Avatar() {
           </ModalContent>
         </Modal>
 
-      <Link href='/character/voice'>
+      {/* <Link href='/character/voice'>
         <Image className=" absolute right-10 -bottom-1 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
-      </Link>
+      </Link> */}
     </div>
   );
 }

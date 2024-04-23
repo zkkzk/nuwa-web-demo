@@ -49,7 +49,7 @@ export default function WorldBookList() {
 
 
               <div className="absolute top-4 right-4 flex flex-col gap-4">
-                <Popover placement="top" color='danger'>
+                <Popover placement="top" color='warning'>
                   <PopoverTrigger>
                     <Button
                       className="bg-black text-white opacity-0 group-hover:opacity-100"
@@ -61,7 +61,7 @@ export default function WorldBookList() {
                     <Button 
                       className="w-full" 
                       size="sm" 
-                      color="danger"
+                      color="warning"
                       onClick={() => {
                         // setChara(prev => ({
                         //   ...prev,

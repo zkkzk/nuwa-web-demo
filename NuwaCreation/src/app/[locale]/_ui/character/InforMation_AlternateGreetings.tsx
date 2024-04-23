@@ -60,7 +60,7 @@ function InforMation_AlternateGreetings() {
                     className="border-none h-full outline-none w-full resize-none mb-6 break-all"
                   />
                 </div>
-                <Popover placement="top" color='danger'>
+                <Popover placement="top" color='warning'>
                   <PopoverTrigger>
                     <Button
                       className=" absolute top-4 right-4 bg-black text-white opacity-0 group-hover:opacity-100"
@@ -72,7 +72,7 @@ function InforMation_AlternateGreetings() {
                     <Button 
                       className="w-full" 
                       size="sm" 
-                      color="danger"
+                      color="warning"
                       onClick={() => {
                         setChara(prev => ({
                           ...prev,

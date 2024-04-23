@@ -113,7 +113,7 @@ export default function Mes_Example() {
             </div>
 
 
-            <Popover placement="top" color='danger'>
+            <Popover placement="top" color='warning'>
               <PopoverTrigger>
                 <Button
                   className="absolute top-10 right-10 bg-white text-white opacity-0 group-hover:opacity-100"
@@ -125,7 +125,7 @@ export default function Mes_Example() {
                 <Button 
                   className="w-full" 
                   size="sm" 
-                  color="danger"
+                  color="warning"
                   onClick={(e) => {
                     e.stopPropagation();
                     const newMesExampleList = mesExampleList.filter((_, i) => i !== index);
@@ -149,11 +149,11 @@ export default function Mes_Example() {
       )})}
 
 
-      <div className="flex justify-end mt-10 w-full">
+      {/* <div className="flex justify-end mt-10 w-full">
         <Link href='/character/avatar'>
           <Image className="cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
         </Link> 
-      </div>
+      </div> */}
      
     </>
   );

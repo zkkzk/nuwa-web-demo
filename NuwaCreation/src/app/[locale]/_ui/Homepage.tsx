@@ -7,7 +7,7 @@ import { useTranslations } from "next-intl";
 import RoleDesignIcon from "./icons/RoleDesignIcon";
 import CFGIcon from "./icons/CFGIcon";
 import ModelSelectIcon from "./icons/ModelSelectIcon";
-import WorldBookIcon from "./icons/WorldBookIcon";
+import NuwaWorldBookIcon from "./icons/NuwaWorldBookIcon";
 import HotKeyIcon from "./icons/HotKeyIcon";
 import { Button } from "@nextui-org/react";
 import { useChara, useCharacterBook, useCover } from "../_lib/utils";
@@ -28,7 +28,7 @@ const understandandlearnList = [{
 }, {
   url: '',
   label: '世界书',
-  icon: WorldBookIcon
+  icon: NuwaWorldBookIcon
 }, {
   url: '',
   label: '热键',
@@ -111,7 +111,7 @@ function Homepage() {
       >
         {t("HomePage.3")}
       </Link> */}
-      <div className="flex flex-col min-w-full bg-[#110F0E] text-white min-h-80 rounded-[40px] w-full relative" style={{minHeight: 320}}>
+      <div className=" overflow-hidden flex flex-col min-w-full bg-[#110F0E] text-white min-h-80 rounded-[40px] w-full relative" style={{minHeight: 320}}>
         <div className="pt-16 text-base font-semibold mb-6 px-8">{t('HomePage.title1')}</div>
         <div className="grow text-4xl px-8 font-semibold mb-7 xl:mr-[400px] min-h-6">{t('HomePage.title2')}</div>
         <div className=" px-8 pt-5 h-[105px] w-full bg-white bg-opacity-40 rounded-bl-[39px] rounded-br-[39px] backdrop-blur-[20px] z-10">powered by {t('HomePage.nuwaLabs')}</div>
@@ -119,7 +119,7 @@ function Homepage() {
           className="absolute bottom-0 right-0 hidden xl:block"
           width={428}
           height={320}
-          src="/overview-banner.png"
+          src="/overview-banner.jpg"
           alt=""
         />
       </div>
@@ -177,7 +177,7 @@ function Homepage() {
                   ReadChar.click();
                 }
               }}
-              className="col-span-3 bg-gray-200 h-[116px] relative rounded-lg flex items-center justify-center hover:scale-105"
+              className="col-span-3 bg-gray-200 h-[116px] relative rounded-lg flex items-center justify-center hover:scale-105 break-words"
             >
               <input
                 accept=".png"
@@ -186,7 +186,7 @@ function Homepage() {
                 style={{ display: 'none' }}
                 onChange={handleReadChar}
               />
-              <div className="text-black text-xl sm:text-3xl font-semibold leading-[54.36px] tracking-tight">{t('HomePage.readDigitalLife')}</div>
+              <div className="text-black text-xl sm:text-3xl font-semibold leading-[54.36px] tracking-tight max-w-full whitespace-normal overflow-hidden">{t('HomePage.readDigitalLife')}</div>
             </Button>
             
             <Button
@@ -197,7 +197,7 @@ function Homepage() {
                   ReadWorldBook.click();
                 }
               }}
-              className="col-span-2 bg-gray-200 h-[116px] relative rounded-lg flex items-center justify-center hover:scale-105"
+              className="col-span-2 bg-gray-200 h-[116px] relative rounded-lg flex items-center justify-center hover:scale-105 text-wrap"
             >
               <input
                 accept=".json"
@@ -206,7 +206,7 @@ function Homepage() {
                 style={{ display: 'none' }}
                 onChange={handleReadWorldBook}
               />
-              <div className="text-black text-xl sm:text-3xl font-semibold leading-[54.36px] tracking-tight">{t('HomePage.readWorldBook')}</div>
+              <div className="text-black text-xl sm:text-3xl font-semibold leading-[54.36px] tracking-tight max-w-full whitespace-normal overflow-hidden">{t('HomePage.readWorldBook')}</div>
             </Button>
           </div>
           </div>

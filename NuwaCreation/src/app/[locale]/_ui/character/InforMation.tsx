@@ -37,9 +37,9 @@ function InforMation() {
         
       </div>
       
-      <Link href='/character/scenario' className="flex flex-row-reverse mt-10">
+      {/* <Link href='/character/scenario' className="flex flex-row-reverse mt-10">
         <Image className="cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
-      </Link>
+      </Link> */}
     </div>
   );
 }

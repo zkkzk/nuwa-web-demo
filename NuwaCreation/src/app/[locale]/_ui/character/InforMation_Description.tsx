@@ -21,7 +21,7 @@ function InforMation_Description() {
   };
 
   return (
-    <div className="h-6/12 py-4 flex flex-col">
+    <div className="group h-6/12 py-4 flex flex-col">
       <label
         className="block text-lg font-medium leading-8 mb-1"
       >
@@ -37,14 +37,17 @@ function InforMation_Description() {
             className="border-none outline-none w-full h-full resize-none mb-6 break-all"
           />
         </div>
-        <InsertUserOrChar getTextRef={() => {
-          return descTextareaRef.current
-        }} onDone={(newValue) => {
-          setChara((prevChara) => ({
-            ...prevChara,
-            data: { ...prevChara.data, description: newValue },
-          }));
-        }} />
+        <div className="opacity-0 group-hover:opacity-100">
+          <InsertUserOrChar getTextRef={() => {
+            return descTextareaRef.current
+          }} onDone={(newValue) => {
+            setChara((prevChara) => ({
+              ...prevChara,
+              data: { ...prevChara.data, description: newValue },
+            }));
+          }} />
+        </div>
+        
       </div>     
     </div>
   );

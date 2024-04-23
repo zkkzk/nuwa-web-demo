@@ -86,7 +86,7 @@ function Preview() {
         setIsOpen(false)
       }} />
       <Button
-        className="bg-black text-white" startContent={<PaperAirplaneIcon className="h-4 w-4"/>}
+        className="bg-black text-white h-14" startContent={<PaperAirplaneIcon className="h-4 w-4"/>}
         onClick={() => {
           let chara = getChara();
           previewModal.onOpen();

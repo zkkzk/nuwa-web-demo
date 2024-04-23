@@ -217,9 +217,9 @@ export default function Voice() {
         }}
       />
 
-      <Link href='/character/creatorinfo'>
+      {/* <Link href='/character/creatorinfo'>
         <Image className=" absolute right-10 -bottom-1 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
-      </Link>
+      </Link> */}
     </div>
   );
 }

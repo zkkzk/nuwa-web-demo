@@ -126,7 +126,7 @@ export default function WorldBook({characterBook, isPreview = false}: {
                   setSelectedEntry(entry);
                 }}
                 endContent={!isPreview &&
-                  <Popover key={`${entry.id}-${displayCharaterBook?.entries.length}`} placement="top" color="danger">
+                  <Popover key={`${entry.id}-${displayCharaterBook?.entries.length}`} placement="top" color="warning">
                     <PopoverTrigger>
                       <Button className="h-4 w-4 bg-transparent" size="sm" isIconOnly>
                         <XMarkIcon className="h-4 w-4 text-white" />
@@ -139,7 +139,7 @@ export default function WorldBook({characterBook, isPreview = false}: {
                           handleDeleteButtonClick(entry.id)
                         }}
                         size="sm"
-                        color="danger"
+                        color="warning"
                       >
                         {t('Previews.mymindismadeup')}
                       </Button>
