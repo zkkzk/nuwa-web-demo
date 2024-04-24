@@ -9,6 +9,8 @@ import { Divider, Listbox, ListboxItem, Tab, Tabs } from "@nextui-org/react";
 import Image from "next/image";
 import { Link } from "@/navigation";
 import { TypeVoiceName, TypeVoiceNameList, TypeVoiceType, voiceSex } from "../../_lib/definitions.voice";
+import { TypeAvatar } from "../../_lib/definitions.avatar";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
@@ -20,28 +22,43 @@ export default function Voice() {
   const t = useTranslations();
   const messages = useMessages();
   const { Voices } = messages;
-  const { chara , setChara } = useChara();
   const initVoiceNameList = Voices;
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
 
-  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(chara.data.extensions.voice?.type as TypeVoiceType || TypeVoiceType.None);
+  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(charaListItem.chara.data.extensions.voice?.type as TypeVoiceType || TypeVoiceType.None);
   
-  const [selectedVoiceSex, setSelectedVoiceSex] = React.useState<voiceSex>(chara.data.extensions.voice?.sex as voiceSex || voiceSex.Male);
-  const [selectedVoiceName, setSelectedVoiceName] = React.useState<string>(chara.data.extensions.voice?.name || '');
+  const [selectedVoiceSex, setSelectedVoiceSex] = React.useState<voiceSex>(charaListItem.chara.data.extensions.voice?.sex as voiceSex || voiceSex.Male);
+  const [selectedVoiceName, setSelectedVoiceName] = React.useState<string>(charaListItem.chara.data.extensions.voice?.name || '');
 
   const [voiceNameList, setVoiceNameList] = React.useState<TypeVoiceNameList>(initVoiceNameList as unknown as TypeVoiceNameList);
 
-  const handleSetSelectedVoiceType = (voiceType : TypeVoiceType) => {
-    setSelectedVoiceType(voiceType)
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: {
-        ...prevChara.data,
-        extensions: {
-          ...prevChara.data.extensions,
-          voice: null
+  const setCharaListItem = (newValue: {
+    type: string,
+    sex: string,
+    name: string,
+  } | null) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            extensions: {
+              ...charaListItem.chara.data.extensions,
+              voice: newValue
+            }
+          }
         }
       },
-    }));
+    })
+  }
+  
+  const handleSetSelectedVoiceType = (voiceType : TypeVoiceType) => {
+    setSelectedVoiceType(voiceType)
+    setCharaListItem(null);
   }
 
   useEffect(() => {
@@ -50,20 +67,11 @@ export default function Voice() {
   }, [selectedVoiceName]);
 
   const setVoiceToChar = () => {
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: {
-        ...prevChara.data,
-        extensions: {
-          ...prevChara.data.extensions,
-          voice: {
-            type: selectedVoiceType,
-            sex: selectedVoiceSex,
-            name: selectedVoiceName,
-          }
-        }
-      },
-    }));
+    setCharaListItem({
+      type: selectedVoiceType,
+      sex: selectedVoiceSex,
+      name: selectedVoiceName,
+    })
   };
  
 

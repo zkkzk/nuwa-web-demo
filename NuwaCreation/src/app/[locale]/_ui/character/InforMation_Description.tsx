@@ -1,24 +1,38 @@
 "use client";
 import React, { useRef } from "react";
-import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
-import { Button } from "@nextui-org/react";
 import { ArrowUpRightIcon } from "@heroicons/react/24/outline";
 import InsertUserOrChar from "../components/InsertUserOrChar";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 function InforMation_Description() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
   const descTextareaRef = useRef(null);
 
 
   const handleDescriptionChange = (e:any) => {
     const newValue = e.target.value;
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: { ...prevChara.data, description: newValue },
-    }));
+    setDesc(newValue)
   };
+
+  const setDesc = (desc:string) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            description: desc,
+          }
+        }
+      },
+    })
+  }
+  
 
   return (
     <div className="group h-6/12 py-4 flex flex-col">
@@ -32,7 +46,7 @@ function InforMation_Description() {
           <textarea
             ref={descTextareaRef}
             placeholder="Description"
-            value={chara.data.description}
+            value={charaListItem.chara.data.description}
             onChange={handleDescriptionChange}
             className="border-none outline-none w-full h-full resize-none mb-6 break-all"
           />
@@ -41,10 +55,7 @@ function InforMation_Description() {
           <InsertUserOrChar getTextRef={() => {
             return descTextareaRef.current
           }} onDone={(newValue) => {
-            setChara((prevChara) => ({
-              ...prevChara,
-              data: { ...prevChara.data, description: newValue },
-            }));
+            setDesc(newValue)
           }} />
         </div>
         

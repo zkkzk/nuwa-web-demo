@@ -1,12 +1,64 @@
 "use client";
-import React, { useRef } from "react";
-import { useChara } from "../../_lib/utils";
+import React from "react";;
 import { useTranslations } from "next-intl";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 function AdvancedSet_Base() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
  
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
+  const setNewDepthListItem = (newValue: string) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            extensions: {
+              ...charaListItem.chara.data.extensions,
+              depth_prompt: {
+                ...charaListItem.chara.data.extensions.depth_prompt,
+                depth: newValue,
+              },
+            }
+          }
+        }
+      },
+    })
+  }
+  const setpost_history_instructionsListItem = (newValue: string) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            post_history_instructions: newValue
+          }
+        }
+      },
+    })
+  }
+  const setsystem_promptListItem = (newValue: string) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            system_prompt: newValue,
+          }
+        }
+      },
+    })
+  }
 
   return (
     <div className="bg-white h-full w-full rounded-[40px] relative flex flex-col">
@@ -19,31 +71,18 @@ function AdvancedSet_Base() {
         <div className="">  
           <input
             placeholder={`${t('Character.depthprompt')}`}
-            value={chara.data.extensions.depth_prompt.depth}
-            onChange={(e) =>
-              setChara((prevChara) => {
-                let newDepth = e.target.value;
-                
-                if (parseInt(newDepth) < 0) {
-                  newDepth = '0'
-                } else if (parseInt(newDepth) > 999) {
-                  newDepth = '999'
-                }
+            value={charaListItem.chara.data.extensions.depth_prompt.depth}
+            onChange={(e) => {
+              let newDepth = e.target.value;
+                              
+              if (parseInt(newDepth) < 0) {
+                newDepth = '0'
+              } else if (parseInt(newDepth) > 999) {
+                newDepth = '999'
+              }
 
-                return {
-                ...prevChara,
-                data: {
-                  ...prevChara.data,
-                  extensions: {
-                    ...prevChara.data.extensions,
-                    depth_prompt: {
-                      ...prevChara.data.extensions.depth_prompt,
-                      depth: newDepth,
-                    },
-                  },
-                },
-              }})
-            }
+              setNewDepthListItem(newDepth)
+            }}
             max="999"
             min="0"
             type="number"
@@ -61,8 +100,8 @@ function AdvancedSet_Base() {
         <div className="">  
           <input
             placeholder={`${t('Character.mainprompt')}`}
-            value={chara.data.system_prompt}
-            onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, system_prompt: e.target.value } }))}
+            value={charaListItem.chara.data.system_prompt}
+            onChange={(e) => setsystem_promptListItem(e.target.value)}
             className="text-neutral-950 text-base font-normal tracking-tight border-none outline-none w-full resize-none bg-transparent"
           />
         </div> 
@@ -77,8 +116,8 @@ function AdvancedSet_Base() {
         <div className="h-full">  
           <input
             placeholder={`${t('Character.jailbreak')}`}
-            value={chara.data.post_history_instructions}
-            onChange={(e) => setChara((prevChara) => ({ ...prevChara, data: { ...prevChara.data, post_history_instructions: e.target.value } }))}
+            value={charaListItem.chara.data.post_history_instructions}
+            onChange={(e) => setpost_history_instructionsListItem(e.target.value)}
             maxLength={64}
             className="text-neutral-950 text-base font-normal tracking-tight border-none outline-none w-full resize-none bg-transparent"
           />

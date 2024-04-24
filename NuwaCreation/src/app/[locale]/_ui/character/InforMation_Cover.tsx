@@ -1,21 +1,23 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { useChara,useCover,useCoverHandler } from "../../_lib/utils";
+import { useCoverHandler } from "../../_lib/utils";
 import { Button } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
-import { ArrowUpCircleIcon } from "@heroicons/react/24/solid";
 import UploadCoverIcon from "../icons/UploadCoverIcon";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 function InforMation_Cover() {
   const t = useTranslations();
-  const { cover , setCover } = useCover();
   const { isReplacingTheCoverLoding, handleReplacingTheCover } = useCoverHandler();
+
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
 
   return (
     <div className="flex flex-row justify-center items-center gap-x-8 relative">
       <Image
-        src={cover}
+        src={charaListItem.cover}
         width={384}
         height={384}
         alt=""
@@ -28,7 +30,15 @@ function InforMation_Cover() {
           id="ReplacingTheCover"
           style={{ display: 'none' }}
           className="h-12 w-12"
-          onChange={(e) => handleReplacingTheCover(e, setCover)}
+          onChange={(e) => handleReplacingTheCover(e, (newCover: string) => {
+            charaListItemDispatch({
+              type: "changed",
+              payload: {
+                ...charaListItem,
+                cover: newCover
+              },
+            })
+          })}
         />
         <Button
           isLoading={isReplacingTheCoverLoding}

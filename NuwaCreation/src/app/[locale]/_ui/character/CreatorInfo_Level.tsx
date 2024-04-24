@@ -1,17 +1,36 @@
 "use client";
-import React, { useRef } from "react";
-import { useChara } from "../../_lib/utils";
+import React from "react";
 import { useTranslations, useMessages } from "next-intl";
 import NuwaRadio from "../components/NuwaRadio";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 
 function CreatorInfo_Level() {
   const t = useTranslations();
   const messages = useMessages();
   const { Levels } = messages;
-  const { chara , setChara } = useChara();
 
-  const [selected, setSelected] = React.useState(chara.data.extensions.level);
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
+  const setCharaListItem = (newValue: string) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            extensions: {
+              ...charaListItem.chara.data.extensions,
+              level: newValue
+            }
+          }
+        }
+      },
+    })
+  }
+  
  
   return (
     <div className="bg-white h-full w-full rounded-[40px]">
@@ -28,20 +47,9 @@ function CreatorInfo_Level() {
         <div className="mt-10">
           <NuwaRadio
             items={Levels as unknown as {name: string, value: string}[]}
-            value={selected}
+            value={charaListItem.chara.data.extensions.level}
             onChange={(e: any) => {
-              setSelected(e.target.value)
-              setChara((prevChara) => ({
-                ...prevChara,
-                data: {
-                  ...prevChara.data,
-                  extensions: {
-                    ...prevChara.data.extensions,
-                    level: e.target.value
-                  }
-                }
-              })
-              )
+              setCharaListItem(e.target.value)
             }}
           />
         </div> 

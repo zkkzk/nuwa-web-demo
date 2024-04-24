@@ -1,13 +1,32 @@
 "use client";
-import React, { useRef } from "react";
-import { useChara } from "../../_lib/utils";
+import React from "react";
 import { useTranslations } from "next-intl";
 import { Slider } from "@nextui-org/react";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 function AdvancedSet_Talkativeness() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
  
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
+  const setCharaListItem = (newValue: string) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            extensions: {
+              ...charaListItem.chara.data.extensions,
+              talkativeness: newValue
+            }
+          }
+        }
+      },
+    })
+  }
 
   return (
     <div className="bg-white h-full w-full rounded-[40px] relative flex flex-col">
@@ -54,9 +73,11 @@ function AdvancedSet_Talkativeness() {
               ],
               step: "data-[in-range=true]:bg-black/30"
             }}
-            value={chara.data.extensions.talkativeness as unknown as number}
-            onChange={(value) => setChara((prevChara) => ({...prevChara,data: {...prevChara.data,extensions: {...prevChara.data.extensions,talkativeness: value.toString()}}}))}
-          />
+            value={charaListItem.chara.data.extensions.talkativeness as unknown as number}
+            onChange={(value) => {
+              setCharaListItem(value.toString())
+            }}
+            ></Slider>
         </div> 
       </div>
     </div>

@@ -1,46 +1,52 @@
 "use client";
 import React, { RefObject, useRef, useState } from "react";
-import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import { Button, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import InsertUserOrChar from "../components/InsertUserOrChar";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 function InforMation_AlternateGreetings() {
   const descTextareaRefs = useRef<{ [key: string]: RefObject<HTMLElement> | null }>({});
   const t = useTranslations();
-  const { chara , setChara } = useChara();
   const [deleteCount, setDeleteCount] = useState(1);
 
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
+  const setCharaListItem = (newValue: string[]) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            alternate_greetings: newValue,
+          }
+        }
+      },
+    })
+  }
+
   const updateAlternateGreetings = (newValue: string, index: number) => {
-    setChara(prev => ({
-      ...prev,
-      data: {
-        ...prev.data, 
-        alternate_greetings: prev.data.alternate_greetings.map((greet, i) => 
-          i === index ? newValue : greet  
-        )
-      }
-    }))
+    const newAlternateGreetings = charaListItem.chara.data.alternate_greetings.map((greet, i) => 
+      i === index ? newValue : greet  
+    );
+    setCharaListItem(newAlternateGreetings);
   }
 
   const handleAddGreetingsClick = () => {
     
-    setChara(prev => ({
-      ...prev,
-      data: {
-        ...prev.data,
-        alternate_greetings: [
-          ...prev.data.alternate_greetings,
-          `New Greetings`  
-        ]
-      }
-    }));
+    setCharaListItem([
+      ...charaListItem.chara.data.alternate_greetings,
+      `New Greetings`  
+    ])
   };
 
   return (
       <div>
-        {chara.data.alternate_greetings.map((item, index) => (
+        {charaListItem.chara.data.alternate_greetings.map((item, index) => (
           <div className="group relative flex flex-col grow mt-6" key={deleteCount + index}>
             <div className="py-4 flex flex-col bg-white h-52 rounded-[40px] p-7">
               <label
@@ -74,13 +80,7 @@ function InforMation_AlternateGreetings() {
                       size="sm" 
                       color="warning"
                       onClick={() => {
-                        setChara(prev => ({
-                          ...prev,
-                          data: {
-                            ...prev.data,
-                            alternate_greetings: prev.data.alternate_greetings.filter((_, i) => i !== index)  
-                          }
-                        }))
+                        setCharaListItem(charaListItem.chara.data.alternate_greetings.filter((_, i) => i !== index)  )
                         setDeleteCount(deleteCount + 1);
                       }}
                     >    

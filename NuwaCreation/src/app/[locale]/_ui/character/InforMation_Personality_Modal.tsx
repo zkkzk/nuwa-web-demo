@@ -1,6 +1,5 @@
 "use client";
 import React, { useState } from "react";
-import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import { Button, Card, CardBody, CardHeader, Checkbox, Chip, Divider, Input, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Tab, Tabs, useDisclosure } from "@nextui-org/react";
 import {
@@ -9,7 +8,6 @@ import {
   PlusIcon,
   ArrowLongRightIcon,
 } from '@heroicons/react/24/outline';
-import NuwaInsertIcon from "../icons/NuwaInsertIcon";
 import NuwaButton from "../components/NuwaButton";
 import { cloneDeep, trim } from "lodash-es";
 

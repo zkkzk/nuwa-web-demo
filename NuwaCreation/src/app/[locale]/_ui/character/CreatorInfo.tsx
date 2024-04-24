@@ -28,10 +28,6 @@ function CreatorInfo() {
       </div>
       <div className="h-full relative">
         <CreatorInfo_CCLicenses />
-
-        {/* <Link href='/character/advancedset'>
-          <Image className=" absolute -right-2 -bottom-2 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
-        </Link> */}
       </div>
     </>
   );

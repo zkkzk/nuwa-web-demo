@@ -1,4 +1,7 @@
 {
+  "CharacterList": {
+    "createbutton": "创建"
+  },
   "Character": {
     "charactername": "数字生命名",
     "characternote": "数字生命卡标签",

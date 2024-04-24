@@ -1,19 +1,35 @@
 "use client";
-import React, { useRef } from "react";
-import { useChara } from "../../_lib/utils";
+import React from "react";
 import { useTranslations, useMessages } from "next-intl";
 import NuwaCheckbox from "../components/NuwaCheckbox";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 
 function CreatorInfo_Language() {
   const t = useTranslations();
   const messages = useMessages();
   const { Languages } = messages;
-  const { chara , setChara } = useChara();
 
-  const [groupSelected, setGroupSelected] = React.useState(chara.data.extensions.languages);
-
- 
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
+  const setCharaListItem = (newValue: string[]) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            extensions: {
+              ...charaListItem.chara.data.extensions,
+              languages: newValue
+            }
+          }
+        }
+      },
+    })
+  }
 
   return (
     <div className="bg-white h-full w-full rounded-[40px]">
@@ -26,20 +42,9 @@ function CreatorInfo_Language() {
         <div className="mt-10">  
           <NuwaCheckbox
             items={Languages as unknown as {name: string, value: string}[]}
-            value={groupSelected}
+            value={charaListItem.chara.data.extensions.languages}
             onChange={(value: any) => {
-              setGroupSelected(value as any)
-              setChara((prevChara) => ({
-                ...prevChara,
-                data: {
-                  ...prevChara.data,
-                  extensions: {
-                    ...prevChara.data.extensions,
-                    languages: value
-                  }
-                }
-              })
-              )
+              setCharaListItem(value)
             }}
           />
         </div> 

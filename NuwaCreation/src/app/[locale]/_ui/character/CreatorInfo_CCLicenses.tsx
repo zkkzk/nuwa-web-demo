@@ -1,17 +1,35 @@
 "use client";
-import React, { useRef } from "react";
-import { useChara } from "../../_lib/utils";
+import React from "react";
 import { useTranslations, useMessages } from "next-intl";
 import CCLicensesRadio from "../components/CCLicensesRadio";
 import { Link } from "@/navigation";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 
 function CreatorInfo_CCLicenses() {
   const t = useTranslations();
   const messages = useMessages();
-  const { chara , setChara } = useChara();
 
-  const [cclicense, setCclicense] = React.useState(chara.data.extensions.cclicense);
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
+  const setCharaListItem = (newValue: string) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            extensions: {
+              ...charaListItem.chara.data.extensions,
+              cclicense: newValue
+            }
+          }
+        }
+      },
+    })
+  }
  
   return (
     <div className="bg-white h-full w-full rounded-[40px] relative pb-24">
@@ -32,20 +50,9 @@ function CreatorInfo_CCLicenses() {
         </Link>
         <div className="mt-10">
           <CCLicensesRadio
-            value={cclicense}
+            value={charaListItem.chara.data.extensions.cclicense}
             onChange={(e: any) => {
-              setCclicense(e.target.value)
-              setChara((prevChara) => ({
-                ...prevChara,
-                data: {
-                  ...prevChara.data,
-                  extensions: {
-                    ...prevChara.data.extensions,
-                    cclicense: e.target.value
-                  }
-                }
-              })
-              )
+              setCharaListItem(e.target.value)
             }}
           />
         </div> 

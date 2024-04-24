@@ -9,43 +9,8 @@ import Scenario_CreateWorldBook from "./Scenario_CreateWorldBook";
 import { TypeCharacterBook } from "../../_lib/definitions";
 import { Link } from "@/navigation";
 import Image from "next/image";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
-// const worldbookList = [{
-//   name: "一本世界书1",
-//   entries: [{
-//     comment: "一本世界书11",
-//   }, {
-//     comment: "一本世界书11",
-//   }]
-// }, {
-//   name: "一本世界书2",
-//   entries: [{
-//     comment: "一本世界书22",
-//   }, {
-//     comment: "一本世界书22",
-//   }]
-// }, {
-//   name: "一本世界书3",
-//   entries: [{
-//     comment: "一本世界书33",
-//   }, {
-//     comment: "一本世界书33",
-//   }]
-// }, {
-//   name: "一本世界书3",
-//   entries: [{
-//     comment: "一本世界书33",
-//   }, {
-//     comment: "一本世界书33",
-//   }]
-// }, {
-//   name: "一本世界书3",
-//   entries: [{
-//     comment: "一本世界书33",
-//   }, {
-//     comment: "一本世界书33",
-//   }]
-// }]
 function Scenario_WorldBook() {
   const t = useTranslations();
   const { chara , setChara } = useChara();
@@ -55,11 +20,27 @@ function Scenario_WorldBook() {
   const [myWorldBooks , setMyWorldBooks] = useState([] as Array<TypeCharacterBook>);
   const isLogin = false;
 
+
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
+  const setCharaListItem = (newValue:string | undefined) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            character_book: newValue,
+          }
+        }
+      },
+    })
+  }
+  
   const handleRemoveSelectedWorldBook = () => {
-    setChara({
-      ...chara,
-      data: { ...chara.data, character_book: undefined },
-    });
+    setCharaListItem(undefined)
   };
 
   const handleCloseCreateWorldBookModal = () => {
@@ -71,7 +52,13 @@ function Scenario_WorldBook() {
     
     const {updateChara} = usePostCharaFun(chara, character_book);
     
-    setChara(updateChara)
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: updateChara
+      },
+    })
     if(isLogin) {
       selectWorldBookModal.onClose();
     } else {
@@ -195,7 +182,7 @@ function Scenario_WorldBook() {
       <div className="overflow-y-scroll w-full h-full">
         <div className="grid 2xl:grid-cols-3 3xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-4 py-10 px-7 overflow-visible h-auto">
           
-            {chara.data.character_book && (
+            {charaListItem.chara.data.character_book && (
               <div className="relative bg-[#979797] w-auto h-[340px] rounded-lg shadow-lg shadow-black/25 py-8 px-3">
                 <Button
                   onClick={() => {
@@ -209,9 +196,9 @@ function Scenario_WorldBook() {
                 >
                   <XMarkIcon className="h-6 w-6 text-white font-black absolute" aria-hidden="true" />
               </Button>
-                <div className="border-y border-solid border-white text-white font-semibold text-2xl line-clamp-1">{chara.data.character_book.name}</div>
+                <div className="border-y border-solid border-white text-white font-semibold text-2xl line-clamp-1">{charaListItem.chara.data.character_book.name}</div>
                 <div className="pt-14 pb-4 h-full overflow-y-scroll w-auto text-white break-words">
-                {chara.data.character_book.entries.map((entry, index) => (
+                {charaListItem.chara.data.character_book.entries.map((entry, index) => (
                   <p key={`entries${index}`}>{entry.comment}</p>
                 ))}
                 </div>

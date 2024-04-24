@@ -2,100 +2,79 @@
 
 import React from "react";
 import { useChara } from "../../_lib/utils";
-import { useTranslations, useMessages } from "next-intl";
+import { useTranslations } from "next-intl";
 import { NoSymbolIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import { Link } from "@/navigation";
-import { TypeAvatarType } from "../../_lib/definitions.avatar";
+import { TypeAvatar, TypeAvatarType } from "../../_lib/definitions.avatar";
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, useDisclosure } from "@nextui-org/react";
 import IconCard from "../components/IconCard";
 import NuwaButton from "../components/NuwaButton";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
 }
 
 export default function Avatar() {
-  // const initAvatarList = [{
-  //   url: 'LIVE2D',
-  //   type: TypeAvatarType.LIVE2D
-  // }, {
-  //   url: '3D',
-  //   type: TypeAvatarType["3D"]
-  // }, {
-  //   url: 'image',
-  //   type: TypeAvatarType.IMAGE
-  // }]
   const t = useTranslations();
-  const messages = useMessages();
   const { chara , setChara } = useChara();
   const uploadModal = useDisclosure();
 
   const [selectedAvatarType, setSelectedAvatarType] = React.useState<TypeAvatarType>(TypeAvatarType.LIVE2D);
   
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
+  const setCharaListItem = (newValue: TypeAvatar[]) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            extensions: {
+              ...charaListItem.chara.data.extensions,
+              avatars: newValue
+            }
+          }
+        }
+      },
+    })
+  }
 
   const handleSetSelectedAvatarType = (avatarType : TypeAvatarType) => {
     setSelectedAvatarType(avatarType)
   }
 
   const clearAvatarList = () => {
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: {
-        ...prevChara.data,
-        extensions: {
-          ...prevChara.data.extensions,
-          avatars: []
-        }
-      },
-    }));
+    setCharaListItem([]);
   }
 
   const handleAddAvatar = () => {
     let newAvatars: any[] = [];
-    if (chara.data.extensions.avatars) {
+    if (charaListItem.chara.data.extensions.avatars) {
       newAvatars = [
-        ...chara.data.extensions.avatars
+        ...charaListItem.chara.data.extensions.avatars
       ]
     }
     newAvatars.push({
       url: "demo",
       type: selectedAvatarType
     })
-
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: {
-        ...prevChara.data,
-        extensions: {
-          ...prevChara.data.extensions,
-          avatars: newAvatars
-        }
-      },
-    }));
+    setCharaListItem(newAvatars);
 
     uploadModal.onClose();
   }
 
   const handerRemoveAvatar = (index: number) => {
     let newAvatars = [
-      ...chara.data.extensions.avatars
+      ...charaListItem.chara.data.extensions.avatars
     ]
     newAvatars.splice(index, 1);
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: {
-        ...prevChara.data,
-        extensions: {
-          ...prevChara.data.extensions,
-          avatars: newAvatars
-        }
-      },
-    }));
+    setCharaListItem(newAvatars);
   }
 
 
- 
 
   return (
     <div className="relative bg-white h-full w-full pt-20 pb-40 rounded-[40px]">
@@ -125,7 +104,7 @@ export default function Avatar() {
 
         <div className="flex flex-col flex-wrap gap-[42px] mt-[20px]">
    
-          {chara.data.extensions.avatars && chara.data.extensions.avatars.map((item, index) => {
+          {charaListItem.chara.data.extensions.avatars && charaListItem.chara.data.extensions.avatars.map((item, index) => {
             return (
               <div>
                 <div className="text-black text-[32px] font-['SF Pro'] leading-[57.98px] tracking-tight">

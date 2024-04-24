@@ -1,3 +1,5 @@
+import { TypeAvatar } from "./definitions.avatar";
+
 export type TypeChara = {
   name: string;
   description: string;
@@ -27,16 +29,16 @@ export type TypeChara = {
     character_version: string;
     alternate_greetings: string[];
     extensions: {
-      avatar: string | undefined;
+      avatar?: string | undefined;
       avatars: TypeAvatar[];
       talkativeness: string;
       fav: Boolean;
       world: string;
       depth_prompt: {
         prompt: string;
-        depth: string;
+        depth: number;
       };
-      voice: {
+      voice?: {
         type: string,
         sex: string,
         name: string,
@@ -45,16 +47,18 @@ export type TypeChara = {
       level: string,
       cclicense: string,
     };
-    character_book: TypeCharacterBook | undefined;
+    character_book?: TypeCharacterBook;
   };
   create_date: string;
 };
 
-export type TypeAvatar = {
-  type: string;
-  url: string;
-}
+export type TypeCharaList = TypeCharaListItem[];
 
+export type TypeCharaListItem = {
+  uid: string;
+  chara: TypeChara;
+  cover: string,
+};
 export type TypeCharacterBook = {
   name: string;
 

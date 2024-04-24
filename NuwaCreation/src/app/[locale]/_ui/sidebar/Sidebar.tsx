@@ -18,7 +18,7 @@ import LangSwitcher from './LangSwitcher';
 
 const navigation = [
   { name: 'Navigation.home', href: '/', icon: NuwaHomePageIcon, current: false },
-  { name: 'Navigation.character', href: '/character', icon: NuwaDigitLifeIcon, current: false },
+  { name: 'Navigation.character', href: '/charas', icon: NuwaDigitLifeIcon, current: false },
   { name: 'Navigation.worldbook', href: '/worldbook', icon: NuwaWorldBookIcon, current: false },
   // { name: 'Navigation.greetings', href: '/greetings', icon: DocumentPlusIcon, current: false },
   { name: 'Navigation.charabook', href: '/charabook', icon: UserIcon, current: false },
@@ -196,7 +196,7 @@ export default function Sidebar() {
           </div>
         </div>
       </div>
-      <div className='h-16 lg:hidden'></div>
+      <div className='h-20 lg:hidden'></div>
     </>
   )
 }

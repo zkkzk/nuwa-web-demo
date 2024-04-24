@@ -2,18 +2,16 @@
 import React from "react";
 import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
-import { Button, Card, CardBody, CardHeader, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
-import {
-  XMarkIcon,
-  ArrowUpRightIcon,
-} from '@heroicons/react/24/outline'
+import { useDisclosure } from "@nextui-org/react";
+
 import InforMation_Personality_Modal from "./InforMation_Personality_Modal";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 function InforMation_Personality() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
-  const [personalityValue, setpersonalityValue] = React.useState(chara.data.personality);
-  const {isOpen, onOpen, onOpenChange} = useDisclosure();
+  
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
 
  
   const handlePersonalityChange = (e:any) => {
@@ -21,11 +19,19 @@ function InforMation_Personality() {
     setPersonalityNewValue(newValue);
   };
   const setPersonalityNewValue = (newValue:any) => {
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: { ...prevChara.data, personality: newValue },
-    }));
-    setpersonalityValue(newValue);
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            personality: newValue,
+          }
+        }
+      },
+    })
   }
 
   return (
@@ -39,7 +45,7 @@ function InforMation_Personality() {
         <div className="mr-4 grow">
           <textarea
             placeholder="First Message"
-            value={chara.data.personality}
+            value={charaListItem.chara.data.personality}
             onChange={handlePersonalityChange}
             className="border-none outline-none w-full h-full resize-none mb-6"
           />
@@ -47,7 +53,7 @@ function InforMation_Personality() {
         <div>
 
         </div>
-        <InforMation_Personality_Modal setPersonalityNewValue={setPersonalityNewValue} oldPersonalityValue={personalityValue}/>
+        <InforMation_Personality_Modal setPersonalityNewValue={setPersonalityNewValue} oldPersonalityValue={charaListItem.chara.data.personality}/>
       </div>
     </div>
   );

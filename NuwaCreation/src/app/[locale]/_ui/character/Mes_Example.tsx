@@ -1,22 +1,19 @@
 import React, { createRef, RefObject, useEffect, useRef } from "react";
-import { Button, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, Textarea, useDisclosure } from "@nextui-org/react";
+import { Button, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
 import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
-import { trim } from "lodash-es";
-import NuwaButton from "../components/NuwaButton";
-import { XMarkIcon } from "@heroicons/react/20/solid";
-import { Link } from "@/navigation";
-import Image from "next/image";
 import dynamic from 'next/dynamic';
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 const InsertUserOrChar = dynamic(() => import("../components/InsertUserOrChar"), { ssr: false })
 
 export default function Mes_Example() {
   const descTextareaRefs = useRef<{ [key: string]: RefObject<HTMLElement> | null }>({});
   const t = useTranslations();
-  const { chara, setChara } = useChara();
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
 
-  let initNewMesExampleList = chara.data.mes_example.split('<START>');
+  let initNewMesExampleList = charaListItem.chara.data.mes_example.split('<START>');
   initNewMesExampleList = initNewMesExampleList.filter((_, index: number) => {
     return index !== 0;
   })
@@ -27,21 +24,27 @@ export default function Mes_Example() {
   });
   const [mesExampleList, setMesExampleList] = React.useState(initNewMesExampleList);
 
-  const saveMesExample = (newMesExampleList: string[]) => {
-    // 保存到chara
-    setChara({
-      ...chara,
-      data: {
-        ...chara.data,
-        mes_example: mesExampleListToMesExample(newMesExampleList)
-      }
+  const setCharaListItem = (newValue: string) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            mes_example: newValue,
+          }
+        }
+      },
     })
   }
 
-  // useEffect(() => {
-  //   saveMesExample();
-  // }, [mesExampleList])
+  const saveMesExample = (newMesExampleList: string[]) => {
+    // 保存到chara
+    setCharaListItem(mesExampleListToMesExample(newMesExampleList));
 
+  }
 
   const mesExampleListToMesExample = (mesExampleList: string[]) => {
     const newMesExample = mesExampleList.map((item) => {

@@ -3,40 +3,33 @@ import React, { useRef } from "react";
 import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import InsertUserOrChar from "../components/InsertUserOrChar";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 function Scenario_Scenario() {
   const t = useTranslations();
   const { chara , setChara } = useChara();
   const descTextareaRef = useRef(null);
-
-  const [scenarioValue, setScenarioValue] = React.useState(chara.data.scenario);
+  
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
+  const setCharaListItem = (newValue:string) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            scenario: newValue,
+          }
+        }
+      },
+    })
+  }
 
   const handleScenarioChange = (newValue:string) => {
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: { ...prevChara.data, scenario: newValue },
-    }));
-    setScenarioValue(newValue);
-  };
-
-
-  const insertTextAtCursor = (text: string) => {
-    const startPos = (descTextareaRef.current as any).selectionStart;
-    const endPos = (descTextareaRef.current as any).selectionEnd;
-    const value = (descTextareaRef.current as any).value;
-    const textBefore = value.substring(0, startPos);
-    const textAfter = value.substring(endPos, value.length);
-    const newValue = textBefore + text + textAfter;
-
-    (descTextareaRef.current as any).value = newValue;
-    (descTextareaRef.current as any).selectionStart = startPos + text.length;
-    (descTextareaRef.current as any).selectionEnd = startPos + text.length;
-
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: { ...prevChara.data, scenario: newValue },
-    }));
-    setScenarioValue(newValue);
+    setCharaListItem(newValue);
   };
  
 
@@ -52,7 +45,7 @@ function Scenario_Scenario() {
             <textarea
               ref={descTextareaRef}
               placeholder={`${t('Character.scenario')}`}
-              value={chara.data.scenario}
+              value={charaListItem.chara.data.scenario}
               onChange={(e) => (handleScenarioChange(e.target.value))}
               className="grow text-white border-none outline-none w-full h-full resize-none mb-6 bg-transparent break-all"
             />

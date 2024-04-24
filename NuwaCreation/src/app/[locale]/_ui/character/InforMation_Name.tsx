@@ -1,18 +1,33 @@
 "use client";
-import React from "react";
-import { useChara } from "../../_lib/utils";
+import React, { useContext, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { TypeCharaListItem } from "../../_lib/definitions";
 
 function InforMation_Name() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
 
+  const charaListItem = useCharaListItem();
+  const charaDispatch = useCharaListItemDispatch();
+  
   const handleNameChange = (e:any) => {
     const newValue = e.target.value;
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: { ...prevChara.data, name: newValue },
-    }));
+    const newChara:TypeCharaListItem = {
+      ...charaListItem,
+      chara: {
+        ...charaListItem.chara,
+        name: newValue,
+        data: {
+          ...charaListItem.chara.data,
+          name: newValue
+        }
+      }
+    };
+
+    charaDispatch({
+      type: "changed",
+      payload: newChara,
+    })
   };
 
   return (
@@ -26,7 +41,7 @@ function InforMation_Name() {
         <input
           className="text-3xl text-right text-white bg-transparent border-none outline-none w-full"
           placeholder="请输入"
-          value={chara.data.name}
+          value={charaListItem.chara.data.name}
           onChange={handleNameChange}
         />
       </div>

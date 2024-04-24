@@ -3,20 +3,39 @@ import React, { useRef } from "react";
 import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import InsertUserOrChar from "../components/InsertUserOrChar";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 function InfoMation_FirstMessage() {
   const t = useTranslations();
   const { chara , setChara } = useChara();
   const descTextareaRef = useRef(null);
-  const [first_messageValue, setFirst_MessageValue] = React.useState(chara.data.first_mes);
 
   const handleFirst_MessageChange = (newValue:string) => {
     setChara((prevChara) => ({
       ...prevChara,
       data: { ...prevChara.data, first_mes: newValue },
     }));
-    setFirst_MessageValue(newValue);
+    setCharaListItem(newValue);
   };
+
+  
+  const charaListItem = useCharaListItem();
+  const charaListItemDispatch = useCharaListItemDispatch();
+  const setCharaListItem = (newValue:string) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: {
+          ...charaListItem.chara,
+          data: {
+            ...charaListItem.chara.data,
+            first_mes: newValue,
+          }
+        }
+      },
+    })
+  }
 
   return (
       <div>
@@ -32,9 +51,9 @@ function InfoMation_FirstMessage() {
                 <textarea
                   ref={descTextareaRef}
                   placeholder={t('Character.firstmessage')}
-                  value={chara.data.first_mes}
+                  value={charaListItem.chara.data.first_mes}
                   onChange={(e) => {
-                    handleFirst_MessageChange(e.target.value)
+                    setCharaListItem(e.target.value)
                   }}
                   className="h-full border-none outline-none w-full resize-none mb-6 break-all"
                 />
@@ -44,7 +63,7 @@ function InfoMation_FirstMessage() {
                 <InsertUserOrChar getTextRef={() => {
                   return descTextareaRef.current
                 }} onDone={(newValue) => {
-                  handleFirst_MessageChange(newValue)
+                  setCharaListItem(newValue)
                 }} />
                 </div>
             </div>
