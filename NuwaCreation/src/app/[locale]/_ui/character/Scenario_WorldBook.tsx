@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { useChara, useWorldBook, usePostCharaFun } from "../../_lib/utils";
+import { useChara, useWorldBook, usePostCharaFun, getWorldBookList } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import { LinkIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Button, Divider, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
 import NuwaButton from "../components/NuwaButton";
 import Scenario_CreateWorldBook from "./Scenario_CreateWorldBook";
-import { TypeWorldBook } from "../../_lib/definitions";
+import { TypeChara, TypeWorldBook } from "../../_lib/definitions";
 import { Link } from "@/navigation";
 import Image from "next/image";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
@@ -17,13 +17,24 @@ function Scenario_WorldBook() {
 
   const selectWorldBookModal = useDisclosure();
   const createWorldBookModal = useDisclosure();
-  const [myWorldBooks , setMyWorldBooks] = useState([] as Array<TypeWorldBook>);
+
+  const charaList = getWorldBookList();
+  const [myWorldBooks , setMyWorldBooks] = useState(charaList || [] as Array<TypeWorldBook>);
   const isLogin = false;
 
 
   const charaListItem = useCharaListItem();
   const charaListItemDispatch = useCharaListItemDispatch();
-  const setCharaListItem = (newValue:string | undefined) => {
+  const setCharaListItem = (newValue:TypeChara | undefined) => {
+    charaListItemDispatch({
+      type: "changed",
+      payload: {
+        ...charaListItem,
+        chara: newValue
+      },
+    })
+  }
+  const setCharaListItemCleareWorldBook = (newValue:string | undefined) => {
     charaListItemDispatch({
       type: "changed",
       payload: {
@@ -40,7 +51,7 @@ function Scenario_WorldBook() {
   }
   
   const handleRemoveSelectedWorldBook = () => {
-    setCharaListItem(undefined)
+    setCharaListItemCleareWorldBook(undefined)
   };
 
   const handleCloseCreateWorldBookModal = () => {
@@ -77,11 +88,11 @@ function Scenario_WorldBook() {
       <NuwaButton
         color="black"
         onClick={() => {
-          if(isLogin) {
+          // if(isLogin) {
             selectWorldBookModal.onOpen();
-          } else {
-            createWorldBookModal.onOpen();
-          }
+          // } else {
+          //   createWorldBookModal.onOpen();
+          // }
         }}
         startContent={<LinkIcon className="h-4 w-4"/>}
         className="absolute top-4 right-4 h-10 w-32 p-0 z-40"
@@ -117,19 +128,19 @@ function Scenario_WorldBook() {
               </ModalHeader>
               <ModalBody>
                 <div className="grid md:grid-cols-4 sm:grid-cols-3 gap-10 py-10 px-7 overflow-visible h-auto">
-                  {myWorldBooks && myWorldBooks.map((worldbook, index) => (
+                  {myWorldBooks && myWorldBooks.map((worldbookItem, index) => (
                     <div
-                      key={`${worldbook.name}+${index}`}
+                      key={`${worldbookItem.uid}+${index}`}
                       onClick={() => {
-                        const {updateChara} = usePostCharaFun(chara, worldbook);
-                        setChara(updateChara)
+                        const {updateChara} = usePostCharaFun(charaListItem.chara, worldbookItem.worldBook);
+                        setCharaListItem(updateChara);
                         onClose();
                       }}
                       className="cursor-pointer relative bg-[#979797] w-auto h-[340px] rounded-lg shadow-lg shadow-black/25 py-8 px-3"
                     >
-                      <div className="border-y border-solid border-white text-white font-semibold text-2xl overflow-hidden text-overflow-ellipsis">{worldbook.name}</div>
+                      <div className="border-y border-solid border-white text-white font-semibold text-2xl overflow-hidden text-overflow-ellipsis">{worldbookItem.worldBook.name}</div>
                       <div className="pt-14 pb-4 h-full overflow-y-scroll w-auto text-white break-words">
-                      {worldbook.entries && worldbook.entries.map((entry, index) => (
+                      {worldbookItem.worldBook.entries && worldbookItem.worldBook.entries.map((entry, index) => (
                         <p key={`entries${index}`}>{entry.comment}</p>
                       ))}
                       </div>
