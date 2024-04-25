@@ -5,7 +5,6 @@ import { useTranslations } from "next-intl";
 import ThemeSwitcher from "./ThemeSwitcher";
 import LanguageSwitcher from "./LanguageSwitcher";
 import ClearLocalstorge from "./ClearLocalstorge";
-import WorldBookPositionSet from "./WorldBookPositionSet";
 
 export default function Settings() {
   const t = useTranslations();

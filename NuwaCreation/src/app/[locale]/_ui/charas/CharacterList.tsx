@@ -32,7 +32,8 @@ export default function CharacterList() {
             onCreateDone={(newChara) => {
               setCharaList(getCharaList())
               setEditChara(newChara);
-            }} />
+            }}
+          />
         </div>
         <div className="flex flex-wrap flex-row gap-4">
           {charaList.map((chara, index) => (

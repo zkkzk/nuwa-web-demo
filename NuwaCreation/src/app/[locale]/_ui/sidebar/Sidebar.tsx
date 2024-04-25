@@ -21,7 +21,6 @@ const navigation = [
   { name: 'Navigation.character', href: '/charas', icon: NuwaDigitLifeIcon, current: false },
   { name: 'Navigation.worldbook', href: '/worldbook', icon: NuwaWorldBookIcon, current: false },
   // { name: 'Navigation.greetings', href: '/greetings', icon: DocumentPlusIcon, current: false },
-  // { name: 'Navigation.charabook', href: '/charabook', icon: UserIcon, current: false },
   { name: 'Navigation.settings', href: '/settings', icon: NuwaSettingsIcon, current: false },
 ]
 // const teams: any[] = [

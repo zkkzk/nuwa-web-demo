@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { TypeChara, TypeWorldBook, TypeWorldBookEntriy, TypeWorldBookItem, TypeWorldBookList, TypeCharaList, TypeCharaListItem } from "./definitions";
 import defaultCoverBase64 from "./defalutCover";
+import { isEmpty, isNull, map, keyBy } from "lodash-es";
 
 const defaultChara = {
   name: "",
@@ -44,6 +45,11 @@ const defaultChara = {
   },
   create_date: "",
 } as TypeChara;
+
+const defaultWorldBook = {
+  name: "no name",
+  entries:{}
+}
 
 export function useChara() {
   const [chara, setChara] = useState<TypeChara>(() => {
@@ -204,13 +210,20 @@ export const usePostChara = () => {
 };
 
 export const usePostCharaFun = (chara: TypeChara, character_book: TypeWorldBook,) => {
-  const updatedWorldBook = {
-    ...character_book,
-    entries: character_book.entries?.map((entry:TypeWorldBookEntriy) => ({
+
+  const newEntries = keyBy(Object.keys(character_book.entries).map((key) => {
+    const entry = character_book.entries[key]
+    return {
       ...entry,
       key: entry.keys !== undefined ? [entry.keys].flat() : [],                    
       secondary_keys: entry.secondary_keys !== undefined ? [entry.secondary_keys].flat() : [],
-    })) || [],
+    }
+  }), 'id');
+
+
+  const updatedWorldBook = {
+    ...character_book,
+    entries: newEntries || {},
     // name: chara.data.name + chara.data.character_version,
   };
 
@@ -274,9 +287,6 @@ export const pushCharaListByUid = (newChara: TypeCharaListItem) => {
   pushCharaList(newCharaList)
 };
 
-
-
-
 export const uuid = () => {
   var s = [];
   var hexDigits = "0123456789abcdef";
@@ -290,25 +300,22 @@ export const uuid = () => {
   var uuid = s.join("");
   return uuid;
 }
-export const createChara = () => {
+export const createChara = (cover: string = defaultCoverBase64, chara: TypeChara = defaultChara) => {
   const uid = uuid();
   const newChara: TypeCharaListItem = {
     uid: uid,
-    cover: defaultCoverBase64,
-    chara: defaultChara,
+    cover: cover,
+    chara: chara,
   }
   
   return newChara;
 }
 
-export const createWorldBook = () => {
+export const createWorldBook = (worldBook: TypeWorldBook = defaultWorldBook) => {
   const uid = uuid();
   const newChara: TypeWorldBookItem = {
     uid: uid,
-    worldBook: {
-      name: '',
-      entries: [],
-    } as TypeWorldBook,
+    worldBook: worldBook,
   }
   
   return newChara;

@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
+import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 import NuwaButton from "../components/NuwaButton";
 import { TypeWorldBookItem } from "../../_lib/definitions";
 import AlterMessage from "../components/AlterMessage";
@@ -58,7 +58,7 @@ function WorldBookEdit({ onDone, worldBook }: {
                   className="flex flex-row items-center justify-center gap-4"
                 >
                   
-                  <Button isLoading={isMakeCharLoding} className="h-16 w-48 text-xl" color="default" variant="bordered">发布</Button>
+                  {/* <Button isLoading={isMakeCharLoding} className="h-16 w-48 text-xl" color="default" variant="bordered">发布</Button> */}
                   <NuwaButton className="h-16 w-48 text-xl" color="black" variant="flat" onPress={() => {
                     onClose();
                   }}>关闭</NuwaButton>

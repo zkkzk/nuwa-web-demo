@@ -62,37 +62,12 @@ export type TypeCharaListItem = {
 export type TypeWorldBook = {
   name: string;
 
-  // entries: (Iterable<any> & any[]) | undefined;
-  entries: Array<TypeWorldBookEntriy> | [];
-  // character_book: {
-  //   entries: [
-  //     {
-  //       id: Number;
-  //       key: string[];
-  //       secondary_keys: string[];
-  //       comment: string;
-  //       content: string;
-  //       constant: Boolean;
-  //       selective: Boolean;
-  //       insertion_order: Number;
-  //       enabled: Boolean;
-  //       position: string;
-  //       extensions: {
-  //         position: Number;
-  //         exclude_recursion: Boolean;
-  //         display_index: Number;
-  //         probability: Number;
-  //         useProbability: Boolean;
-  //         depth: Number;
-  //       };
-  //     }
-  //   ];
-  //   name: string;
-  // };
+  entries: {[index: string]: TypeWorldBookEntriy};
+  // entries: Array<TypeWorldBookEntriy> | [];
 };
 
 export type TypeWorldBookEntriy = {
-  id: string;
+  uid: string;
   keys: string[];
   secondary_keys: string[];
   comment: string;
@@ -101,14 +76,13 @@ export type TypeWorldBookEntriy = {
   selective: Boolean;
   insertion_order: Number;
   enabled: Boolean;
-  position: string;
+  position: Number;
+  depth: Number;
   extensions: {
-    position: Number;
     exclude_recursion: Boolean;
     display_index: string;
     probability: Number;
     useProbability: Boolean;
-    depth: Number;
   };
 };
 export type TypeWorldBookItem = {

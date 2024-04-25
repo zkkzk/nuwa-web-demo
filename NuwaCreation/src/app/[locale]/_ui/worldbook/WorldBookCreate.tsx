@@ -34,6 +34,7 @@ function WorldBookCreate({ onCreateDone }: {
           } catch (e: any) {
             setMessage("本地存储空间已满，请删除后在操作");
             setIsOpen(true);
+            return
           }
           onCreateDone && onCreateDone(newWorldBook as TypeWorldBookItem)
         }}

@@ -10,7 +10,6 @@ import WorldBookEdit from "./WorldBookEdit";
 import { TypeWorldBookItem, TypeWorldBookList } from "../../_lib/definitions";
 import WorldBookCreate from "./WorldBookCreate";
 import WorldBookItem from "./WorldBookItem"
-import Image from "next/image";
 
 export default function WorldBookList() {
   const t = useTranslations();
@@ -39,7 +38,7 @@ export default function WorldBookList() {
         <div className="px-7">
           <div className="grid md:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-5 3xl:grid-cols-6 3xl:grid-cols-4 sm:grid-cols-2 gap-4 py-10 px-7 overflow-visible h-auto">
             {worldBookList.map((worldBookItem, index) => (
-              <div key={worldBookItem.uid} className="relative group w-auto h-[340px]rflow-hidden">
+              <div key={worldBookItem.uid} className="relative group w-auto h-[340px]">
                 <WorldBookItem worldBookItem={worldBookItem.worldBook} />
 
                 <div className="absolute top-4 right-4 flex flex-col gap-4">

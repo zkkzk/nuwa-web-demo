@@ -55,9 +55,9 @@ export default function WorldBook_Entry_R({value, isPreview = false, onChange}: 
               disabled={isPreview}
               className="grow border-none outline-none text-right disabled:bg-transparent"
               autoComplete="off"
-              value={value?.extensions.depth as number}
+              value={value?.depth as number}
               onChange={(e: { target: { value: any; }; }) => (
-                onChange({ ...value, extensions: { ...value?.extensions, depth: e.target.value } } as TypeWorldBookEntriy)
+                onChange({ ...value, depth: e.target.value } as TypeWorldBookEntriy)
               )}
               type="number"
               max={4}
@@ -72,33 +72,34 @@ export default function WorldBook_Entry_R({value, isPreview = false, onChange}: 
           label={t('WorldBook.position')}
           radioList={[
             {
-              value: '1',
+              value: 0,
               name: t('WorldBook.beforechar'),
             },
             {
-              value: '2',
+              value: 1,
               name: t('WorldBook.afterchar'),
             },
             {
-              value: '3',
+              value: 2,
               name: t('WorldBook.berforean'),
             },
             {
-              value: '4',
+              value: 3,
               name: t('WorldBook.afteran'),
             },
             {
-              value: '5',
+              value: 4,
               name: t('WorldBook.D'),
             },
           ]}
           radioProps={{
             isDisabled: isPreview,
-            value: String(value?.extensions.position),
+            value: value?.position,
 
-            onChange: (e: { target: { value: any; }; }) => (
-              onChange({ ...value, extensions: { ...value?.extensions, position: Number(e.target.value)  } }as TypeWorldBookEntriy)
-            )
+            onChange: (e: { target: { value: any; }; }) => {
+              
+              onChange({ ...value, position: Number(e.target.value) } as TypeWorldBookEntriy)
+            }
           }}
         >
         </NuwaRadioWrapper>
@@ -108,19 +109,19 @@ export default function WorldBook_Entry_R({value, isPreview = false, onChange}: 
           label={t('WorldBook.status')}
           radioList={[
             {
-              value: 'true',
+              value: true,
               name: t('WorldBook.constan'),
             }, 
             {
-              value: 'false',
+              value: false,
               name: t('WorldBook.normal'),
             }
           ]}
           radioProps={{
             isDisabled: isPreview,
-            value: String(value?.constant),
+            value: value?.constant,
             onChange: (e: { target: { value: any; }; }) => (
-              onChange({ ...value, extensions: { ...value?.extensions, constant: Boolean(e.target.value === 'true')  } }as TypeWorldBookEntriy)
+              onChange({ ...value, constant: Boolean(e.target.value === 'true') }as TypeWorldBookEntriy)
             )
           }}
         >

@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Link } from "@/navigation";
+import { Link, useRouter } from "@/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import RoleDesignIcon from "./icons/RoleDesignIcon";
@@ -9,7 +9,7 @@ import ModelSelectIcon from "./icons/ModelSelectIcon";
 import NuwaWorldBookIcon from "./icons/NuwaWorldBookIcon";
 import HotKeyIcon from "./icons/HotKeyIcon";
 import { Button } from "@nextui-org/react";
-import { useChara, useWorldBook, useCover } from "../_lib/utils";
+import { createChara, pushCharaList, getCharaList, createWorldBook, pushWorldBookList, getWorldBookList } from "../_lib/utils";
 import AlterMessage from "./components/AlterMessage";
 
 const understandandlearnList = [{
@@ -34,14 +34,14 @@ const understandandlearnList = [{
   icon: HotKeyIcon
 }]
 function Homepage() {
+  const router = useRouter();
   const t = useTranslations();
   const [isReadCharLoding, setIsReadCharLoding] = useState(false);
   const [isReadWorldBookLoding, setIsReadWorldBookLoding] = useState(false);
-  const {chara,setChara} = useChara();
-  const {character_book,setCharacter_Book} =  useWorldBook()
-  const {cover,setCover} = useCover();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState(t('Previews.importok'))
+  const charaList  = getCharaList();
+  const worldBookList  = getWorldBookList();
 
   const handleReadChar = async(e:any) =>{
     if(typeof window !== "undefined"){
@@ -53,17 +53,25 @@ function Homepage() {
       });
       if(res.ok){
         const data = await res.json();
-        // if(data.data.character_book){
-        //   setCharacter_Book(data.data.character_book)
-        // }
-        setCover(data.Nuwa_ORG_cover)
-        // delete data.data.character_book;
+
+        const cover = data.Nuwa_ORG_cover;
         delete data.Nuwa_ORG_cover;
-        data.data.extensions.world = '';
-        setChara(data)
+
+        const newChara = createChara(cover, data);
+        try {
+          pushCharaList([...charaList, newChara]);
+        } catch (e: any) {
+          setMessage("本地存储空间已满，请删除后在操作");
+          setIsReadCharLoding(false)
+          setIsOpen(true);
+          return
+        }
+        
         setIsReadCharLoding(false)
         setMessage(t('Previews.importok'))
         setIsOpen(true);
+
+        router.replace('/charas');
       }else{
         setIsReadCharLoding(false)
       }
@@ -82,15 +90,34 @@ function Homepage() {
       });
       if(res.ok){
         const data = await res.json();
+
+        const newWorldBook = createWorldBook(data);
+        try {
+          pushWorldBookList([...worldBookList, newWorldBook]);
+        } catch (e: any) {
+          setMessage("本地存储空间已满，请删除后在操作");
+          setIsOpen(true);
+          return
+        }
+        
         if(data){
-          setCharacter_Book({
+          const newWorldBook = createWorldBook({
             entries: data.entries,
             name: file.name.split(".json")[0]
-          })
+          });
+          try {
+            pushWorldBookList([...worldBookList, newWorldBook]);
+          } catch (e: any) {
+            setMessage("本地存储空间已满，请删除后在操作");
+            setIsOpen(true);
+            return
+          }
         }
         setIsReadWorldBookLoding(false)
         setMessage(t('Previews.importok'))
         setIsOpen(true);
+
+        router.replace('/worldbook');
       }else{
         setIsReadWorldBookLoding(false)
       }

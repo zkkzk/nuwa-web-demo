@@ -108,7 +108,7 @@ function Preview({charaItem}: {charaItem: TypeCharaListItem}) {
                 >
                   
                   <Button isLoading={isMakeCharLoding} className="h-16 w-48 text-xl" color="default" variant="bordered" onPress={handleMakeChar}>仅导出</Button>
-                  <NuwaButton className="h-16 w-48 text-xl" color="black" variant="flat">导出并发布</NuwaButton>
+                  {/* <NuwaButton className="h-16 w-48 text-xl" color="black" variant="flat">导出并发布</NuwaButton> */}
                 </div>
               </ModalHeader>
               <ModalBody>

@@ -1,14 +1,14 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useEffect } from "react";
 import {
   Button,
   Popover,
   PopoverContent,
   PopoverTrigger,
 } from "@nextui-org/react";
-import { useWorldBook, uuid } from "../../_lib/utils";
+import { uuid } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
-import { isEmpty, isNull } from "lodash-es";
+import { isNull, map, keyBy } from "lodash-es";
 import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import NuwaButton from "../components/NuwaButton";
 import { TypeWorldBook, TypeWorldBookEntriy } from "../../_lib/definitions";
@@ -27,23 +27,23 @@ export default function WorldBook({worldBooka, isPreview = false}: {
 
   let initSelectedEntry = undefined;
 
-  if (worldBook?.entries && worldBook?.entries.length > 0) {
-    initSelectedEntry = worldBook.entries[0] 
+  if (worldBook?.entries && Object.keys(worldBook.entries).length > 0) {
+    initSelectedEntry = worldBook.entries[Object.keys(worldBook.entries)[0]] 
   }
   const [selectedEntry, setSelectedEntry] = React.useState(initSelectedEntry);
 
   const handleDeleteButtonClick = (id: any) => {
     // Implement the logic to delete the entry with the given id
     setWorldBookItemDeleteEntries(id);
-    if (selectedEntry?.id === id) {
-      setSelectedEntry(worldBook?.entries[0])
+    if (selectedEntry?.uid === id) {
+      setSelectedEntry(worldBook?.entries[Object.keys(worldBook?.entries)[0]])
     }
   };
 
   const handleAddNewBookClick = () => {
     const uid = uuid();
     const defaultTemplate: TypeWorldBookEntriy = {
-      id: uid,
+      uid: uid,
       keys: [],
       secondary_keys: [],
       comment: "New Book",
@@ -52,14 +52,13 @@ export default function WorldBook({worldBooka, isPreview = false}: {
       selective: true,
       insertion_order: 100,
       enabled: true,
-      position: "after_char",
+      position: 0,
+      depth: 4,
       extensions: {
-        position: 3,
         exclude_recursion: false,
         display_index: uid,
         probability: 100,
         useProbability: true,
-        depth: 4,
       },
     };
 
@@ -68,7 +67,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
   };
 
   useEffect(() => {
-    isNull(selectedEntry) && worldBook?.entries && worldBook?.entries.length > 0 &&setSelectedEntry(worldBook?.entries[0])
+    isNull(selectedEntry) && worldBook?.entries && Object.keys(worldBook.entries).length > 0 &&setSelectedEntry(worldBook?.entries[0])
   }, [worldBook])
 
   const setWorldBookItem = (newValue:TypeWorldBook) => {
@@ -87,29 +86,38 @@ export default function WorldBook({worldBooka, isPreview = false}: {
         ...worldBookItem,
         worldBook: {
           ...worldBook,
-          entries: [
-            ...(worldBook?.entries || []),
-            newValue
-          ]
+          entries: {
+            ...worldBook?.entries,
+            [newValue.uid]: newValue
+          }
         }
       },
     })
   }
-  const setWorldBookItemDeleteEntries = (entryId: string) => {
+  const setWorldBookItemDeleteEntries = (key: string) => {
 
-    const updatedEntries = (worldBook?.entries || []).filter(
-      (entry) => entry.id !== entryId
-    );
+    delete worldBook?.entries[key];
+
+    // const newEntriesArray = map(worldBook, (value, key) => {
+    //   return {value};
+    // })
+
+    // const newEntries = keyBy(newEntriesArray, "id");
+
+
+    // const updatedEntries = (worldBook?.entries || []).filter(
+    //   (entry) => entry.uid !== entryId
+    // );
 
     // Update ids and display_index in sequential order
-    const updatedEntriesWithIds = updatedEntries.map((entry, index) => ({
-      ...entry,
-      id: index + 1,
-      extensions: {
-        ...entry.extensions,
-        display_index: index + 1,
-      },
-    }));
+    // const updatedEntriesWithIds = updatedEntries.map((entry, index) => ({
+    //   ...entry,
+    //   id: index + 1,
+    //   extensions: {
+    //     ...entry.extensions,
+    //     display_index: index + 1,
+    //   },
+    // }));
     
     worldBookItemDispatch({
       type: "changed",
@@ -117,7 +125,6 @@ export default function WorldBook({worldBooka, isPreview = false}: {
         ...worldBookItem,
         worldBook: {
           ...worldBook,
-          entries: updatedEntriesWithIds
         }
       },
     })
@@ -153,17 +160,17 @@ export default function WorldBook({worldBooka, isPreview = false}: {
                 <PlusCircleIcon className="h-12 w-12" aria-hidden="true" />
               </Button>
             )}
-            {worldBook?.entries.map((entry) => (
+            {worldBook&& Object.keys(worldBook.entries).map((key) => (
               <NuwaButton
-                key={`${uid}${entry.id}`}
+                key={`${uid}${worldBook.entries[key].uid}`}
                 className={`${
-                  selectedEntry?.id === entry.id ? "h-12" : "h-7"
+                  selectedEntry?.uid === worldBook.entries[key].uid ? "h-12" : "h-7"
                 } w-full rounded-l-[12px] bg-black text-white flex justify-center items-center cursor-pointer`}
                 onClick={() => {
-                  setSelectedEntry(entry);
+                  setSelectedEntry(worldBook.entries[key]);
                 }}
                 endContent={!isPreview &&
-                  <Popover key={`${entry.id}-${worldBook?.entries.length}`} placement="top" color="warning">
+                  <Popover key={`${worldBook.entries[key].uid}-${worldBook?.entries.length}`} placement="top" color="warning">
                     <PopoverTrigger>
                       <Button className="h-4 w-4 bg-transparent" size="sm" isIconOnly>
                         <XMarkIcon className="h-4 w-4 text-white" />
@@ -173,7 +180,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
                       <Button
                         onClick={(e) => {
                           e.stopPropagation();
-                          handleDeleteButtonClick(entry.id)
+                          handleDeleteButtonClick(worldBook.entries[key].uid)
                         }}
                         size="sm"
                         color="warning"
@@ -184,7 +191,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
                   </Popover>
                 }
               >
-                <div className="mx-2 overflow-x-scroll">{entry.comment || t('WorldBook.untitledbook')}</div>
+                <div className="mx-2 overflow-x-scroll">{worldBook.entries[key].comment || t('WorldBook.untitledbook')}</div>
               </NuwaButton>
             ))}
           </div>
@@ -202,9 +209,9 @@ export default function WorldBook({worldBooka, isPreview = false}: {
                 className="w-full h-full bg-transparent outline-none disabled:bg-transparent"
               />
             </div>
-            {worldBook?.entries && worldBook?.entries.map((entrys) => (
-              <div key={`${uid}${entrys.id}`}>
-                {selectedEntry?.id === entrys.id && (
+            {worldBook?.entries && Object.keys(worldBook.entries).map((key) => (
+              <div key={`${uid}${worldBook.entries[key].uid}`}>
+                {selectedEntry?.uid === worldBook.entries[key].uid && (
                   <WorldBook_Entry
                     value={selectedEntry}
                     isPreview={isPreview}
@@ -212,11 +219,10 @@ export default function WorldBook({worldBooka, isPreview = false}: {
 
                       const newWorldBook =  {
                         ...worldBook,
-                        entries: (worldBook.entries || []).map((item) =>
-                          item.id === newSelectedEntry.id
-                            ? newSelectedEntry
-                            : item
-                        )
+                        entries: {
+                          ...worldBook.entries,
+                          [newSelectedEntry.uid]: newSelectedEntry
+                        }
                       }
 
                       setWorldBookItem(newWorldBook)
