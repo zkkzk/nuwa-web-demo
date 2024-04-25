@@ -10,6 +10,7 @@ import { TypeChara, TypeWorldBook } from "../../_lib/definitions";
 import { Link } from "@/navigation";
 import Image from "next/image";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import WorldBookItem from "../worldbook/WorldBookItem";
 
 function Scenario_WorldBook() {
   const t = useTranslations();
@@ -117,33 +118,28 @@ function Scenario_WorldBook() {
             <>
               <ModalHeader className="flex flex-row justify-between items-center gap-1 py-6">
                 <div>选择一本世界书</div>
-                <div
+                {/* <div
                   className="cursor-pointer flex flex-row items-center justify-center h-12 w-52 z-40 bg-[url('/character-inforMation-personality-model-insert-bg.png')] bg-no-repeat bg-center bg-contain"
                   onClick={() => {
                     createWorldBookModal.onOpen();
                   }}
                 >
                   <span className="text-black text-lg ont-semibold">创建新世界书</span>
-                </div>
+                </div> */}
               </ModalHeader>
               <ModalBody>
                 <div className="grid md:grid-cols-4 sm:grid-cols-3 gap-10 py-10 px-7 overflow-visible h-auto">
-                  {myWorldBooks && myWorldBooks.map((worldbookItem, index) => (
+                  {myWorldBooks && myWorldBooks.map((worldBookItem, index) => (
                     <div
-                      key={`${worldbookItem.uid}+${index}`}
+                      key={`${worldBookItem.uid}+${index}`}
                       onClick={() => {
-                        const {updateChara} = usePostCharaFun(charaListItem.chara, worldbookItem.worldBook);
+                        const {updateChara} = usePostCharaFun(charaListItem.chara, worldBookItem.worldBook);
                         setCharaListItem(updateChara);
                         onClose();
                       }}
-                      className="cursor-pointer relative bg-[#979797] w-auto h-[340px] rounded-lg shadow-lg shadow-black/25 py-8 px-3"
+                      className="cursor-pointer relative w-auto h-[340px]"
                     >
-                      <div className="border-y border-solid border-white text-white font-semibold text-2xl overflow-hidden text-overflow-ellipsis">{worldbookItem.worldBook.name}</div>
-                      <div className="pt-14 pb-4 h-full overflow-y-scroll w-auto text-white break-words">
-                      {worldbookItem.worldBook.entries && worldbookItem.worldBook.entries.map((entry, index) => (
-                        <p key={`entries${index}`}>{entry.comment}</p>
-                      ))}
-                      </div>
+                      <WorldBookItem worldBookItem={worldBookItem.worldBook} />
                     </div>
                   ))}
                 </div>
@@ -194,7 +190,7 @@ function Scenario_WorldBook() {
         <div className="grid 2xl:grid-cols-3 3xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-4 py-10 px-7 overflow-visible h-auto">
           
             {charaListItem.chara.data.character_book && (
-              <div className="relative bg-[#979797] w-auto h-[340px] rounded-lg shadow-lg shadow-black/25 py-8 px-3">
+              <div className="relative w-auto h-[340px]">
                 <Button
                   onClick={() => {
                     handleRemoveSelectedWorldBook();
@@ -207,19 +203,12 @@ function Scenario_WorldBook() {
                 >
                   <XMarkIcon className="h-6 w-6 text-white font-black absolute" aria-hidden="true" />
               </Button>
-                <div className="border-y border-solid border-white text-white font-semibold text-2xl line-clamp-1">{charaListItem.chara.data.character_book.name}</div>
-                <div className="pt-14 pb-4 h-full overflow-y-scroll w-auto text-white break-words">
-                {charaListItem.chara.data.character_book.entries.map((entry, index) => (
-                  <p key={`entries${index}`}>{entry.comment}</p>
-                ))}
-                </div>
+
+                <WorldBookItem worldBookItem={charaListItem.chara.data.character_book} />
+            
               </div>
             )}
         </div>
-        {/* <Divider />
-        <Link href='/character/mesexample'>
-          <Image className=" absolute -right-2 -bottom-3 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
-        </Link>  */}
       </div>
     </div>
   );

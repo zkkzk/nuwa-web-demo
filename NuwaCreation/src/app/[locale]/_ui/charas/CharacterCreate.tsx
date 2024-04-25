@@ -24,7 +24,9 @@ function CharacterCreate({ onCreateDone }: {
         setIsOpen(false)
       }} />
       <Button
-        className="bg-black text-white h-14" startContent={<PlusIcon className="h-4 w-4"/>}
+        className="bg-black text-white"
+        startContent={<PlusIcon className="h-4 w-4"/>}
+        size="md"
         onClick={() => {
           const newChara = createChara();
           try {

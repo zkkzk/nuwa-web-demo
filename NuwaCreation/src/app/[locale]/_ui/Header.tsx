@@ -17,7 +17,7 @@ export default function Header() {
   const t = useTranslations();
   return (
     <div className="lg:block hidden w-full">
-      <div className="fixed top-0 left-0 z-40 bg-[#F6F6F6] w-full">
+      <div className="fixed top-0 left-0 z-40 bg-white w-full">
         <div className='flex flex-row justify-end items-center mt-9 mb-7 '>
           <div className='flex-row text-base font-semibold text-[#7C7C7C] hidden lg:flex'>
           {teams.map((team) => (

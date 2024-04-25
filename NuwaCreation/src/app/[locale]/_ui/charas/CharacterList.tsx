@@ -26,24 +26,25 @@ export default function CharacterList() {
 
   return (
     <>
-      <div className="relative bg-white h-full w-full pt-2 pb-40 rounded-[40px] px-10">
-        <div className="flex flex-row justify-end mt-2 z-40">
+      <div className="relative bg-white h-full w-full pt-2 pb-40 rounded-[40px] px-10 flex flex-col justify-center">
+        <div className="flex flex-row justify-end mt-2 z-4 mb-8">
           <CharacterCreate
             onCreateDone={(newChara) => {
               setCharaList(getCharaList())
+              setEditChara(newChara);
             }} />
         </div>
         <div className="flex flex-wrap flex-row gap-4">
           {charaList.map((chara, index) => (
-            <div className="w-[212px] group relative" key={chara.uid}>
+            <div className="w-[212px] group relative hover:scale-105" key={chara.uid}>
               <Image
                 src={chara.cover}
                 width={212}
                 height={250}
                 alt=""
-                className="w-[212px] h-[250px] flex-none object-cover rounded-[14px] border border-neutral-400 border-opacity-50"
+                className="w-full h-[250px] flex-none object-cover rounded-[14px] border border-neutral-400 border-opacity-50"
               />
-              <div className="w-[212px] h-[250px] absolute top-0 bg-gray-50/50 hidden group-hover:block" />
+              <div className="w-full h-[250px] absolute top-0 bg-gray-50/50 hidden group-hover:block" />
               <div className="w-full h-[36px] text-center text-stone-950 text-lg font-semibold leading-loose tracking-tight">{chara.chara.name}</div>
               <div className="absolute top-4 right-4 flex flex-col gap-4">
                 <Popover placement="top" color='warning'>

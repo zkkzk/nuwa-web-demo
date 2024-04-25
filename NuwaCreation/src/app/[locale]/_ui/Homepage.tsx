@@ -1,5 +1,4 @@
 "use client";
-import { ChevronRightIcon } from "@heroicons/react/24/outline";
 import React, { useState } from "react";
 import { Link } from "@/navigation";
 import Image from "next/image";
@@ -124,8 +123,8 @@ function Homepage() {
         />
       </div>
 
-      <div className="grid lg:grid-cols-5 grid-cols-1 w-full gap-4">
-        <div className="lg:col-span-3 min-w-full bg-white pb-7 rounded-[40px] px-8 w-full relative mt-3 pt-6">
+      <div className="grid lg:grid-cols-5 grid-cols-1 w-full gap-6 mt-6">
+        <div className="lg:col-span-3 min-w-full bg-gray-100 pb-7 rounded-[40px] px-8 w-full relative pt-6">
           <div className="text-black text-8 font-semibold mb-3">{t('HomePage.quickstart')}</div>
           <div className="grid grid-row-2 gap-4">
             <div className="grid grid-cols-4 gap-4">
@@ -153,7 +152,7 @@ function Homepage() {
             </Link>
             <Link
               href="/worldbook"
-              className="bg-gray-100 relative rounded-lg flex items-center justify-center hover:scale-105"
+              className="bg-gray-200 relative rounded-lg flex items-center justify-center hover:scale-105"
             >
               {/* <div className="w-1 h-[9rem] bg-[#212121] absolute left-2 my-2"></div> */}
               <div className="flex flex-col items-center justify-center my-auto">
@@ -212,7 +211,7 @@ function Homepage() {
           </div>
           
         </div>
-        <div className="lg:col-span-2 min-w-full bg-white pb-7 rounded-[40px] px-5 w-full relative mt-3 pt-6">
+        <div className="lg:col-span-2 min-w-full bg-gray-100 pb-7 rounded-[40px] px-5 w-full relative pt-6">
           <div className="text-black text-8 font-semibold mb-3 px-3 flex flex-row justify-between">
             <div>{t('HomePage.understandandlearn')}</div>
             <Button className="w-[32px] h-[32px] bg-neutral-100 rounded-[11px]" >

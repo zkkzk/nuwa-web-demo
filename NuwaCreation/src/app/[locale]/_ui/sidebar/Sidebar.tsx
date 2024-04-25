@@ -61,7 +61,7 @@ export default function Sidebar() {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="fixed inset-0 bg-gray-900/80" />
+              <div className="fixed inset-0 bg-white" />
             </Transition.Child>
 
             <div className="fixed inset-0 flex">
@@ -92,12 +92,12 @@ export default function Sidebar() {
                     </div>
                   </Transition.Child>
                   {/* Sidebar component, swap this element with another sidebar if you like */}
-                  <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-gray-900 pb-2 rounded-r-3xl">
+                  <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-stone-900  pb-2 rounded-r-3xl">
                     <div className="flex flex-col justify-center h-16 shrink-0 items-start pl-16 pt-6">
                       <Image
                         width={96}
                         height={20}
-                        src="/tittle-logo.png"
+                        src="/title-logo-white.png"
                         alt=""
                       />
                       <div className='text-neutral-600 text-xs'>Nuwa Digital Life Labs</div>
@@ -144,12 +144,12 @@ export default function Sidebar() {
         {/* Static sidebar for desktop */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-white dark:bg-gray-900 rounded-r-3xl">
+          <div className="flex grow flex-col gap-y-5 overflow-y-auto bg-stone-900  rounded-r-3xl">
             <div className="flex flex-col justify-center h-16 shrink-0 items-start pl-16 mt-14 mb-2">
               <Image
                 width={96}
                 height={20}
-                src="/tittle-logo.png"
+                src="/title-logo-white.png"
                 alt=""
               />
               <div className='text-neutral-600 text-[10px]'>Nuwa Digital Life Labs</div>
@@ -184,7 +184,7 @@ export default function Sidebar() {
           </div>
         </div>
 
-        <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white dark:bg-gray-900 px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+        <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white  px-4 py-4 shadow-sm sm:px-6 lg:hidden">
           <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
             <span className="sr-only">Open sidebar</span>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
