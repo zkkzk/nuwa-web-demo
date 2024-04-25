@@ -9,11 +9,11 @@ import {
   Button,
   useDisclosure,
 } from "@nextui-org/react";
-import { useCharacterBook } from "../../_lib/utils";
+import { useWorldBook } from "../../_lib/utils";
 export default function WorldBookPositionSet() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const { character_book, setCharacter_Book } = useCharacterBook();
+  const { character_book, setCharacter_Book } = useWorldBook();
 
   return (
     <>

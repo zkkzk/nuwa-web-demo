@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { useChara, useCharacterBook } from "../../_lib/utils";
+import { useChara, useWorldBook } from "../../_lib/utils";
 import {
   Image,
   Accordion,

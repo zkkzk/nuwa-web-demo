@@ -6,7 +6,7 @@ import {
   PopoverTrigger,
 } from "@nextui-org/react";
 import React, { useState } from "react";
-import { useChara, usePostChara,useCharacterBook } from "../../_lib/utils";
+import { useChara, usePostChara,useWorldBook } from "../../_lib/utils";
 import { useCover } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import CharacterPreviews from "./CharacterPreviews";
@@ -16,7 +16,7 @@ function Previews() {
   const [isMakeCharLoding, setIsMakeCharLoding] = useState(false);
   const t = useTranslations();
   const {chara,setChara} = useChara();
-  const {character_book,setCharacter_Book} =  useCharacterBook()
+  const {character_book,setCharacter_Book} =  useWorldBook()
   const {cover,setCover} = useCover();
   const {updateChara} = usePostChara();
   const handleMakeChar = async (e: any) => {

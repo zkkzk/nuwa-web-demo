@@ -6,67 +6,51 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@nextui-org/react";
-import { useCharacterBook } from "../../_lib/utils";
+import { useWorldBook, uuid } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import { isEmpty, isNull } from "lodash-es";
 import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import NuwaButton from "../components/NuwaButton";
-import { TypeCharacterBook, TypeCharacterBookEntriy } from "../../_lib/definitions";
+import { TypeWorldBook, TypeWorldBookEntriy } from "../../_lib/definitions";
 import WorldBook_Entry from "./WorldBook_Entry";
+import { useWorldBookItem, useWorldBookItemDispatch } from "./WorldBookContext";
 
-export default function WorldBook({characterBook, isPreview = false}: {
-  characterBook?: TypeCharacterBook | undefined,
+export default function WorldBook({worldBook, isPreview = false}: {
+  worldBook?: TypeWorldBook | undefined,
   isPreview?: boolean,
 }) {
   const t = useTranslations();
-  const { character_book, setCharacter_Book } = useCharacterBook();
-  const displayCharaterBook =characterBook || character_book;
+  const worldBookItem = useWorldBookItem();
+  const worldBookItemDispatch = useWorldBookItemDispatch();
 
   let initSelectedEntry = null;
 
-  if (displayCharaterBook?.entries && displayCharaterBook?.entries.length > 0) {
-    initSelectedEntry = displayCharaterBook.entries[0] 
+  if (worldBookItem.worldBook?.entries && worldBookItem.worldBook?.entries.length > 0) {
+    initSelectedEntry = worldBookItem.worldBook.entries[0] 
   }
   const [selectedEntry, setSelectedEntry] = React.useState(initSelectedEntry);
 
   const handleDeleteButtonClick = (id: any) => {
     // Implement the logic to delete the entry with the given id
-    setCharacter_Book((prevChara) => {
-      const updatedEntries = (prevChara.entries || []).filter(
-        (entry) => entry.id !== id
-      );
-
-      // Update ids and display_index in sequential order
-      const updatedEntriesWithIds = updatedEntries.map((entry, index) => ({
-        ...entry,
-        id: index + 1,
-        extensions: {
-          ...entry.extensions,
-          display_index: index + 1,
-        },
-      }));
-
-      return {
-        ...prevChara,
-        entries: updatedEntriesWithIds,
-      };
-    });
+    setWorldBookItemDeleteEntries(id);
     if (selectedEntry?.id === id) {
-      setSelectedEntry(displayCharaterBook?.entries[0])
+      setSelectedEntry(worldBookItem.worldBook?.entries[0])
     }
   };
 
   const handleAddNewBookClick = () => {
     // Determine the next available id and display_index based on existing entries
-    let nextId = (displayCharaterBook.entries || []).length + 1;
-    // if(displayCharaterBook.entries[displayCharaterBook.entries.length - 1].id >= nextId) {
-    //   nextId = displayCharaterBook.entries[displayCharaterBook.entries.length - 1].id + 1;
-    // }
-    const nextDisplayIndex = nextId;
+    // let nextId = (worldBookItem.worldBook.entries || []).length + 1;
+    // // if(worldBookItem.worldBook.entries[worldBookItem.worldBook.entries.length - 1].id >= nextId) {
+    // //   nextId = worldBookItem.worldBook.entries[worldBookItem.worldBook.entries.length - 1].id + 1;
+    // // }
+    // const nextDisplayIndex = nextId;
 
     // Default template for new entries
-    const defaultTemplate: TypeCharacterBookEntriy = {
-      id: nextId,
+
+    const uid = uuid();
+    const defaultTemplate: TypeWorldBookEntriy = {
+      id: uid,
       keys: [],
       secondary_keys: [],
       comment: "New Book",
@@ -79,24 +63,84 @@ export default function WorldBook({characterBook, isPreview = false}: {
       extensions: {
         position: 3,
         exclude_recursion: false,
-        display_index: nextDisplayIndex,
+        display_index: uid,
         probability: 100,
         useProbability: true,
         depth: 4,
       },
     };
 
-    setCharacter_Book((prevChara: TypeCharacterBook):TypeCharacterBook => ({
-      ...prevChara,
-      entries: [...(prevChara.entries || []), defaultTemplate],
-    }));
+    setWorldBookItemInNewEntries(defaultTemplate);
     setSelectedEntry(defaultTemplate)
-
   };
 
   useEffect(() => {
-    isNull(selectedEntry) && displayCharaterBook.entries && displayCharaterBook?.entries.length > 0 &&setSelectedEntry(displayCharaterBook?.entries[0])
-  }, [displayCharaterBook])
+    isNull(selectedEntry) && worldBookItem.worldBook.entries && worldBookItem.worldBook?.entries.length > 0 &&setSelectedEntry(worldBookItem.worldBook?.entries[0])
+  }, [worldBookItem.worldBook])
+
+  const setWorldBookItem = (newValue:TypeWorldBook) => {
+    worldBookItemDispatch({
+      type: "changed",
+      payload: {
+        ...worldBookItem,
+        worldBook: newValue
+      },
+    })
+  }
+  const setWorldBookItemInNewEntries = (newValue:TypeWorldBookEntriy) => {
+    worldBookItemDispatch({
+      type: "changed",
+      payload: {
+        ...worldBookItem,
+        worldBook: {
+          ...worldBookItem.worldBook,
+          entries: [
+            ...worldBookItem.worldBook.entries,
+            newValue
+          ]
+        }
+      },
+    })
+  }
+  const setWorldBookItemDeleteEntries = (entryId: string) => {
+
+    const updatedEntries = (worldBookItem.worldBook.entries || []).filter(
+      (entry) => entry.id !== entryId
+    );
+
+    // Update ids and display_index in sequential order
+    const updatedEntriesWithIds = updatedEntries.map((entry, index) => ({
+      ...entry,
+      id: index + 1,
+      extensions: {
+        ...entry.extensions,
+        display_index: index + 1,
+      },
+    }));
+    
+    worldBookItemDispatch({
+      type: "changed",
+      payload: {
+        ...worldBookItem,
+        worldBook: {
+          ...worldBookItem.worldBook,
+          entries: updatedEntriesWithIds
+        }
+      },
+    })
+  }
+  const setWorldBookItemName = (newValue:string) => {
+    worldBookItemDispatch({
+      type: "changed",
+      payload: {
+        ...worldBookItem,
+        worldBook: {
+          ...worldBookItem.worldBook,
+          name: newValue
+        }
+      },
+    })
+  }
   
   return (
     <>
@@ -116,9 +160,9 @@ export default function WorldBook({characterBook, isPreview = false}: {
                 <PlusCircleIcon className="h-12 w-12" aria-hidden="true" />
               </Button>
             )}
-            {displayCharaterBook.entries?.map((entry) => (
+            {worldBookItem.worldBook.entries?.map((entry) => (
               <NuwaButton
-                key={`${entry.id}`}
+                key={`${worldBookItem.uid}${entry.id}`}
                 className={`${
                   selectedEntry?.id === entry.id ? "h-12" : "h-7"
                 } w-full rounded-l-[12px] bg-black text-white flex justify-center items-center cursor-pointer`}
@@ -126,7 +170,7 @@ export default function WorldBook({characterBook, isPreview = false}: {
                   setSelectedEntry(entry);
                 }}
                 endContent={!isPreview &&
-                  <Popover key={`${entry.id}-${displayCharaterBook?.entries.length}`} placement="top" color="warning">
+                  <Popover key={`${entry.id}-${worldBookItem.worldBook?.entries.length}`} placement="top" color="warning">
                     <PopoverTrigger>
                       <Button className="h-4 w-4 bg-transparent" size="sm" isIconOnly>
                         <XMarkIcon className="h-4 w-4 text-white" />
@@ -156,37 +200,35 @@ export default function WorldBook({characterBook, isPreview = false}: {
               className="-mb-9 pb-9 px-2 w-5/12 h-[132px] rounded-[40px] flex justify-center items-center bg-[#313131] text-white font-semibold text-[20px]"
             >
               <input
-                value={displayCharaterBook.name}
+                value={worldBookItem.worldBook.name}
                 disabled={isPreview}
                 onChange={(e) => {
                   const newValue = e.target.value;
-                  setCharacter_Book((prevChara) => ({
-                    ...prevChara,
-                    name: newValue,
-                  }))
+                  setWorldBookItemName(newValue);
                 }}
                 className="w-full h-full bg-transparent outline-none disabled:bg-transparent"
               />
             </div>
-            {displayCharaterBook.entries && displayCharaterBook?.entries.map((entrys) => (
-              <div key={`${entrys.id}`}>
+            {worldBookItem.worldBook.entries && worldBookItem.worldBook?.entries.map((entrys) => (
+              <div key={`${worldBookItem.uid}${entrys.id}`}>
                 {selectedEntry?.id === entrys.id && (
                   <WorldBook_Entry
                     value={selectedEntry}
                     isPreview={isPreview}
                     onChange={(newSelectedEntry) => {
-                      setCharacter_Book((prevChara) => {
-                        const newCharaterBook =  {
-                          ...prevChara,
-                          entries: (prevChara.entries || []).map((item) =>
-                            item.id === newSelectedEntry.id
-                              ? newSelectedEntry
-                              : item
-                          ),
-                        }
-                        setSelectedEntry(newSelectedEntry);
-                        return newCharaterBook;
-                      })
+
+                      const newWorldBook =  {
+                        ...worldBookItem.worldBook,
+                        entries: (worldBookItem.worldBook.entries || []).map((item) =>
+                          item.id === newSelectedEntry.id
+                            ? newSelectedEntry
+                            : item
+                        )
+                      }
+
+                      setWorldBookItem(newWorldBook)
+
+                      setSelectedEntry(newSelectedEntry);
                     }}
                   />
                 )}

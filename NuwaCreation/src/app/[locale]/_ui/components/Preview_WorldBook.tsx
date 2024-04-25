@@ -20,7 +20,7 @@ function Preview_WorldBook() {
     <div>   
       <PreviewTitle>{t('Navigation.worldbook')}</PreviewTitle>
       <div className="w-full py-6">
-        <WorldBook_Preview characterBook={chara.data.character_book} />
+        <WorldBook_Preview worldBook={chara.data.character_book} />
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ import ModelSelectIcon from "./icons/ModelSelectIcon";
 import NuwaWorldBookIcon from "./icons/NuwaWorldBookIcon";
 import HotKeyIcon from "./icons/HotKeyIcon";
 import { Button } from "@nextui-org/react";
-import { useChara, useCharacterBook, useCover } from "../_lib/utils";
+import { useChara, useWorldBook, useCover } from "../_lib/utils";
 import AlterMessage from "./components/AlterMessage";
 
 const understandandlearnList = [{
@@ -39,7 +39,7 @@ function Homepage() {
   const [isReadCharLoding, setIsReadCharLoding] = useState(false);
   const [isReadWorldBookLoding, setIsReadWorldBookLoding] = useState(false);
   const {chara,setChara} = useChara();
-  const {character_book,setCharacter_Book} =  useCharacterBook()
+  const {character_book,setCharacter_Book} =  useWorldBook()
   const {cover,setCover} = useCover();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState(t('Previews.importok'))

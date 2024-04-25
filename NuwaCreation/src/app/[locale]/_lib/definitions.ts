@@ -47,7 +47,7 @@ export type TypeChara = {
       level: string,
       cclicense: string,
     };
-    character_book?: TypeCharacterBook;
+    character_book?: TypeWorldBook;
   };
   create_date: string;
 };
@@ -59,11 +59,11 @@ export type TypeCharaListItem = {
   chara: TypeChara;
   cover: string,
 };
-export type TypeCharacterBook = {
+export type TypeWorldBook = {
   name: string;
 
   // entries: (Iterable<any> & any[]) | undefined;
-  entries: Array<TypeCharacterBookEntriy> | [];
+  entries: Array<TypeWorldBookEntriy> | [];
   // character_book: {
   //   entries: [
   //     {
@@ -91,8 +91,8 @@ export type TypeCharacterBook = {
   // };
 };
 
-export type TypeCharacterBookEntriy = {
-  id: Number;
+export type TypeWorldBookEntriy = {
+  id: string;
   keys: string[];
   secondary_keys: string[];
   comment: string;
@@ -105,9 +105,15 @@ export type TypeCharacterBookEntriy = {
   extensions: {
     position: Number;
     exclude_recursion: Boolean;
-    display_index: Number;
+    display_index: string;
     probability: Number;
     useProbability: Boolean;
     depth: Number;
   };
 };
+export type TypeWorldBookItem = {
+  uid: string;
+  worldBook: TypeWorldBook;
+};
+
+export type TypeWorldBookList = TypeWorldBookItem[];

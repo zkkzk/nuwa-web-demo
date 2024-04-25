@@ -4,16 +4,16 @@ import { useTranslations } from "next-intl";
 import NuwaTextareaWrapper from "../components/NuwaTextareaWrapper";
 import NuwaRadioWrapper from "../components/NuwaRadioWrapper";
 import NuwaFormWrapper from "../components/NuwaFormWrapper";
-import { TypeCharacterBookEntriy } from "../../_lib/definitions";
+import { TypeWorldBookEntriy } from "../../_lib/definitions";
 import WorldBook_Entry_Wrapper from "./WorldBook_Entry_Wrapper";
 import WorldBook_Entry_L from "./WorldBook_Entry_L";
 import WorldBook_Entry_R from "./WorldBook_Entry_R";
 import PreviewWrapper from "../components/PreviewWrapper";
 
 export default function WorldBook_Entry({value, isPreview = false, onChange}: {
-  value?: TypeCharacterBookEntriy,
+  value?: TypeWorldBookEntriy,
   isPreview?: boolean,
-  onChange: (value: TypeCharacterBookEntriy) => void,
+  onChange: (value: TypeWorldBookEntriy) => void,
 }) {
   const t = useTranslations();
 

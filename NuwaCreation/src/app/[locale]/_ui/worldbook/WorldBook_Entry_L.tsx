@@ -2,12 +2,12 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import NuwaTextareaWrapper from "../components/NuwaTextareaWrapper";
-import { TypeCharacterBookEntriy } from "../../_lib/definitions";
+import { TypeWorldBookEntriy } from "../../_lib/definitions";
 
 export default function WorldBook_Entry_L({value, isPreview = false, onChange}: {
-  value?: TypeCharacterBookEntriy,
+  value?: TypeWorldBookEntriy,
   isPreview?: boolean,
-  onChange: (value: TypeCharacterBookEntriy) => void,
+  onChange: (value: TypeWorldBookEntriy) => void,
 }) {
   const t = useTranslations();
 
@@ -21,7 +21,7 @@ export default function WorldBook_Entry_L({value, isPreview = false, onChange}: 
             disabled: isPreview,
             value: value?.comment,
             onChange: (e: { target: { value: any; }; }) => (
-              onChange({ ...value, comment: e.target.value } as TypeCharacterBookEntriy)
+              onChange({ ...value, comment: e.target.value } as TypeWorldBookEntriy)
             )
           }}
         >
@@ -35,7 +35,7 @@ export default function WorldBook_Entry_L({value, isPreview = false, onChange}: 
             value: value?.content,
             onChange: (e: { target: { value: any; }; }) => (
 
-              onChange({ ...value, content: e.target.value } as TypeCharacterBookEntriy)
+              onChange({ ...value, content: e.target.value } as TypeWorldBookEntriy)
             )
           }}
         >
@@ -49,7 +49,7 @@ export default function WorldBook_Entry_L({value, isPreview = false, onChange}: 
             value: value?.keys,
             onChange: (e: { target: { value: any; }; }) => (
 
-              onChange({ ...value, keys: e.target.value } as TypeCharacterBookEntriy)
+              onChange({ ...value, keys: e.target.value } as TypeWorldBookEntriy)
             )
           }}
         >

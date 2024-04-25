@@ -4,13 +4,13 @@ import { useTranslations } from "next-intl";
 import NuwaTextareaWrapper from "../components/NuwaTextareaWrapper";
 import NuwaRadioWrapper from "../components/NuwaRadioWrapper";
 import NuwaFormWrapper from "../components/NuwaFormWrapper";
-import { TypeCharacterBookEntriy } from "../../_lib/definitions";
+import { TypeWorldBookEntriy } from "../../_lib/definitions";
 import WorldBook_Entry_Wrapper from "./WorldBook_Entry_Wrapper";
 
 export default function WorldBook_Entry_R({value, isPreview = false, onChange}: {
-  value?: TypeCharacterBookEntriy,
+  value?: TypeWorldBookEntriy,
   isPreview?: boolean,
-  onChange: (value: TypeCharacterBookEntriy) => void,
+  onChange: (value: TypeWorldBookEntriy) => void,
 }) {
   const t = useTranslations();
 
@@ -24,7 +24,7 @@ export default function WorldBook_Entry_R({value, isPreview = false, onChange}: 
             disabled: isPreview,
             value: value?.secondary_keys,
             onChange: (e: { target: { value: any; }; }) => (
-              onChange({ ...value, secondary_keys: e.target.value } as TypeCharacterBookEntriy)
+              onChange({ ...value, secondary_keys: e.target.value } as TypeWorldBookEntriy)
             )
           }}
         >
@@ -44,7 +44,7 @@ export default function WorldBook_Entry_R({value, isPreview = false, onChange}: 
               autoComplete="off"
               value={value?.insertion_order as number}
               onChange={(e: { target: { value: any; }; }) => (
-                onChange({ ...value, insertion_order: e.target.value } as TypeCharacterBookEntriy)
+                onChange({ ...value, insertion_order: e.target.value } as TypeWorldBookEntriy)
               )}
               type="number"
               max={1000}
@@ -57,7 +57,7 @@ export default function WorldBook_Entry_R({value, isPreview = false, onChange}: 
               autoComplete="off"
               value={value?.extensions.depth as number}
               onChange={(e: { target: { value: any; }; }) => (
-                onChange({ ...value, extensions: { ...value?.extensions, depth: e.target.value } } as TypeCharacterBookEntriy)
+                onChange({ ...value, extensions: { ...value?.extensions, depth: e.target.value } } as TypeWorldBookEntriy)
               )}
               type="number"
               max={4}
@@ -97,7 +97,7 @@ export default function WorldBook_Entry_R({value, isPreview = false, onChange}: 
             value: String(value?.extensions.position),
 
             onChange: (e: { target: { value: any; }; }) => (
-              onChange({ ...value, extensions: { ...value?.extensions, position: Number(e.target.value)  } }as TypeCharacterBookEntriy)
+              onChange({ ...value, extensions: { ...value?.extensions, position: Number(e.target.value)  } }as TypeWorldBookEntriy)
             )
           }}
         >
@@ -120,7 +120,7 @@ export default function WorldBook_Entry_R({value, isPreview = false, onChange}: 
             isDisabled: isPreview,
             value: String(value?.constant),
             onChange: (e: { target: { value: any; }; }) => (
-              onChange({ ...value, extensions: { ...value?.extensions, constant: Boolean(e.target.value === 'true')  } }as TypeCharacterBookEntriy)
+              onChange({ ...value, extensions: { ...value?.extensions, constant: Boolean(e.target.value === 'true')  } }as TypeWorldBookEntriy)
             )
           }}
         >

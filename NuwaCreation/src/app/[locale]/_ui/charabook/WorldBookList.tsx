@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react";
-import { useChara, useCharacterBook } from "../../_lib/utils";
+import { useChara, useWorldBook } from "../../_lib/utils";
 import { useTranslations, useMessages } from "next-intl";
 import { NoSymbolIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
@@ -23,7 +23,7 @@ export default function WorldBookList() {
   const t = useTranslations();
   const messages = useMessages();
   const { chara , setChara } = useChara();
-  const { character_book, setCharacter_Book } = useCharacterBook();
+  const { character_book, setCharacter_Book } = useWorldBook();
   const uploadModal = useDisclosure();
   let initWorldbookList = [character_book, character_book];
   if (chara.data.character_book) {

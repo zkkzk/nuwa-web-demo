@@ -1,40 +1,25 @@
 "use client"
 
 import React, { useState } from "react";
-import { getCharaList, useChara, useCharaList, useCover, pushCharaList } from "../../_lib/utils";
-import { useTranslations, useMessages } from "next-intl";
-import { NoSymbolIcon, PencilIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { getCharaList, pushCharaList } from "../../_lib/utils";
+import { useTranslations } from "next-intl";
+import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { Link } from "@/navigation";
-import LIVE2DIcon from "../icons/LIVE2DIcon";
-import { TypeAvatarType } from "../../_lib/definitions.avatar";
-import A3DIcon from "../icons/A3DIcon";
-import ImageIcon from "../icons/ImageIcon";
-import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, useDisclosure } from "@nextui-org/react";
-import IconCard, {IconCardType} from "../components/IconCard";
-import NuwaButton from "../components/NuwaButton";
+import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure } from "@nextui-org/react";
 import CharacterCreate from "./CharacterCreate";
 import { TypeCharaList, TypeCharaListItem } from "../../_lib/definitions";
 import CharacterEdit from "./CharacterEdit";
 
-function classNames(...classes:any) {
-  return classes.filter(Boolean).join(' ')
-}
 
 export default function CharacterList() {
   const t = useTranslations();
-  const messages = useMessages();
   let initCharaList = getCharaList();
   const [charaList, setCharaList] = useState<TypeCharaList>(initCharaList);
-  const { chara , setChara } = useChara();
-  const { cover , setCover } = useCover();
   const [ editChara, setEditChara ] = useState<TypeCharaListItem>();
-  const uploadModal = useDisclosure();
-
 
   const deleteChara = ({index}: {index: number}) => {
     const newCharaList = charaList.filter((_, i) => i !== index);
-    pushCharaList(charaList.filter((_, i) => i !== index));
+    pushCharaList(newCharaList);
     setCharaList(newCharaList);
   }
 
@@ -97,8 +82,7 @@ export default function CharacterList() {
                   isIconOnly
                   onClick={() => {
                     setEditChara(chara);
-                  }
-                  }
+                  }}
                 ></Button>
               </div>
             </div>

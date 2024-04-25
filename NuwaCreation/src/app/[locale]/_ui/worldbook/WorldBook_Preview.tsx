@@ -4,9 +4,9 @@ import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 
 import WorldBook from "./WorldBook";
-import { TypeCharacterBook } from "../../_lib/definitions";
+import { TypeWorldBook } from "../../_lib/definitions";
 
-function Preview_WorldBook({characterBook}: {characterBook: TypeCharacterBook | undefined}) {
+function Preview_WorldBook({worldBook}: {worldBook: TypeWorldBook | undefined}) {
   const t = useTranslations();
   const { chara , setChara } = useChara();
   
@@ -16,7 +16,7 @@ function Preview_WorldBook({characterBook}: {characterBook: TypeCharacterBook | 
 
   return (
     <div>   
-        <WorldBook isPreview={true} characterBook={characterBook}/>
+        <WorldBook isPreview={true} worldBook={worldBook}/>
     </div>
   );
 }

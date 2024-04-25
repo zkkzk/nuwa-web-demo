@@ -1,12 +1,12 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { useChara, useCharacterBook, usePostCharaFun } from "../../_lib/utils";
+import { useChara, useWorldBook, usePostCharaFun } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import { LinkIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Button, Divider, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
 import NuwaButton from "../components/NuwaButton";
 import Scenario_CreateWorldBook from "./Scenario_CreateWorldBook";
-import { TypeCharacterBook } from "../../_lib/definitions";
+import { TypeWorldBook } from "../../_lib/definitions";
 import { Link } from "@/navigation";
 import Image from "next/image";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
@@ -17,7 +17,7 @@ function Scenario_WorldBook() {
 
   const selectWorldBookModal = useDisclosure();
   const createWorldBookModal = useDisclosure();
-  const [myWorldBooks , setMyWorldBooks] = useState([] as Array<TypeCharacterBook>);
+  const [myWorldBooks , setMyWorldBooks] = useState([] as Array<TypeWorldBook>);
   const isLogin = false;
 
 

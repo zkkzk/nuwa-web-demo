@@ -1,6 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
-import { TypeChara, TypeCharacterBook, TypeCharacterBookEntriy, TypeCharaList, TypeCharaListItem } from "./definitions";
+import { TypeChara, TypeWorldBook, TypeWorldBookEntriy, TypeWorldBookItem, TypeWorldBookList, TypeCharaList, TypeCharaListItem } from "./definitions";
 import defaultCoverBase64 from "./defalutCover";
 
 const defaultChara = {
@@ -69,10 +69,10 @@ export function getChara() {
   return defaultChara;
 }
 
-export function useCharacterBook() {
+export function useWorldBook() {
   const {chara} = useChara()
-  const [ character_book , setCharacter_Book ] = useState<TypeCharacterBook>(() => {
-    const defaultCharacterBook = {
+  const [ character_book , setCharacter_Book ] = useState<TypeWorldBook>(() => {
+    const defaultWorldBook = {
       entries:[
         {
           "id": 1,
@@ -99,9 +99,9 @@ export function useCharacterBook() {
     };
     if(typeof window !== "undefined" ){
       const character_booked = localStorage.getItem('character_book');
-      return character_booked ? JSON.parse(character_booked) || defaultCharacterBook : defaultCharacterBook;
+      return character_booked ? JSON.parse(character_booked) || defaultWorldBook : defaultWorldBook;
     }
-    return defaultCharacterBook;
+    return defaultWorldBook;
   });
   useEffect(() => {
     if(typeof window !== "undefined") {
@@ -196,17 +196,17 @@ export const usePostCharaAll = () => {
 
 export const usePostChara = () => {
   const { chara, setChara } = useChara();
-  const { character_book, setCharacter_Book } = useCharacterBook();
+  const { character_book, setCharacter_Book } = useWorldBook();
 
   const updateChara = usePostCharaFun(chara, character_book)
 
   return { updateChara };
 };
 
-export const usePostCharaFun = (chara: TypeChara, character_book: TypeCharacterBook,) => {
-  const updatedCharacterBook = {
+export const usePostCharaFun = (chara: TypeChara, character_book: TypeWorldBook,) => {
+  const updatedWorldBook = {
     ...character_book,
-    entries: character_book.entries?.map((entry:TypeCharacterBookEntriy) => ({
+    entries: character_book.entries?.map((entry:TypeWorldBookEntriy) => ({
       ...entry,
       key: entry.keys !== undefined ? [entry.keys].flat() : [],                    
       secondary_keys: entry.secondary_keys !== undefined ? [entry.secondary_keys].flat() : [],
@@ -220,11 +220,11 @@ export const usePostCharaFun = (chara: TypeChara, character_book: TypeCharacterB
       ...chara.data,
       extensions: {
         ...chara.data.extensions,
-        world: updatedCharacterBook.name,
+        world: updatedWorldBook.name,
       },
       character_book: {
         ...character_book,
-        entries: updatedCharacterBook.entries,
+        entries: updatedWorldBook.entries,
         // name: chara.data.name + chara.data.character_version,
       },
     },
@@ -277,7 +277,7 @@ export const pushCharaListByUid = (newChara: TypeCharaListItem) => {
 
 
 
-function uuid() {
+export const uuid = () => {
   var s = [];
   var hexDigits = "0123456789abcdef";
   for (var i = 0; i < 36; i++) {
@@ -300,3 +300,31 @@ export const createChara = () => {
   
   return newChara;
 }
+
+export const createWorldBook = () => {
+  const uid = uuid();
+  const newChara: TypeWorldBookItem = {
+    uid: uid,
+    worldBook: {
+      name: '',
+      entries: [],
+    } as TypeWorldBook,
+  }
+  
+  return newChara;
+}
+
+export const pushWorldBookList = (worldBookList: TypeWorldBookList) => {
+  if (typeof window !== "undefined") {
+      localStorage.setItem("worldBookList", JSON.stringify(worldBookList));
+  }
+};
+
+
+export const getWorldBookList = (): TypeWorldBookList => {
+  if (typeof window !== "undefined") {
+    const worldBookList = localStorage.getItem("worldBookList");
+    return worldBookList ? JSON.parse(worldBookList) || [] : []
+  }
+  return [] as TypeWorldBookList;
+};
