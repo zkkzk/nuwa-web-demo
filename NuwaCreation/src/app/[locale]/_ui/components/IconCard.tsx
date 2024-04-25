@@ -1,11 +1,8 @@
 "use client";
 import React from "react";
-import { Button } from "@nextui-org/react";
 import A3DIcon from "../icons/A3DIcon";
 import ImageIcon from "../icons/ImageIcon";
 import LIVE2DIcon from "../icons/LIVE2DIcon";
-import { NoSymbolIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { Icon } from "next/dist/lib/metadata/types/metadata-types";
 import { useTranslations } from "next-intl";
 
 function classNames(...classes:any) {

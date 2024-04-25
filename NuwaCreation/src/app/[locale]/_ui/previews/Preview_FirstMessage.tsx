@@ -1,12 +1,11 @@
 "use client";
 import React, { useState } from "react";
-import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import PreviewTitle from "../components/PreviewTitle";
-import PreviewWrapper from "../components/PreviewWrapper";
+import PreviewTitle from "./PreviewTitle";
+import PreviewWrapper from "./PreviewWrapper";
 import { useCharaListItem } from "../charas/CharaContext";
 
 function Preview_PristMessage() {

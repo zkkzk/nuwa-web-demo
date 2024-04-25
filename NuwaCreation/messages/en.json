@@ -1,4 +1,7 @@
 {
+  "CharacterList": {
+    "createbutton": "Ceate"
+  },
   "Character": {
     "charactername": "Character Name",
     "characternote": "Character Card Tag",

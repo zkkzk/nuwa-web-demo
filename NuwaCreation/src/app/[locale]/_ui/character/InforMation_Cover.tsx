@@ -15,15 +15,16 @@ function InforMation_Cover() {
   const charaListItemDispatch = useCharaListItemDispatch();
 
   return (
-    <div className="flex flex-row justify-center items-center gap-x-8 relative">
+    <div className="flex flex-row justify-start items-start gap-x-8 relative group">
       <Image
         src={charaListItem.cover}
         width={384}
         height={384}
         alt=""
-        className="h-full w-full flex-none rounded-[40px] object-cover"
+        className="h-auto w-full flex-none rounded-[40px] object-cover"
       />
-      <div className="absolute top-0 right-0 flex items-center justify-center cursor-pointer w-full h-full rounded-bl-xl">
+      <div className="w-full h-full absolute top-0 bg-gray-50/50 hidden group-hover:block" />
+      <div className="group-hover:flex absolute top-0 right-0 hidden items-center justify-center cursor-pointer w-full h-full rounded-bl-xl">
         <input
           accept=".jpg,.jpeg,.png,.webp,.gif"
           type="file"

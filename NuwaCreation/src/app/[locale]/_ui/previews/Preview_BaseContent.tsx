@@ -2,8 +2,8 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 
-import PreviewTitle from "../components/PreviewTitle";
-import PreviewWrapper from "../components/PreviewWrapper";
+import PreviewTitle from "./PreviewTitle";
+import PreviewWrapper from "./PreviewWrapper";
 import { Divider } from "@nextui-org/react";
 import { useCharaListItem } from "../charas/CharaContext";
 

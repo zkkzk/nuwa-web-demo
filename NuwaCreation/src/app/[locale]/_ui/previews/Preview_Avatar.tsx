@@ -2,8 +2,8 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 
-import PreviewTitle from "../components/PreviewTitle";
-import IconCard from "./IconCard";
+import PreviewTitle from "./PreviewTitle";
+import IconCard from "../components/IconCard";
 import { useCharaListItem } from "../charas/CharaContext";
 
 function Preview_Avatar() {

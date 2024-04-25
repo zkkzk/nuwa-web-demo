@@ -13,9 +13,14 @@ const NuwaButton = extendVariants(Button, {
     },
     size: {
     },
+    shadowghost: {
+      default: "shadow-none",
+      white: "shadow text-sm h-11 rounded-3xl border-none bg-white text-neutral-800"
+    }
   },
   defaultVariants: { // <- modify/add default variants
-    color: "black"
+    color: "black",
+    shadowghost: "default",
   },
   compoundVariants: [ // <- modify/add compound variants
     {

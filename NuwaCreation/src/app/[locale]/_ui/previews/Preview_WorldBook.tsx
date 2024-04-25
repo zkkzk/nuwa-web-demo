@@ -2,7 +2,7 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 
-import PreviewTitle from "../components/PreviewTitle";
+import PreviewTitle from "./PreviewTitle";
 import WorldBook_Preview from "../worldbook/WorldBook_Preview";
 import { TypeWorldBook } from "../../_lib/definitions";
 

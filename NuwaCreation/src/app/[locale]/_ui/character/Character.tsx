@@ -5,7 +5,7 @@ import { Link } from '@/navigation';
 import { useTranslations, useLocale } from "next-intl";
 import { usePathname } from "next/navigation";
 import dynamic from 'next/dynamic';
-import Preview from "./Preview";
+import Preview from "../previews/Preview";
 
 const InforMation = dynamic(() => import('./InforMation'), { ssr: false })
 const Scenario = dynamic(() => import('./Scenario'), { ssr: false })
@@ -23,7 +23,7 @@ export default function Character() {
   return (
       <div className="relative flex w-full flex-col">
         <div className="fixed mt-2 right-8 z-40">
-          <Preview/>
+          {/* <Preview/> */}
         </div>
         <div className="flex w-full flex-col relative">
           <Tabs
@@ -31,7 +31,7 @@ export default function Character() {
             selectedKey={pathname}
             variant="solid"
             classNames={{
-              base: "pr-62 fixed mt-0 z-30 py-2 overflow-x-scroll w-full pr-[200px] lg:pr-[500px]",
+              base: "pr-62 fixed mt-0 z-30 py-2 overflow-x-scroll w-full pr-[200px] lg:pr-[500px] bg-white",
               tabList: "bg-[#D9D9D9] py-2 overflow-x-scroll",
               cursor: "w-full bg-[#0C0C0C] text-white",
               tab:"group-data-[selected=true]:bg-[#0C0C0C] px-2 h-10",

@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button, Card, CardBody, CardHeader, Checkbox, Chip, Divider, Input, Link, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Tab, Tabs, useDisclosure } from "@nextui-org/react";
+import { Button, Card, CardBody, CardHeader, Chip, Divider, Input, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Tab, Tabs, useDisclosure } from "@nextui-org/react";
 import {
   XMarkIcon,
   ArrowUpRightIcon,
@@ -197,7 +197,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
   }
 
   return (
-    <div className="h-6/12 py-4 flex flex-col">
+    <div className="flex flex-col">
         <Modal placement={"top"} isOpen={msgModal.isOpen} onOpenChange={msgModal.onOpenChange}>
           <ModalContent>
             {(onClose) => (
@@ -207,14 +207,13 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
             )}
           </ModalContent>
         </Modal>
-        <Button
-          variant="ghost"
-          className="border w-36 text-[10px] h-14 rounded-[20px]"
+        <NuwaButton
+          shadowghost="white"
           onPress={onOpen}
           startContent={<ArrowUpRightIcon className="h-5 w-5"/>}
         >
             打开PList生成器
-        </Button>
+        </NuwaButton>
         <Modal 
           isDismissable={!msgModal.isOpen}
           isOpen={isOpen} 

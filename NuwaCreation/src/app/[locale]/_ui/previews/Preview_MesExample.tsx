@@ -2,7 +2,7 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 
-import PreviewTitle from "../components/PreviewTitle";
+import PreviewTitle from "./PreviewTitle";
 import { useCharaListItem } from "../charas/CharaContext";
 
 function Preview_MesExample() {

@@ -1,6 +1,7 @@
 "use client";
 import React from "react";
 import { Button } from "@nextui-org/react";
+import NuwaButton from "./NuwaButton";
 
 function InsertUserOrChar({getTextRef, onDone}: {getTextRef: () => any, onDone: (value: string) => void}) {
   const insertTextAtCursor = (text: string) => {
@@ -22,27 +23,27 @@ function InsertUserOrChar({getTextRef, onDone}: {getTextRef: () => any, onDone: 
 
   return (
     <div className="flex flex-col gap-2">
-      <Button
-        variant="ghost"
-        className="border w-36 h-14 text-[10px] font-normal rounded-[20px] justify-start bg-white"
-        onClick={() => {
-          insertTextAtCursor('{{user}}');
-        }}
-        startContent={ 
-          <div className="rounded-full overflow-hidden w-6 h-6 cursor-pointer text-xl flex items-center justify-center bg-no-repeat bg-right-bottom bg-cover bg-[url('/character-mesExample-user-avator.png')]"></div>}
-      >
-          &nbsp;&nbsp;插入玩家名称&nbsp;&nbsp;
-      </Button>
-      <Button
-        variant="ghost"
-        className="border w-36 h-14 text-[10px] font-normal rounded-[20px] bg-white"
-        onClick={() => {
+
+    <NuwaButton
+      shadowghost="white"
+      onPress={
+        () => {
           insertTextAtCursor('{{char}}');
-        }}
-        startContent={<div className="rounded-full overflow-hidden w-6 h-6 cursor-pointer text-xl flex items-center justify-center bg-no-repeat bg-right-bottom bg-cover bg-[url('/character-mesExample-char-avator.png')]"></div>}
-      >
-          插入数字生命名称
-      </Button>
+        }
+      }
+    >
+          &nbsp;&nbsp;插入玩家名称&nbsp;&nbsp;
+    </NuwaButton>
+    <NuwaButton
+      shadowghost="white"
+      onPress={
+        () => {
+          insertTextAtCursor('{{user}}');
+        }
+      }
+    >
+          &nbsp;&nbsp;插入数字生命名称&nbsp;&nbsp;
+    </NuwaButton>
   </div>
   );
 }

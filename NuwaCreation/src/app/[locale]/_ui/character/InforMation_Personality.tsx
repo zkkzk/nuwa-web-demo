@@ -1,11 +1,10 @@
 "use client";
 import React from "react";
-import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
-import { useDisclosure } from "@nextui-org/react";
 
 import InforMation_Personality_Modal from "./InforMation_Personality_Modal";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import NuwaTextarea from "../components/NuwaTextarea";
 
 function InforMation_Personality() {
   const t = useTranslations();
@@ -35,24 +34,14 @@ function InforMation_Personality() {
   }
 
   return (
-    <div className="h-6/12 py-4 flex flex-col">
-      <label
-        className="block text-lg font-medium leading-8 mb-1"
-      >
-        {t('Character.personalitysummary')}
-      </label>
-      <div className="flex flex-row mt-2 grow">  
-        <div className="mr-4 grow">
-          <textarea
-            placeholder="First Message"
-            value={charaListItem.chara.data.personality}
-            onChange={handlePersonalityChange}
-            className="border-none outline-none w-full h-full resize-none mb-6"
-          />
-        </div>
-        <div>
-
-        </div>
+    <div className="relative group">
+      <NuwaTextarea
+        label={t('Character.personalitysummary')}
+        placeholder="First Message"
+        value={charaListItem.chara.data.personality}
+        onChange={handlePersonalityChange}
+      />
+      <div className="z-40 hidden group-hover:block absolute -top-2 right-0 pl-4 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
         <InforMation_Personality_Modal setPersonalityNewValue={setPersonalityNewValue} oldPersonalityValue={charaListItem.chara.data.personality}/>
       </div>
     </div>

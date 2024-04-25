@@ -8,9 +8,9 @@ import {
 import NuwaButton from "../components/NuwaButton";
 import { TypeCharaListItem } from "../../_lib/definitions";
 import AlterMessage from "../components/AlterMessage";
-import CharacterEditWrapper from "../character/CharacterEditWrapper";
+import CharacterEditWrapper from "./CharacterEditWrapper";
 import { CharaProvider } from "./CharaContext";
-import Preview from "../character/Preview";
+import Preview from "../previews/Preview";
 
 function CharacterEdit({ onDone, chara }: {
   onDone?: () => void,
@@ -45,7 +45,7 @@ function CharacterEdit({ onDone, chara }: {
           onDone && onDone();
         }}
         classNames={{
-          body: "overflow-y-scroll",
+          body: "overflow-y-scroll py-0",
           backdrop: "",
           base: "h-full",
           header: "",

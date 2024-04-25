@@ -1,22 +1,16 @@
 'use client'
-import React, { useContext } from "react";
-import {Tabs, Tab, Card, CardBody} from "@nextui-org/react";
-import { Link } from '@/navigation';
+import React from "react";
+import {Tabs, Tab } from "@nextui-org/react";
 import { useTranslations, useLocale } from "next-intl";
-import { usePathname } from "next/navigation";
 import dynamic from 'next/dynamic';
-import Preview from "./Preview";
-import { TypeCharaListItem } from "../../_lib/definitions";
 
-const InforMation = dynamic(() => import('./InforMation'), { ssr: false })
-const Scenario = dynamic(() => import('./Scenario'), { ssr: false })
-const Mes_Example = dynamic(() => import('./Mes_Example'), { ssr: false })
-const Avatar = dynamic(() => import('./Avatar'), { ssr: false })
-const Voice = dynamic(() => import('./Voice'), { ssr: false })
-const CreatorInfo = dynamic(() => import('./CreatorInfo'), { ssr: false })
-const AdvancedSet = dynamic(() => import('./AdvancedSet'), { ssr: false })
-
-
+const InforMation = dynamic(() => import('../character/InforMation'), { ssr: false })
+const Scenario = dynamic(() => import('../character/Scenario'), { ssr: false })
+const Mes_Example = dynamic(() => import('../character/Mes_Example'), { ssr: false })
+const Avatar = dynamic(() => import('../character/Avatar'), { ssr: false })
+const Voice = dynamic(() => import('../character/Voice'), { ssr: false })
+const CreatorInfo = dynamic(() => import('../character/CreatorInfo'), { ssr: false })
+const AdvancedSet = dynamic(() => import('../character/AdvancedSet'), { ssr: false })
 
 
 export default function CharacterEditWrapper() {
@@ -27,13 +21,14 @@ export default function CharacterEditWrapper() {
         <div className="flex w-full flex-col relative">
           <Tabs
             aria-label="Options"
-            variant="solid"
+            variant="underlined"
+            size="lg"
             classNames={{
-              base: "pr-62 fixed mt-0 z-30 py-2 overflow-x-scroll w-full pr-[200px] lg:pr-[500px]",
-              tabList: "bg-[#D9D9D9] py-2 overflow-x-scroll",
+              base: "fixed mt-0 ml-0 left-0 z-50 overflow-x-scroll w-full bg-white",
+              tabList: "overflow-x-scroll gap-10 py-0 border-b border-solid border-black/20 w-full px-20",
               cursor: "w-full bg-[#0C0C0C] text-white",
-              tab:"group-data-[selected=true]:bg-[#0C0C0C] px-2 h-10",
-              tabContent: "text-zinc-800 group-data-[selected=true]:text-white w-full h-full",
+              tab:"h-10 group-data-[selected=true]:bg-[#0C0C0C]",
+              tabContent: " text-neutral-700 w-full h-full group-data-[selected=true]:text-neutral-800 group-data-[selected=true]:font-bold",
               panel: " pt-20"
             }}
           >
@@ -60,7 +55,6 @@ export default function CharacterEditWrapper() {
             </Tab>
           </Tabs>
         </div>
-        
       </div>
   );
 }

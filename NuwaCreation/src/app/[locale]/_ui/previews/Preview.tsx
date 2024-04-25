@@ -3,11 +3,10 @@ import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 
-import { usePostCharaAll } from "../../_lib/utils";
 
 import NuwaButton from "../components/NuwaButton";
-import { TypeChara, TypeCharaListItem } from "../../_lib/definitions";
-import CharacterPreview from "../components/CharacterPreview";
+import { TypeCharaListItem } from "../../_lib/definitions";
+import CharacterPreview from "./CharacterPreview";
 import AlterMessage from "../components/AlterMessage";
 
 function Preview({charaItem}: {charaItem: TypeCharaListItem}) {

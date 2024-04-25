@@ -9,8 +9,8 @@ import { TypeVoiceName, TypeVoiceNameList, TypeVoiceType, voiceSex } from "../..
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
 }
-import PreviewTitle from "../components/PreviewTitle";
-import PreviewWrapper from "../components/PreviewWrapper";
+import PreviewTitle from "./PreviewTitle";
+import PreviewWrapper from "./PreviewWrapper";
 import { useCharaListItem } from "../charas/CharaContext";
 
 

@@ -8,7 +8,7 @@ import { TypeWorldBookEntriy } from "../../_lib/definitions";
 import WorldBook_Entry_Wrapper from "./WorldBook_Entry_Wrapper";
 import WorldBook_Entry_L from "./WorldBook_Entry_L";
 import WorldBook_Entry_R from "./WorldBook_Entry_R";
-import PreviewWrapper from "../components/PreviewWrapper";
+import PreviewWrapper from "../previews/PreviewWrapper";
 
 export default function WorldBook_Entry({value, isPreview = false, onChange}: {
   value?: TypeWorldBookEntriy,
