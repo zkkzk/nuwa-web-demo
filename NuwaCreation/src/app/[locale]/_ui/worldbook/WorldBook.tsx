@@ -15,18 +15,20 @@ import { TypeWorldBook, TypeWorldBookEntriy } from "../../_lib/definitions";
 import WorldBook_Entry from "./WorldBook_Entry";
 import { useWorldBookItem, useWorldBookItemDispatch } from "./WorldBookContext";
 
-export default function WorldBook({worldBook, isPreview = false}: {
-  worldBook?: TypeWorldBook | undefined,
+export default function WorldBook({worldBooka, isPreview = false}: {
+  worldBooka?: TypeWorldBook | undefined,
   isPreview?: boolean,
 }) {
   const t = useTranslations();
   const worldBookItem = useWorldBookItem();
+  const worldBook = isPreview ? worldBooka : worldBookItem.worldBook;
+  const uid = isPreview ? worldBooka?.name : worldBookItem.uid;
   const worldBookItemDispatch = useWorldBookItemDispatch();
 
-  let initSelectedEntry = null;
+  let initSelectedEntry = undefined;
 
-  if (worldBookItem.worldBook?.entries && worldBookItem.worldBook?.entries.length > 0) {
-    initSelectedEntry = worldBookItem.worldBook.entries[0] 
+  if (worldBook?.entries && worldBook?.entries.length > 0) {
+    initSelectedEntry = worldBook.entries[0] 
   }
   const [selectedEntry, setSelectedEntry] = React.useState(initSelectedEntry);
 
@@ -34,20 +36,11 @@ export default function WorldBook({worldBook, isPreview = false}: {
     // Implement the logic to delete the entry with the given id
     setWorldBookItemDeleteEntries(id);
     if (selectedEntry?.id === id) {
-      setSelectedEntry(worldBookItem.worldBook?.entries[0])
+      setSelectedEntry(worldBook?.entries[0])
     }
   };
 
   const handleAddNewBookClick = () => {
-    // Determine the next available id and display_index based on existing entries
-    // let nextId = (worldBookItem.worldBook.entries || []).length + 1;
-    // // if(worldBookItem.worldBook.entries[worldBookItem.worldBook.entries.length - 1].id >= nextId) {
-    // //   nextId = worldBookItem.worldBook.entries[worldBookItem.worldBook.entries.length - 1].id + 1;
-    // // }
-    // const nextDisplayIndex = nextId;
-
-    // Default template for new entries
-
     const uid = uuid();
     const defaultTemplate: TypeWorldBookEntriy = {
       id: uid,
@@ -75,8 +68,8 @@ export default function WorldBook({worldBook, isPreview = false}: {
   };
 
   useEffect(() => {
-    isNull(selectedEntry) && worldBookItem.worldBook.entries && worldBookItem.worldBook?.entries.length > 0 &&setSelectedEntry(worldBookItem.worldBook?.entries[0])
-  }, [worldBookItem.worldBook])
+    isNull(selectedEntry) && worldBook?.entries && worldBook?.entries.length > 0 &&setSelectedEntry(worldBook?.entries[0])
+  }, [worldBook])
 
   const setWorldBookItem = (newValue:TypeWorldBook) => {
     worldBookItemDispatch({
@@ -93,9 +86,9 @@ export default function WorldBook({worldBook, isPreview = false}: {
       payload: {
         ...worldBookItem,
         worldBook: {
-          ...worldBookItem.worldBook,
+          ...worldBook,
           entries: [
-            ...worldBookItem.worldBook.entries,
+            ...(worldBook?.entries || []),
             newValue
           ]
         }
@@ -104,7 +97,7 @@ export default function WorldBook({worldBook, isPreview = false}: {
   }
   const setWorldBookItemDeleteEntries = (entryId: string) => {
 
-    const updatedEntries = (worldBookItem.worldBook.entries || []).filter(
+    const updatedEntries = (worldBook?.entries || []).filter(
       (entry) => entry.id !== entryId
     );
 
@@ -123,7 +116,7 @@ export default function WorldBook({worldBook, isPreview = false}: {
       payload: {
         ...worldBookItem,
         worldBook: {
-          ...worldBookItem.worldBook,
+          ...worldBook,
           entries: updatedEntriesWithIds
         }
       },
@@ -135,7 +128,7 @@ export default function WorldBook({worldBook, isPreview = false}: {
       payload: {
         ...worldBookItem,
         worldBook: {
-          ...worldBookItem.worldBook,
+          ...worldBook,
           name: newValue
         }
       },
@@ -160,9 +153,9 @@ export default function WorldBook({worldBook, isPreview = false}: {
                 <PlusCircleIcon className="h-12 w-12" aria-hidden="true" />
               </Button>
             )}
-            {worldBookItem.worldBook.entries?.map((entry) => (
+            {worldBook?.entries.map((entry) => (
               <NuwaButton
-                key={`${worldBookItem.uid}${entry.id}`}
+                key={`${uid}${entry.id}`}
                 className={`${
                   selectedEntry?.id === entry.id ? "h-12" : "h-7"
                 } w-full rounded-l-[12px] bg-black text-white flex justify-center items-center cursor-pointer`}
@@ -170,7 +163,7 @@ export default function WorldBook({worldBook, isPreview = false}: {
                   setSelectedEntry(entry);
                 }}
                 endContent={!isPreview &&
-                  <Popover key={`${entry.id}-${worldBookItem.worldBook?.entries.length}`} placement="top" color="warning">
+                  <Popover key={`${entry.id}-${worldBook?.entries.length}`} placement="top" color="warning">
                     <PopoverTrigger>
                       <Button className="h-4 w-4 bg-transparent" size="sm" isIconOnly>
                         <XMarkIcon className="h-4 w-4 text-white" />
@@ -200,7 +193,7 @@ export default function WorldBook({worldBook, isPreview = false}: {
               className="-mb-9 pb-9 px-2 w-5/12 h-[132px] rounded-[40px] flex justify-center items-center bg-[#313131] text-white font-semibold text-[20px]"
             >
               <input
-                value={worldBookItem.worldBook.name}
+                value={worldBook?.name}
                 disabled={isPreview}
                 onChange={(e) => {
                   const newValue = e.target.value;
@@ -209,8 +202,8 @@ export default function WorldBook({worldBook, isPreview = false}: {
                 className="w-full h-full bg-transparent outline-none disabled:bg-transparent"
               />
             </div>
-            {worldBookItem.worldBook.entries && worldBookItem.worldBook?.entries.map((entrys) => (
-              <div key={`${worldBookItem.uid}${entrys.id}`}>
+            {worldBook?.entries && worldBook?.entries.map((entrys) => (
+              <div key={`${uid}${entrys.id}`}>
                 {selectedEntry?.id === entrys.id && (
                   <WorldBook_Entry
                     value={selectedEntry}
@@ -218,8 +211,8 @@ export default function WorldBook({worldBook, isPreview = false}: {
                     onChange={(newSelectedEntry) => {
 
                       const newWorldBook =  {
-                        ...worldBookItem.worldBook,
-                        entries: (worldBookItem.worldBook.entries || []).map((item) =>
+                        ...worldBook,
+                        entries: (worldBook.entries || []).map((item) =>
                           item.id === newSelectedEntry.id
                             ? newSelectedEntry
                             : item

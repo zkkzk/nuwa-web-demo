@@ -1,14 +1,14 @@
 "use client";
 import React from "react";
-import { useChara,useCover } from "../../_lib/utils";
 import Preview_AddTags from './Preview_AddTags';
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { TypeCharaListItem } from "../../_lib/definitions";
 
-function Preview_BaseInfo() {
+function Preview_BaseInfo({charaItem}: {charaItem: TypeCharaListItem}) {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
-  const { cover , setCover } = useCover();
+
+  const { chara, cover } = charaItem
   
   return (
     <div>   

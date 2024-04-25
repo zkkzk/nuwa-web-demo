@@ -1,47 +1,37 @@
 "use client";
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { Button, Divider, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
+import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 
-import { useChara, getChara, usePostChara, useCover, usePostCharaAll } from "../../_lib/utils";
-import {
-  PaperAirplaneIcon
-} from '@heroicons/react/24/outline';
+import { usePostCharaAll } from "../../_lib/utils";
+
 import NuwaButton from "../components/NuwaButton";
-import { TypeChara } from "../../_lib/definitions";
+import { TypeChara, TypeCharaListItem } from "../../_lib/definitions";
 import CharacterPreview from "../components/CharacterPreview";
 import AlterMessage from "../components/AlterMessage";
 
-function Preview() {
+function Preview({charaItem}: {charaItem: TypeCharaListItem}) {
   const t = useTranslations();
   const previewModal = useDisclosure();
-  const chara = getChara();
-  const {updateChara} = usePostCharaAll();
-  const {cover,setCover} = useCover();
   const [isMakeCharLoding, setIsMakeCharLoding] = useState(false);
-  const msgModal = useDisclosure();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
 
   const handleMakeChar = async (e: any) => {
     setIsMakeCharLoding(true)
-    const charData = {
-      cover: cover,
-      chara: updateChara,
-    };
-    if (!chara?.data?.name) {
+    if (!charaItem.chara?.data?.name) {
       setMessage(t("Previews.charactercardnamesmust"));
       setIsOpen(true);
       setIsMakeCharLoding(false)
       return;
     }
-    if (!chara?.data?.description) {
+    if (!charaItem.chara?.data?.description) {
       setMessage(t("Previews.charactercarddescsmust"));
       setIsOpen(true);
       setIsMakeCharLoding(false)
       return;
     }
-    if (!chara?.data?.first_mes) {
+    if (!charaItem.chara?.data?.first_mes) {
       setMessage(t("Previews.charactercardfirstmessmust"));
       setIsOpen(true);
       setIsMakeCharLoding(false)
@@ -50,7 +40,10 @@ function Preview() {
     try {
       const charDataRes = await fetch("/api/makechar", {
         method: "POST",
-        body: JSON.stringify(charData),
+        body: JSON.stringify({
+          cover: charaItem.cover,
+          chara: charaItem.chara,
+        }),
         headers: {
           "Content-Type": "application/json",
         },
@@ -62,7 +55,7 @@ function Preview() {
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
         a.href = url;
-        a.download = chara.data.name + chara.data.character_version + ".png";
+        a.download = charaItem.chara.data.name + charaItem.chara.data.character_version + ".png";
         document.body.appendChild(a);
         a.click();
         document.body.removeChild(a);
@@ -85,13 +78,14 @@ function Preview() {
       <AlterMessage isOpen={isOpen} message={message} onClose={() => {
         setIsOpen(false)
       }} />
-      <Button
-        className="bg-black text-white h-14" startContent={<PaperAirplaneIcon className="h-4 w-4"/>}
+      <NuwaButton
+        color="black"
+        size="md"
+        // startContent={<PaperAirplaneIcon className="h-4 w-4"/>}
         onClick={() => {
-          let chara = getChara();
           previewModal.onOpen();
         }}
-      >{t('Navigation.previews')}</Button>
+      >{t('Navigation.previews')}</NuwaButton>
 
       <Modal
         isDismissable={!isOpen}
@@ -119,7 +113,7 @@ function Preview() {
                 </div>
               </ModalHeader>
               <ModalBody>
-                <CharacterPreview chara={chara} />
+                <CharacterPreview charaItem={charaItem} />
               </ModalBody>
             </>
           )}

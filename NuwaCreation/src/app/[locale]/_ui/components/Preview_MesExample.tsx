@@ -1,13 +1,14 @@
 "use client";
-import React, { useState } from "react";
-import { useChara } from "../../_lib/utils";
+import React from "react";
 import { useTranslations } from "next-intl";
 
 import PreviewTitle from "../components/PreviewTitle";
+import { useCharaListItem } from "../charas/CharaContext";
 
 function Preview_MesExample() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
+  const charaListItem = useCharaListItem();
+  const { chara } = charaListItem;
   let initNewMesExampleList = chara.data.mes_example.split('<START>');
   initNewMesExampleList = initNewMesExampleList.filter((_, index: number) => {
     return index !== 0;

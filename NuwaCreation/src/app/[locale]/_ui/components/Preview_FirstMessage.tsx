@@ -7,10 +7,12 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import PreviewTitle from "../components/PreviewTitle";
 import PreviewWrapper from "../components/PreviewWrapper";
+import { useCharaListItem } from "../charas/CharaContext";
 
 function Preview_PristMessage() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
+  const charaListItem = useCharaListItem();
+  const { chara } = charaListItem;
   const [first_messageValue, setFirst_MessageValue] = React.useState(chara.data.first_mes);
   const [alternate_greetings, setAlternate_greetings] = React.useState(chara.data.alternate_greetings);
 

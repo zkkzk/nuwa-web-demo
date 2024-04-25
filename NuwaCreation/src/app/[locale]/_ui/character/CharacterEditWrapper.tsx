@@ -24,9 +24,6 @@ export default function CharacterEditWrapper() {
   const locale = useLocale();
   return (
       <div className="relative flex w-full flex-col">
-        <div className="fixed mt-2 right-8 z-40">
-          <Preview/>
-        </div>
         <div className="flex w-full flex-col relative">
           <Tabs
             aria-label="Options"

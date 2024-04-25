@@ -1,14 +1,15 @@
 "use client";
-import React, { useState } from "react";
-import { useChara } from "../../_lib/utils";
+import React from "react";
 import { useTranslations } from "next-intl";
 
 import PreviewTitle from "../components/PreviewTitle";
 import IconCard from "./IconCard";
+import { useCharaListItem } from "../charas/CharaContext";
 
 function Preview_Avatar() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
+  const charaListItem = useCharaListItem();
+  const { chara } = charaListItem;
 
   return (
     <div>   
@@ -17,7 +18,7 @@ function Preview_Avatar() {
    
           {chara.data.extensions.avatars.map((item, index) => {
             return (
-              <div className="w-full flex flex-row justify-between items-center">
+              <div key={index} className="w-full flex flex-row justify-between items-center">
                 <IconCard 
                   onClick={() => {}}
                   isActive={true}

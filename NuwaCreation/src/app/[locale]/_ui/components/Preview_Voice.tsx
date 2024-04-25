@@ -1,12 +1,9 @@
 "use client";
-import React, { createRef, RefObject, useEffect, useRef } from "react";
-import { useChara } from "../../_lib/utils";
-import { useTranslations, useMessages, useLocale } from "next-intl";
-import { NoSymbolIcon, PlayCircleIcon, PauseCircleIcon } from "@heroicons/react/24/outline";
+import React, { useEffect, useRef } from "react";
+import { useTranslations, useMessages } from "next-intl";
+import { PlayCircleIcon, PauseCircleIcon } from "@heroicons/react/24/outline";
 import MicrosoftTTSIcon from "../icons/MicrosoftTTSIcon";
-import { Divider, Listbox, ListboxItem, Tab, Tabs } from "@nextui-org/react";
-import Image from "next/image";
-import { Link } from "@/navigation";
+import { Listbox, ListboxItem } from "@nextui-org/react";
 import { TypeVoiceName, TypeVoiceNameList, TypeVoiceType, voiceSex } from "../../_lib/definitions.voice";
 
 function classNames(...classes:any) {
@@ -14,15 +11,17 @@ function classNames(...classes:any) {
 }
 import PreviewTitle from "../components/PreviewTitle";
 import PreviewWrapper from "../components/PreviewWrapper";
+import { useCharaListItem } from "../charas/CharaContext";
 
 
 function Preview_Voice() {
+  const charaListItem = useCharaListItem();
+  const { chara } = charaListItem;
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlay, setIsPlay] = React.useState({name: '', isPlay: false} as {name: string, isPlay: boolean});
   const t = useTranslations();
   const messages = useMessages();
   const { Voices } = messages;
-  const { chara , setChara } = useChara();
   const initVoiceNameList = Voices;
 
   const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(chara.data.extensions.voice?.type as TypeVoiceType || TypeVoiceType.None);
@@ -32,41 +31,6 @@ function Preview_Voice() {
 
   const [voiceNameList, setVoiceNameList] = React.useState<TypeVoiceNameList>(initVoiceNameList as unknown as TypeVoiceNameList);
 
-  const handleSetSelectedVoiceType = (voiceType : TypeVoiceType) => {
-    setSelectedVoiceType(voiceType)
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: {
-        ...prevChara.data,
-        extensions: {
-          ...prevChara.data.extensions,
-          voice: null
-        }
-      },
-    }));
-  }
-
-  useEffect(() => {
-    // console.log(selectedVoiceName);
-    setVoiceToChar();
-  }, [selectedVoiceName]);
-
-  const setVoiceToChar = () => {
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: {
-        ...prevChara.data,
-        extensions: {
-          ...prevChara.data.extensions,
-          voice: {
-            type: selectedVoiceType,
-            sex: selectedVoiceSex,
-            name: selectedVoiceName,
-          }
-        }
-      },
-    }));
-  };
   
   return (
     <div>   

@@ -1,26 +1,19 @@
 "use client";
 import React from "react";
-import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 
 import PreviewTitle from "../components/PreviewTitle";
-import PreviewWrapper from "../components/PreviewWrapper";
-import { Divider } from "@nextui-org/react";
 import WorldBook_Preview from "../worldbook/WorldBook_Preview";
+import { TypeWorldBook } from "../../_lib/definitions";
 
-function Preview_WorldBook() {
+function Preview_WorldBook({worldBook}: {worldBook: TypeWorldBook}) {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
-  
-  function classNames(...classes:any) {
-    return classes.filter(Boolean).join(' ')
-  }
 
   return (
     <div>   
       <PreviewTitle>{t('Navigation.worldbook')}</PreviewTitle>
       <div className="w-full py-6">
-        <WorldBook_Preview worldBook={chara.data.character_book} />
+        <WorldBook_Preview worldBook={worldBook} />
       </div>
     </div>
   );

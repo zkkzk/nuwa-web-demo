@@ -7,14 +7,37 @@ import { TagIcon } from "@heroicons/react/24/solid";
 import NuwaButton from "../components/NuwaButton";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { trim } from "lodash-es";
+import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { TypeCharaListItem } from "../../_lib/definitions";
 
 function Preview_AddTags() {
   const t = useTranslations();
 
-  const { chara , setChara } = useChara();
-  const { cover , setCover } = useCover();
+  const charaListItem = useCharaListItem();
+  const charaDispatch = useCharaListItemDispatch();
+
+
+  const handleTagsChange = (newValue: string) => {
+    const newChara:TypeCharaListItem = {
+      ...charaListItem,
+      chara: {
+        ...charaListItem.chara,
+        name: newValue,
+        data: {
+          ...charaListItem.chara.data,
+          tags: newValue
+        }
+      }
+    };
+
+    charaDispatch({
+      type: "changed",
+      payload: newChara,
+    })
+  };
+
   
-  const [tagsList, setTagsList ] = useState<string[]>(chara.data.tags.toString().split(',').filter((item) => (trim(item) !== '')) || []);
+  const [tagsList, setTagsList ] = useState<string[]>(charaListItem.chara.data.tags.toString().split(',').filter((item) => (trim(item) !== '')) || []);
   const [inputVal, setInputVal ] = useState<string>("");
   
   return (
@@ -41,13 +64,7 @@ function Preview_AddTags() {
           <NuwaButton className=" h-14 w-20 text-xl" color="black" variant="flat" onClick={() => {
             const newTagsList = [...tagsList, inputVal]
             setTagsList(newTagsList);
-            setChara({
-              ...chara,
-              data: {
-                ...chara.data,
-                tags: newTagsList.join(',')
-              }
-            })
+            handleTagsChange(newTagsList.join(','))
             setInputVal("");
 
           }}>{t('Preview.tagAddButton')}</NuwaButton>
@@ -64,13 +81,7 @@ function Preview_AddTags() {
             endContent={<XMarkIcon className="h-4 w-4" onClick={() => {
               tagsList.splice(index, 1)
               setTagsList(tagsList);
-              setChara({
-                ...chara,
-                data: {
-                  ...chara.data,
-                  tags: tagsList.join(',')
-                }
-              })
+              handleTagsChange(tagsList.join(','))
             }} />}
             variant="flat" 
           >
