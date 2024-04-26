@@ -238,8 +238,7 @@ export const usePostCharaFun = (chara: TypeChara, character_book: TypeWorldBook,
       key: entry.keys !== undefined ? [entry.keys].flat() : [],                    
       secondary_keys: entry.secondary_keys !== undefined ? [entry.secondary_keys].flat() : [],
     }
-  }), 'id');
-
+  }), 'uid');
 
   const updatedWorldBook = {
     ...character_book,

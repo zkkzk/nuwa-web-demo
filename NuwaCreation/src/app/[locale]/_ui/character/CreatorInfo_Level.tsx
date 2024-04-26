@@ -9,7 +9,7 @@ import { textareaProps } from "../components/NuwaTextarea";
 function CreatorInfo_Level() {
   const t = useTranslations();
   const messages = useMessages();
-  const { Levels } = messages;
+  const { LevelsOptions } = messages;
 
   const charaListItem = useCharaListItem();
   const charaListItemDispatch = useCharaListItemDispatch();
@@ -45,7 +45,7 @@ function CreatorInfo_Level() {
       </div>
       <div className="mt-10">  
         <NuwaRadio
-          items={Levels as unknown as {name: string, value: string}[]}
+          items={LevelsOptions as unknown as {name: string, value: string}[]}
           value={charaListItem.chara.data.extensions.level}
           onChange={(e: any) => {
             if (e) {

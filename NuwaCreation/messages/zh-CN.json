@@ -101,9 +101,9 @@
     "name": "法语",
     "value": "fr"
   }],
-  "Levels": [{
+  "LevelsOptions": [{
     "name": "SFW/大众级",
-    "value": ""
+    "value": "SFW"
   }, {
     "name": "NSFW/限制级",
     "value": "NSFW"

@@ -101,7 +101,7 @@
     "name": "French",
     "value": "fr"
   }],
-  "Levels": [{
+  "LevelsOptions": [{
     "name": "SFW",
     "value": "SFW"
   }, {

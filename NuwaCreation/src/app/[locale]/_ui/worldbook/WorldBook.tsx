@@ -168,7 +168,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
               key={`${uid}${worldBook.entries[key].uid}`}
               id={`${uid}${worldBook.entries[key].uid}`}
               title={
-                <div className="flex flex-row items-center group">
+                <div className="flex flex-row items-center group justify-center">
                   <div>{worldBook.entries[key].comment || t('WorldBook.untitledbook')}</div>
                   {!isPreview && 
                     <Popover
