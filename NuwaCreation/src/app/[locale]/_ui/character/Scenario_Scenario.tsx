@@ -1,13 +1,11 @@
 "use client";
 import React, { useRef } from "react";
-import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import InsertUserOrChar from "../components/InsertUserOrChar";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 
 function Scenario_Scenario() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
   const descTextareaRef = useRef(null);
   
   const charaListItem = useCharaListItem();

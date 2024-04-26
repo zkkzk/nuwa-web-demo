@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import { useChara, useWorldBook, usePostCharaFun, getWorldBookList } from "../../_lib/utils";
+import React, { useState } from "react";
+import { usePostCharaFun, getWorldBookList } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import { LinkIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Button, Divider, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
@@ -14,7 +14,6 @@ import WorldBookItem from "../worldbook/WorldBookItem";
 
 function Scenario_WorldBook() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
 
   const selectWorldBookModal = useDisclosure();
   const createWorldBookModal = useDisclosure();
@@ -56,26 +55,26 @@ function Scenario_WorldBook() {
   };
 
   const handleCloseCreateWorldBookModal = () => {
-    let character_book = null
-    if(typeof window !== "undefined" ){
-      const character_booked = localStorage.getItem('character_book') || '';
-      character_book = JSON.parse(character_booked);
-    }
+    // let character_book = null
+    // if(typeof window !== "undefined" ){
+    //   const character_booked = localStorage.getItem('character_book') || '';
+    //   character_book = JSON.parse(character_booked);
+    // }
     
-    const {updateChara} = usePostCharaFun(chara, character_book);
+    // const {updateChara} = usePostCharaFun(chara, character_book);
     
-    charaListItemDispatch({
-      type: "changed",
-      payload: {
-        ...charaListItem,
-        chara: updateChara
-      },
-    })
-    if(isLogin) {
-      selectWorldBookModal.onClose();
-    } else {
-      createWorldBookModal.onClose();
-    }
+    // charaListItemDispatch({
+    //   type: "changed",
+    //   payload: {
+    //     ...charaListItem,
+    //     chara: updateChara
+    //   },
+    // })
+    // if(isLogin) {
+    //   selectWorldBookModal.onClose();
+    // } else {
+    //   createWorldBookModal.onClose();
+    // }
   }
 
   return (
@@ -148,7 +147,7 @@ function Scenario_WorldBook() {
           )}
         </ModalContent>
       </Modal>
-      <Modal 
+      {/* <Modal 
         size="full"
         isOpen={createWorldBookModal.isOpen}
         placement={'bottom'}
@@ -184,7 +183,7 @@ function Scenario_WorldBook() {
             </>
           )}
         </ModalContent>
-      </Modal>
+      </Modal> */}
 
       <div className="overflow-y-scroll w-full h-full">
         <div className="grid 2xl:grid-cols-3 3xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-4 py-10 px-7 overflow-visible h-auto">

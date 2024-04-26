@@ -1,6 +1,5 @@
-import React, { createRef, RefObject, useEffect, useRef } from "react";
+import React, { createRef, RefObject, useRef } from "react";
 import { Button, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
-import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import dynamic from 'next/dynamic';
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";

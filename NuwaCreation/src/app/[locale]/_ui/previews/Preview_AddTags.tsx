@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { Chip, Input } from "@nextui-org/react";
-import { useChara,useCover } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import { TagIcon } from "@heroicons/react/24/solid";
 import NuwaButton from "../components/NuwaButton";

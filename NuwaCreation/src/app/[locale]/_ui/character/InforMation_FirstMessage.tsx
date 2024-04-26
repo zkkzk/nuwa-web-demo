@@ -1,6 +1,5 @@
 "use client";
 import React, { useRef } from "react";
-import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import InsertUserOrChar from "../components/InsertUserOrChar";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
@@ -9,17 +8,7 @@ import { Textarea } from "@nextui-org/react";
 
 function InfoMation_FirstMessage() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
   const descTextareaRef = useRef(null);
-
-  const handleFirst_MessageChange = (newValue:string) => {
-    setChara((prevChara) => ({
-      ...prevChara,
-      data: { ...prevChara.data, first_mes: newValue },
-    }));
-    setCharaListItem(newValue);
-  };
-
   
   const charaListItem = useCharaListItem();
   const charaListItemDispatch = useCharaListItemDispatch();

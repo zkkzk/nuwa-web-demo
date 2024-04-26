@@ -8,7 +8,7 @@ import {
 } from "@nextui-org/react";
 import { uuid } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
-import { isNull, map, keyBy } from "lodash-es";
+import { isNull } from "lodash-es";
 import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import NuwaButton from "../components/NuwaButton";
 import { TypeWorldBook, TypeWorldBookEntriy } from "../../_lib/definitions";

@@ -1,7 +1,6 @@
 "use client"
 
 import React from "react";
-import { useChara } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import { NoSymbolIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { TypeAvatar, TypeAvatarType } from "../../_lib/definitions.avatar";
@@ -16,7 +15,6 @@ function classNames(...classes:any) {
 
 export default function Avatar() {
   const t = useTranslations();
-  const { chara , setChara } = useChara();
   const uploadModal = useDisclosure();
 
   const [selectedAvatarType, setSelectedAvatarType] = React.useState<TypeAvatarType>(TypeAvatarType.LIVE2D);
