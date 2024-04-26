@@ -79,7 +79,7 @@ const CCLicensesDataListEN = [
   }
 ]
 
-const CustomRadio = (props: RadioProps) => {
+const CustomRadio = (props: any) => {
   const {
     Component,
     children,
@@ -97,15 +97,26 @@ const CustomRadio = (props: RadioProps) => {
     <Component
       {...getBaseProps()}
       className={cn(
-        "group inline-flex items-center justify-left hover:bg-content2 flex-row",
-        "max-w-[620px] cursor-pointer border-2 border-default rounded-lg gap-4 p-4",
-        "data-[selected=true]:border-black"
+        "group w-[235px] h-[145px] rounded-[14px] border border-black border-opacity-20",
+        "cursor-pointer py-4 px-2 flex flex-col justify-between items-start relative overflow-hidden",
+        "data-[selected=true]:border-black hover:border-black",
+        // " hover:bg-content2"
       )}
+      onClick={(e: any) => {
+        if (e.currentTarget.getAttribute('data-selected') === "true") {
+          // 阻止事件冒泡
+          e.stopPropagation();
+     
+          // 阻止事件的默认行为
+          e.preventDefault();
+          props.onChange();
+        }
+      }}
     >
       <VisuallyHidden>
         <input {...getInputProps()} />
       </VisuallyHidden>
-      <span {...getWrapperProps()} className={cn(
+      {/* <span {...getWrapperProps()} className={cn(
           "w-4 h-4 rounded-[25px] opacity-100 shrink-0",
           isSelected ? "bg-black" : "bg-zinc-300",
         )}
@@ -114,7 +125,7 @@ const CustomRadio = (props: RadioProps) => {
           "bg-black w-[41px] h-[41px] rounded-[25px] opacity-0",
           isSelected ? "opacity-100" : "opacity-0",
         )} />
-      </span>
+      </span> */}
       <Image
         className="shrink-0"
         width={82}
@@ -126,7 +137,7 @@ const CustomRadio = (props: RadioProps) => {
         
         {children && <span {...getLabelProps()} className="text-black text-base leading-[29px] tracking-tight">{children}</span>}
         {description && (
-          <span className=" text-black text-[10px] font-normal leading-[18px] tracking-tight">{description}</span>
+          <span className=" px-2 py-4 text-neutral-700 text-[10px] font-extralight leading-[15px] tracking-tight hidden group-hover:block absolute bg-white z-10 left-0 group-hover:bottom-0 w-full ">{description}</span>
         )}
       </div>
     </Component>
@@ -141,9 +152,12 @@ export default function NuwaRadio({value, onChange}: {
     <RadioGroup
       value={value}
       onChange={onChange}
+      classNames={{
+        wrapper: "flex flex-row flex-wrap gap-5"
+      }}
     >
       {(locale === "zh-CN" ? CCLicensesDataListZHCN : CCLicensesDataListEN).map((item) => (
-        <CustomRadio key={item.value} value={item.value} description={item.description}>{item.label}</CustomRadio>
+        <CustomRadio key={item.value} value={item.value} description={item.description} onChange={onChange}>{item.label}</CustomRadio>
       ))}
     </RadioGroup>
   );

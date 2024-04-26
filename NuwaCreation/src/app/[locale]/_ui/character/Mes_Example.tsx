@@ -1,9 +1,11 @@
 import React, { createRef, RefObject, useRef } from "react";
-import { Button, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/react";
+import { Button, Popover, PopoverContent, PopoverTrigger, Textarea } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import dynamic from 'next/dynamic';
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { textareaProps } from "../components/NuwaTextarea";
+import NuwaButton from "../components/NuwaButton";
 const InsertUserOrChar = dynamic(() => import("../components/InsertUserOrChar"), { ssr: false })
 
 export default function Mes_Example() {
@@ -77,8 +79,8 @@ export default function Mes_Example() {
 }
 
   return (
-    <>
-      <div
+    <div className="grid grid-cols-1 gap-8 sm:grid-cols-10">
+      {/* <div
         onClick={() => {
           insertNewMesExample();
         }}
@@ -93,73 +95,60 @@ export default function Mes_Example() {
         <div className="shrink-0">
           添加对话示例
         </div>
-      </div>
-
-
-      {mesExampleList.map((item, index) =>{
-        return (
-        <div className="flex flex-row gap-4 mt-4" key={index}>
-          <div
-            className="group relative p-10 flex flex-row items-end cursor-pointer text-xl bg-black rounded-[40px] w-full min-h-[300px] bg-no-repeat bg-right-bottom bg-cover bg-[url('/character-mesExample-list-item-bg.png')]"
-          >
-            <div className="mr-4 grow h-full">
-              <textarea
-                ref={r => { (descTextareaRefs.current[index] as any) = r; }}
-                placeholder="请在这里填写对话示例"
-                value={item}
-                onChange={e => {
-                  updateMesExamplePlist(e.target.value, index)
-                }}
-                className="border-none outline-none w-full h-full resize-none mb-6 bg-transparent text-white"
-              />
-            </div>
-
-
-            <Popover placement="top" color='warning'>
-              <PopoverTrigger>
-                <Button
-                  className="absolute top-10 right-10 bg-white text-white opacity-0 group-hover:opacity-100"
-                  startContent={<TrashIcon className="h-5 w-5 text-black"/>}
-                  isIconOnly
-                ></Button>
-              </PopoverTrigger>
-              <PopoverContent>
-                <Button 
-                  className="w-full" 
-                  size="sm" 
-                  color="warning"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    const newMesExampleList = mesExampleList.filter((_, i) => i !== index);
-                    setMesExampleList(newMesExampleList);
-                    saveMesExample(newMesExampleList);
-                  }}
-                >    
-                  {t('Previews.mymindismadeup')}
-                </Button>
-              </PopoverContent>
-            </Popover>
-
-            <div className="opacity-0 group-hover:opacity-100">
-              <InsertUserOrChar getTextRef={()=>{return descTextareaRefs.current[index] as any}} onDone={(newValue) => {
-                updateMesExamplePlist(newValue, index);
-              }} />
-            </div>
-            
-          </div>
-        </div>
-      )})}
-      <div className="flex flex-row-reverse mt-2">
-        <Button onClick={insertNewMesExample} variant="light" className="w-[200px]" endContent={<PlusIcon className="h-4 w-4 text-black"/>}>增加对话示例</Button> 
-      </div>   
-
-
-      {/* <div className="flex justify-end mt-10 w-full">
-        <Link href='/character/avatar'>
-          <Image className="cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
-        </Link> 
       </div> */}
-     
-    </>
+      <div className="sm:col-start-3 sm:col-end-9 grid gap-2">
+        {mesExampleList.map((item, index) => (
+          <div className="relative group" key={index}>
+            <Textarea
+              {...textareaProps as any}
+              ref={r => { (descTextareaRefs.current[index] as any) = r; }}
+              placeholder="请在这里填写对话示例"
+              value={item}
+              onChange={e => {
+                updateMesExamplePlist(e.target.value, index)
+              }}
+            />
+            <div className="z-40 hidden group-hover:block absolute -top-16 right-0 pl-4 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
+              <Popover placement="top" color='warning'>
+                <PopoverTrigger>
+                  <NuwaButton
+                    shadowghost="white"
+                    className="mb-2 w-full"
+                  >
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  </NuwaButton>
+                  {/* <Button
+                    className=" absolute top-4 right-4 bg-black text-white opacity-0 group-hover:opacity-100"
+                    startContent={<TrashIcon className="h-5 w-5"/>}
+                    isIconOnly
+                  ></Button> */}
+                </PopoverTrigger>
+                <PopoverContent>
+                  <Button 
+                    className="w-full" 
+                    size="sm" 
+                    color="warning"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      const newMesExampleList = mesExampleList.filter((_, i) => i !== index);
+                      setMesExampleList(newMesExampleList);
+                      saveMesExample(newMesExampleList);
+                    }}
+                  >    
+                    {t('Previews.mymindismadeup')}
+                  </Button>
+                </PopoverContent>
+              </Popover>
+                <InsertUserOrChar getTextRef={()=>{return descTextareaRefs.current[index] as any}} onDone={(newValue) => {
+                  updateMesExamplePlist(newValue, index);
+                }} />
+            </div>
+          </div>
+        ))}
+        <div className="flex flex-row-reverse mt-2">   
+          <Button onClick={insertNewMesExample} variant="ghost" className="w-full h-20 border-dashed border border-zinc-800"><PlusIcon className="h-32 w-32 text-black"/></Button>  
+        </div>   
+      </div>
+    </div>
   );
 }

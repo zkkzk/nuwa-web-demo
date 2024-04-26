@@ -1,6 +1,5 @@
 "use client";
 import React from "react";
-import { Button } from "@nextui-org/react";
 import NuwaButton from "./NuwaButton";
 
 function InsertUserOrChar({getTextRef, onDone}: {getTextRef: () => any, onDone: (value: string) => void}) {
@@ -23,28 +22,27 @@ function InsertUserOrChar({getTextRef, onDone}: {getTextRef: () => any, onDone: 
 
   return (
     <div className="flex flex-col gap-2">
-
-    <NuwaButton
-      shadowghost="white"
-      onPress={
-        () => {
-          insertTextAtCursor('{{char}}');
+      <NuwaButton
+        shadowghost="white"
+        onPress={
+          () => {
+            insertTextAtCursor('{{char}}');
+          }
         }
-      }
-    >
-          &nbsp;&nbsp;插入玩家名称&nbsp;&nbsp;
-    </NuwaButton>
-    <NuwaButton
-      shadowghost="white"
-      onPress={
-        () => {
-          insertTextAtCursor('{{user}}');
+      >
+            &nbsp;&nbsp;插入玩家名称&nbsp;&nbsp;
+      </NuwaButton>
+      <NuwaButton
+        shadowghost="white"
+        onPress={
+          () => {
+            insertTextAtCursor('{{user}}');
+          }
         }
-      }
-    >
-          &nbsp;&nbsp;插入数字生命名称&nbsp;&nbsp;
-    </NuwaButton>
-  </div>
+      >
+            &nbsp;&nbsp;插入数字生命名称&nbsp;&nbsp;
+      </NuwaButton>
+    </div>
   );
 }
 

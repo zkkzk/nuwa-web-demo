@@ -1,14 +1,11 @@
 "use client";
 import React from "react";
-import { Divider } from "@nextui-org/react";
 import InforMation_FirstMessage from "./InforMation_FirstMessage";
 import InforMation_Cover from "./InforMation_Cover";
 import InforMation_Name from "./InforMation_Name";
 import InforMation_Personality from "./InforMation_Personality";
 import InforMation_Description from "./InforMation_Description"
 import InforMation_AlternateGreetings from "./InforMation_AlternateGreetings"
-import { Link } from "@/navigation";
-import Image from "next/image";
 
 function InforMation() {
   

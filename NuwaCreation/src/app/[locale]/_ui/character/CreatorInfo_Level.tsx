@@ -3,6 +3,7 @@ import React from "react";
 import { useTranslations, useMessages } from "next-intl";
 import NuwaRadio from "../components/NuwaRadio";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { textareaProps } from "../components/NuwaTextarea";
 
 
 function CreatorInfo_Level() {
@@ -33,26 +34,27 @@ function CreatorInfo_Level() {
   
  
   return (
-    <div className="bg-white h-full w-full rounded-[40px]">
-      <div className="flex flex-col h-full w-full py-7 px-7 rounded-[40px]">
-        <div className="flex flex-row items-center">
-          <div
-            className=" shrink-0 text-neutral-950 text-lg font-semibold leading-loose tracking-tight mr-2"
-          >
-            {t('Character.level')}
-          </div>
-          <div className="text-neutral-500 text-xs font-normal leading-snug tracking-tight">{t('Character.leveltip')}</div>
-        </div>
-        
-        <div className="mt-10">
-          <NuwaRadio
-            items={Levels as unknown as {name: string, value: string}[]}
-            value={charaListItem.chara.data.extensions.level}
-            onChange={(e: any) => {
+    <div className="h-full w-full">
+      <div className="flex flex-row items-center">
+
+        <label className={`${textareaProps.classNames.label} mb-0 mr-4`}>
+          {t('Character.level')}
+        </label>
+
+        <div className="text-neutral-500 text-xs font-normal leading-snug tracking-tight">{t('Character.leveltip')}</div>
+      </div>
+      <div className="mt-10">  
+        <NuwaRadio
+          items={Levels as unknown as {name: string, value: string}[]}
+          value={charaListItem.chara.data.extensions.level}
+          onChange={(e: any) => {
+            if (e) {
               setCharaListItem(e.target.value)
-            }}
-          />
-        </div> 
+            } else {
+              setCharaListItem("")
+            }
+          }}
+        />
       </div>
     </div>
   );

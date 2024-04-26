@@ -16,7 +16,6 @@ function Scenario_WorldBook() {
   const t = useTranslations();
 
   const selectWorldBookModal = useDisclosure();
-  const createWorldBookModal = useDisclosure();
 
   const charaList = getWorldBookList();
   const [myWorldBooks , setMyWorldBooks] = useState(charaList || [] as Array<TypeWorldBook>);
@@ -54,33 +53,10 @@ function Scenario_WorldBook() {
     setCharaListItemCleareWorldBook(undefined)
   };
 
-  const handleCloseCreateWorldBookModal = () => {
-    // let character_book = null
-    // if(typeof window !== "undefined" ){
-    //   const character_booked = localStorage.getItem('character_book') || '';
-    //   character_book = JSON.parse(character_booked);
-    // }
-    
-    // const {updateChara} = usePostCharaFun(chara, character_book);
-    
-    // charaListItemDispatch({
-    //   type: "changed",
-    //   payload: {
-    //     ...charaListItem,
-    //     chara: updateChara
-    //   },
-    // })
-    // if(isLogin) {
-    //   selectWorldBookModal.onClose();
-    // } else {
-    //   createWorldBookModal.onClose();
-    // }
-  }
-
   return (
-    <div className="relative bg-white h-full w-full py-12 rounded-[40px] bg-[url('/character-worldbook-bg.png')] bg-no-repeat bg-right-top">
+    <div className="relative h-full w-full">
       <label
-        className="text-[#0C0C0C] text-lg font-medium leading-8 mb-1 px-7"
+        className="text-2xl text-neutral-800 font-bold tracking-tight"
       >
         {t('Character.scenarioWorldbookTitle')}
       </label>
@@ -88,14 +64,10 @@ function Scenario_WorldBook() {
       <NuwaButton
         color="black"
         onClick={() => {
-          // if(isLogin) {
-            selectWorldBookModal.onOpen();
-          // } else {
-          //   createWorldBookModal.onOpen();
-          // }
+          selectWorldBookModal.onOpen();
         }}
         startContent={<LinkIcon className="h-4 w-4"/>}
-        className="absolute top-4 right-4 h-10 w-32 p-0 z-40"
+        className="absolute top-0 right-0 h-10 w-32 p-0 z-40"
         type="button"
         variant="flat"
         >
@@ -147,46 +119,9 @@ function Scenario_WorldBook() {
           )}
         </ModalContent>
       </Modal>
-      {/* <Modal 
-        size="full"
-        isOpen={createWorldBookModal.isOpen}
-        placement={'bottom'}
-        scrollBehavior="inside"
-        onOpenChange={createWorldBookModal.onOpenChange}
-        classNames={{
-          base: "h-3/4 bg-[#F6F6F6]",
-        }}
-        hideCloseButton={true}
-      >
-        <ModalContent>
-          {(onClose) => (
-            <>
-              <ModalHeader className="flex flex-row justify-between items-center gap-1 py-6">
-                <div>创建新世界书</div>
 
-                <NuwaButton
-                  color="black"
-                  onClick={()=>{
-                    handleCloseCreateWorldBookModal();
-                  }}
-                  startContent={<LinkIcon className="h-4 w-4"/>}
-                  className="h-10 w-32 p-0 z-40"
-                  type="button"
-                  variant="flat"
-                  >
-                    保存
-                </NuwaButton>
-              </ModalHeader>
-              <ModalBody>
-                <Scenario_CreateWorldBook />
-              </ModalBody>
-            </>
-          )}
-        </ModalContent>
-      </Modal> */}
-
-      <div className="overflow-y-scroll w-full h-full">
-        <div className="grid 2xl:grid-cols-3 3xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-4 py-10 px-7 overflow-visible h-auto">
+      <div className="w-full h-full">
+        <div className="grid 2xl:grid-cols-3 3xl:grid-cols-4 md:grid-cols-2 sm:grid-cols-2 gap-4 py-10 overflow-visible h-auto">
           
             {charaListItem.chara.data.character_book && (
               <div className="relative w-auto h-[340px]">
@@ -201,10 +136,8 @@ function Scenario_WorldBook() {
                   isIconOnly
                 >
                   <XMarkIcon className="h-6 w-6 text-white font-black absolute" aria-hidden="true" />
-              </Button>
-
+                </Button>
                 <WorldBookItem worldBookItem={charaListItem.chara.data.character_book} />
-            
               </div>
             )}
         </div>

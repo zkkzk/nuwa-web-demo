@@ -33,14 +33,12 @@ function InforMation_Name() {
   };
 
   return (
-    <div className="relative">
-      <NuwaInput
-        placeholder="请输入"
-        label={<div>{t('Character.charactername')}<span className="text-red-500">*</span></div>}
-        value={charaListItem.chara.data.name}
-        onChange={handleNameChange}
-      />
-    </div>
+    <NuwaInput
+      placeholder="请输入"
+      label={<div>{t('Character.charactername')}<span className="text-red-500">*</span></div>}
+      value={charaListItem.chara.data.name}
+      onChange={handleNameChange}
+    />
   );
 }
 

@@ -6,15 +6,12 @@ import Scenario_WorldBook from "./Scenario_WorldBook";
 function Scenario() {
   
   return (
-    <>   
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 py-7">
-        <div className="h-[630px]">
+    <>
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-10">
+        <div className="sm:col-start-3 sm:col-end-9 grid gap-20">
           <Scenario_Scenario />
-        </div>
-        <div className="h-[630px]" >
           <Scenario_WorldBook />
         </div>
-
       </div>
     </>
   );

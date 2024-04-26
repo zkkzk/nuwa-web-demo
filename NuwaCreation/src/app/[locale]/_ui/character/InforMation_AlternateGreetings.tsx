@@ -98,7 +98,7 @@ function InforMation_AlternateGreetings() {
       ))}
       <div className="flex flex-row-reverse mt-2">
         
-        <Button onClick={handleAddGreetingsClick} variant="ghost" className="w-full h-20 border-dashed border border-zinc-800"><PlusIcon className="h-20 w-20 text-black"/></Button>  
+        <Button onClick={handleAddGreetingsClick} variant="ghost" className="w-full h-20 border-dashed border border-zinc-800"><PlusIcon className="h-32 w-32 text-black"/></Button>  
       </div>   
     </div>
   );

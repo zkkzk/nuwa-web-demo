@@ -8,7 +8,7 @@ export const textareaProps = {
   size: "lg",
   minRows: 5,
   classNames: {
-    label: "text-2xl text-neutral-800 text-2xl font-bold tracking-tight",
+    label: "text-2xl text-neutral-800 font-bold tracking-tight mb-6 block",
     input: "text-black text-sm font-normal leading-relaxed tracking-tight",
   },
   className: "border-none outline-none w-full h-full resize-none text-[#272727] disabled:bg-transparent break-all",
@@ -17,7 +17,7 @@ export const textareaProps = {
 function NuwaTextarea(...props: any) {
   return (
     <>
-      <label className="text-neutral-800 text-2xl font-bold tracking-tight mb-6 block">
+      <label className={textareaProps.classNames.label}>
         {props[0].label}
       </label>
       <Textarea

@@ -75,33 +75,33 @@ export default function Avatar() {
 
 
   return (
-    <div className="relative bg-white h-full w-full pt-20 pb-40 rounded-[40px]">
-      <div className="px-7">
-        <h2 className="text-lg font-semibold">{t('Character.avatar')}</h2>
-        <div className="text-stone-500 text-[8.50px] font-normal leading-none tracking-tight mt-2">{t('Character.avatartip')}</div>
-        <div className="flex flex-row flex-wrap gap-[42px] mt-[20px]">
-        <div
-            onClick={() => {
-              clearAvatarList();
-            }}
-            className={classNames('group hover:bg-black shrink-0 flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]')}
-          >
-            <NoSymbolIcon className={classNames('h-32 w-32  font-black group-hover:text-white')} aria-hidden="true" />
-            <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight group-hover:text-white')} >{t('Character.none')}</div>
-          </div>
+    <div className="grid grid-cols-1 gap-8 sm:grid-cols-10">
+      <div className="sm:col-start-3 sm:col-end-9 grid gap-20">
+        <div>
+          <h2 className="text-lg font-semibold">{t('Character.avatar')}</h2>
+          <div className="text-stone-500 text-[8.50px] font-normal leading-none tracking-tight mt-2">{t('Character.avatartip')}</div>
+          <div className="flex flex-row flex-wrap gap-[42px] mt-[20px]">
           <div
-            onClick={() => {
-              uploadModal.onOpen();
-            }}
-            className={classNames('group hover:bg-black shrink-0 flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]')}
-          >
-            <PlusIcon className={classNames('h-32 w-32  font-black group-hover:text-white')} aria-hidden="true" />
-            <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight group-hover:text-white')} >{t('Character.plus')}</div>
+              onClick={() => {
+                clearAvatarList();
+              }}
+              className={classNames('group hover:bg-black shrink-0 flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]')}
+            >
+              <NoSymbolIcon className={classNames('h-32 w-32  font-black group-hover:text-white')} aria-hidden="true" />
+              <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight group-hover:text-white')} >{t('Character.none')}</div>
+            </div>
+            <div
+              onClick={() => {
+                uploadModal.onOpen();
+              }}
+              className={classNames('group hover:bg-black shrink-0 flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]')}
+            >
+              <PlusIcon className={classNames('h-32 w-32  font-black group-hover:text-white')} aria-hidden="true" />
+              <div className={classNames('text-center text-base font-normal leading-[29px] tracking-tight group-hover:text-white')} >{t('Character.plus')}</div>
+            </div>
           </div>
         </div>
-
         <div className="flex flex-col flex-wrap gap-[42px] mt-[20px]">
-   
           {charaListItem.chara.data.extensions.avatars && charaListItem.chara.data.extensions.avatars.map((item, index) => {
             return (
               <div>
@@ -141,8 +141,7 @@ export default function Avatar() {
                 </div>
               </div>
             )
-          })}
-          
+          })}         
         </div>
       </div>
       
@@ -218,9 +217,6 @@ export default function Avatar() {
           </ModalContent>
         </Modal>
 
-      {/* <Link href='/character/voice'>
-        <Image className=" absolute right-10 -bottom-1 cursor-pointer" width={120} height={114} src="/character-nexttab.png" alt="" />
-      </Link> */}
     </div>
   );
 }

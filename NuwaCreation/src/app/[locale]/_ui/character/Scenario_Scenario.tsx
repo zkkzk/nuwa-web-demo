@@ -3,6 +3,8 @@ import React, { useRef } from "react";
 import { useTranslations } from "next-intl";
 import InsertUserOrChar from "../components/InsertUserOrChar";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { Textarea } from "@nextui-org/react";
+import { textareaProps } from "../components/NuwaTextarea";
 
 function Scenario_Scenario() {
   const t = useTranslations();
@@ -32,30 +34,22 @@ function Scenario_Scenario() {
  
 
   return (
-    <div className="bg-[#333333] h-full w-full rounded-[40px] bg-[url('/character-scenario-bg1.png')] bg-no-repeat">
-      <div className="flex flex-col h-full w-full py-12 px-7  rounded-[40px] bg-[url('/character-scenario-bg2.png')] bg-no-repeat bg-[bottom_right_-6rem]">
-        <label
-          className="text-white text-lg font-medium leading-8 mb-1"
-        >
-          {t('Character.scenario')}
-        </label>
-        <div className="flex flex-col items-end mt-10 grow">  
-            <textarea
-              ref={descTextareaRef}
-              placeholder={`${t('Character.scenario')}`}
-              value={charaListItem.chara.data.scenario}
-              onChange={(e) => (handleScenarioChange(e.target.value))}
-              className="grow text-white border-none outline-none w-full h-full resize-none mb-6 bg-transparent break-all"
-            />
-          <div className="shrink-0">
-            <InsertUserOrChar getTextRef={() => {
-              return descTextareaRef.current
-            }} onDone={(newValue) => {
-              handleScenarioChange(newValue);
-            }} />
-          </div>
-        </div> 
-      </div>    
+    <div className="relative group">
+      <Textarea
+        {...textareaProps as any}
+        label={<div>{t('Character.scenario')}</div>}
+        ref={descTextareaRef}
+        placeholder={`${t('Character.scenario')}`}
+        value={charaListItem.chara.data.scenario}
+        onChange={(e) => (handleScenarioChange(e.target.value))}
+      />
+      <div className="z-40 hidden group-hover:block absolute -top-16 right-0 pl-4 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
+          <InsertUserOrChar getTextRef={() => {
+            return descTextareaRef.current
+          }} onDone={(newValue) => {
+            handleScenarioChange(newValue);
+          }} />
+      </div>
     </div>
   );
 }
