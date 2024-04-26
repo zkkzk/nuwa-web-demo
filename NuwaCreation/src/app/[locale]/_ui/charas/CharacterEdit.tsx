@@ -10,7 +10,7 @@ import { TypeCharaListItem } from "../../_lib/definitions";
 import AlterMessage from "../components/AlterMessage";
 import CharacterEditWrapper from "./CharacterEditWrapper";
 import { CharaProvider } from "./CharaContext";
-import Preview from "../previews/Preview";
+import CharacterPreview from "./CharacterPreview";
 
 function CharacterEdit({ onDone, chara }: {
   onDone?: () => void,
@@ -66,7 +66,7 @@ function CharacterEdit({ onDone, chara }: {
                   }}><XMarkIcon className="h-6 w-6" /></NuwaButton>
                   <div className="flex flex-row items-center justify-center gap-4">
                     {chara && (
-                        <Preview charaItem={chara} /> 
+                        <CharacterPreview /> 
                     )}
                     <NuwaButton color="black" isLoading={isMakeCharLoding} className="hidden" size="md">发布</NuwaButton>
                   </div>

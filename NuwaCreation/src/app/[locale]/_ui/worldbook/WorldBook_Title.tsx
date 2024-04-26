@@ -41,9 +41,9 @@ function WorldBook_Title() {
         size="sm"
         classNames={{
           label: "",
-          input: "text-right",
+          input: "",
           innerWrapper: "bg-transparent",
-          inputWrapper: "bg-transparent shadow-none",
+          inputWrapper: "shadow-none",
         }}
         className="w-full h-full bg-transparent outline-none disabled:bg-transparent"
         endContent={

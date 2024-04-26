@@ -29,7 +29,8 @@ const config: Config = {
           layout: {}, // light theme layout tokens
           colors: {
             background:"#FFFFFF",
-            danger: { DEFAULT: "#ef4444"}
+            danger: { DEFAULT: "#FF0000"},
+            primary: { DEFAULT: "#000000"}
           }, // light theme colors
         },
         dark: {

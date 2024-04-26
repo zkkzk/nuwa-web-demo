@@ -12,9 +12,9 @@ function AdvancedSet() {
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-10">
         <div className="sm:col-start-3 sm:col-end-9 grid gap-20 mb-20">
           <AdvancedSet_Depthprompt />
+          <AdvancedSet_Talkativeness />
           <AdvancedSet_Mainprompt />
           <AdvancedSet_Jailbreak />
-          <AdvancedSet_Talkativeness />
         </div>
       </div>
     </>

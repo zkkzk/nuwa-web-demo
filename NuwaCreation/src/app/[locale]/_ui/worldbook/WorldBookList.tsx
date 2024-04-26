@@ -36,9 +36,9 @@ export default function WorldBookList() {
         </div>
 
         <div className="px-7">
-          <div className="grid md:grid-cols-3 xl:grid-cols-5 2xl:grid-cols-5 3xl:grid-cols-6 3xl:grid-cols-4 sm:grid-cols-2 gap-4 py-10 px-7 overflow-visible h-auto">
+          <div className="grid md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-4 3xl:grid-cols-5 3xl:grid-cols-4 sm:grid-cols-2 gap-4 py-10 px-7 overflow-visible h-auto">
             {worldBookList.map((worldBookItem, index) => (
-              <div key={worldBookItem.uid} className="relative group w-auto h-[340px]">
+              <div key={worldBookItem.uid} className="relative group w-auto h-[280px]">
                 <WorldBookItem worldBookItem={worldBookItem.worldBook} />
 
                 <div className="absolute top-4 right-4 flex flex-col gap-4">

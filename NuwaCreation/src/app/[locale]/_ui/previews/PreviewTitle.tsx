@@ -6,7 +6,7 @@ function PreviewTitle({children}: {
 }) {
   return (
     <>   
-      <div className="text-black text-[32px] font-semibold leading-[58px] tracking-tight px-">{children}</div>
+      <div className="text-black text-2xl font-semibold font-light leading-9 tracking-tight mb-2">{children}</div>
     </>
   );
 }

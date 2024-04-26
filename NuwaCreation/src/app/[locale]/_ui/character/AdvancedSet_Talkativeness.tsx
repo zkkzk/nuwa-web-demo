@@ -57,20 +57,7 @@ function AdvancedSet_Talkativeness() {
           ]}
           defaultValue={0.5}
           classNames={{
-            base: "max-w-md",
-            track: "border-l-black",
             mark: "text-nowrap w-8",
-            filler: "bg-black",
-            labelWrapper: "mb-2",
-            label: "font-medium text-default-700 text-medium",
-            value: "font-medium text-default-500 text-small",
-            thumb: [
-              "transition-size",
-              "bg-black",
-              "data-[dragging=true]:shadow-lg data-[dragging=true]:shadow-black/20",
-              "data-[dragging=true]:w-7 data-[dragging=true]:h-7 data-[dragging=true]:after:h-6 data-[dragging=true]:after:w-6"
-            ],
-            step: "data-[in-range=true]:bg-black/30"
           }}
           value={charaListItem.chara.data.extensions.talkativeness as unknown as number}
           onChange={(value) => {

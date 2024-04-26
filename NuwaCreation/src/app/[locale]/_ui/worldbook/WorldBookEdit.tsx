@@ -63,7 +63,7 @@ function WorldBookEdit({ onDone, worldBook }: {
                     onClose();
                   }}><XMarkIcon className="h-6 w-6" /></NuwaButton>
 
-                  <div className="max-w-[450px]">
+                  <div className="w-[300px]">
                     <WorldBook_Title />
                   </div>
                   

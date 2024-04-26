@@ -20,7 +20,7 @@ function CharacterPreview({charaItem}: {charaItem: TypeCharaListItem}) {
   
   return (
   
-    <div className="space-y-8 divide-y">
+    <div className="space-y-20 px-4 sm:px-24 md:px-40 lg:px-52 xl:px-60 2xl:px-72">
       <Preview_BaseInfo charaItem={charaItem} />
       <Preview_PristMessage />
       <Preview_BaseContent />

@@ -99,7 +99,7 @@ const CustomRadio = (props: any) => {
       className={cn(
         "group w-[235px] h-[145px] rounded-[14px] border border-black border-opacity-20",
         "cursor-pointer py-4 px-2 flex flex-col justify-between items-start relative overflow-hidden",
-        "data-[selected=true]:border-black hover:border-black",
+        "data-[selected=true]:border-black data-[selected=true]:border-2 hover:border-black",
         // " hover:bg-content2"
       )}
       onClick={(e: any) => {
@@ -137,7 +137,7 @@ const CustomRadio = (props: any) => {
         
         {children && <span {...getLabelProps()} className="text-black text-base leading-[29px] tracking-tight">{children}</span>}
         {description && (
-          <span className=" px-2 py-4 text-neutral-700 text-[10px] font-extralight leading-[15px] tracking-tight hidden group-hover:block absolute bg-white z-10 left-0 group-hover:bottom-0 w-full ">{description}</span>
+          <span className="h-full px-2 py-4 text-neutral-700 text-[10px] font-extralight leading-[15px] tracking-tight hidden group-hover:block absolute bg-white z-10 left-0 group-hover:bottom-0 w-full ">{description}</span>
         )}
       </div>
     </Component>

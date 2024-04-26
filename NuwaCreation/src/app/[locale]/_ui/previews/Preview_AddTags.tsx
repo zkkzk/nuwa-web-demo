@@ -1,10 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { Chip, Input } from "@nextui-org/react";
+import { Button, Chip, Input } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import { TagIcon } from "@heroicons/react/24/solid";
 import NuwaButton from "../components/NuwaButton";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { trim } from "lodash-es";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 import { TypeCharaListItem } from "../../_lib/definitions";
@@ -42,33 +42,39 @@ function Preview_AddTags() {
   return (
     <>   
       <div className="flex flex-row items-center">
-        <div className="text-black text-3xl font-semibold leading-[54.36px] tracking-tight mr-6 shrink-0">{t('Preview.tags')}</div>
-        <div className="text-black text-sm font-normal leading-relaxed tracking-tight">{t('Preview.tagTip')}</div>
+        <div className="text-black text-2xl font-semibold leading-[54.36px] tracking-tight mr-4 shrink-0">{t('Preview.tags')}</div>
+        <div className="text-sm font-normal leading-relaxed tracking-tight text-neutral-500">{t('Preview.tagTip')}</div>
       </div>
 
       <div>
-
-      <Input
-        placeholder={t('Preview.tagsinputplaceholder')}
-        classNames={{
-          base: 'mb-2',
-          inputWrapper: 'h-16 bg-zinc-100'
-        }}
-        value={inputVal}
-        onChange={(e) => setInputVal(e.target.value)}
-        startContent={
-          <TagIcon className="h-5 w-5 text-default-400 pointer-events-none flex-shrink-0" />
-        }
-        endContent={
-          <NuwaButton className=" h-14 w-20 text-xl" color="black" variant="flat" onClick={() => {
-            const newTagsList = [...tagsList, inputVal]
-            setTagsList(newTagsList);
-            handleTagsChange(newTagsList.join(','))
-            setInputVal("");
-
-          }}>{t('Preview.tagAddButton')}</NuwaButton>
-        }
-      />
+        <Input
+          placeholder={t('Preview.tagsinputplaceholder')}
+          classNames={{
+            base: 'mb-2 w-[400px]',
+            inputWrapper: 'bg-zinc-100'
+          }}
+          size="sm"
+          value={inputVal}
+          onChange={(e) => setInputVal(e.target.value)}
+          startContent={
+            <TagIcon className="h-5 w-5 text-default-400 pointer-events-none flex-shrink-0" />
+          }
+          endContent={
+            <Button
+              size="sm"
+              variant="ghost"
+              className="border-none"
+              isIconOnly
+              onClick={() => {
+                const newTagsList = [...tagsList, inputVal]
+                setTagsList(newTagsList);
+                handleTagsChange(newTagsList.join(','))
+                setInputVal("");
+              }}>
+                <PlusCircleIcon className="h-8 w-8" aria-hidden="true" />
+              </Button>
+          }
+        />
 
       <div className="flex flex-wrap gap-4">
         {tagsList.map((item: string, index: number) => (

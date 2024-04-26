@@ -101,13 +101,13 @@ function Preview({charaItem}: {charaItem: TypeCharaListItem}) {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-row justify-between items-center gap-1 py-6">
+              <ModalHeader className=" relative h-2 bg-transparent flex flex-row justify-between items-center py-1">
                 <div></div>
                 <div
-                  className="flex flex-row items-center justify-center gap-4"
+                  className="flex flex-row items-center justify-center gap-4 absolute right-10 top-6"
                 >
                   
-                  <Button isLoading={isMakeCharLoding} className="h-16 w-48 text-xl" color="default" variant="bordered" onPress={handleMakeChar}>仅导出</Button>
+                  <Button isLoading={isMakeCharLoding} color="default" variant="bordered" onPress={handleMakeChar}>仅导出</Button>
                   {/* <NuwaButton className="h-16 w-48 text-xl" color="black" variant="flat">导出并发布</NuwaButton> */}
                 </div>
               </ModalHeader>
