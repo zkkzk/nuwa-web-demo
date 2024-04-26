@@ -11,7 +11,7 @@ function CreatorInfo() {
   
   return (
     <>
-      <div className="grid grid-cols-1 gap-8 sm:grid-cols-10">
+      <div className="grid grid-cols-1 gap-8 sm:grid-cols-10 mb-20">
         <div className="sm:col-start-3 sm:col-end-9 grid gap-20">
           <div className="grid grid-cols-1 gap-20 sm:grid-cols-2">
             <CreatorInfo_CreatedBy />

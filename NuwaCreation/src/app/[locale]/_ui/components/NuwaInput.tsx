@@ -15,7 +15,8 @@ function NuwaInput(...props: any) {
         labelPlacement="outside"
         size="lg"
         classNames={{
-          input: "text-black text-sm font-normal leading-relaxed tracking-tight"
+          input: "text-black text-sm font-normal leading-relaxed tracking-tight",
+          inputWrapper: "border"
         }}
         className="border-none outline-none w-full resize-none text-[#272727] disabled:bg-transparent"
       />

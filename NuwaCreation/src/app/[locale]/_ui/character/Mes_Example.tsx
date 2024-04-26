@@ -79,7 +79,7 @@ export default function Mes_Example() {
 }
 
   return (
-    <div className="grid grid-cols-1 gap-8 sm:grid-cols-10">
+    <div className="grid grid-cols-1 gap-8 sm:grid-cols-10 mb-20">
       {/* <div
         onClick={() => {
           insertNewMesExample();

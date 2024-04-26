@@ -10,6 +10,7 @@ export const textareaProps = {
   classNames: {
     label: "text-2xl text-neutral-800 font-bold tracking-tight mb-6 block",
     input: "text-black text-sm font-normal leading-relaxed tracking-tight",
+    inputWrapper: "border"
   },
   className: "border-none outline-none w-full h-full resize-none text-[#272727] disabled:bg-transparent break-all",
 }
