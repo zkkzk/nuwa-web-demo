@@ -5,15 +5,16 @@ import {
   Popover,
   PopoverContent,
   PopoverTrigger,
+  Tab,
+  Tabs,
 } from "@nextui-org/react";
-import { uuid } from "../../_lib/utils";
+import { defaultWorldBookEntry, uuid } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
-import { isNull } from "lodash-es";
-import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
-import NuwaButton from "../components/NuwaButton";
+import { clone, isNull } from "lodash-es";
 import { TypeWorldBook, TypeWorldBookEntriy } from "../../_lib/definitions";
 import WorldBook_Entry from "./WorldBook_Entry";
 import { useWorldBookItem, useWorldBookItemDispatch } from "./WorldBookContext";
+import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 export default function WorldBook({worldBooka, isPreview = false}: {
   worldBooka?: TypeWorldBook | undefined,
@@ -42,28 +43,13 @@ export default function WorldBook({worldBooka, isPreview = false}: {
 
   const handleAddNewBookClick = () => {
     const uid = uuid();
-    const defaultTemplate: TypeWorldBookEntriy = {
-      uid: uid,
-      keys: [],
-      secondary_keys: [],
-      comment: "New Book",
-      content: "",
-      constant: true,
-      selective: true,
-      insertion_order: 100,
-      enabled: true,
-      position: 0,
-      depth: 4,
-      extensions: {
-        exclude_recursion: false,
-        display_index: uid,
-        probability: 100,
-        useProbability: true,
-      },
-    };
 
-    setWorldBookItemInNewEntries(defaultTemplate);
-    setSelectedEntry(defaultTemplate)
+    let newEntry = clone(defaultWorldBookEntry);
+    newEntry.uid = uid;
+    newEntry.extensions.display_index = uid;
+
+    setWorldBookItemInNewEntries(newEntry);
+    setSelectedEntry(newEntry)
   };
 
   useEffect(() => {
@@ -144,99 +130,99 @@ export default function WorldBook({worldBooka, isPreview = false}: {
   
   return (
     <>
-      <div>
-        <div className="flex flex-row">
-          
-          <div className="relative flex flex-col shrink-0 gap-y-4 w-[200px] bg-[#D9D9D9]/30 rounded-[14px] py-12 mt-32 -mr-2 h-[570px] pl-1">
-            {!isPreview && (
-              <Button
-                onClick={handleAddNewBookClick}
-                className="absolute top-2 right-4 bg-transparent p-0 z-40"
-                type="button"
-                color="default"
-                variant="flat"
-                isIconOnly
-              >
-                <PlusCircleIcon className="h-12 w-12" aria-hidden="true" />
-              </Button>
-            )}
-            {worldBook&& Object.keys(worldBook.entries).map((key) => (
-              <NuwaButton
-                key={`${uid}${worldBook.entries[key].uid}`}
-                className={`${
-                  selectedEntry?.uid === worldBook.entries[key].uid ? "h-12" : "h-7"
-                } w-full rounded-l-[12px] bg-black text-white flex justify-center items-center cursor-pointer`}
-                onClick={() => {
-                  setSelectedEntry(worldBook.entries[key]);
-                }}
-                endContent={!isPreview &&
-                  <Popover key={`${worldBook.entries[key].uid}-${worldBook?.entries.length}`} placement="top" color="warning">
-                    <PopoverTrigger>
-                      <Button className="h-4 w-4 bg-transparent" size="sm" isIconOnly>
-                        <XMarkIcon className="h-4 w-4 text-white" />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent>  
-                      <Button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleDeleteButtonClick(worldBook.entries[key].uid)
-                        }}
-                        size="sm"
-                        color="warning"
-                      >
-                        {t('Previews.mymindismadeup')}
-                      </Button>
-                    </PopoverContent>
-                  </Popover>
-                }
-              >
-                <div className="mx-2 overflow-x-scroll">{worldBook.entries[key].comment || t('WorldBook.untitledbook')}</div>
-              </NuwaButton>
-            ))}
-          </div>
-          <div className="grow z-40">
-            <div
-              className="-mb-9 pb-9 px-2 w-5/12 h-[132px] rounded-[40px] flex justify-center items-center bg-[#313131] text-white font-semibold text-[20px]"
+      <div className="relative">
+        {!isPreview && (
+          <div className="h-10 w-20 flex flex-row justify-center bg-white p-0 z-40 absolute top-0 right-0 pb-2">
+            <Button
+              onClick={handleAddNewBookClick}
+              className="bg-transparent"
+              type="button"
+              color="default"
+              variant="flat"
+              isIconOnly
             >
-              <input
-                value={worldBook?.name}
-                disabled={isPreview}
-                onChange={(e) => {
-                  const newValue = e.target.value;
-                  setWorldBookItemName(newValue);
-                }}
-                className="w-full h-full bg-transparent outline-none disabled:bg-transparent"
-              />
-            </div>
-            {worldBook?.entries && Object.keys(worldBook.entries).map((key) => (
-              <div key={`${uid}${worldBook.entries[key].uid}`}>
-                {selectedEntry?.uid === worldBook.entries[key].uid && (
-                  <WorldBook_Entry
-                    value={selectedEntry}
-                    isPreview={isPreview}
-                    onChange={(newSelectedEntry) => {
-
-                      const newWorldBook =  {
-                        ...worldBook,
-                        entries: {
-                          ...worldBook.entries,
-                          [newSelectedEntry.uid]: newSelectedEntry
-                        }
-                      }
-
-                      setWorldBookItem(newWorldBook)
-
-                      setSelectedEntry(newSelectedEntry);
-                    }}
-                  />
-                )}
-              </div>
-            ))}
-            
+              <PlusCircleIcon className="h-8 w-8" aria-hidden="true" />
+            </Button>
           </div>
-        </div>
+        )}
       </div>
+      {(!worldBook || Object.keys(worldBook.entries).length === 0) && (
+        <div className="h-40"></div>
+      )}
+      <Tabs
+          aria-label="Options"
+          variant="underlined"
+          size="lg"
+          classNames={{
+            base: "sticky top-0 ml-0 z-30 overflow-x-scroll bg-white w-full h-full shrink-0",
+            tabList: "overflow-x-scroll gap-10 py-0 border-b border-solid border-black/20 w-full pr-20 h-full",
+            cursor: "w-full bg-[#0C0C0C] text-white",
+            tab:"h-10 group-data-[selected=true]:bg-[#0C0C0C]",
+            tabContent: " text-neutral-700 w-full h-full group-data-[selected=true]:text-neutral-800 group-data-[selected=true]:font-bold",
+            panel: "overflow-y-scroll",
+          }}
+        >
+
+          {worldBook && Object.keys(worldBook.entries).map((key) => (
+            <Tab
+              key={`${uid}${worldBook.entries[key].uid}`}
+              id={`${uid}${worldBook.entries[key].uid}`}
+              title={
+                <div className="flex flex-row items-center group">
+                  <div>{worldBook.entries[key].comment || t('WorldBook.untitledbook')}</div>
+                  {!isPreview && 
+                    <Popover
+                      key={`${worldBook.entries[key].uid}-${worldBook?.entries.length}`}
+                      placement="top"
+                      color="danger"
+                      className=""
+                    >
+                      <PopoverTrigger>
+                        <Button className="opacity-0 group-hover:opacity-100 h-4 w-4 bg-transparent" size="sm" isIconOnly>
+                          <XMarkIcon className="h-4 w-4 text-black" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent>  
+                        <Button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleDeleteButtonClick(worldBook.entries[key].uid)
+                          }}
+                          size="sm"
+                          color="danger"
+                        >
+                          {t('Previews.mymindismadeup')}
+                        </Button>
+                      </PopoverContent>
+                    </Popover>
+                  }
+                </div>
+              }
+            >
+              <div key={`${uid}${worldBook.entries[key].uid}`}>
+                <WorldBook_Entry
+                  value={worldBook.entries[key]}
+                  isPreview={isPreview}
+                  onChange={(newSelectedEntry) => {
+
+                    const newWorldBook =  {
+                      ...worldBook,
+                      entries: {
+                        ...worldBook.entries,
+                        [newSelectedEntry.uid]: newSelectedEntry
+                      }
+                    }
+
+                    setWorldBookItem(newWorldBook)
+
+                    setSelectedEntry(newSelectedEntry);
+                  }}
+                />
+              </div>
+            </Tab>
+          ))}
+        </Tabs>
+      
     </>
   );
 }

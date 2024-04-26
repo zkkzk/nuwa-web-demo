@@ -103,10 +103,33 @@
   }],
   "Levels": [{
     "name": "SFW/大众级",
-    "value": "SFW"
+    "value": ""
   }, {
     "name": "NSFW/限制级",
     "value": "NSFW"
+  }],
+  "ConstantOptions": [{
+    "name": "常量",
+    "value": true
+  }, {
+    "name": "正常",
+    "value": false
+  }],
+  "PositionOptions": [{
+    "name": "字符之前",
+    "value": 0
+  }, {
+    "name": "字符之后",
+    "value": 1
+  }, {
+    "name": "数字生命之前",
+    "value": 2
+  }, {
+    "name": "数字生命之后",
+    "value": 3
+  }, {
+    "name": "@D",
+    "value": 4
   }],
   "Greetings": {
     "deletegreetings": "删除",
@@ -188,12 +211,12 @@
     "websitedisplaysettings": "网站显示设置"
   },
   "WorldBook": {
-    "D": "@D",
     "addnewbook": "添加新的世界书",
-    "afteran": "字符之后",
-    "afterchar": "数字生命之后",
-    "beforechar": "数字生命之前",
     "berforean": "字符之前",
+    "afteran": "字符之后",
+    "beforechar": "数字生命之前",
+    "afterchar": "数字生命之后",
+    "D": "@D",
     "constan": "常量",
     "content": "内容",
     "delete": "删除",

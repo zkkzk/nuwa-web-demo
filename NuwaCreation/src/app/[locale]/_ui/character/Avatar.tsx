@@ -116,7 +116,7 @@ export default function Avatar() {
                     iconType={item.type}
                   />
 
-                <Popover placement="top" color='warning'>
+                <Popover placement="top" color='danger'>
                   <PopoverTrigger>
                     <Button
                       className=" absolute top-2 right-2 bg-white text-black opacity-0 group-hover:opacity-100"
@@ -128,7 +128,7 @@ export default function Avatar() {
                     <Button 
                       className="w-full" 
                       size="sm" 
-                      color="warning"
+                      color="danger"
                       onClick={() => {
                         handerRemoveAvatar(index);
                       }}

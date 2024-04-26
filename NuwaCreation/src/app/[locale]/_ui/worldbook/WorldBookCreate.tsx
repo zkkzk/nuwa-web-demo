@@ -3,11 +3,12 @@ import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button, useDisclosure } from "@nextui-org/react";
 
-import { pushWorldBookList, createWorldBook, getWorldBookList } from "../../_lib/utils";
+import { pushWorldBookList, createWorldBook, getWorldBookList, uuid } from "../../_lib/utils";
 
 import { TypeWorldBookList, TypeWorldBookItem } from "../../_lib/definitions";
 import AlterMessage from "../components/AlterMessage";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import { clone } from "lodash";
 
 function WorldBookCreate({ onCreateDone }: {
   onCreateDone?: (newWorldBook: TypeWorldBookItem) => void
@@ -29,6 +30,7 @@ function WorldBookCreate({ onCreateDone }: {
         size="md"
         onClick={() => {
           const newWorldBook = createWorldBook();
+
           try {
             pushWorldBookList([...worldBookList, newWorldBook]);
           } catch (e: any) {

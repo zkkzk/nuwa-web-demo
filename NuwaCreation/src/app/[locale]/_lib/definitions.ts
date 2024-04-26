@@ -72,11 +72,11 @@ export type TypeWorldBookEntriy = {
   secondary_keys: string[];
   comment: string;
   content: string;
-  constant: Boolean;
+  constant: Boolean | null;
   selective: Boolean;
   insertion_order: Number;
   enabled: Boolean;
-  position: Number;
+  position: Number | null;
   depth: Number;
   extensions: {
     exclude_recursion: Boolean;

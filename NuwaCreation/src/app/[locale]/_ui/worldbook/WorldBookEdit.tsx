@@ -7,6 +7,8 @@ import { TypeWorldBookItem } from "../../_lib/definitions";
 import AlterMessage from "../components/AlterMessage";
 import WorldBook from "./WorldBook";
 import { WorldBookProvider } from "./WorldBookContext";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import WorldBook_Title from "./WorldBook_Title";
 
 function WorldBookEdit({ onDone, worldBook }: {
   onDone?: () => void,
@@ -14,7 +16,6 @@ function WorldBookEdit({ onDone, worldBook }: {
 }) {
   const t = useTranslations();
   const editModal = useDisclosure();
-  const [isMakeCharLoding, setIsMakeCharLoding] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
 
@@ -31,19 +32,21 @@ function WorldBookEdit({ onDone, worldBook }: {
         setIsOpen(false)
       }} />
 
+      {worldBook && <WorldBookProvider value={worldBook}>
       <Modal
         isDismissable={!isOpen}
-        size="full"
+        size="5xl"
         isOpen={editModal.isOpen}
         onOpenChange={editModal.onOpenChange}
         hideCloseButton={true}
+        scrollBehavior="inside"
         onClose={() => {
           onDone && onDone();
         }}
         classNames={{
-          body: "overflow-y-scroll",
+          body: "px-2 py-0 overflow-y-hidden gap-0",
           backdrop: "",
-          base: "h-full",
+          base: "",
           header: "",
           footer: "",
           closeButton: "",
@@ -52,30 +55,33 @@ function WorldBookEdit({ onDone, worldBook }: {
         <ModalContent>
           {(onClose) => (
             <>
-              <ModalHeader className="flex flex-row justify-between items-center gap-1 py-6">
-                <div></div>
+              <ModalHeader className="gap-1 py-6">
                 <div
-                  className="flex flex-row items-center justify-center gap-4"
+                  className="w-full flex flex-row items-center justify-between gap-4"
                 >
-                  
-                  {/* <Button isLoading={isMakeCharLoding} className="h-16 w-48 text-xl" color="default" variant="bordered">发布</Button> */}
-                  <NuwaButton className="h-16 w-48 text-xl" color="black" variant="flat" onPress={() => {
+                  <NuwaButton isIconOnly className="text-xl" size="md" color="black" variant="flat" onPress={() => {
                     onClose();
-                  }}>关闭</NuwaButton>
+                  }}><XMarkIcon className="h-6 w-6" /></NuwaButton>
+
+                  <div className="max-w-[450px]">
+                    <WorldBook_Title />
+                  </div>
+                  
+                  <div className="flex flex-row items-center justify-center gap-4">
+                    {/* {chara && (
+                        <Preview charaItem={chara} /> 
+                    )} */}
+                  </div>
                 </div>
               </ModalHeader>
               <ModalBody>
-                {/* <WorldBookListProvider value={worldBook as any}> */}
-                {worldBook && (
-                  <WorldBookProvider value={worldBook}>
-                    <WorldBook />
-                  </WorldBookProvider>
-                )}
+                <WorldBook />
               </ModalBody>
             </>
           )}
         </ModalContent>
       </Modal>
+      </WorldBookProvider>}
     </>
   );
 }

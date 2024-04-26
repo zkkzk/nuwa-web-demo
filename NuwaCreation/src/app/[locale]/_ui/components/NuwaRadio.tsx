@@ -66,8 +66,8 @@ const CustomRadio = (props : any) => {
 
 
 export default function NuwaRadio({items, value, onChange}: {
-  items: {name: string, value: string}[],
-  value: string,
+  items: {name: string, value: any}[],
+  value: any,
   onChange: (e: any) => void
 }) {
   return (

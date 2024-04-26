@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { TypeChara, TypeWorldBook, TypeWorldBookEntriy, TypeWorldBookItem, TypeWorldBookList, TypeCharaList, TypeCharaListItem } from "./definitions";
 import defaultCoverBase64 from "./defalutCover";
-import { isEmpty, isNull, map, keyBy } from "lodash-es";
+import { isEmpty, isNull, map, keyBy, clone } from "lodash-es";
 
 const defaultChara = {
   name: "",
@@ -50,6 +50,26 @@ const defaultWorldBook = {
   name: "no name",
   entries:{}
 }
+
+export const defaultWorldBookEntry: TypeWorldBookEntriy = {
+  uid: "",
+  keys: [],
+  secondary_keys: [],
+  comment: "New Book",
+  content: "",
+  constant: true,
+  selective: true,
+  insertion_order: 100,
+  enabled: true,
+  position: 0,
+  depth: 4,
+  extensions: {
+    exclude_recursion: false,
+    display_index: "",
+    probability: 100,
+    useProbability: true,
+  },
+};
 
 export function useChara() {
   const [chara, setChara] = useState<TypeChara>(() => {
@@ -313,9 +333,19 @@ export const createChara = (cover: string = defaultCoverBase64, chara: TypeChara
 
 export const createWorldBook = (worldBook: TypeWorldBook = defaultWorldBook) => {
   const uid = uuid();
+  const uid2 = uuid();
+  let newEntry = clone(defaultWorldBookEntry);
+  newEntry.uid = uid2;
+  newEntry.extensions.display_index = uid2;
+
   const newChara: TypeWorldBookItem = {
     uid: uid,
-    worldBook: worldBook,
+    worldBook: {
+      ...worldBook,
+      entries: {
+        [uid2]: newEntry,
+      }
+    },
   }
   
   return newChara;

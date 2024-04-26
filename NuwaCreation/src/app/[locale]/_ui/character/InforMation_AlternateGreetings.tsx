@@ -60,7 +60,7 @@ function InforMation_AlternateGreetings() {
             }}
           />
           <div className="z-40 hidden group-hover:block absolute -top-16 right-0 pl-4 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
-            <Popover placement="top" color='warning'>
+            <Popover placement="top" color='danger'>
               <PopoverTrigger>
                 <NuwaButton
                   shadowghost="white"
@@ -78,7 +78,7 @@ function InforMation_AlternateGreetings() {
                 <Button 
                   className="w-full" 
                   size="sm" 
-                  color="warning"
+                  color="danger"
                   onClick={() => {
                     setCharaListItem(charaListItem.chara.data.alternate_greetings.filter((_, i) => i !== index)  )
                     setDeleteCount(deleteCount + 1);

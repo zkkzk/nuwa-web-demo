@@ -68,7 +68,7 @@ function CharacterEdit({ onDone, chara }: {
                     {chara && (
                         <Preview charaItem={chara} /> 
                     )}
-                    <NuwaButton color="black" isLoading={isMakeCharLoding} className="" size="md">发布</NuwaButton>
+                    <NuwaButton color="black" isLoading={isMakeCharLoding} className="hidden" size="md">发布</NuwaButton>
                   </div>
                 </div>
               </ModalHeader>

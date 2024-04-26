@@ -108,6 +108,29 @@
     "name": "NSFW",
     "value": "NSFW"
   }],
+  "ConstantOptions": [{
+    "name": "Constant",
+    "value": true
+  }, {
+    "name": "Normal",
+    "value": false
+  }],
+  "PositionOptions": [{
+    "name": "Before character",
+    "value": 0
+  }, {
+    "name": "After character",
+    "value": 1
+  }, {
+    "name": "Before character",
+    "value": 2
+  }, {
+    "name": "After character",
+    "value": 3
+  }, {
+    "name": "@D",
+    "value": 4
+  }],
   "Greetings": {
     "deletegreetings": "Delete",
     "thisoperationcannotbewithdrawn": "This operation cannot be withdrawn!"
@@ -188,12 +211,12 @@
     "websitedisplaysettings": "Website Display Settings"
   },
   "WorldBook": {
-    "D": "@D",
     "addnewbook": "Add New World Book",
-    "afteran": "After character",
-    "afterchar": "After character",
-    "beforechar": "Before character",
     "berforean": "Before character",
+    "afteran": "After character",
+    "beforechar": "Before character",
+    "afterchar": "After character",
+    "D": "@D",
     "constan": "Constant",
     "content": "Content",
     "delete": "Delete",

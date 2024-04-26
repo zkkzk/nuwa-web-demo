@@ -5,7 +5,6 @@ import NuwaTextareaWrapper from "../components/NuwaTextareaWrapper";
 import NuwaRadioWrapper from "../components/NuwaRadioWrapper";
 import NuwaFormWrapper from "../components/NuwaFormWrapper";
 import { TypeWorldBookEntriy } from "../../_lib/definitions";
-import WorldBook_Entry_Wrapper from "./WorldBook_Entry_Wrapper";
 
 export default function WorldBook_Entry_R({value, isPreview = false, onChange}: {
   value?: TypeWorldBookEntriy,

@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 
 import PreviewTitle from "./PreviewTitle";
-import WorldBook_Preview from "../worldbook/WorldBook_Preview";
+import WorldBook_Preview from "../worldbookPreview/WorldBook_Preview";
 import { TypeWorldBook } from "../../_lib/definitions";
 
 function Preview_WorldBook({worldBook}: {worldBook: TypeWorldBook}) {

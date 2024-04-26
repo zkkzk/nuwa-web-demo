@@ -48,7 +48,7 @@ export default function CharacterList() {
               <div className="w-full h-[250px] absolute top-0 bg-gray-50/50 hidden group-hover:block" />
               <div className="w-full h-[36px] text-center text-stone-950 text-lg font-semibold leading-loose tracking-tight">{chara.chara.name}</div>
               <div className="absolute top-4 right-4 flex flex-col gap-4">
-                <Popover placement="top" color='warning'>
+                <Popover placement="top" color='danger'>
                   <PopoverTrigger>
                     <Button
                       className="bg-black text-white opacity-0 group-hover:opacity-100"
@@ -60,7 +60,7 @@ export default function CharacterList() {
                     <Button 
                       className="w-full" 
                       size="sm" 
-                      color="warning"
+                      color="danger"
                       onClick={() => {
                         deleteChara({index})
                         // setChara(prev => ({

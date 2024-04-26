@@ -27,7 +27,7 @@ export default function WorldBookList() {
   return (
     <>
       <div className="relative bg-white h-full w-full pb-40 rounded-[40px]">
-        <div className="flex flex-row justify-end mt-2 z-40">
+        <div className="flex flex-row justify-end mt-2 z-40 mr-8">
           <WorldBookCreate
             onCreateDone={(newWorldBook) => {
               setWorldBookList(getWorldBookList());
@@ -42,7 +42,7 @@ export default function WorldBookList() {
                 <WorldBookItem worldBookItem={worldBookItem.worldBook} />
 
                 <div className="absolute top-4 right-4 flex flex-col gap-4">
-                  <Popover placement="top" color='warning'>
+                  <Popover placement="top" color='danger'>
                     <PopoverTrigger>
                       <Button
                         className="bg-black text-white opacity-0 group-hover:opacity-100"
@@ -54,7 +54,7 @@ export default function WorldBookList() {
                       <Button 
                         className="w-full" 
                         size="sm" 
-                        color="warning"
+                        color="danger"
                         onClick={() => {
                           deleteWorldBook({index})
                         }}
