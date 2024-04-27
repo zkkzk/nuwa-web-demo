@@ -235,7 +235,12 @@
     "imsure": "我确定。",
     "settingthedisplayofthewebsite": "设置网站显示",
     "thisoperationsisirrevocable": "继续:此操作不可撤销",
-    "websitedisplaysettings": "网站显示设置"
+    "websitedisplaysettings": "网站显示设置",
+    "title": "设置",
+    "feedback": "反馈",
+    "contactus": "联系我们",
+    "clear": "清理缓存",
+    "clearbtn": "清除"
   },
   "WorldBook": {
     "addnewbook": "添加新的世界书",

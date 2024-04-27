@@ -235,7 +235,12 @@
     "imsure": "I'm sure.",
     "settingthedisplayofthewebsite": "Setting the Website Display",
     "thisoperationsisirrevocable": "Continue: This operation is irrevocable",
-    "websitedisplaysettings": "Website Display Settings"
+    "websitedisplaysettings": "Website Display Settings",
+    "title": "Settings",
+    "feedback": "Feedback",
+    "contactus": "Contact Us",
+    "clear": "Clear Cache",
+    "clearbtn": "clear"
   },
   "WorldBook": {
     "addnewbook": "Add New World Book",
