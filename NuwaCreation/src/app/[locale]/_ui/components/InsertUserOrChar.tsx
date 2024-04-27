@@ -1,8 +1,11 @@
 "use client";
 import React from "react";
 import NuwaButton from "./NuwaButton";
+import { useTranslations } from "next-intl";
 
 function InsertUserOrChar({getTextRef, onDone}: {getTextRef: () => any, onDone: (value: string) => void}) {
+  const t = useTranslations();
+  
   const insertTextAtCursor = (text: string) => {
     const textRef = getTextRef();
     const startPos = (textRef as any).selectionStart;
@@ -30,7 +33,7 @@ function InsertUserOrChar({getTextRef, onDone}: {getTextRef: () => any, onDone: 
           }
         }
       >
-            &nbsp;&nbsp;插入玩家名称&nbsp;&nbsp;
+        {t('Character.insertuserorcharuser')}
       </NuwaButton>
       <NuwaButton
         shadowghost="white"
@@ -40,7 +43,7 @@ function InsertUserOrChar({getTextRef, onDone}: {getTextRef: () => any, onDone: 
           }
         }
       >
-            &nbsp;&nbsp;插入数字生命名称&nbsp;&nbsp;
+        {t('Character.insertuserorcharchat')}
       </NuwaButton>
     </div>
   );

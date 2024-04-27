@@ -37,7 +37,7 @@ function InforMation_Personality() {
     <div className="relative group">
       <NuwaTextarea
         label={t('Character.personalitysummary')}
-        placeholder="First Message"
+        placeholder={t('Character.personalitysummarytoken')}
         value={charaListItem.chara.data.personality}
         onChange={handlePersonalityChange}
       />

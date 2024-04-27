@@ -16,7 +16,7 @@ export default function WorldBook_Entry_L({value, isPreview = false, onChange}: 
     <div className="h-[620px] flex flex-col divide-y">
       <div className="grow">
         <NuwaTextareaWrapper
-          label={t('WorldBook.titlememo')}
+          label={t('WorldBook.title')}
           textareaProps={{
             disabled: isPreview,
             value: value?.comment,

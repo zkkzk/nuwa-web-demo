@@ -28,7 +28,7 @@ function CreatorInfo_CreatedBy() {
   return (
     <NuwaInput
       label={`${t('Character.createdby')}`}
-      placeholder={`${t('Character.createdby')}`}
+      placeholder={`${t('Character.createdbytoken')}`}
       value={charaListItem.chara.data.creator}
       onChange={(e: { target: { value: string; }; }) => setCreator(e.target.value)}
       maxLength={64}

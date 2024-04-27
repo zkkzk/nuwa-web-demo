@@ -5,14 +5,14 @@ import { useTranslations } from "next-intl";
 import { LinkIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Button, Divider, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
 import NuwaButton from "../components/NuwaButton";
-import Scenario_CreateWorldBook from "./Scenario_CreateWorldBook";
+import Plot_CreateWorldBook from "./Plot_CreateWorldBook";
 import { TypeChara, TypeWorldBook } from "../../_lib/definitions";
 import { Link } from "@/navigation";
 import Image from "next/image";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 import WorldBookItem from "../worldbook/WorldBookItem";
 
-function Scenario_WorldBook() {
+function Plot_WorldBook() {
   const t = useTranslations();
 
   const selectWorldBookModal = useDisclosure();
@@ -58,7 +58,7 @@ function Scenario_WorldBook() {
       <label
         className="text-2xl text-neutral-800 font-bold tracking-tight"
       >
-        {t('Character.scenarioWorldbookTitle')}
+        {t('Character.plotWorldbookTitle')}
       </label>
 
       <NuwaButton
@@ -67,11 +67,11 @@ function Scenario_WorldBook() {
           selectWorldBookModal.onOpen();
         }}
         startContent={<LinkIcon className="h-4 w-4"/>}
-        className="absolute top-0 right-0 h-10 w-32 p-0 z-40"
+        className="absolute top-0 right-0 z-40"
         type="button"
         variant="flat"
         >
-          关联世界书
+          {t('Character.plotWorldbooklinkbtn')}
       </NuwaButton>
       <Modal 
         size="full"
@@ -88,7 +88,7 @@ function Scenario_WorldBook() {
           {(onClose) => (
             <>
               <ModalHeader className="flex flex-row justify-between items-center gap-1 py-6">
-                <div>选择一本世界书</div>
+                <div>{t('Character.plotWorldbookchoose')}</div>
                 {/* <div
                   className="cursor-pointer flex flex-row items-center justify-center h-12 w-52 z-40 bg-[url('/character-inforMation-personality-model-insert-bg.png')] bg-no-repeat bg-center bg-contain"
                   onClick={() => {
@@ -146,4 +146,4 @@ function Scenario_WorldBook() {
   );
 }
 
-export default Scenario_WorldBook;
+export default Plot_WorldBook;

@@ -31,7 +31,7 @@ function CreatorInfo_CreatorNotes() {
     <Textarea
       {...textareaProps as any}
       label={t('Character.creatorsnotes')}
-      placeholder={t('Character.creatorsnotes')}
+      placeholder={t('Character.creatorsnotestoken')}
       value={charaListItem.chara.data.creator_notes}
       onChange={(e: { target: { value: string; }; }) => setCreatorNotes(e.target.value)}
     />

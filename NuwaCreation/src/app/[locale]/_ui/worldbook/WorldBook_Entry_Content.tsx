@@ -17,7 +17,7 @@ export default function WorldBook_Entry_Content({value, isPreview = false, onCha
     <Textarea
       {...textareaProps as any}
       label={t('WorldBook.content')}
-      placeholder={t('WorldBook.content')}
+      placeholder={t('WorldBook.contenttoken')}
       value={value?.content}
       onChange={(e: { target: { value: any; }; }) => (
 

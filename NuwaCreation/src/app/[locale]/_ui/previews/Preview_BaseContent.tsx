@@ -41,9 +41,9 @@ function Preview_BaseContent() {
         <div className="row-span-3 col-span-1">
           <PreviewWrapper>
             <div className="h-full px-6 py-10">
-              <div className="text-neutral-800 text-xl font-semibold leading-[30px] tracking-tight">{t('Character.scenario')}</div>
+              <div className="text-neutral-800 text-xl font-semibold leading-[30px] tracking-tight">{t('Character.plot')}</div>
               <Divider className="mb-4 mt-2" />
-              <div className="text-neutral-800 text-sm font-normal leading-relaxed tracking-tight">{chara.data.scenario}</div>
+              <div className="text-neutral-800 text-sm font-normal leading-relaxed tracking-tight">{chara.data.plot}</div>
             </div>
           </PreviewWrapper>
         </div>

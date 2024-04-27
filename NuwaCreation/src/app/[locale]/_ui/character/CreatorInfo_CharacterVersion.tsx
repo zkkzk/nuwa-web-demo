@@ -28,7 +28,7 @@ function CreatorInfo_CharacterVersion() {
   return (
     <NuwaInput
       label={t('Character.characterversion')}
-      placeholder={t('Character.characterversion')}
+      placeholder={t('Character.characterversiontoken')}
       value={charaListItem.chara.data.character_version}
       onChange={(e: { target: { value: string; }; }) => setCharacterVersion(e.target.value)}
       maxLength={64}

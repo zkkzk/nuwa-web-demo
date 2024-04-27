@@ -9,7 +9,7 @@ import ModelSelectIcon from "./icons/ModelSelectIcon";
 import NuwaWorldBookIcon from "./icons/NuwaWorldBookIcon";
 import HotKeyIcon from "./icons/HotKeyIcon";
 import { Button } from "@nextui-org/react";
-import { createChara, pushCharaList, getCharaList, createWorldBook, pushWorldBookList, getWorldBookList } from "../_lib/utils";
+import { createChara, pushCharaList, getCharaList, pushWorldBookList, getWorldBookList, InsertWorldBook } from "../_lib/utils";
 import AlterMessage from "./components/AlterMessage";
 
 const understandandlearnList = [{
@@ -91,7 +91,7 @@ function Homepage() {
       if(res.ok){
         const data = await res.json();
 
-        const newWorldBook = createWorldBook(data);
+        const newWorldBook = InsertWorldBook(data);
         try {
           pushWorldBookList([...worldBookList, newWorldBook]);
         } catch (e: any) {
@@ -101,7 +101,7 @@ function Homepage() {
         }
         
         if(data){
-          const newWorldBook = createWorldBook({
+          const newWorldBook = InsertWorldBook({
             entries: data.entries,
             name: file.name.split(".json")[0]
           });

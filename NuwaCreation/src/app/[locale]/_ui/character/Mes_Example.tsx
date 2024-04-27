@@ -108,20 +108,15 @@ export default function Mes_Example() {
                 updateMesExamplePlist(e.target.value, index)
               }}
             />
-            <div className="z-40 hidden group-hover:block absolute -top-16 right-0 pl-4 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
+            <div className="z-40 hidden group-hover:block absolute -top-16 right-0 pl-10 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
               <Popover placement="top" color='danger'>
                 <PopoverTrigger>
                   <NuwaButton
                     shadowghost="white"
-                    className="mb-2 w-full"
+                    className="mb-2 w-full hidden"
                   >
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;删除&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    {t('Character.insertuserorchardelete')}
                   </NuwaButton>
-                  {/* <Button
-                    className=" absolute top-4 right-4 bg-black text-white opacity-0 group-hover:opacity-100"
-                    startContent={<TrashIcon className="h-5 w-5"/>}
-                    isIconOnly
-                  ></Button> */}
                 </PopoverTrigger>
                 <PopoverContent>
                   <Button 
@@ -139,6 +134,18 @@ export default function Mes_Example() {
                   </Button>
                 </PopoverContent>
               </Popover>
+            <NuwaButton
+              shadowghost="white"
+              className="mb-2 w-full"
+              onClick={(e) => {
+                e.stopPropagation();
+                const newMesExampleList = mesExampleList.filter((_, i) => i !== index);
+                setMesExampleList(newMesExampleList);
+                saveMesExample(newMesExampleList);
+              }}
+                >
+                  {t('Character.insertuserorchardelete')}
+            </NuwaButton>
                 <InsertUserOrChar getTextRef={()=>{return descTextareaRefs.current[index] as any}} onDone={(newValue) => {
                   updateMesExamplePlist(newValue, index);
                 }} />

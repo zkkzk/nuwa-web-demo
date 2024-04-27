@@ -28,7 +28,7 @@ function AdvancedSet_Mainprompt() {
   return (
     <NuwaInput
       label={`${t('Character.mainprompt')}`}
-      placeholder={`${t('Character.mainprompt')}`}
+      placeholder={`${t('Character.mainprompttoken')}`}
       value={charaListItem.chara.data.system_prompt}
       onChange={(e: { target: { value: string; }; }) => setsystem_promptListItem(e.target.value)}
     />

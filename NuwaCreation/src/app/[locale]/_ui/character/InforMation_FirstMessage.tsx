@@ -34,13 +34,13 @@ function InfoMation_FirstMessage() {
         {...textareaProps as any}
         label={<div>{t('Character.firstmessage')}<span className="text-red-500">*</span></div>}
         ref={descTextareaRef}
-        placeholder={t('Character.firstmessage')}
+        placeholder={t('Character.firstmessagetoken')}
         value={charaListItem.chara.data.first_mes}
         onChange={(e) => {
           setCharaListItem(e.target.value)
         }}
       />
-      <div className="z-40 hidden group-hover:block absolute -top-16 right-0 pl-4 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
+      <div className="z-40 hidden group-hover:block absolute -top-16 right-0 pl-10 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
           <InsertUserOrChar getTextRef={() => {
             return descTextareaRef.current
           }} onDone={(newValue) => {

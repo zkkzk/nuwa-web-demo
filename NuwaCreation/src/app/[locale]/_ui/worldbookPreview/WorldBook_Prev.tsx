@@ -46,7 +46,7 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
       uid: uid,
       keys: [],
       secondary_keys: [],
-      comment: "New Book",
+      comment: "",
       content: "",
       constant: true,
       selective: true,

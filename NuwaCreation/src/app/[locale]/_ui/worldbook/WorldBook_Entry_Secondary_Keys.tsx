@@ -17,7 +17,7 @@ export default function WorldBook_Entry_Secondary_Keys({value, isPreview = false
     <Textarea
       {...textareaProps as any}
       label={t('WorldBook.optionalfilter')}
-      placeholder={t('WorldBook.optionalfilter')}
+      placeholder={t('WorldBook.optionalfiltertoken')}
       value={value?.secondary_keys}
       onChange={(e: { target: { value: any; }; }) => (
         onChange({ ...value, secondary_keys: e.target.value } as TypeWorldBookEntriy)

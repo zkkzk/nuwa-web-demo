@@ -30,7 +30,7 @@ function AdvancedSet_Jailbreak() {
     <Textarea
       {...textareaProps as any}
       label={t('Character.jailbreak')}
-      placeholder={`${t('Character.jailbreak')}`}
+      placeholder={`${t('Character.jailbreaktoken')}`}
       value={charaListItem.chara.data.post_history_instructions}
       onChange={(e: { target: { value: string; }; }) => setpost_history_instructionsListItem(e.target.value)}
     />

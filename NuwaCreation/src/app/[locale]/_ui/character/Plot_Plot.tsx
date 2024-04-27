@@ -6,7 +6,7 @@ import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaConte
 import { Textarea } from "@nextui-org/react";
 import { textareaProps } from "../components/NuwaTextarea";
 
-function Scenario_Scenario() {
+function Plot_Plot() {
   const t = useTranslations();
   const descTextareaRef = useRef(null);
   
@@ -28,7 +28,7 @@ function Scenario_Scenario() {
     })
   }
 
-  const handleScenarioChange = (newValue:string) => {
+  const handlePlotChange = (newValue:string) => {
     setCharaListItem(newValue);
   };
  
@@ -37,21 +37,21 @@ function Scenario_Scenario() {
     <div className="relative group">
       <Textarea
         {...textareaProps as any}
-        label={<div>{t('Character.scenario')}</div>}
+        label={<div>{t('Character.plot')}</div>}
         ref={descTextareaRef}
-        placeholder={`${t('Character.scenario')}`}
+        placeholder={`${t('Character.plot')}`}
         value={charaListItem.chara.data.scenario}
-        onChange={(e) => (handleScenarioChange(e.target.value))}
+        onChange={(e) => (handlePlotChange(e.target.value))}
       />
-      <div className="z-40 hidden group-hover:block absolute -top-16 right-0 pl-4 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
+      <div className="z-40 hidden group-hover:block absolute -top-16 right-0 pl-10 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
           <InsertUserOrChar getTextRef={() => {
             return descTextareaRef.current
           }} onDone={(newValue) => {
-            handleScenarioChange(newValue);
+            handlePlotChange(newValue);
           }} />
       </div>
     </div>
   );
 }
 
-export default Scenario_Scenario;
+export default Plot_Plot;

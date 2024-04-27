@@ -5,7 +5,7 @@ import { useTranslations, useLocale } from "next-intl";
 import dynamic from 'next/dynamic';
 
 const InforMation = dynamic(() => import('../character/InforMation'), { ssr: false })
-const Scenario = dynamic(() => import('../character/Scenario'), { ssr: false })
+const Plot = dynamic(() => import('../character/Plot'), { ssr: false })
 const Mes_Example = dynamic(() => import('../character/Mes_Example'), { ssr: false })
 const Avatar = dynamic(() => import('../character/Avatar'), { ssr: false })
 const Voice = dynamic(() => import('../character/Voice'), { ssr: false })
@@ -32,11 +32,11 @@ export default function CharacterEditWrapper() {
             panel: " pt-20"
           }}
         >
-          <Tab key={`/${locale}/character`} id="information" title={t('Character.information')}>
+          <Tab key={`/${locale}/character`} id="basics" title={t('Character.basics')}>
             <InforMation />
           </Tab>
-          <Tab key={`/${locale}/character/scenario`} id="scenario" title={t('Character.scenario')}>
-            <Scenario />
+          <Tab key={`/${locale}/character/plot`} id="plot" title={t('Character.plot')}>
+            <Plot />
           </Tab>
           <Tab key={`/${locale}/character/mesexample`} id="mesexample" title={t('Character.mesexample')}>
             <Mes_Example />

@@ -5,34 +5,51 @@
   "Character": {
     "charactername": "Character Name",
     "characternote": "Character Card Tag",
-    "characterversion": "Character Version",
+    "characterversion": "Version",
+    "characterversiontoken": "Character's version",
     "cover": "Cover",
-    "createdby": "Created By",
+    "createdby": "Creator",
+    "createdbytoken": "Creator’s name",
     "creatorsnotes": "Creator's Notes",
-    "depthprompt": "Character Card Depth and Prompts",
+    "creatorsnotestoken": "Type creator’s notes here.",
+    "depthprompt": "Depth",
     "description": "Description",
-    "descriptiontoken": "Description Token",
-    "firstmessage": "First Message",
-    "firstmessagetoken": "First Message Token",
-    "information": "Information",
-    "jailbreak": "Jailbreak",
-    "jailbreaktoken": "Jailbreak Token",
-    "mainprompt": "Main Prompt",
-    "mainprompttoken": "Main Prompt Token",
-    "mesexample": "Message Example",
+    "descriptiontoken": "Type other description here.",
+    "firstmessage": "Greeting Message",
+    "firstmessagetoken": "Type the greeting message here.",
+    "basics": "Basics",
+    "jailbreak": "Jail Break",
+    "jailbreaktoken": "Type jail break information here.",
+    "mainprompt": "Self Defined Prompt",
+    "mainprompttoken": "Type self defined prompt here. This will replace the default system prompt.",
+    "mesexample": "Speech Style",
     "modifythebasicinsormationofthecharactercard": "Modify the Basic Information of the Character Card",
     "personalitysummary": "Personality Summary",
+    "personalitysummarytoken": "Describe your character’s personality here.",
+    "personalitysummaryplist": "Easy Generator",
+    "personalitysummaryplistType": "Custom addition",
+    "personalitysummaryplistRole": "Custom addition",
+    "personalitysummaryplistmtitle": "Custom",
+    "personalitysummaryplistmtype": "Type",
+    "personalitysummaryplistmtypetoken": "Type here",
+    "personalitysummaryplistmtypeattr" : "Attr",
+    "personalitysummaryplistmtypeattrtoken" : "Attr here, Multiple use',' separate",
+    "personalitysummaryplistmsave": "Save",
+    "personalitysummaryplistmcancel": "Cancel",
+    "personalitysummaryplistinsert": "Insert",
     "promptoverrdies": "Prompt Overrides",
     "replacementofthecover": "Replacement of the Cover",
-    "scenario": "Scenario",
-    "scenarioWorldbookTitle": "World Book",
+    "plot": "Plot",
+    "plotWorldbookTitle": "Linked World Book",
+    "plotWorldbooklinkbtn": "Link a world book",
+    "plotWorldbookchoose": "Select a world book",
     "tagstoembed": "Tags to Embed",
     "talkativeness": "Talkativeness",
     "talkativeness0": "shy",
     "talkativeness05": "normal",
     "talkativeness1": "talkative",
     "zipcover": "JPG|PNG|WEBP images will be automatically compressed",
-    "avatar": "avatar",
+    "avatar": "Avatar",
     "avatartip": "Select voice technology you want to integrate",
     "avatartip2": "Please select the image you want to add",
     "avatartip3": "#{index} {type} avatar",
@@ -47,7 +64,7 @@
     "IMAGEtip": "png",
     "none": "none",
     "plus": "add",
-    "voice": "voice",
+    "voice": "Voice",
     "voicetab": {
       "desc": "Select voice technology you want to integrate",
       "sex": "Voice Sex",
@@ -56,14 +73,17 @@
       "type": "Voice Type"
     },
     "creatorinfo": "Creator’s Info",
-    "language": "Supported languages(multiple)",
-    "level": "level",
+    "language": "Supported Languages",
+    "level": "Level",
     "leveltip": "If the content contains violence, pornography, or gore, select NSFW/ Restricted",
-    "copyright": "copyright",
+    "copyright": "Copyrights",
     "copyrighttip1": "Choose your CC license agreement[4.0]",
     "copyrighttip2": "For details, please visit：",
     "copyrighttip3": "How do I choose?",
-    "advancedset": "advanced"
+    "advancedset": "Advanced Set",
+    "insertuserorchardelete": "Delete",
+    "insertuserorcharuser": "Insert Player",
+    "insertuserorcharchat": "Insert Digital Life"
   },
   "Preview": {
     "tags": "tags",
@@ -86,20 +106,26 @@
     "name": "English",
     "value": "en"
   }, {
-    "name": "Chinese",
+    "name": "Mandarin",
     "value": "zh-CN"
   }, {
-    "name": "Japanese",
-    "value": "ja"
+    "name": "Cantonese",
+    "value": "zh-GD"
   }, {
     "name": "Korean",
     "value": "ko"
   }, {
-    "name": "spanish",
-    "value": "es"
+    "name": "Japanese",
+    "value": "ja"
   }, {
     "name": "French",
     "value": "fr"
+  }, {
+    "name": "Italian",
+    "value": "it_IT"
+  }, {
+    "name": "Russian",
+    "value": "ru_RU"
   }],
   "LevelsOptions": [{
     "name": "SFW",
@@ -168,7 +194,7 @@
     "greetings": "Alternative Greetings",
     "help": "Help",
     "home": "Overview",
-    "previews": "Previews",
+    "previews": "Preview",
     "serverstatus": "Server Status",
     "settings": "Settings",
     "worldbook": "World Book",
@@ -219,16 +245,21 @@
     "D": "@D",
     "constan": "Constant",
     "content": "Content",
+    "contenttoken": "Type the content of this chapter here.",
     "delete": "Delete",
     "deletebook": "Delete World Book",
     "depth": "Depth",
     "normal": "Normal",
     "optionalfilter": "Optional Filter",
+    "optionalfiltertoken": "Type optional filter here",
     "orfer": "Order",
     "position": "Position",
-    "primarykeywords": "Primary Keywords",
+    "primarykeywords": "Key Words",
+    "primarykeywordstoken": "Insert Keywords",
     "status": "Status",
-    "titlememo": "Title/Memo",
-    "untitledbook": "Untitled World Book"
+    "title": "Title",
+    "titletoken": "Type title here.",
+    "untitledbook": "Untitled World Book",
+    "untitledbookEntry": "Untitled Chapter"
   }
 }

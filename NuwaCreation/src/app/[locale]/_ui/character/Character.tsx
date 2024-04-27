@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 import Preview from "../previews/Preview";
 
 const InforMation = dynamic(() => import('./InforMation'), { ssr: false })
-const Scenario = dynamic(() => import('./Scenario'), { ssr: false })
+const Plot = dynamic(() => import('./Plot'), { ssr: false })
 const Mes_Example = dynamic(() => import('./Mes_Example'), { ssr: false })
 const Avatar = dynamic(() => import('./Avatar'), { ssr: false })
 const Voice = dynamic(() => import('./Voice'), { ssr: false })
@@ -39,15 +39,15 @@ export default function Character() {
               panel: " pt-20"
             }}
           >
-            <Tab key={`/${locale}/character`} id="information" title={
-              <Link className="w-full h-full px-4 block leading-8" href={`/character`}>{t('Character.information')}</Link>
+            <Tab key={`/${locale}/character`} id="basics" title={
+              <Link className="w-full h-full px-4 block leading-8" href={`/character`}>{t('Character.basics')}</Link>
             }>
               <InforMation />
             </Tab>
-            <Tab key={`/${locale}/character/scenario`} id="scenario" title={
-              <Link className="w-full h-full px-4 block leading-8" href={`/character/scenario`}>{t('Character.scenario')}</Link>
+            <Tab key={`/${locale}/character/plot`} id="plot" title={
+              <Link className="w-full h-full px-4 block leading-8" href={`/character/plot`}>{t('Character.plot')}</Link>
             }>
-              <Scenario />
+              <Plot />
             </Tab>
             <Tab key={`/${locale}/character/mesexample`} id="mesexample" title={
               <Link className="w-full h-full px-4 block leading-8" href={`/character/mesexample`}>{t('Character.mesexample')}</Link>

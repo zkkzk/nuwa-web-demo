@@ -16,7 +16,7 @@ export default function WorldBook_Entry_Keys({value, isPreview = false, onChange
     <Textarea
       {...textareaProps as any}
       label={t('WorldBook.primarykeywords')}
-      placeholder={t('WorldBook.primarykeywords')}
+      placeholder={t('WorldBook.primarykeywordstoken')}
       value={value?.keys}
       onChange={(e: { target: { value: any; }; }) => (
 

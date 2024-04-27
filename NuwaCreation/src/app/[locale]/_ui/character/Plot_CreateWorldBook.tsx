@@ -3,7 +3,7 @@ import React from "react";
 import WorldBook from "../worldbook/WorldBook";
 
 
-function Scenario_CreateWorldBook() {
+function Plot_CreateWorldBook() {
 
   return (
     <div>
@@ -12,4 +12,4 @@ function Scenario_CreateWorldBook() {
   );
 }
 
-export default Scenario_CreateWorldBook;
+export default Plot_CreateWorldBook;

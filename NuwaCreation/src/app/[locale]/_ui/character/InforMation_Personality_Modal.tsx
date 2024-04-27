@@ -212,7 +212,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
           onPress={onOpen}
           startContent={<ArrowUpRightIcon className="h-5 w-5"/>}
         >
-            打开PList生成器
+            {t('Character.personalitysummaryplist')}
         </NuwaButton>
         <Modal 
           isDismissable={!msgModal.isOpen}
@@ -251,7 +251,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                           <Tab key={`${category1.name}${index1}`} title={category1.name}>
                             <div className="flex flex-row-reverse">
                               <Button onPress={plistModal.onOpen} variant="light" className="w-40" endContent={<PlusIcon/>}>
-                                添加自定义Plist
+                                {t('Character.personalitysummaryplistType')}
                               </Button>
                               <Modal 
                                 isOpen={plistModal.isOpen} 
@@ -263,11 +263,12 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                 <ModalContent>
                                   {(onClose) => (
                                     <>
-                                      <ModalHeader className="flex flex-col gap- text-4xl text-center py-8">自定义</ModalHeader>
+                                      <ModalHeader className="flex flex-col gap- text-4xl text-center py-8">{t('Character.personalitysummaryplistmtitle')}</ModalHeader>
                                       <ModalBody>
                                         <Input
                                           autoFocus
-                                          label="类型"
+                                          label={t('Character.personalitysummaryplistmtype')}
+                                          placeholder={t('Character.personalitysummaryplistmtypetoken')}
                                           isDisabled={pListIndex >= 0}
                                           labelPlacement="outside-left"
                                           classNames={{
@@ -284,7 +285,6 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                               "border-none",
                                             ],
                                           }}
-                                          placeholder=""
                                           variant="bordered"
                                           value={pListName}
                                           onChange={(e) => {
@@ -292,7 +292,8 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                           }}
                                         />
                                         <Input
-                                          label="属性"
+                                          label={t('Character.personalitysummaryplistmtypeattr')}
+                                          placeholder={t('Character.personalitysummaryplistmtypeattrtoken')}
                                           labelPlacement="outside-left"
                                           classNames={{
                                             label: "text-[#171717] w-20 text-lg",
@@ -308,7 +309,6 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                               "border-none",
                                             ],
                                           }}
-                                          placeholder="多个用,分隔"
                                           variant="bordered"
                                           value={pListProps}
                                           onChange={(e) => {
@@ -317,8 +317,8 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                         />
                                       </ModalBody>
                                       <ModalFooter>
-                                        <NuwaButton className="h-16 w-48 text-xl" color="black" variant="flat" onPress={handleModalOnClose}>取消</NuwaButton>
-                                        <NuwaButton className="h-16 w-48 text-xl" color="gray" onPress={insertCustomerPlist}>添加</NuwaButton>
+                                        <NuwaButton className="h-16 w-48 text-xl" color="black" variant="flat" onPress={handleModalOnClose}>{t('Character.personalitysummaryplistmcancel')}</NuwaButton>
+                                        <NuwaButton className="h-16 w-48 text-xl" color="gray" onPress={insertCustomerPlist}>{t('Character.personalitysummaryplistmsave')}</NuwaButton>
                                       </ModalFooter>
                                     </>
                                   )}
@@ -353,7 +353,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                               usePListName(category1.name);
                               usePListIndex(index1);
                             }}  variant="light" className="w-40 absolute bottom-4 right-6" endContent={<PlusIcon/>}>
-                              添加自定义身份
+                              {t('Character.personalitysummaryplistRole')}
                             </Button> 
                           </Tab>
                         ))}
@@ -447,7 +447,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                         onClick={handleInsertPersonality}
                         endContent={<ArrowLongRightIcon className="h-8 w-8 fill-white" />}
                       >
-                        插入
+                        {t('Character.personalitysummaryplistinsert')}
                       </NuwaButton>
                   </div>
                 </ModalBody>

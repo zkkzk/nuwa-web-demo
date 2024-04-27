@@ -14,8 +14,8 @@ export default function WorldBook_Entry_Name({value, isPreview = false, onChange
 
   return (
     <NuwaInput
-      label={t('WorldBook.titlememo')}
-      placeholder={t('WorldBook.titlememo')}
+      label={t('WorldBook.title')}
+      placeholder={t('WorldBook.titletoken')}
       value={value?.comment}
       onChange={ (e: { target: { value: any; }; }) => (
         onChange({ ...value, comment: e.target.value } as TypeWorldBookEntriy)

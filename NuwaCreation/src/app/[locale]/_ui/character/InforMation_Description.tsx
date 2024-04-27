@@ -41,11 +41,11 @@ function InforMation_Description() {
         {...textareaProps as any}
         label={<div>{t('Character.description')}<span className="text-red-500">*</span></div>}
         ref={descTextareaRef}
-        placeholder="Description"
+        placeholder={t('Character.descriptiontoken')}
         value={charaListItem.chara.data.description}
         onChange={handleDescriptionChange}
       />
-      <div className="z-40 hidden group-hover:block absolute -top-16 right-0 pl-4 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
+      <div className="z-40 hidden group-hover:block absolute -top-16 right-0 pl-10 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
           <InsertUserOrChar getTextRef={() => {
             return descTextareaRef.current
           }} onDone={(newValue) => {

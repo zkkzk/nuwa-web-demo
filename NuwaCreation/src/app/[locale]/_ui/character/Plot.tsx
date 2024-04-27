@@ -1,20 +1,20 @@
 "use client";
 import React from "react";
-import Scenario_Scenario from "./Scenario_Scenario";
-import Scenario_WorldBook from "./Scenario_WorldBook";
+import Plot_Plot from "./Plot_Plot";
+import Plot_WorldBook from "./Plot_WorldBook";
 
-function Scenario() {
+function Plot() {
   
   return (
     <>
       <div className="grid grid-cols-1 gap-8 sm:grid-cols-10">
         <div className="sm:col-start-3 sm:col-end-9 grid gap-20">
-          <Scenario_Scenario />
-          <Scenario_WorldBook />
+          <Plot_Plot />
+          <Plot_WorldBook />
         </div>
       </div>
     </>
   );
 }
 
-export default Scenario;
+export default Plot;

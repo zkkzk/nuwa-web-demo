@@ -55,7 +55,7 @@ export const defaultWorldBookEntry: TypeWorldBookEntriy = {
   uid: "",
   keys: [],
   secondary_keys: [],
-  comment: "New Book",
+  comment: "",
   content: "",
   constant: true,
   selective: true,
@@ -330,7 +330,7 @@ export const createChara = (cover: string = defaultCoverBase64, chara: TypeChara
   return newChara;
 }
 
-export const createWorldBook = (worldBook: TypeWorldBook = defaultWorldBook) => {
+export const createWorldBook = () => {
   const uid = uuid();
   const uid2 = uuid();
   let newEntry = clone(defaultWorldBookEntry);
@@ -340,10 +340,23 @@ export const createWorldBook = (worldBook: TypeWorldBook = defaultWorldBook) => 
   const newChara: TypeWorldBookItem = {
     uid: uid,
     worldBook: {
-      ...worldBook,
+      name: '',
       entries: {
         [uid2]: newEntry,
       }
+    },
+  }
+  
+  return newChara;
+}
+
+export const InsertWorldBook = (worldBook: TypeWorldBook) => {
+  const uid = uuid();
+
+  const newChara: TypeWorldBookItem = {
+    uid: uid,
+    worldBook: {
+      ...worldBook,
     },
   }
   
