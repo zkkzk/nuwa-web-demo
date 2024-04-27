@@ -7,6 +7,7 @@ import {
   PopoverTrigger,
   Tab,
   Tabs,
+  Tooltip,
 } from "@nextui-org/react";
 import { defaultWorldBookEntry, uuid } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
@@ -158,7 +159,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
             tabList: "overflow-x-scroll gap-10 py-0 border-b border-solid border-black/20 w-full pr-20 h-full",
             cursor: "w-full bg-[#0C0C0C] text-white",
             tab:"h-10 group-data-[selected=true]:bg-[#0C0C0C]",
-            tabContent: " text-neutral-700 w-full h-full group-data-[selected=true]:text-neutral-800 group-data-[selected=true]:font-bold",
+            tabContent: "text-neutral-700 w-full h-full group-data-[selected=true]:text-neutral-800 group-data-[selected=true]:font-bold",
             panel: "overflow-y-scroll",
           }}
         >
@@ -169,7 +170,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
               id={`${uid}${worldBook.entries[key].uid}`}
               title={
                 <div className="flex flex-row items-center group justify-center">
-                  <div>{worldBook.entries[key].comment || t('WorldBook.untitledbook')}</div>
+                  <div className="truncate w-40">{worldBook.entries[key].comment}</div>
                   {!isPreview && 
                     <Popover
                       key={`${worldBook.entries[key].uid}-${worldBook?.entries.length}`}

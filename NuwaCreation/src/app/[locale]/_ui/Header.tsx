@@ -18,7 +18,7 @@ export default function Header() {
   return (
     <div className="lg:block hidden w-full">
       <div className="fixed top-0 left-0 z-40 bg-white w-full">
-        <div className='flex flex-row justify-end items-center mt-9 mb-7 '>
+        <div className='flex flex-row justify-end items-center h-20'>
           <div className='flex-row text-base font-semibold text-[#7C7C7C] hidden lg:flex'>
           {teams.map((team) => (
             <Link
@@ -39,7 +39,7 @@ export default function Header() {
           <div className="w-9/12 h-px bg-gradient-to-r from-[#E2E2E2]/[.01] to-[#7C7C7C]/[.3] from-0% to-100%" />
         </div>
       </div>
-      <div className=" h-28">
+      <div className="h-20">
 
       </div>
     </div>

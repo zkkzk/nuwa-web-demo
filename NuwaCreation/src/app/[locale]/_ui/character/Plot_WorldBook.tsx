@@ -3,14 +3,12 @@ import React, { useState } from "react";
 import { usePostCharaFun, getWorldBookList } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
 import { LinkIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { Button, Divider, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
+import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 import NuwaButton from "../components/NuwaButton";
-import Plot_CreateWorldBook from "./Plot_CreateWorldBook";
 import { TypeChara, TypeWorldBook } from "../../_lib/definitions";
-import { Link } from "@/navigation";
-import Image from "next/image";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 import WorldBookItem from "../worldbook/WorldBookItem";
+import UnLinkIcon from "../icons/UnLinkIcon";
 
 function Plot_WorldBook() {
   const t = useTranslations();
@@ -60,19 +58,22 @@ function Plot_WorldBook() {
       >
         {t('Character.plotWorldbookTitle')}
       </label>
-
-      <NuwaButton
-        color="black"
-        onClick={() => {
-          selectWorldBookModal.onOpen();
-        }}
-        startContent={<LinkIcon className="h-4 w-4"/>}
-        className="absolute top-0 right-0 z-40"
-        type="button"
-        variant="flat"
-        >
-          {t('Character.plotWorldbooklinkbtn')}
-      </NuwaButton>
+      {!charaListItem.chara.data.character_book && (
+        <div className="mt-8">
+            <Button
+            className="text-neutral-800 text-sm font-extralight font-['Inter'] underline leading-relaxed tracking-tight"
+            onClick={() => {
+              selectWorldBookModal.onOpen();
+            }}
+            // startContent={<LinkIcon className="h-4 w-4"/>}
+            type="button"
+            variant="light"
+            >
+              {t('Character.plotWorldbooklinkbtn')}
+          </Button>
+        </div>
+      )}
+      
       <Modal 
         size="full"
         isOpen={selectWorldBookModal.isOpen}
@@ -129,13 +130,16 @@ function Plot_WorldBook() {
                   onClick={() => {
                     handleRemoveSelectedWorldBook();
                   }}
-                  className="absolute -top-4 -right-4 h-10 w-5 p-0 rounded-full bg-black z-40"
+                  className="absolute top-10 right-4 z-40"
                   type="button"
-                  color="default"
-                  variant="flat"
-                  isIconOnly
+                  color="primary"
+                  variant="bordered"
+                  size="sm"
+                  startContent={
+                    <UnLinkIcon className="h-6 w-6" aria-hidden="true" />
+                  }
                 >
-                  <XMarkIcon className="h-6 w-6 text-white font-black absolute" aria-hidden="true" />
+                  {t('Character.plotWorldbookunlinkbtn')}
                 </Button>
                 <WorldBookItem worldBookItem={charaListItem.chara.data.character_book} />
               </div>

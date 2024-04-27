@@ -59,18 +59,21 @@ function WorldBookEdit({ onDone, worldBook }: {
                 <div
                   className="w-full flex flex-row items-center justify-between gap-4"
                 >
-                  <NuwaButton isIconOnly className="text-xl" size="md" color="black" variant="flat" onPress={() => {
+                  <NuwaButton
+                    isIconOnly
+                    className="w-12 text-xl"
+                    size="md" color="black"
+                    variant="flat"
+                    onPress={() => {
                     onClose();
-                  }}><XMarkIcon className="h-6 w-6" /></NuwaButton>
+                  }}>
+                    <XMarkIcon className="h-6 w-6" />
+                  </NuwaButton>
 
-                  <div className="w-[300px]">
+                  <div className="grow overflow-hidden">
                     <WorldBook_Title />
                   </div>
-                  
-                  <div className="flex flex-row items-center justify-center gap-4">
-                    {/* {chara && (
-                        <Preview charaItem={chara} /> 
-                    )} */}
+                  <div className="w-12">
                   </div>
                 </div>
               </ModalHeader>
