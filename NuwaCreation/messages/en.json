@@ -170,8 +170,8 @@
     "understandandlearn": "Understand and learn",
     "createDigitalLife": "Create Digital Life",
     "createWorldBook": "Create World Book",
-    "readDigitalLife": "Read Digital Life",
-    "readWorldBook": "Read World Book"
+    "readDigitalLife": "Load Digital Life",
+    "readWorldBook": "Load World Book"
   },
   "Footer": {
     "nuwaLabs": "Nuwa Labs",
@@ -217,7 +217,7 @@
     "importingcharactercards": "Importing Character Cards",
     "importok": "Import successful, please refresh the browser if no content is displayed",
     "isitalldone": "Continue: Is it all done?",
-    "mymindismadeup": "My mind is made up!",
+    "mymindismadeup": "Confirm？",
     "thisoperationoverwritesthedata": "Continue: This operation will overwrite data!"
   },
   "Settings": {

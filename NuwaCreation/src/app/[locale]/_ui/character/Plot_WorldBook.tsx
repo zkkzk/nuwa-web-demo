@@ -1,16 +1,17 @@
 "use client";
 import React, { useState } from "react";
+import { useRouter } from "@/navigation";
 import { usePostCharaFun, getWorldBookList } from "../../_lib/utils";
 import { useTranslations } from "next-intl";
-import { LinkIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
-import NuwaButton from "../components/NuwaButton";
 import { TypeChara, TypeWorldBook } from "../../_lib/definitions";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 import WorldBookItem from "../worldbook/WorldBookItem";
 import UnLinkIcon from "../icons/UnLinkIcon";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 function Plot_WorldBook() {
+  const router = useRouter();
   const t = useTranslations();
 
   const selectWorldBookModal = useDisclosure();
@@ -98,6 +99,14 @@ function Plot_WorldBook() {
                 >
                   <span className="text-black text-lg ont-semibold">创建新世界书</span>
                 </div> */}
+                <Button
+                  className="bg-black text-white"
+                  startContent={<PlusIcon className="h-4 w-4"/>}
+                  size="md"
+                  onClick={() => {
+                    router.replace('/worldbook');
+                  }}
+                >{t('WorldBook.addnewbook')}</Button>
               </ModalHeader>
               <ModalBody>
                 <div className="grid md:grid-cols-4 sm:grid-cols-3 gap-10 py-10 px-7 overflow-visible h-auto">

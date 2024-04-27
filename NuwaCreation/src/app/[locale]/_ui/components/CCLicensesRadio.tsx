@@ -53,7 +53,7 @@ const CCLicensesDataListIconZhcn = {
   'NC': "NC: Only noncommercial uses of the work are permitted.",
   'SA': "SA: Adaptations must be shared under the same terms.",
   'ND': "ND: No derivatives or adaptations of the work are permitted.",
-}
+} as any;
 
 const CCLicensesDataListEN = [
   {
@@ -104,7 +104,7 @@ const CCLicensesDataListIconEn = {
   'NC': "NC: Only noncommercial uses of the work are permitted.",
   'SA': "SA: Adaptations must be shared under the same terms.",
   'ND': "ND: No derivatives or adaptations of the work are permitted.",
-}
+} as any;
 
 const CustomRadio = (props: any) => {
   const locale = useLocale();
