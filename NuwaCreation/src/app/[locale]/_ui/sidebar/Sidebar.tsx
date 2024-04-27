@@ -1,12 +1,11 @@
 'use client'
 import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
-import { usePathname } from '@/navigation';
+import { Link, usePathname } from '@/navigation';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import {
   Bars3Icon,
-  UserIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
 import NuwaDigitLifeIcon from '../icons/NuwaDigitLifeIcon';
@@ -132,7 +131,10 @@ export default function Sidebar() {
                         )}
                         
                       </ul>
-                    </nav>             
+                    </nav>
+                    <div className='flex flex-row pl-10 pb-6 w-full'>
+                      <LangSwitcher />
+                    </div>            
                   </div>
                 </Dialog.Panel>
               </Transition.Child>
@@ -180,6 +182,9 @@ export default function Sidebar() {
                 </li>
               </ul>
             </nav>
+            <div className='flex flex-row pl-10 pb-6 w-full'>
+              <LangSwitcher />
+            </div>       
           </div>
         </div>
 
@@ -190,9 +195,12 @@ export default function Sidebar() {
           </button>
           <div className="flex-1 text-sm font-semibold leading-6">Nuwa</div>
 
-          <div className='mr-4'>
+          <Link href="/me" className="w-10 h-10 bg-zinc-800 rounded-full mx-10">
+
+          </Link>
+          {/* <div className='mr-4'>
             <LangSwitcher />
-          </div>
+          </div> */}
         </div>
       </div>
       <div className='h-20 lg:hidden'></div>

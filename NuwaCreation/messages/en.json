@@ -267,5 +267,20 @@
     "titletoken": "Type title here.",
     "untitledbook": "Untitled World Book",
     "untitledbookEntry": "Untitled Chapter"
+  },
+  "Me": {
+    "title": "My Profile",
+    "usename": "User Name",
+    "usenametoken": "Type User Name here.",
+    "email": "Email",
+    "emailtoken": "Type Email here.",
+    "web3wallet": "Web3 Wallet",
+    "web3walletbtn": "Connect",
+    "updatepassword": "Update Password",
+    "updatepasswordbtn": "Update",
+    "deleteaccount": "Delete Account",
+    "deleteaccountbtn": "Delete",
+    "logoutbtn": "Log Out",
+    "savebtn": "Save"
   }
 }

@@ -31,9 +31,12 @@ export default function Header() {
             </Link>
           ))}
           </div>
-          <div className='flex flex-row text-black text-center mx-16'>
+          {/* <div className='flex flex-row text-black text-center mx-16'>
             <LangSwitcher />
-          </div>
+          </div> */}
+          <Link href="/me" className="w-10 h-10 bg-zinc-800 rounded-full mx-10">
+
+          </Link>
         </div>
         <div className='flex flex-row justify-end'>
           <div className="w-9/12 h-px bg-gradient-to-r from-[#E2E2E2]/[.01] to-[#7C7C7C]/[.3] from-0% to-100%" />

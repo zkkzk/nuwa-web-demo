@@ -1,9 +1,6 @@
 "use client";
 import { useState } from "react";
-import { Switch } from "@headlessui/react";
 import { useTranslations } from "next-intl";
-import ThemeSwitcher from "./ThemeSwitcher";
-import LanguageSwitcher from "./LanguageSwitcher";
 import ClearLocalstorge from "./ClearLocalstorge";
 import FeedbackIcon from "../icons/FeedbackIcon";
 import NuwaButton from "../components/NuwaButton";
@@ -24,8 +21,10 @@ export default function Settings() {
       </div>
       <div className="grid grid-cols-1 divide-y">
         <div className="flex flex-row justify-between py-5">
-          <div className="flex flex-row gap-2">
-            <FeedbackIcon className={""} />
+          <div className="flex flex-row gap-2 items-center">
+            <div className="w-6">
+              <FeedbackIcon className={""} />
+            </div>
             <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Settings.feedback')}</div>
           </div>
           <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
@@ -33,8 +32,10 @@ export default function Settings() {
           </div>
         </div>
         <div className="flex flex-col justify-between py-5">
-          <div className="flex flex-row gap-2">
-            <ContactUsIcon className={""} />
+          <div className="flex flex-row gap-2 items-center">
+            <div className="w-6">
+              <ContactUsIcon className={""} />
+            </div>
             <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Settings.contactus')}</div>
           </div>
 
@@ -54,8 +55,10 @@ export default function Settings() {
           </div>
         </div>
         <div className="flex flex-row justify-between py-5">
-          <div className="flex flex-row gap-2">
-            <ClearIcon className={""} />
+          <div className="flex flex-row gap-2 items-center">
+            <div className="w-6">
+              <ClearIcon className={""} />
+            </div>
             <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Settings.clear')}</div>
           </div>
           <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">

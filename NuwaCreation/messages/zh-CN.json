@@ -266,5 +266,20 @@
     "titletoken": "在这输入标题.",
     "untitledbook": "未命名世界书",
     "untitledbookEntry": "未命名章节"
+  },
+  "Me": {
+    "title": "个人信息",
+    "usename": "用户名",
+    "usenametoken": "在这输入用户名",
+    "email": "邮箱",
+    "emailtoken": "在这输入邮箱",
+    "web3wallet": "Web3钱包",
+    "web3walletbtn": "关联",
+    "updatepassword": "修改密码",
+    "updatepasswordbtn": "修改",
+    "deleteaccount": "注销账号",
+    "deleteaccountbtn": "注销",
+    "logoutbtn": "退出",
+    "savebtn": "保存"
   }
 }
