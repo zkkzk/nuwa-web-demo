@@ -208,7 +208,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
           </ModalContent>
         </Modal>
         <NuwaButton
-          shadowghost="white"
+          shadowghost="black"
           onPress={onOpen}
           startContent={<ArrowUpRightIcon className="h-5 w-5"/>}
         >

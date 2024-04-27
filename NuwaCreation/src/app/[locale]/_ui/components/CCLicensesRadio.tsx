@@ -3,83 +3,111 @@ import {RadioGroup, Radio, useRadio, VisuallyHidden, RadioProps, cn} from "@next
 import Image from "next/image";
 import { useLocale } from "next-intl";
 
-const CCLicensesDataListZHCN = [
+const CCLicensesDataListZhcn = [
   {
     value: "CC0",
-    label: "CC 0（公共领域奉献）",
+    label: "CC 0",
+    icons: [],
     description: "在法律允许的范围内，放弃其在全球范围内对该作品享有的所有权利，从而将该作品奉献给公共领域。 其他人可以复制、修改、分发和使用该作品，并可用于商业目的，而无需征求许可。",
   },
   {
     value: "CCBY",
-    label: "CC BY（署名）",
+    label: "CC BY",
+    icons: ['BY'],
     description: "允许他人以任何目、任何媒介，甚至商业目的的使用作品，只要提供适当的署名给原作",
   },
   {
     value: "CCBYNC",
-    label: "CC BY-NC（署名-非商业使用）",
+    label: "CC BY-NC",
+    icons: ['BY', 'NC'],
     description: "允许他人以任何目的使用作品，但不允许用于商业目的",
   },
   {
     value: "CCBYND",
-    label: "CC BY-ND（署名-禁止演绎）",
+    label: "CC BY-ND",
+    icons: ['BY', 'ND'],
     description: "允许他人下载作品并与他人共享，但不允许对作品进行修改，或以其为基础的进行新的创作",
   },
   {
     value: "CCBYSA",
-    label: "CC BY-SA（署名-相同方式共享）",
+    label: "CC BY-SA",
+    icons: ['BY', 'SA'],
     description: "允许他人以任何目的使用、修改、演绎作品，但新的作品必须使用相同的许可协议",
   },
   {
     value: "CCBYNCND",
-    label: "CC BY-NC-ND（署名-非商业性使用-禁止演绎）",
+    label: "CC BY-NC-ND",
+    icons: ['BY', 'NC', 'ND'],
     description: "允许他人以任何目的使用和分发作品，但新的作品必须使用相同的许可协议。不允许商业性使用，必须提供适当的署名给作者，禁止对作品进行修改。",
   },
   {
     value: "CCBYNCSA",
-    label: "CC BY-NC-SA（署名-非商业性使用-相同方式共享）",
+    label: "CC BY-NC-SA",
+    icons: ['BY', 'NC', 'SA'],
     description: "允许他人以任何目的使用、修改、演绎作品，但新的作品必须使用相同的许可协议。不允许商业性使用，必须提供适当的署名给作者。",
   }
 ]
+
+const CCLicensesDataListIconZhcn = {
+  'BY': "BY: credit must be given to the creator.",
+  'NC': "NC: Only noncommercial uses of the work are permitted.",
+  'SA': "SA: Adaptations must be shared under the same terms.",
+  'ND': "ND: No derivatives or adaptations of the work are permitted.",
+}
 
 const CCLicensesDataListEN = [
   {
     value: "CC0",
-    label: "CC 0（公共领域奉献）en",
-    description: "在法律允许的范围内，放弃其在全球范围内对该作品享有的所有权利，从而将该作品奉献给公共领域。 其他人可以复制、修改、分发和使用该作品，并可用于商业目的，而无需征求许可。",
+    label: "CC 0",
+    icons: [],
+    description: "CC0 (aka CC Zero) is a public dedication tool, which enables creators to give up their copyright and put their works into the worldwide public domain. CC0 enables reusers to distribute, remix, adapt, and build upon the material in any medium or format, with no conditions.",
   },
   {
     value: "CCBY",
-    label: "CC BY（署名）",
-    description: "允许他人以任何目、任何媒介，甚至商业目的的使用作品，只要提供适当的署名给原作",
+    label: "CC BY",
+    icons: ['BY'],
+    description: "This license enables reusers to distribute, remix, adapt, and build upon the material in any medium or format, so long as attribution is given to the creator. The license allows for commercial use.",
   },
   {
     value: "CCBYNC",
-    label: "CC BY-NC（署名-非商业使用）",
-    description: "允许他人以任何目的使用作品，但不允许用于商业目的",
+    label: "CC BY-NC",
+    icons: ['BY', 'NC'],
+    description: "This license enables reusers to distribute, remix, adapt, and build upon the material in any medium or format for noncommercial purposes only, and only so long as attribution is given to the creator.",
   },
   {
     value: "CCBYND",
-    label: "CC BY-ND（署名-禁止演绎）",
-    description: "允许他人下载作品并与他人共享，但不允许对作品进行修改，或以其为基础的进行新的创作",
+    label: "CC BY-ND",
+    icons: ['BY', 'ND'],
+    description: "This license enables reusers to copy and distribute the material in any medium or format in unadapted form only, and only so long as attribution is given to the creator. The license allows for commercial use.",
   },
   {
     value: "CCBYSA",
-    label: "CC BY-SA（署名-相同方式共享）",
-    description: "允许他人以任何目的使用、修改、演绎作品，但新的作品必须使用相同的许可协议",
+    label: "CC BY-SA",
+    icons: ['BY', 'SA'],
+    description: "This license enables reusers to distribute, remix, adapt, and build upon the material in any medium or format, so long as attribution is given to the creator. The license allows for commercial use. If you remix, adapt, or build upon the material, you must license the modified material under identical terms.",
   },
   {
     value: "CCBYNCND",
-    label: "CC BY-NC-ND（署名-非商业性使用-禁止演绎）",
-    description: "允许他人以任何目的使用和分发作品，但新的作品必须使用相同的许可协议。不允许商业性使用，必须提供适当的署名给作者，禁止对作品进行修改。",
+    label: "CC BY-NC-ND",
+    icons: ['BY', 'NC', 'ND'],
+    description: "This license enables reusers to copy and distribute the material in any medium or format in unadapted form only, for noncommercial purposes only, and only so long as attribution is given to the creator.",
   },
   {
     value: "CCBYNCSA",
-    label: "CC BY-NC-SA（署名-非商业性使用-相同方式共享）",
-    description: "允许他人以任何目的使用、修改、演绎作品，但新的作品必须使用相同的许可协议。不允许商业性使用，必须提供适当的署名给作者。",
+    label: "CC BY-NC-SA",
+    icons: ['BY', 'NC', 'SA'],
+    description: "This license enables reusers to distribute, remix, adapt, and build upon the material in any medium or format for noncommercial purposes only, and only so long as attribution is given to the creator. If you remix, adapt, or build upon the material, you must license the modified material under identical terms."
   }
 ]
+const CCLicensesDataListIconEn = {
+  'BY': "BY: credit must be given to the creator.",
+  'NC': "NC: Only noncommercial uses of the work are permitted.",
+  'SA': "SA: Adaptations must be shared under the same terms.",
+  'ND': "ND: No derivatives or adaptations of the work are permitted.",
+}
 
 const CustomRadio = (props: any) => {
+  const locale = useLocale();
   const {
     Component,
     children,
@@ -98,7 +126,7 @@ const CustomRadio = (props: any) => {
       {...getBaseProps()}
       className={cn(
         "group w-[235px] h-[145px] rounded-[14px] border border-black border-opacity-20",
-        "cursor-pointer py-4 px-2 flex flex-col justify-between items-start relative overflow-hidden",
+        "cursor-pointer py-4 px-3 relative overflow-hidden",
         "data-[selected=true]:border-black data-[selected=true]:border-2 hover:border-black",
         // " hover:bg-content2"
       )}
@@ -126,19 +154,40 @@ const CustomRadio = (props: any) => {
           isSelected ? "opacity-100" : "opacity-0",
         )} />
       </span> */}
-      <Image
-        className="shrink-0"
-        width={82}
-        height={29}
-        src={`/CCLicenses-${props.value}.png`}
-        alt=""
-      />
-      <div {...getLabelWrapperProps()}>
-        
-        {children && <span {...getLabelProps()} className="text-black text-base leading-[29px] tracking-tight">{children}</span>}
-        {description && (
-          <span className="h-full px-2 py-4 text-neutral-700 text-[10px] font-extralight leading-[15px] tracking-tight hidden group-hover:block absolute bg-white z-10 left-0 group-hover:bottom-0 w-full ">{description}</span>
-        )}
+
+      <div className="flex flex-col w-full h-full">
+
+        <div className=" flex flex-row justify-between items-center">
+          <span className="text-black text-base font-bold underline leading-[29px]">{children}</span>
+
+          <Image
+            className="w-10 h-4"
+            width={40}
+            height={6}
+            src={`/CCLicenses-${props.value}.png`}
+            alt=""
+          />
+        </div>
+        <div className="w-full h-full grow justify-center gap-2 flex flex-col px-6 mt-4">
+          {props.icons.map((icon: any) => (
+            <div className="flex flex-row justify-start items-center gap-2">
+              <Image
+                className="w-[10px] h-[10px]"
+                width={10}
+                height={10}
+                src={`/CCLicenses-Icon-${icon}.png`}
+                alt=""
+              />
+              <div className="text-neutral-700 text-[5px] font-normal leading-[9px] tracking-tight">
+                {(locale === "zh-CN" ? CCLicensesDataListIconZhcn : CCLicensesDataListIconEn)[icon]}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      
+      <div>
+        <span className="h-[98px] px-3 pb-2 text-neutral-700 text-[10px] font-extralight leading-[15px] tracking-tight hidden group-hover:block absolute bg-white z-10 left-0 bottom-0 w-full ">{description}</span>
       </div>
     </Component>
   );
@@ -156,8 +205,8 @@ export default function NuwaRadio({value, onChange}: {
         wrapper: "flex flex-row flex-wrap gap-5"
       }}
     >
-      {(locale === "zh-CN" ? CCLicensesDataListZHCN : CCLicensesDataListEN).map((item) => (
-        <CustomRadio key={item.value} value={item.value} description={item.description} onChange={onChange}>{item.label}</CustomRadio>
+      {(locale === "zh-CN" ? CCLicensesDataListZhcn : CCLicensesDataListEN).map((item) => (
+        <CustomRadio key={item.value} value={item.value} description={item.description} icons={item.icons} onChange={onChange}>{item.label}</CustomRadio>
       ))}
     </RadioGroup>
   );

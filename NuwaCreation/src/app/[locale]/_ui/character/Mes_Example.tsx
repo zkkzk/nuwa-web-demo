@@ -112,7 +112,7 @@ export default function Mes_Example() {
               <Popover placement="top" color='danger'>
                 <PopoverTrigger>
                   <NuwaButton
-                    shadowghost="white"
+                    shadowghost="black"
                     className="mb-2 w-full hidden"
                   >
                     {t('Character.insertuserorchardelete')}
@@ -135,7 +135,7 @@ export default function Mes_Example() {
                 </PopoverContent>
               </Popover>
             <NuwaButton
-              shadowghost="white"
+              shadowghost="black"
               className="mb-2 w-full"
               onClick={(e) => {
                 e.stopPropagation();

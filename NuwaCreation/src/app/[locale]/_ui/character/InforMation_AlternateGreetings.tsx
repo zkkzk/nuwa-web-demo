@@ -63,7 +63,7 @@ function InforMation_AlternateGreetings() {
             <Popover placement="left" color='danger' className="hidden">
               <PopoverTrigger>
                 <NuwaButton
-                  shadowghost="white"
+                  shadowghost="black"
                   className="mb-2 w-full hidden"
                 >
                   {t('Character.insertuserorchardelete')}
@@ -84,7 +84,7 @@ function InforMation_AlternateGreetings() {
               </PopoverContent>
             </Popover>
             <NuwaButton
-              shadowghost="white"
+              shadowghost="black"
               className="mb-2 w-full"
               onClick={() => {
                 setCharaListItem(charaListItem.chara.data.alternate_greetings.filter((_, i) => i !== index)  )

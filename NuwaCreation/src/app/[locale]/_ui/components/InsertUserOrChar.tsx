@@ -26,7 +26,7 @@ function InsertUserOrChar({getTextRef, onDone}: {getTextRef: () => any, onDone: 
   return (
     <div className="flex flex-col gap-2">
       <NuwaButton
-        shadowghost="white"
+        shadowghost="black"
         onPress={
           () => {
             insertTextAtCursor('{{char}}');
@@ -36,7 +36,7 @@ function InsertUserOrChar({getTextRef, onDone}: {getTextRef: () => any, onDone: 
         {t('Character.insertuserorcharuser')}
       </NuwaButton>
       <NuwaButton
-        shadowghost="white"
+        shadowghost="black"
         onPress={
           () => {
             insertTextAtCursor('{{user}}');

@@ -15,7 +15,8 @@ const NuwaButton = extendVariants(Button, {
     },
     shadowghost: {
       default: "shadow-none",
-      white: "shadow text-sm h-11 rounded-3xl border-none bg-white text-neutral-800"
+      white: "shadow text-sm h-11 rounded-3xl border-none bg-white text-neutral-800",
+      black: "shadow text-sm h-10 rounded-3xl border border-black border-solid bg-white text-black"
     }
   },
   defaultVariants: { // <- modify/add default variants
