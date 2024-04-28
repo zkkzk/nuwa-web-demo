@@ -2,6 +2,7 @@ import React from "react";
 import {RadioGroup, Radio, useRadio, VisuallyHidden, RadioProps, cn} from "@nextui-org/react";
 import Image from "next/image";
 import { useLocale } from "next-intl";
+import { HeartIcon } from "@heroicons/react/24/solid";
 
 const CCLicensesDataListZhcn = [
   {
@@ -125,8 +126,8 @@ const CustomRadio = (props: any) => {
     <Component
       {...getBaseProps()}
       className={cn(
-        "group w-[235px] h-[145px] rounded-[14px] border border-black border-opacity-20",
-        "cursor-pointer py-4 px-3 relative overflow-hidden",
+        "group w-[330px] h-[230px] rounded-[14px] border border-black border-opacity-20",
+        "cursor-pointer py-5 px-5 relative overflow-hidden",
         "data-[selected=true]:border-black data-[selected=true]:border-2 hover:border-black",
         // " hover:bg-content2"
       )}
@@ -158,7 +159,7 @@ const CustomRadio = (props: any) => {
       <div className="flex flex-col w-full h-full">
 
         <div className=" flex flex-row justify-between items-center">
-          <span className="text-black text-base font-bold underline leading-[29px]">{children}</span>
+          <span className="text-black text-xl font-bold underline leading-[29px]">{children}</span>
 
           <Image
             className="w-10 h-4"
@@ -168,26 +169,31 @@ const CustomRadio = (props: any) => {
             alt=""
           />
         </div>
-        <div className="w-full h-full grow justify-center gap-2 flex flex-col px-6 mt-4">
+        <div className="w-full h-full grow justify-center gap-2 flex flex-col mt-4">
           {props.icons.map((icon: any) => (
             <div className="flex flex-row justify-start items-center gap-2">
               <Image
-                className="w-[10px] h-[10px]"
-                width={10}
-                height={10}
+                className="w-[18px] h-[18px]"
+                width={18}
+                height={18}
                 src={`/CCLicenses-Icon-${icon}.png`}
                 alt=""
               />
-              <div className="text-neutral-700 text-[5px] font-normal leading-[9px] tracking-tight">
+              <div className="text-neutral-700 text-sm font-normal tracking-tight">
                 {(locale === "zh-CN" ? CCLicensesDataListIconZhcn : CCLicensesDataListIconEn)[icon]}
               </div>
             </div>
           ))}
+          {props.icons.length === 0 && (
+            <div className="w-full h-full flex items-center justify-center">
+              <HeartIcon className="h-20 w-20 fill-red-400" />
+            </div>
+          )}
         </div>
       </div>
       
       <div>
-        <span className="h-[98px] px-3 pb-2 text-neutral-700 text-[10px] font-extralight leading-[15px] tracking-tight hidden group-hover:block absolute bg-white z-10 left-0 bottom-0 w-full ">{description}</span>
+        <span className="h-[170px] px-3 pb-2 text-neutral-700 text-sm font-extralight leading-6 tracking-tight hidden group-hover:block absolute bg-white z-10 left-0 bottom-0 w-full ">{description}</span>
       </div>
     </Component>
   );

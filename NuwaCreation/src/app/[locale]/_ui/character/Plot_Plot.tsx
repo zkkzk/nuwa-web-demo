@@ -39,7 +39,7 @@ function Plot_Plot() {
         {...textareaProps as any}
         label={<div>{t('Character.plot')}</div>}
         ref={descTextareaRef}
-        placeholder={`${t('Character.plot')}`}
+        placeholder={`${t('Character.plottoken')}`}
         value={charaListItem.chara.data.scenario}
         onChange={(e) => (handlePlotChange(e.target.value))}
       />

@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useState, useRef, useEffect, RefObject, MutableRefObject } from "react";
 import { useTranslations } from "next-intl";
 import { TypeWorldBookEntriy } from "../../_lib/definitions";
 import { useWorldBookItem, useWorldBookItemDispatch } from "./WorldBookContext";
@@ -8,6 +8,8 @@ import PencilEditIcon from "../icons/PencilEditIcon";
 
 function WorldBook_Title() {
   const t = useTranslations();
+  const [isEdit, setIsEdit] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const worldBookItem = useWorldBookItem();
   const worldBookItemDispatch = useWorldBookItemDispatch();
@@ -25,6 +27,12 @@ function WorldBook_Title() {
     })
   }
 
+  useEffect(() => {
+    if (isEdit) {
+      inputRef.current?.focus();
+    }
+  }, [isEdit])
+
   return (
     <div className="group w-full flex flex-row justify-center h-14">
       {/* <div className="flex flex-row items-center justify-center">
@@ -32,25 +40,32 @@ function WorldBook_Title() {
         <PencilEditIcon className="text-2xl text-default-400 pointer-events-none flex-shrink-0 fill-black" /> 
       </div> */}
       <Input
-        value={worldBookItem?.worldBook.name}
-        variant="underlined"
-        onChange={(e) => {
-          const newValue = e.target.value;
-          setWorldBookItemName(newValue);
-        }}
-        size="sm"
-        classNames={{
-          label: "",
-          input: "",
-          innerWrapper: "bg-transparent",
-          inputWrapper: "shadow-none",
-        }}
-        className="w-full h-full px-10 bg-transparent outline-none disabled:bg-transparent hidden group-hover:block"
-      />
-      <div className="h-full flex flex-row group-hover:hidden items-center gap-2 overflow-hidden">
-        <div className="overflow-hidden whitespace-nowrap text-overflow-ellipsis">{worldBookItem?.worldBook.name}</div>
-        <PencilEditIcon className="h-12 text-2xl text-default-400 pointer-events-none flex-shrink-0 " />
-      </div>
+          ref={inputRef}
+          value={worldBookItem?.worldBook.name}
+          variant="underlined"
+          onChange={(e) => {
+            const newValue = e.target.value;
+            setWorldBookItemName(newValue);
+          }}
+          onBlur={() => setIsEdit(false)}
+          size="sm"
+          classNames={{
+            label: "",
+            input: "",
+            innerWrapper: "bg-transparent",
+            inputWrapper: "shadow-none",
+          }}
+          className={`w-full h-full px-10 bg-transparent outline-none disabled:bg-transparent ${isEdit ? 'block' : 'hidden'}`}
+        />
+        <div
+          className={`h-full flex-row items-center gap-2 overflow-hidden ${isEdit ? 'hidden' : 'flex'}`}
+          onClick={() => {
+            setIsEdit(true);
+          }}
+        >
+          <div className="overflow-hidden whitespace-nowrap text-overflow-ellipsis">{worldBookItem?.worldBook.name}</div>
+          <PencilEditIcon className="h-12 text-2xl text-default-400 pointer-events-none flex-shrink-0 " />
+        </div>
     </div>
     
   );

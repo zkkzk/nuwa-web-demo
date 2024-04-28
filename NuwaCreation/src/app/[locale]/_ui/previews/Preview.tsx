@@ -94,7 +94,8 @@ function Preview({charaItem}: {charaItem: TypeCharaListItem}) {
         scrollBehavior="inside"
         onOpenChange={previewModal.onOpenChange}
         classNames={{
-          base: "h-11/12 bg-neutral-100 ",
+          base: "h-11/12 bg-transparent ",
+          body: "h-full bg-neutral-100 rounded-t-3xl",
         }}
         hideCloseButton={true}
       >
@@ -107,7 +108,7 @@ function Preview({charaItem}: {charaItem: TypeCharaListItem}) {
                   className="flex flex-row items-center justify-center gap-4 absolute right-10 top-6"
                 >
                   
-                  <Button isLoading={isMakeCharLoding} color="default" variant="bordered" onPress={handleMakeChar}>仅导出</Button>
+                  <Button isLoading={isMakeCharLoding} color="default" variant="bordered" onPress={handleMakeChar}>{t("Preview.exportbtn")}</Button>
                   {/* <NuwaButton className="h-16 w-48 text-xl" color="black" variant="flat">导出并发布</NuwaButton> */}
                 </div>
               </ModalHeader>

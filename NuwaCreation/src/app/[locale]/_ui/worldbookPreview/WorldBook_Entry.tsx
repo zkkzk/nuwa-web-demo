@@ -16,24 +16,24 @@ export default function WorldBook_Entry({value, isPreview = false, onChange}: {
 
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-y-4 gap-x-4">
+    <div className="grid grid-cols-1 md:grid-cols-1 gap-y-4 gap-x-4">
       {isPreview ? (
         <>
           <PreviewWrapper>
             <WorldBook_Entry_L value={value} isPreview={isPreview} onChange={onChange}/>
           </PreviewWrapper>
-          <PreviewWrapper>
+          {/* <PreviewWrapper>
             <WorldBook_Entry_R value={value} isPreview={isPreview} onChange={onChange}/>
-          </PreviewWrapper>
+          </PreviewWrapper> */}
         </>
       ): (
         <>
           <WorldBook_Entry_Wrapper>
             <WorldBook_Entry_L value={value} isPreview={isPreview} onChange={onChange}/>
           </WorldBook_Entry_Wrapper>
-          <WorldBook_Entry_Wrapper>
+          {/* <WorldBook_Entry_Wrapper>
             <WorldBook_Entry_R value={value} isPreview={isPreview} onChange={onChange}/>
-          </WorldBook_Entry_Wrapper>  
+          </WorldBook_Entry_Wrapper>   */}
         </>
       )}  
     </div>

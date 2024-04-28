@@ -1,7 +1,8 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { RefObject, useEffect, useRef } from "react";
 import {
   Button,
+  Input,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -22,6 +23,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
   isPreview?: boolean,
 }) {
   const tabsRef = useRef<any>(null);
+  const inputRefs = useRef<{ [key: string]: RefObject<HTMLInputElement> | null }>({});
   const t = useTranslations();
   const worldBookItem = useWorldBookItem();
   const worldBook = isPreview ? worldBooka : worldBookItem.worldBook;
@@ -182,7 +184,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
             base: "sticky top-0 ml-0 z-30 overflow-x-scroll bg-white w-full h-full shrink-0",
             tabList: "overflow-x-scroll gap-10 py-0 border-b border-solid border-black/20 max-w-full pr-20 h-full",
             cursor: "w-full bg-[#0C0C0C] text-white",
-            tab:"h-10 group-data-[selected=true]:bg-[#0C0C0C]",
+            tab:"h-14 group-data-[selected=true]:bg-[#0C0C0C]",
             tabContent: "text-neutral-700 h-full group-data-[selected=true]:text-neutral-800 group-data-[selected=true]:font-bold",
             panel: "overflow-y-scroll",
           }}
@@ -197,7 +199,10 @@ export default function WorldBook({worldBooka, isPreview = false}: {
                   className="flex flex-row items-center group justify-center"
                   onClick={() => {
                     if (selectedEntry?.uid === worldBook.entries[key].uid) {
-                      setEditEntry(worldBook.entries[key])
+                      if (editEntry?.uid !== key) {
+                        setEditEntry(worldBook.entries[key])
+                        inputRefs.current[key]?.current?.focus();
+                      }
                       return
                     } else {
                       setSelectedEntry(worldBook.entries[key])
@@ -205,8 +210,41 @@ export default function WorldBook({worldBooka, isPreview = false}: {
                     
                   }}
                 >
+
+                  <Input
+                    ref={r => { (inputRefs.current[key] as any) = r; }}
+                    value={worldBook.entries[key].comment}
+                    variant="underlined"
+                    onChange={(e) => {
+                      const newValue = e.target.value;
+
+                      const newWorldBook =  {
+                        ...worldBook,
+                        entries: {
+                          ...worldBook.entries,
+                          [key]: {
+                            ...worldBook.entries[key],
+                            comment: newValue
+                          }
+                        }
+                      }
+
+                      setWorldBookItem(newWorldBook)
+                    }}
+                    onBlur={(e) => {
+                      setEditEntry(undefined)
+                    }}
+                    size="sm"
+                    classNames={{
+                      label: "",
+                      input: "",
+                      innerWrapper: "h-8 bg-transparent",
+                      inputWrapper: "w-40 shadow-none",
+                    }}
+                    className={`w-full h-full px-10 bg-transparent outline-none disabled:bg-transparent ${editEntry?.uid === key ? 'block' : 'hidden'}`}
+                  />
                   <div
-                    className="truncate w-40"
+                    className={`truncate w-40 ${editEntry?.uid !== key ? 'block' : 'hidden'}`}
                   >{worldBook.entries[key].comment}</div>
                   {!isPreview && 
                     <Popover

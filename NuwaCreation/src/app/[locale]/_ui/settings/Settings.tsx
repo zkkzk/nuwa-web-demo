@@ -6,6 +6,7 @@ import FeedbackIcon from "../icons/FeedbackIcon";
 import NuwaButton from "../components/NuwaButton";
 import ClearIcon from "../icons/ClearIcon";
 import ContactUsIcon from "../icons/ContactUsIcon";
+import { DocumentDuplicateIcon, GlobeAltIcon, TrashIcon } from "@heroicons/react/24/outline";
 
 export default function Settings() {
   const t = useTranslations();
@@ -23,7 +24,7 @@ export default function Settings() {
         <div className="flex flex-row justify-between py-5">
           <div className="flex flex-row gap-2 items-center">
             <div className="w-6">
-              <FeedbackIcon className={""} />
+              <DocumentDuplicateIcon className={""} />
             </div>
             <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Settings.feedback')}</div>
           </div>
@@ -34,7 +35,7 @@ export default function Settings() {
         <div className="flex flex-col justify-between py-5">
           <div className="flex flex-row gap-2 items-center">
             <div className="w-6">
-              <ContactUsIcon className={""} />
+              <GlobeAltIcon className={""} />
             </div>
             <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Settings.contactus')}</div>
           </div>
@@ -57,7 +58,7 @@ export default function Settings() {
         <div className="flex flex-row justify-between py-5">
           <div className="flex flex-row gap-2 items-center">
             <div className="w-6">
-              <ClearIcon className={""} />
+              <TrashIcon className={""} />
             </div>
             <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Settings.clear')}</div>
           </div>

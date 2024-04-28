@@ -35,13 +35,13 @@ function CreatorInfo_Level() {
  
   return (
     <div className="h-full w-full">
-      <div className="flex flex-row items-center">
+      <div className="flex flex-col">
 
         <label className={`${textareaProps.classNames.label} mb-0 mr-4`}>
           {t('Character.level')}
         </label>
 
-        <div className="text-neutral-500 text-xs font-normal leading-snug tracking-tight">{t('Character.leveltip')}</div>
+        <div className="text-neutral-500 text-sm font-normal tracking-tight -mt-4">{t('Character.leveltip')}</div>
       </div>
       <div className="mt-10">  
         <NuwaRadio

@@ -25,13 +25,13 @@ export default function WorldBook_Entry({value, isPreview = false, onChange}: {
         <WorldBook_Entry_Name value={value} isPreview={isPreview} onChange={onChange}/>
         <WorldBook_Entry_Content value={value} isPreview={isPreview} onChange={onChange}/>
         <WorldBook_Entry_Keys value={value} isPreview={isPreview} onChange={onChange}/>
-        <WorldBook_Entry_Secondary_Keys value={value} isPreview={isPreview} onChange={onChange}/>
+        {/* <WorldBook_Entry_Secondary_Keys value={value} isPreview={isPreview} onChange={onChange}/>
         <div className="grid grid-cols-1 gap-20 sm:grid-cols-2">
           <WorldBook_Entry_Insertion_Order value={value} isPreview={isPreview} onChange={onChange}/>
           <WorldBook_Entry_Depth value={value} isPreview={isPreview} onChange={onChange}/>
         </div>
         <WorldBook_Entry_Position value={value} isPreview={isPreview} onChange={onChange}/>
-        <WorldBook_Entry_Status value={value} isPreview={isPreview} onChange={onChange}/>
+        <WorldBook_Entry_Status value={value} isPreview={isPreview} onChange={onChange}/> */}
       </div>
     </div>
   );

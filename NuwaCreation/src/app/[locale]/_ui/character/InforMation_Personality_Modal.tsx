@@ -240,9 +240,9 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                         variant="solid"
                         classNames={{
                           base: "mr-32",
-                          tabList: "bg-[#D9D9D9]",
+                          tabList: "bg-[#D9D9D9] h-14 px-4",
                           cursor: "w-full bg-[#0C0C0C] text-white",
-                          tab:"group-data-[selected=true]:bg-[#0C0C0C]",
+                          tab:"group-data-[selected=true]:bg-[#0C0C0C] px-4",
                           tabContent: "text-zinc-800 group-data-[selected=true]:text-white",
                           panel: "overflow-y-scroll"
                         }}
@@ -250,7 +250,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                         {personalityDataList.filter((item) => !item.isCustomer).map((category1, index1) => (
                           <Tab key={`${category1.name}${index1}`} title={category1.name}>
                             <div className="flex flex-row-reverse">
-                              <Button onPress={plistModal.onOpen} variant="light" className="w-40" endContent={<PlusIcon/>}>
+                              <Button onPress={plistModal.onOpen} variant="light" startContent={<PlusIcon className="h-5 w-5"/>}>
                                 {t('Character.personalitysummaryplistType')}
                               </Button>
                               <Modal 
@@ -258,6 +258,7 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                 onOpenChange={plistModal.onOpenChange}
                                 placement="top-center"
                                 className="rounded-[30px]"
+                                size="lg"
                                 hideCloseButton={true}
                               >
                                 <ModalContent>
@@ -267,11 +268,14 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                       <ModalBody>
                                         <Input
                                           autoFocus
+                                          className="w-full"
                                           label={t('Character.personalitysummaryplistmtype')}
                                           placeholder={t('Character.personalitysummaryplistmtypetoken')}
                                           isDisabled={pListIndex >= 0}
                                           labelPlacement="outside-left"
                                           classNames={{
+                                            base: "w-full",
+                                            mainWrapper: "w-full",
                                             label: "text-[#171717] w-20 text-lg",
                                             input: [
                                               "text-lg",
@@ -292,10 +296,13 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                           }}
                                         />
                                         <Input
+                                          className="w-full"
                                           label={t('Character.personalitysummaryplistmtypeattr')}
                                           placeholder={t('Character.personalitysummaryplistmtypeattrtoken')}
                                           labelPlacement="outside-left"
                                           classNames={{
+                                            base: "w-full",
+                                            mainWrapper: "w-full",
                                             label: "text-[#171717] w-20 text-lg",
                                             input: [
                                               "text-lg",
@@ -348,11 +355,13 @@ function InforMation_Personality({setPersonalityNewValue, oldPersonalityValue}: 
                                 </CardBody>
                               </Card>
                             ))}
-                            <Button onPress={() => {
-                              plistModal.onOpen();
-                              usePListName(category1.name);
-                              usePListIndex(index1);
-                            }}  variant="light" className="w-40 absolute bottom-4 right-6" endContent={<PlusIcon/>}>
+                            <Button
+                              onPress={() => {
+                                plistModal.onOpen();
+                                usePListName(category1.name);
+                                usePListIndex(index1);
+                              }} 
+                            variant="light" className="absolute bottom-4 right-6" startContent={<PlusIcon className="h-5 w-5"/>}>
                               {t('Character.personalitysummaryplistRole')}
                             </Button> 
                           </Tab>

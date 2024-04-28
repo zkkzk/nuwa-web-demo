@@ -11,6 +11,7 @@ import { Link } from "@/navigation";
 import { TypeVoiceName, TypeVoiceNameList, TypeVoiceType, voiceSex } from "../../_lib/definitions.voice";
 import { TypeAvatar } from "../../_lib/definitions.avatar";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { textareaProps } from "../components/NuwaTextarea";
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
@@ -79,9 +80,9 @@ export default function Voice() {
     <div className="grid grid-cols-1 gap-8 sm:grid-cols-10">
       <div className="sm:col-start-3 sm:col-end-9 grid gap-12">
         <div>
-          <h2 className="text-lg font-semibold">{t('Character.voice')}</h2>
-          <div className="text-stone-500 text-[8.50px] font-normal leading-none tracking-tight mt-2">{t('Character.voicetab.desc')}</div>
-          <div className="flex flex-row flex-wrap gap-[42px] mt-[20px]">
+          <h2 className={`${textareaProps.classNames.label}`}>{t('Character.voicetab.voice')}</h2>
+          <div className="text-stone-500 text-sm font-normal leading-none tracking-tight -mt-4">{t('Character.voicetab.desc')}</div>
+          <div className="flex flex-row flex-wrap gap-[42px] mt-8">
             <div
               onClick={() => handleSetSelectedVoiceType(TypeVoiceType.None)}
               className={classNames('group hover:bg-black shrink-0 flex flex-col items-center justify-center border border-neutral-400 border-opacity-50 cursor-pointer w-[174px] h-[206px] rounded-[14px]', (
@@ -113,15 +114,17 @@ export default function Voice() {
             </div>
             <div className="flex flex-col items-center justify-center w-[174px] h-[206px] ">
               <Image width={96} height={20} src="/character-voice-more.png" alt="" />
-              <div className="text-center text-stone-950 text-base font-normal leading-[29px] tracking-tight">MORE TO COME</div>
+              <div className="text-center text-stone-950 text-base font-normal leading-[29px] tracking-tight">
+                {t('Character.voicetab.more')}
+              </div>
             </div>
           </div>
         </div>
         {selectedVoiceType !== TypeVoiceType.None && (
           <>
             <Divider className="my-4 px-2" />
-            <div className="py-8 px-7">
-              <div className="mb-5 text-black text-base font-semibold leading-[29px] tracking-tight">{t('Character.voicetab.sex')}</div>
+            <div className="py-8">
+              <div className={`${textareaProps.classNames.label}`}>{t('Character.voicetab.sex')}</div>
               <Tabs
                 aria-label="Options"         
                 selectedKey={selectedVoiceSex}
@@ -138,8 +141,8 @@ export default function Voice() {
                   <Tab key={voiceSex.Female} title={t(`Character.voicetab.${voiceSex.Female}`)} />
               </Tabs>
             </div>
-            <div className="py-8 px-7">
-              <div className="mb-5 text-black text-base font-semibold leading-[29px] tracking-tight">{t('Character.voicetab.type')}</div>
+            <div className="py-8">
+              <div className={`${textareaProps.classNames.label}`}>{t('Character.voicetab.type')}</div>
               <div  className="w-[260px] px-1 py-2">
                 <Listbox 
                   aria-label="Single selection example"

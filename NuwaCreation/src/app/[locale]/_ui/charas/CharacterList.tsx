@@ -35,7 +35,7 @@ export default function CharacterList() {
             }}
           />
         </div>
-        <div className="flex flex-wrap flex-row gap-4">
+        <div className="flex flex-wrap flex-row gap-4 min-h-[60vh]">
           {charaList.map((chara, index) => (
             <div className="w-[212px] group relative hover:scale-105" key={chara.uid}>
               <Image
@@ -46,7 +46,9 @@ export default function CharacterList() {
                 className="w-full h-[250px] flex-none object-cover rounded-[14px] border border-neutral-400 border-opacity-50"
               />
               <div className="w-full h-[250px] absolute top-0 bg-gray-50/50 hidden group-hover:block" />
-              <div className="w-full h-[36px] text-center text-stone-950 text-lg font-semibold leading-loose tracking-tight">{chara.chara.name}</div>
+              <div className="truncate px-2 w-full h-[36px] text-center text-stone-950 text-lg font-semibold leading-loose tracking-tight">
+                {chara.chara.name}
+              </div>
               <div className="absolute top-4 right-4 flex flex-col gap-4">
                 <Popover placement="top" color='danger'>
                   <PopoverTrigger>
@@ -58,7 +60,7 @@ export default function CharacterList() {
                   </PopoverTrigger>
                   <PopoverContent>
                     <Button 
-                      className="w-full" 
+                      className="w-full font-semibold" 
                       size="sm" 
                       color="danger"
                       onClick={() => {

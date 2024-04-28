@@ -13,6 +13,7 @@ import MeWeb3WalletIcon from "../icons/MeWeb3WalletIcon";
 import MeUpdatePasswordIcon from "../icons/MeUpdatePasswordIcon";
 import MeDeleteAccountIcon from "../icons/MeDeleteAccountIcon";
 import { Button, Input } from "@nextui-org/react";
+import { EnvelopeIcon, LockClosedIcon, PowerIcon, UserIcon, WalletIcon } from "@heroicons/react/24/outline";
 
 export default function Me() {
   const t = useTranslations();
@@ -46,7 +47,7 @@ export default function Me() {
             <div className="flex flex-row justify-between py-5">
               <div className="flex flex-row gap-2 items-center">
                 <div className="w-6">
-                  <MeUsernameIcon className={""} />
+                  <UserIcon className={""} />
                 </div>
                 <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.usename')}</div>
               </div>
@@ -57,7 +58,7 @@ export default function Me() {
             <div className="flex flex-row justify-between py-5">
               <div className="flex flex-row gap-2 items-center">
                 <div className="w-6">
-                  <MeEmailIcon className={""} />
+                  <EnvelopeIcon className={""} />
                 </div>
                 <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.email')}</div>
               </div>
@@ -68,7 +69,7 @@ export default function Me() {
             <div className="flex flex-row justify-between py-5">
               <div className="flex flex-row gap-2 items-center">
                 <div className="w-6">
-                  <MeWeb3WalletIcon className={""} />
+                  <WalletIcon className={""} />
                 </div>
                 <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.web3wallet')}</div>
               </div>
@@ -83,7 +84,7 @@ export default function Me() {
             <div className="flex flex-row justify-between py-5">
               <div className="flex flex-row gap-2 items-center">
                 <div className="w-6">
-                  <MeUpdatePasswordIcon className={""} />
+                  <LockClosedIcon className={""} />
                 </div>
                 <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.updatepassword')}</div>
               </div>
@@ -98,7 +99,7 @@ export default function Me() {
             <div className="flex flex-row justify-between py-5">
               <div className="flex flex-row gap-2 items-center">
                 <div className="w-6">
-                  <MeDeleteAccountIcon className={""} />
+                  <PowerIcon className={""} />
                 </div>
                 <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.deleteaccount')}</div>
               </div>

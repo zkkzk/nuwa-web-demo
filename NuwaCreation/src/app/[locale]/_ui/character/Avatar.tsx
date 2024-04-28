@@ -8,6 +8,7 @@ import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popov
 import IconCard from "../components/IconCard";
 import NuwaButton from "../components/NuwaButton";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { textareaProps } from "../components/NuwaTextarea";
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
@@ -78,9 +79,9 @@ export default function Avatar() {
     <div className="grid grid-cols-1 gap-8 sm:grid-cols-10 mb-20">
       <div className="sm:col-start-3 sm:col-end-9 grid gap-20">
         <div>
-          <h2 className="text-lg font-semibold">{t('Character.avatar')}</h2>
-          <div className="text-stone-500 text-[8.50px] font-normal leading-none tracking-tight mt-2">{t('Character.avatartip')}</div>
-          <div className="flex flex-row flex-wrap gap-[42px] mt-[20px]">
+          <h2 className={textareaProps.classNames.label}>{t('Character.avatartitle')}</h2>
+          <div className="text-stone-500 text-sm font-normal leading-none tracking-tight -mt-4">{t('Character.avatartip')}</div>
+          <div className="flex flex-row flex-wrap gap-[42px] mt-8">
           <div
               onClick={() => {
                 clearAvatarList();
@@ -126,7 +127,7 @@ export default function Avatar() {
                   </PopoverTrigger>
                   <PopoverContent>
                     <Button 
-                      className="w-full" 
+                      className="w-full font-semibold" 
                       size="sm" 
                       color="danger"
                       onClick={() => {
@@ -173,6 +174,16 @@ export default function Avatar() {
                         className="shrink-0"
                       >
                         <IconCard 
+                          onClick={() => handleSetSelectedAvatarType(TypeAvatarType.IMAGE)}
+                          isActive={selectedAvatarType === TypeAvatarType.IMAGE }
+                          iconType="IMAGE"
+                        />
+                        <div></div>
+                      </div>
+                      <div
+                        className="shrink-0"
+                      >
+                        <IconCard 
                           onClick={() => handleSetSelectedAvatarType(TypeAvatarType.LIVE2D)}
                           isActive={selectedAvatarType === TypeAvatarType.LIVE2D }
                           iconType="LIVE2D"
@@ -185,26 +196,28 @@ export default function Avatar() {
                           onClick={() => handleSetSelectedAvatarType(TypeAvatarType["3D"])}
                           isActive={selectedAvatarType === TypeAvatarType["3D"] }
                           iconType="3D"
+                          disabled={true}
                         />
-                      </div>
-                      <div
-                        className="shrink-0"
-                      >
-                        <IconCard 
-                          onClick={() => handleSetSelectedAvatarType(TypeAvatarType.IMAGE)}
-                          isActive={selectedAvatarType === TypeAvatarType.IMAGE }
-                          iconType="IMAGE"
-                        />
+                        <div className="w-full text-center text-sm py-2 text-gray-400">{t('Character.3Dtip2')}</div>
                       </div>
                     </div>
                     {selectedAvatarType === TypeAvatarType.LIVE2D && (
-                      <div className="mt-10 text-black text-sm leading-relaxed tracking-tight">{t(`Character.LIVE2Dtip`)}</div>
+                      <div className="h-20">
+                        <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.LIVE2Dtip`)}</div>
+                        <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.LIVE2Dlinktip`)}{t(`Character.LIVE2Dlink`)}</div>
+                      </div>
                     )}
                     {selectedAvatarType === TypeAvatarType["3D"] && (
-                      <div className="mt-10 text-black text-sm leading-relaxed tracking-tight">{t(`Character.3Dtip`)}</div>
+                      <div className="h-20">
+                        <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.3Dtiptip`)}</div>
+                        <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.3Dtiplink`)}</div>
+                      </div>
                     )}
                     {selectedAvatarType === TypeAvatarType.IMAGE && (
-                      <div className="mt-10 text-black text-sm leading-relaxed tracking-tight">{t(`Character.IMAGEtip`)}</div>
+                      <div className="h-20">
+                        <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.IMAGEtip`)}</div>
+                        <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.IMAGElink`)}</div>
+                      </div>
                     )}
                   </div>
                 </ModalBody>

@@ -26,7 +26,7 @@ export default function WorldBookList() {
 
   return (
     <>
-      <div className="relative bg-white h-full w-full pb-40 rounded-[40px]">
+      <div className="relative bg-white h-full w-full pb-40 rounded-[40px] min-h-[80vh]">
         <div className="flex flex-row justify-end mt-2 z-40 mr-8">
           <WorldBookCreate
             onCreateDone={(newWorldBook) => {
@@ -52,7 +52,7 @@ export default function WorldBookList() {
                     </PopoverTrigger>
                     <PopoverContent>
                       <Button 
-                        className="w-full" 
+                        className="w-full font-semibold" 
                         size="sm" 
                         color="danger"
                         onClick={() => {

@@ -7,6 +7,7 @@ import 'swiper/css';
 import PreviewTitle from "./PreviewTitle";
 import PreviewWrapper from "./PreviewWrapper";
 import { useCharaListItem } from "../charas/CharaContext";
+import { Tooltip } from "@nextui-org/react";
 
 function Preview_PristMessage() {
   const t = useTranslations();
@@ -30,9 +31,9 @@ function Preview_PristMessage() {
       <PreviewTitle>{t('Character.firstmessage')}</PreviewTitle>
       <div className="h-[162px]">
         <PreviewWrapper>
-          <div className="w-full h-full flex flex-row items-center justify-between">
+          <div className="w-full h-full flex flex-row items-center justify-between px-4">
 
-            <div className="mx-8 w-12 h-12 bg-neutral-500 rounded-full flex-shrink-0" />
+            {/* <div className="mx-8 w-12 h-12 bg-neutral-500 rounded-full flex-shrink-0" /> */}
             <div className="overflow-hidden h-full">
             <Swiper
               spaceBetween={50}
@@ -51,7 +52,9 @@ function Preview_PristMessage() {
                 return (
                   <SwiperSlide key={index}>
                     <div className="h-full flex items-center">
-                      <div className="break-words w-full max-w-full overflow-hidden text-ellipsis line-clamp-5">{item}</div>
+                      <Tooltip showArrow={true} content={item} className="text-lg">
+                        <div className="break-words w-full max-w-full overflow-hidden text-ellipsis line-clamp-5">{item}</div>
+                      </Tooltip>
                     </div>
                   </SwiperSlide>
                 )

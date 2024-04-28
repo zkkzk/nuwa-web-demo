@@ -35,7 +35,7 @@ function CreatorInfo_CCLicenses() {
   return (
     
     <div className="h-full w-full relative">
-      <Link href="https://creativecommons.org/share-your-work/cclicenses/" target="_blank" className=" absolute top-0 right-0 text-black text-[10px] font-normal leading-[14.50px] tracking-tight">
+      <Link href="https://creativecommons.org/share-your-work/cclicenses/" target="_blank" className=" absolute top-2 right-0 text-black text-sm font-normal tracking-tight">
         {t('Character.copyrighttip3')}
       </Link>
       <div className="flex flex-col items-start">
@@ -44,12 +44,12 @@ function CreatorInfo_CCLicenses() {
           {t('Character.copyright')}
         </label>
 
-        <div className="text-black text-xl leading-9 tracking-tight">
+        {/* <div className="text-black text-xl leading-9 tracking-tight">
           {t('Character.copyrighttip1')}
-        </div>
-        <Link href="https://creativecommons.org/share-your-work/cclicenses/" target="_blank" className="text-black text-[8px] font-normal leading-[14.50px] tracking-tight">
-          {t('Character.copyrighttip2')}https://creativecommons.org/share-your-work/cclicenses/
-        </Link>
+        </div> */}
+        {/* <Link href="https://creativecommons.org/share-your-work/cclicenses/" target="_blank" className="text-neutral-500 text-sm font-normal -mt-4 tracking-tight">
+          {t('Character.copyrighttip3')}
+        </Link> */}
       </div>
       <div className="mt-10">  
         <CCLicensesRadio

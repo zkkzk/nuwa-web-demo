@@ -71,7 +71,7 @@ function InforMation_AlternateGreetings() {
               </PopoverTrigger>
               <PopoverContent>
                 <Button 
-                  className="w-full" 
+                  className="w-full font-semibold" 
                   size="sm" 
                   color="danger"
                   onClick={() => {

@@ -41,7 +41,7 @@ function Preview_AddTags() {
   
   return (
     <>   
-      <div className="flex flex-row items-center">
+      <div className="flex flex-col items-start mb-2">
         <div className="text-black text-2xl font-semibold leading-[54.36px] tracking-tight mr-4 shrink-0">{t('Preview.tags')}</div>
         <div className="text-sm font-normal leading-relaxed tracking-tight text-neutral-500">{t('Preview.tagTip')}</div>
       </div>

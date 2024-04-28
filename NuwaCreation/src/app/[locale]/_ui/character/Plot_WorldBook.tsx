@@ -8,7 +8,7 @@ import { TypeChara, TypeWorldBook } from "../../_lib/definitions";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
 import WorldBookItem from "../worldbook/WorldBookItem";
 import UnLinkIcon from "../icons/UnLinkIcon";
-import { PlusIcon } from "@heroicons/react/24/outline";
+import { LinkIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 function Plot_WorldBook() {
   const router = useRouter();
@@ -62,13 +62,12 @@ function Plot_WorldBook() {
       {!charaListItem.chara.data.character_book && (
         <div className="mt-8">
             <Button
-            className="text-neutral-800 text-sm font-extralight font-['Inter'] underline leading-relaxed tracking-tight"
             onClick={() => {
               selectWorldBookModal.onOpen();
             }}
-            // startContent={<LinkIcon className="h-4 w-4"/>}
+            startContent={<LinkIcon className="h-4 w-4"/>}
             type="button"
-            variant="light"
+            color="primary"
             >
               {t('Character.plotWorldbooklinkbtn')}
           </Button>
@@ -82,7 +81,8 @@ function Plot_WorldBook() {
         scrollBehavior="inside"
         onOpenChange={selectWorldBookModal.onOpenChange}
         classNames={{
-          base: "h-11/12",
+          base: "h-11/12 rounded-t-lg overflow-hidden",
+          header: "rounded-t-lg overflow-hidden"
         }}
         hideCloseButton={true}
       >
@@ -109,7 +109,7 @@ function Plot_WorldBook() {
                 >{t('WorldBook.addnewbook')}</Button>
               </ModalHeader>
               <ModalBody>
-                <div className="grid md:grid-cols-4 sm:grid-cols-3 gap-10 py-10 px-7 overflow-visible h-auto">
+                <div className="grid md:grid-cols-4 sm:grid-cols-3 gap-10 py-10 px-7 overflow-visible h-auto min-h-[400px]">
                   {myWorldBooks && myWorldBooks.map((worldBookItem, index) => (
                     <div
                       key={`${worldBookItem.uid}+${index}`}
@@ -123,6 +123,11 @@ function Plot_WorldBook() {
                       <WorldBookItem worldBookItem={worldBookItem.worldBook} />
                     </div>
                   ))}
+                  {!myWorldBooks || myWorldBooks.length === 0 && (
+                    <div className="w-full h-full flex justify-center items-center  md:col-span-4 sm:col-span-4 col-span-1">
+                      {t("WorldBook.worldbooknull")}
+                    </div>
+                  )}
                 </div>
               </ModalBody>
             </>

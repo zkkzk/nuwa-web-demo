@@ -102,7 +102,7 @@ export default function Mes_Example() {
             <Textarea
               {...textareaProps as any}
               ref={r => { (descTextareaRefs.current[index] as any) = r; }}
-              placeholder="请在这里填写对话示例"
+              placeholder={t('Character.mesexampletoken')}
               value={item}
               onChange={e => {
                 updateMesExamplePlist(e.target.value, index)
@@ -120,7 +120,7 @@ export default function Mes_Example() {
                 </PopoverTrigger>
                 <PopoverContent>
                   <Button 
-                    className="w-full" 
+                    className="w-full font-semibold" 
                     size="sm" 
                     color="danger"
                     onClick={(e) => {

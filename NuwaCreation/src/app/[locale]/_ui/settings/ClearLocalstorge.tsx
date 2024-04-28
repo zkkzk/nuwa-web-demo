@@ -27,7 +27,7 @@ export default function App() {
         </PopoverTrigger>
         <PopoverContent>
           <Button 
-            className="w-full" 
+            className="w-full font-semibold" 
             size="sm" 
             color="danger"
             onClick={(e) => {

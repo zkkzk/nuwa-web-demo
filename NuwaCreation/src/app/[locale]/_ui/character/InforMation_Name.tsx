@@ -34,7 +34,7 @@ function InforMation_Name() {
 
   return (
     <NuwaInput
-      placeholder="请输入"
+      placeholder={t('Character.characternametoken')}
       label={<div>{t('Character.charactername')}<span className="text-red-500">*</span></div>}
       value={charaListItem.chara.data.name}
       onChange={handleNameChange}
