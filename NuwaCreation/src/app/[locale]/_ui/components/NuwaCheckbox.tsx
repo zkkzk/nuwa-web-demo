@@ -47,7 +47,7 @@ const CustomCheckbox = (props : any) => {
         }}
         color="primary"
         variant="faded"
-        {...getLabelProps()}
+        // {...getLabelProps()}
       >
         {children ? children : isSelected ? "Enabled" : "Disabled"}
       </Chip>

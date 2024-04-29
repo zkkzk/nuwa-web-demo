@@ -306,5 +306,14 @@
     "deleteaccountbtn": "Delete",
     "logoutbtn": "Log Out",
     "savebtn": "Save"
+  },
+  "Web3": {
+    "changewallet": "Change wallet",
+    "connecting": "Connecting ...",
+    "copyaddress": "Copy address",
+    "copied": "Copied",
+    "disconnect": "Disconnect",
+    "haswallet": "Connect",
+    "nowallet": "Select Wallet"
   }
 }

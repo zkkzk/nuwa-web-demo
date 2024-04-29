@@ -1,19 +1,18 @@
 "use client";
+
 import { useState } from "react";
 import { useTranslations } from "next-intl";
-import ClearLocalstorge from "../settings/ClearLocalstorge";
-import FeedbackIcon from "../icons/FeedbackIcon";
 import NuwaButton from "../components/NuwaButton";
-import ClearIcon from "../icons/ClearIcon";
-import ContactUsIcon from "../icons/ContactUsIcon";
 import Me_Avatar from "./Me_Avatar";
-import MeUsernameIcon from "../icons/MeUsernameIcon";
-import MeEmailIcon from "../icons/MeEmailIcon";
-import MeWeb3WalletIcon from "../icons/MeWeb3WalletIcon";
-import MeUpdatePasswordIcon from "../icons/MeUpdatePasswordIcon";
-import MeDeleteAccountIcon from "../icons/MeDeleteAccountIcon";
 import { Button, Input } from "@nextui-org/react";
 import { EnvelopeIcon, LockClosedIcon, PowerIcon, UserIcon, WalletIcon } from "@heroicons/react/24/outline";
+import { WalletModalProvider } from "../../_solana/components/WalletModalProvider";
+import WalletContextProvider from "../../_solana/contexts/WalletContextProvider";
+// import { MintNFTButton } from "../../_solana/components/MintNFTButton";
+import dynamic from "next/dynamic";
+const MintNFTButton = dynamic(() => import('../../_solana/components/MintNFTButton'), { ssr: false })
+const WalletMultiButton  = dynamic(() => import('../../_solana/components/WalletMultiButton'), { ssr: false })
+
 
 export default function Me() {
   const t = useTranslations();
@@ -74,11 +73,17 @@ export default function Me() {
                 <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.web3wallet')}</div>
               </div>
               <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
-                <NuwaButton
-                  size="sm"
-                  shadowghost="black"
-                  className="w-[140px]"
-                >{t('Me.web3walletbtn')}</NuwaButton>
+
+                <WalletContextProvider>
+                  <WalletModalProvider>
+                    <WalletMultiButton
+                      size="sm"
+                      shadowghost="black"
+                      className="w-[140px]"
+                    />
+                  </WalletModalProvider>
+                  {/* <MintNFTButton /> */}
+                </WalletContextProvider>
               </div>
             </div>
             <div className="flex flex-row justify-between py-5">

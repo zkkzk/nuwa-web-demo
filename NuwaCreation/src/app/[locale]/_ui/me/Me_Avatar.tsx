@@ -19,7 +19,7 @@ function Me_Avatar() {
           src={avatar}
           width={200}
           height={200}
-          alt=""
+          alt="werwer"
           className="h-full w-full"
         />
       </div>
