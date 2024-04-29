@@ -14,7 +14,7 @@ import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react
 // } from '@solana/wallet-adapter-wallets';
 
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-    const network = WalletAdapterNetwork.Devnet;
+    const network = WalletAdapterNetwork.Mainnet;
     const endpoint = useMemo(() => clusterApiUrl(network), [network]);
     const wallets = useMemo(
         () => [
