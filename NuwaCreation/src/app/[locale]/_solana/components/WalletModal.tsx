@@ -9,6 +9,7 @@ import { Collapse } from './Collapse';
 import { WalletListItem } from './WalletListItem';
 import { WalletSVG } from './WalletSVG';
 import { useWalletModal } from './useWalletModal';
+import { useTranslations } from 'next-intl';
 
 export interface WalletModalProps {
     className?: string;
@@ -16,6 +17,7 @@ export interface WalletModalProps {
 }
 
 export const WalletModal: FC<WalletModalProps> = ({ className = '', container = 'body' }) => {
+    const t = useTranslations();
     const ref = useRef<HTMLDivElement>(null);
     const { wallets, select } = useWallet();
     const { setVisible } = useWalletModal();
@@ -136,7 +138,7 @@ export const WalletModal: FC<WalletModalProps> = ({ className = '', container = 
                         </button>
                         {listedWallets.length ? (
                             <>
-                                <h1 className="wallet-adapter-modal-title">Connect a wallet on Solana to continue</h1>
+                                <h1 className="wallet-adapter-modal-title">{t("Web3.modeltitle")}</h1>
                                 <ul className="wallet-adapter-modal-list">
                                     {listedWallets.map((wallet) => (
                                         <WalletListItem

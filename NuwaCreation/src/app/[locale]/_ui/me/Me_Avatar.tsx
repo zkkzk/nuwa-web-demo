@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import Image from "next/image";
 import { useCoverHandler } from "../../_lib/utils";
-import { Button } from "@nextui-org/react";
+import { Avatar, Button } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import UploadCoverIcon from "../icons/UploadCoverIcon";
 import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
@@ -13,12 +13,10 @@ function Me_Avatar() {
   const [avatar, setAvatar] = useState("");
 
   return (
-    <div className="flex flex-row justify-start items-start gap-x-8 relative group rounded-full bg-black">
-      <div className="h-[200px] w-[200px] rounded-full overflow-hidden">
-        <Image
+    <div className="flex flex-row justify-center items-start gap-x-8 relative group">
+      <div className="h-[200px] w-[200px] rounded-full overflow-hidden bg-black">
+        <Avatar
           src={avatar}
-          width={200}
-          height={200}
           alt="werwer"
           className="h-full w-full"
         />

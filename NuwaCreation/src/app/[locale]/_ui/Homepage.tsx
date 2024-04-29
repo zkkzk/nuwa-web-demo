@@ -254,7 +254,7 @@ function Homepage() {
         <div className="lg:col-span-2 min-w-full bg-gray-100 pb-7 rounded-[40px] px-5 w-full relative pt-6">
           <div className="text-black text-3xl font-semibold mb-5 px-3 flex flex-row justify-between">
             <div>{t('HomePage.understandandlearn')}</div>
-            <Button className="w-[32px] h-[32px] bg-neutral-100 rounded-[11px]" >
+            <Button className="h-[32px] bg-neutral-100 rounded-[11px]" >
               <div className="text-center text-zinc-500 text-xs font-normal">{t('HomePage.morebtn')}{' >'}</div>
             </Button>
           </div>

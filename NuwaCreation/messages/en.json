@@ -314,6 +314,8 @@
     "copied": "Copied",
     "disconnect": "Disconnect",
     "haswallet": "Connect",
-    "nowallet": "Select Wallet"
+    "nowallet": "Select Wallet",
+    "modeltitle": "Connect a wallet on Solana to continue",
+    "detected": "Detected"
   }
 }

@@ -2,6 +2,7 @@
 import { Link } from "@/navigation";
 import { useTranslations } from 'next-intl';
 import LangSwitcher from "./sidebar/LangSwitcher";
+import { Avatar } from "@nextui-org/react";
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
@@ -35,7 +36,7 @@ export default function Header() {
             <LangSwitcher />
           </div> */}
           <Link href="/me" className="w-10 h-10 bg-zinc-800 rounded-full mx-10">
-
+            <Avatar />
           </Link>
         </div>
         <div className='flex flex-row justify-end'>

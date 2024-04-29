@@ -14,6 +14,7 @@ import NuwaWorldBookIcon from '../icons/NuwaWorldBookIcon';
 import NuwaSettingsIcon from '../icons/NuwaSettingsIcon';
 import SidebarItem from './SidebarItem';
 import LangSwitcher from './LangSwitcher';
+import { Avatar } from '@nextui-org/react';
 
 const navigation = [
   { name: 'Navigation.home', href: '/', icon: NuwaHomePageIcon, current: false },
@@ -188,7 +189,7 @@ export default function Sidebar() {
           </div>
         </div>
 
-        <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white  px-4 py-4 shadow-sm sm:px-6 lg:hidden">
+        <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-white px-4 py-2 shadow-sm sm:px-6 lg:hidden">
           <button type="button" className="-m-2.5 p-2.5 text-gray-700 lg:hidden" onClick={() => setSidebarOpen(true)}>
             <span className="sr-only">Open sidebar</span>
             <Bars3Icon className="h-6 w-6" aria-hidden="true" />
@@ -196,7 +197,7 @@ export default function Sidebar() {
           <div className="flex-1 text-sm font-semibold leading-6">Nuwa</div>
 
           <Link href="/me" className="w-10 h-10 bg-zinc-800 rounded-full mx-10">
-
+            <Avatar />
           </Link>
           {/* <div className='mr-4'>
             <LangSwitcher />

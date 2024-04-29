@@ -313,6 +313,8 @@
     "copied": "已复制",
     "disconnect": "断开连接",
     "haswallet": "连接",
-    "nowallet": "选择钱包"
+    "nowallet": "选择钱包",
+    "modeltitle": "连接一个 Solana 上的钱包",
+    "detected": "已识别"
   }
 }

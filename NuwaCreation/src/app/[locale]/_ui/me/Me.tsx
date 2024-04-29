@@ -20,7 +20,7 @@ export default function Me() {
     useState(true);
 
   return (
-    <div className="px-4 sm:px-36 relative">
+    <div className="px-4 md:px-10 lg:px-16 xl:px-36 relative">
       <div className="absolute right-6 top-6">
         <Button
           className="bg-black text-white"
