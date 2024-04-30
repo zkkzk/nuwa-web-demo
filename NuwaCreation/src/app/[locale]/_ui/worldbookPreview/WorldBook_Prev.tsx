@@ -98,26 +98,6 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
 
     delete worldBook?.entries[key];
 
-    // const newEntriesArray = map(worldBook, (value, key) => {
-    //   return {value};
-    // })
-
-    // const newEntries = keyBy(newEntriesArray, "id");
-
-
-    // const updatedEntries = (worldBook?.entries || []).filter(
-    //   (entry) => entry.uid !== entryId
-    // );
-
-    // Update ids and display_index in sequential order
-    // const updatedEntriesWithIds = updatedEntries.map((entry, index) => ({
-    //   ...entry,
-    //   id: index + 1,
-    //   extensions: {
-    //     ...entry.extensions,
-    //     display_index: index + 1,
-    //   },
-    // }));
     
     worldBookItemDispatch({
       type: "changed",
@@ -145,9 +125,22 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
   return (
     <>
       <div>
-        <div className="flex flex-row">
-          
-          <div className="relative flex flex-col shrink-0 gap-y-4 w-[200px] bg-[#D9D9D9]/30 rounded-[14px] py-12 mt-32 -mr-2 h-[570px] pl-1">
+        <div className="flex flex-col">     
+          <div
+            className="z-10 -mb-9 pb-9 px-2 w-7/12 h-[132px] rounded-t-[40px] flex justify-center items-center bg-[#313131] text-white font-semibold text-[20px]"
+          >
+            <input
+              value={worldBook?.name}
+              disabled={isPreview}
+              onChange={(e) => {
+                const newValue = e.target.value;
+                setWorldBookItemName(newValue);
+              }}
+              className="w-full h-full bg-transparent outline-none disabled:bg-transparent"
+            />
+          </div>
+          <div className="flex flex-row">
+            <div className="relative flex flex-col shrink-0 gap-y-4 w-[200px] bg-[#D9D9D9]/30 rounded-[14px] pt-32 pb-12 -mr-2 h-[570px] pl-1">
             {!isPreview && (
               <Button
                 onClick={handleAddNewBookClick}
@@ -196,19 +189,6 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
             ))}
           </div>
           <div className="grow z-40">
-            <div
-              className="-mb-9 pb-9 px-2 w-5/12 h-[132px] rounded-[40px] flex justify-center items-center bg-[#313131] text-white font-semibold text-[20px]"
-            >
-              <input
-                value={worldBook?.name}
-                disabled={isPreview}
-                onChange={(e) => {
-                  const newValue = e.target.value;
-                  setWorldBookItemName(newValue);
-                }}
-                className="w-full h-full bg-transparent outline-none disabled:bg-transparent"
-              />
-            </div>
             {worldBook?.entries && Object.keys(worldBook.entries).map((key) => (
               <div key={`${uid}${worldBook.entries[key].uid}`}>
                 {selectedEntry?.uid === worldBook.entries[key].uid && (
@@ -235,6 +215,8 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
             ))}
             
           </div>
+          </div>
+          
         </div>
       </div>
     </>

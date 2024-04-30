@@ -22,18 +22,12 @@ export default function WorldBook_Entry({value, isPreview = false, onChange}: {
           <PreviewWrapper>
             <WorldBook_Entry_L value={value} isPreview={isPreview} onChange={onChange}/>
           </PreviewWrapper>
-          {/* <PreviewWrapper>
-            <WorldBook_Entry_R value={value} isPreview={isPreview} onChange={onChange}/>
-          </PreviewWrapper> */}
         </>
       ): (
         <>
           <WorldBook_Entry_Wrapper>
             <WorldBook_Entry_L value={value} isPreview={isPreview} onChange={onChange}/>
           </WorldBook_Entry_Wrapper>
-          {/* <WorldBook_Entry_Wrapper>
-            <WorldBook_Entry_R value={value} isPreview={isPreview} onChange={onChange}/>
-          </WorldBook_Entry_Wrapper>   */}
         </>
       )}  
     </div>

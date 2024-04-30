@@ -2,7 +2,7 @@
 import React from "react";
 import NuwaFormWrapper from "./NuwaFormWrapper";
 
-function NuwaTextareaWrapper({label, textareaProps}: {label: string, textareaProps: Object}) {
+function NuwaTextareaWrapper({label, textareaProps}: {label?: string, textareaProps: Object}) {
   return (
     <NuwaFormWrapper label={label}>
       <textarea

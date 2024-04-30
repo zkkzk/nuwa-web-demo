@@ -14,46 +14,11 @@ export default function WorldBook_Entry_L({value, isPreview = false, onChange}: 
 
   return (
     <div className="h-[620px] flex flex-col divide-y">
-      <div className="grow">
-        <NuwaTextareaWrapper
-          label={t('WorldBook.title')}
-          textareaProps={{
-            disabled: isPreview,
-            value: value?.comment,
-            onChange: (e: { target: { value: any; }; }) => (
-              onChange({ ...value, comment: e.target.value } as TypeWorldBookEntriy)
-            )
-          }}
-        >
-        </NuwaTextareaWrapper>
+      <div className="h-[120px] w-full flex items-center flex-row p-8">
+        <div>{value?.comment}</div>
       </div>
       <div className="grow">
-        <NuwaTextareaWrapper
-          label={t('WorldBook.content')}
-          textareaProps={{
-            disabled: isPreview,
-            value: value?.content,
-            onChange: (e: { target: { value: any; }; }) => (
-
-              onChange({ ...value, content: e.target.value } as TypeWorldBookEntriy)
-            )
-          }}
-        >
-        </NuwaTextareaWrapper>
-      </div>
-      <div className="grow">
-        <NuwaTextareaWrapper
-          label={t('WorldBook.primarykeywords')}
-          textareaProps={{
-            disabled: isPreview,
-            value: value?.keys,
-            onChange: (e: { target: { value: any; }; }) => (
-
-              onChange({ ...value, keys: e.target.value } as TypeWorldBookEntriy)
-            )
-          }}
-        >
-        </NuwaTextareaWrapper>
+        <div>{value?.content}</div>
       </div>
     </div>
   );
