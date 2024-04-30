@@ -41,7 +41,7 @@ function InforMation_Personality() {
         value={charaListItem.chara.data.personality}
         onChange={handlePersonalityChange}
       />
-      <div className="z-40 hidden group-hover:block absolute -top-2 right-0 pl-4 sm:top-auto sm:-right-44 sm:bottom-0 sm:pt-20">
+      <div className="z-40 w-40 hidden group-hover:block absolute -top-2 right-0 pl-4 sm:top-auto sm:-right-40 sm:bottom-0 sm:pt-20">
         <InforMation_Personality_Modal setPersonalityNewValue={setPersonalityNewValue} oldPersonalityValue={charaListItem.chara.data.personality}/>
       </div>
     </div>

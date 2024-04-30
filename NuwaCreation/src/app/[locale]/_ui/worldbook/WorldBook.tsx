@@ -179,12 +179,12 @@ export default function WorldBook({worldBooka, isPreview = false}: {
           selectedKey={selectedEntry?.uid}
           size="lg"
           classNames={{
-            base: "sticky top-0 ml-0 z-30 overflow-x-scroll bg-white w-full h-full shrink-0",
-            tabList: "overflow-x-scroll gap-10 py-0 border-b border-solid border-black/20 max-w-full pr-20 h-full",
+            base: "sticky top-0 ml-0 z-30 overflow-x-scroll scrollbar-hide bg-white w-full h-full shrink-0",
+            tabList: "overflow-x-scroll scrollbar-hide gap-10 py-0 border-b border-solid border-black/20 max-w-full pr-20 h-full",
             cursor: "w-full bg-[#0C0C0C] text-white",
             tab:"h-10 group-data-[selected=true]:bg-[#0C0C0C]",
             tabContent: "text-neutral-700 h-full group-data-[selected=true]:text-neutral-800 group-data-[selected=true]:font-bold",
-            panel: "overflow-y-scroll",
+            panel: "overflow-y-scroll scrollbar-hide",
           }}
         >
 

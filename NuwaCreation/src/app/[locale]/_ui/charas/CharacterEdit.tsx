@@ -36,7 +36,7 @@ function CharacterEdit({ onDone, chara }: {
       }} />
 
       <Modal
-        isDismissable={!isOpen}
+        isDismissable={false}
         size="full"
         isOpen={editModal.isOpen}
         onOpenChange={editModal.onOpenChange}

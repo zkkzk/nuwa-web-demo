@@ -14,7 +14,7 @@ export default function Settings() {
     useState(true);
 
   return (
-    <div className="px-4 sm:px-36">
+    <div className="px-4 sm:px-36 min-h-[80vh]">
       <div className="py-16">
         <div className="text-neutral-800 text-[40px] font-normal leading-[73px] tracking-tight">
           {t("Settings.title")}

@@ -24,8 +24,8 @@ export default function CharacterEditWrapper() {
           variant="underlined"
           size="lg"
           classNames={{
-            base: "fixed mt-0 ml-0 left-0 z-50 overflow-x-scroll w-full bg-white",
-            tabList: "overflow-x-scroll gap-10 py-0 border-b border-solid border-black/20 w-full px-20",
+            base: "fixed mt-0 ml-0 left-0 z-50 overflow-x-scroll scrollbar-hide w-full bg-white",
+            tabList: "overflow-x-scroll scrollbar-hide gap-10 py-0 border-b border-solid border-black/20 w-full px-20",
             cursor: "w-full bg-[#0C0C0C] text-white",
             tab:"h-10 group-data-[selected=true]:bg-[#0C0C0C]",
             tabContent: " text-neutral-700 w-full h-full group-data-[selected=true]:text-neutral-800 group-data-[selected=true]:font-bold",
