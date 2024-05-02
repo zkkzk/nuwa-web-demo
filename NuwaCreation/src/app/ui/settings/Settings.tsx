@@ -7,6 +7,10 @@ import NuwaButton from "../components/NuwaButton";
 import ClearIcon from "@/app/icons/ClearIcon";
 import ContactUsIcon from "@/app/icons/ContactUsIcon";
 import { DocumentDuplicateIcon, GlobeAltIcon, TrashIcon } from "@heroicons/react/24/outline";
+import XTwitterIcon from "@/app/icons/XTwitterIcon";
+import { Button } from "@nextui-org/react";
+import DiscordIcon from "@/app/icons/DiscordIcon";
+import TelegramIcon from "@/app/icons/TelegramIcon";
 
 export default function Settings() {
   const t = useTranslations();
@@ -32,7 +36,7 @@ export default function Settings() {
             info@nuwalabs.org
           </div>
         </div>
-        <div className="flex flex-col justify-between py-5">
+        <div className="flex flex-row justify-between py-5">
           <div className="flex flex-row gap-2 items-center">
             <div className="w-6">
               <GlobeAltIcon className={""} />
@@ -40,19 +44,22 @@ export default function Settings() {
             <div className="w-[151px] opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Settings.contactus')}</div>
           </div>
 
-          <div className="mt-8 mb-0 gap-10 flex flex-row">
-            <NuwaButton
-              shadowghost="white"
-              className="w-[140px]"
-            >X（Twitter）</NuwaButton>
-            <NuwaButton
-              shadowghost="white"
-              className="w-[140px]"
-            >Discord</NuwaButton>
-            <NuwaButton
-              shadowghost="white"
-              className="w-[140px]"
-            >Telegram</NuwaButton>
+          <div className="mt-8 mb-0 gap-4 flex flex-row">
+            <Button
+              className=" border-black h-10 w-10"
+              variant="ghost"
+              isIconOnly
+            ><XTwitterIcon className={""} /></Button>
+            <Button
+              isIconOnly
+              className=" border-black h-10 w-10"
+              variant="ghost"
+            ><TelegramIcon className={""} /></Button>
+            <Button
+              isIconOnly
+              className=" border-black h-10 w-10"
+              variant="ghost"
+            ><DiscordIcon className={""} /></Button>
           </div>
         </div>
         <div className="flex flex-row justify-between py-5">

@@ -95,14 +95,17 @@
     "advancedset": "Advanced",
     "insertuserorchardelete": "Delete",
     "insertuserorcharuser": "Insert Player",
-    "insertuserorcharchat": "Insert Digital Life"
+    "insertuserorcharchat": "Insert Digital Life",
+    "advancedsettip": "Please leave it as default if you have no knowledge of the content of this page.",
+    "advancedsetdoc": "See Documentation",
+    "advancedsetreset": "Reset"
   },
   "Preview": {
     "tags": "Tags",
     "tagTip": "Effective tagging helps others easily find your characters post-publication.",
     "tagsinputplaceholder": "Add a tag",
     "tagAddButton": "add",
-    "basecontent": "Base Content",
+    "basecontent": "Basics",
     "exportbtn": "Export",
     "unnamed": "Unnamed",
     "plot": "Plot"
@@ -176,7 +179,7 @@
     "deletegreetings": "Delete",
     "thisoperationcannotbewithdrawn": "This operation cannot be withdrawn!"
   },
-  "HomePage": {
+  "Overview": {
     "title1": "Based on HomoDeus Protocol",
     "title2": "Nuwa Creation Platform",
     "title3": "a free, powerful, and open sourced character creation tool",
@@ -188,7 +191,9 @@
     "createWorldBook": "Create",
     "createWorldBook2": "World Book",
     "readDigitalLife": "Load Digital Life",
+    "readDigitalLifetip": "Please upload a png file",
     "readWorldBook": "Load World Book",
+    "readWorldBooktip": "Please upload a json file",
     "morebtn": "More",
     "understandandlearnListItem1": "How to design a character",
     "understandandlearnListItem2": "How to manage characters",
@@ -317,5 +322,8 @@
     "nowallet": "Select Wallet",
     "modeltitle": "Connect a wallet on Solana to continue",
     "detected": "Detected"
+  },
+  "Error": {
+    "localstoragefull": "The local storage space is full. Please delete it and perform operations again"
   }
 }

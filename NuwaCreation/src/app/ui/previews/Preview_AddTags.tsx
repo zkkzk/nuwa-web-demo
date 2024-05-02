@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Button, Chip, Input } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import { TagIcon } from "@heroicons/react/24/solid";
-import NuwaButton from "../components/NuwaButton";
 import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { trim } from "lodash-es";
 import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
@@ -76,24 +75,24 @@ function Preview_AddTags() {
           }
         />
 
-      <div className="flex flex-wrap gap-4">
-        {tagsList.map((item: string, index: number) => (
-          <Chip
-            key={index}
-            classNames={{
-              base: "h-9 cursor-pointer bg-zinc-300 bg-opacity-40 rounded-[11px] w-auto px-4",
-            }}
-            endContent={<XMarkIcon className="h-4 w-4" onClick={() => {
-              tagsList.splice(index, 1)
-              setTagsList(tagsList);
-              handleTagsChange(tagsList.join(','))
-            }} />}
-            variant="flat" 
-          >
-            {item}
-          </Chip>
-        ))}
-      </div>
+        <div className="flex flex-wrap gap-4">
+          {tagsList.map((item: string, index: number) => (
+            <Chip
+              key={index}
+              classNames={{
+                base: "h-9 cursor-pointer bg-zinc-300 bg-opacity-40 rounded-[11px] w-auto px-4",
+              }}
+              endContent={<XMarkIcon className="h-4 w-4" onClick={() => {
+                tagsList.splice(index, 1)
+                setTagsList(tagsList);
+                handleTagsChange(tagsList.join(','))
+              }} />}
+              variant="flat" 
+            >
+              {item}
+            </Chip>
+          ))}
+        </div>
       </div>
     </>
   );

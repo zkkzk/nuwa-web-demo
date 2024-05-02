@@ -58,13 +58,14 @@ export default function Register() {
     <NuwaButton
       onClick={async () => {
         setIsSendCodeLoding(true);
-        const res = await fetch("/api/readworldbook",{
+        const res = await fetch("http://47.88.59.68:443/api/v1/user/mail_code",{
           method:"POST",
-          // body: {
-          //   data: {
-          //     email: email,
-          //   },
-          // },          
+          body: JSON.stringify({
+            email: email,
+          }),
+          headers: {
+            'Content-Type': 'application/json'
+          }
         });
         if(res.ok){
           debugger
@@ -72,7 +73,7 @@ export default function Register() {
 
           try {
           } catch (e: any) {
-            setMessage("本地存储空间已满，请删除后在操作");
+            setMessage(t("Error.localstoragefull"));
             setIsOpen(true);
             return
           }
@@ -82,7 +83,7 @@ export default function Register() {
             try {
 
             } catch (e: any) {
-              setMessage("本地存储空间已满，请删除后在操作");
+              setMessage(t("Error.localstoragefull"));
               setIsOpen(true);
               return
             }

@@ -52,7 +52,7 @@ function Preview_PristMessage() {
                 return (
                   <SwiperSlide key={index}>
                     <div className="h-full flex items-center">
-                      <Tooltip showArrow={true} content={item} className="text-lg">
+                      <Tooltip showArrow={true} color="primary" content={item} className="text-lg">
                         <div className="break-words w-full max-w-full overflow-hidden text-ellipsis line-clamp-5">{item}</div>
                       </Tooltip>
                     </div>

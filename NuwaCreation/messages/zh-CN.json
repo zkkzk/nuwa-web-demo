@@ -95,7 +95,10 @@
     "advancedset": "高级设置",
     "insertuserorchardelete": "删除",
     "insertuserorcharuser": "插入玩家名称",
-    "insertuserorcharchat": "插入数字生命名称"
+    "insertuserorcharchat": "插入数字生命名称",
+    "advancedsettip": "如果您不了解本页的内容，请将其保留为默认设置。",
+    "advancedsetdoc": "查看文档",
+    "advancedsetreset": "重置"
   },
   "Preview": {
     "tags": "标签",
@@ -176,7 +179,7 @@
     "deletegreetings": "删除",
     "thisoperationcannotbewithdrawn": "此操作不可撤销！"
   },
-  "HomePage": {
+  "Overview": {
     "title1": "基于BRC-1111协议",
     "title2": "女娲创作平台",
     "title3": "免费、开源的数字生命创造工具",
@@ -188,7 +191,9 @@
     "createWorldBook": "创建",
     "createWorldBook2": "世界书",
     "readDigitalLife": "读取数字生命",
+    "readDigitalLifetip": "请上传一张png图片",
     "readWorldBook": "读取世界书",
+    "readWorldBooktip": "请上传一个json文件",
     "morebtn": "更多",
     "understandandlearnListItem1": "角色设计",
     "understandandlearnListItem2": "角色管理",
@@ -285,6 +290,7 @@
     "orfer": "顺序",
     "position": "位置",
     "primarykeywords": "主要关键词",
+    "primarykeywordstoken": "输入一个关键词",
     "status": "状态",
     "title": "标题",
     "titletoken": "在这输入标题.",
@@ -316,5 +322,8 @@
     "nowallet": "选择钱包",
     "modeltitle": "连接一个 Solana 上的钱包",
     "detected": "已识别"
+  },
+  "Error": {
+    "localstoragefull": "本地存储空间已满，请删除后在操作"
   }
 }
