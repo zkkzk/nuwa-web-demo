@@ -15,8 +15,8 @@ function Preview_AdvancedSet() {
   return (
     <div>   
       <PreviewTitle>{t('Character.advancedset')}</PreviewTitle>
-      <div className="grid grid-rows-2 grid-cols-2 gap-4 w-full">
-        <div className="row-span-1 col-span-1 min-h-[156px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full">
+        <div className="col-span-1 min-h-[156px]">
           <PreviewWrapper>
             <div className="h-full px-7 py-7 flex flex-row justify-between">
               <div className="grow text-neutral-800 text-2xl font-semibold leading-[43.49px] tracking-tight text-left">{t('Character.depthprompt')}</div>
@@ -24,7 +24,7 @@ function Preview_AdvancedSet() {
             </div>
           </PreviewWrapper>
         </div>
-        <div className="row-span-1 col-span-1 min-h-[156px]">
+        <div className="col-span-1 min-h-[156px]">
           <PreviewWrapper>
             <div className="h-full px-7 py-7 flex flex-row justify-between">
               <div className="grow text-neutral-800 text-2xl font-semibold leading-[43.49px] tracking-tight text-left">{t('Character.talkativeness')}</div>
@@ -32,7 +32,7 @@ function Preview_AdvancedSet() {
             </div>
           </PreviewWrapper>
         </div>
-        <div className="row-span-1 col-span-1 min-h-[156px]">
+        <div className="col-span-1 md:col-span-2 min-h-[156px]">
           <PreviewWrapper>
             <div className="h-full px-6 py-10">
               <div className="text-neutral-800 text-xl font-semibold leading-[30px] tracking-tight">{t('Character.jailbreak')}</div>
@@ -41,7 +41,7 @@ function Preview_AdvancedSet() {
             </div>
           </PreviewWrapper>
         </div>
-        <div className="row-span-1 col-span-1 min-h-[156px]">
+        <div className="col-span-1 md:col-span-2 min-h-[156px]">
           <PreviewWrapper>
             <div className="h-full px-6 py-10">
               <div className="text-neutral-800 text-xl font-semibold leading-[30px] tracking-tight">{t('Character.mainprompt')}</div>

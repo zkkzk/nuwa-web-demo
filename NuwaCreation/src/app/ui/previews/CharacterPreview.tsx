@@ -21,7 +21,7 @@ function CharacterPreview({charaItem}: {charaItem: TypeCharaListItem}) {
   
   return (
   
-    <div className="space-y-20 px-4 sm:px-24 md:px-40 lg:px-52 xl:px-60 2xl:px-72">
+    <div className="space-y-20 px-4 sm:px-12 md:px-24 lg:px-38 xl:px-52 2xl:px-72">
       <Preview_BaseInfo charaItem={charaItem} />
       {(chara.data.first_mes.length + chara.data.alternate_greetings.length) > 0 &&  <Preview_PristMessage/>}
       {(chara.data.description || chara.data.personality) &&  <Preview_BaseContent/>}

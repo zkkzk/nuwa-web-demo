@@ -49,7 +49,7 @@ function Preview_AddTags() {
         <Input
           placeholder={t('Preview.tagsinputplaceholder')}
           classNames={{
-            base: 'mb-2 w-[400px]',
+            base: 'mb-2 max-w-[400px]',
             inputWrapper: 'bg-zinc-100'
           }}
           size="sm"
