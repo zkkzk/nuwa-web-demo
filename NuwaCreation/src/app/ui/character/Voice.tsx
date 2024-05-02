@@ -10,7 +10,7 @@ import Image from "next/image";
 import { Link } from "@/navigation";
 import { TypeVoiceName, TypeVoiceNameList, TypeVoiceType, voiceSex } from "@/app/lib/definitions.voice";
 import { TypeAvatar } from "@/app/lib/definitions.avatar";
-import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import { textareaProps } from "../components/NuwaTextarea";
 
 function classNames(...classes:any) {

@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 
 import InforMation_Personality_Modal from "./InforMation_Personality_Modal";
-import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import NuwaTextarea from "../components/NuwaTextarea";
 
 function InforMation_Personality() {

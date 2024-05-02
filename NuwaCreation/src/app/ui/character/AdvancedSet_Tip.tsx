@@ -2,7 +2,7 @@
 import React from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@nextui-org/react";
-import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import ExclamationSquareIcon from "@/app/icons/ExclamationSquareIcon";
 import { Link } from "@/navigation";
 

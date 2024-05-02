@@ -2,7 +2,7 @@
 import React, { useRef } from "react";
 import { useTranslations } from "next-intl";
 import InsertUserOrChar from "../components/InsertUserOrChar";
-import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import { textareaProps } from "../components/NuwaTextarea";
 import { Textarea } from "@nextui-org/react";
 

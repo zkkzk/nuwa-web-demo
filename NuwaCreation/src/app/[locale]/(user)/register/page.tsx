@@ -1,6 +1,7 @@
 import React from 'react'
 import Register from '@/app/ui/register/Register'
 import { NextIntlClientProvider,useMessages } from 'next-intl'
+import { AlterMessageContextProvider } from '@/app/ui/components/AlterMessageContextProvider';
 require('@solana/wallet-adapter-react-ui/styles.css');
 
 function RegisterPage() {
@@ -8,7 +9,9 @@ function RegisterPage() {
   return (
     <>
       <NextIntlClientProvider messages={messages}>
-        <Register />
+        <AlterMessageContextProvider>
+          <Register />
+        </AlterMessageContextProvider>
       </NextIntlClientProvider>
     </>
   )

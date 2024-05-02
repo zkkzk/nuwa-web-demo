@@ -1,7 +1,7 @@
 "use client";
 import React, { useContext, useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import { TypeCharaListItem } from "@/app/lib/definitions";
 import { Input } from "@nextui-org/react";
 import NuwaInput from "../components/NuwaInput";

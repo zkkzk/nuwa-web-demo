@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 import PreviewTitle from "./PreviewTitle";
 import PreviewWrapper from "./PreviewWrapper";
-import { useCharaListItem } from "../charas/CharaContext";
+import { useCharaListItem } from "@/app/contexts/CharasContextProvider";
 import { Divider } from "@nextui-org/react";
 
 function Preview_AdvancedSet() {

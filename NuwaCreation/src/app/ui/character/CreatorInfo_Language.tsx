@@ -2,7 +2,7 @@
 import React from "react";
 import { useTranslations, useMessages } from "next-intl";
 import NuwaCheckbox from "../components/NuwaCheckbox";
-import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import { textareaProps } from "../components/NuwaTextarea";
 
 

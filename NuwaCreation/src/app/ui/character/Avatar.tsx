@@ -7,7 +7,7 @@ import { TypeAvatar, TypeAvatarType } from "@/app/lib/definitions.avatar";
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, useDisclosure } from "@nextui-org/react";
 import IconCard from "../components/IconCard";
 import NuwaButton from "../components/NuwaButton";
-import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import { textareaProps } from "../components/NuwaTextarea";
 
 function classNames(...classes:any) {

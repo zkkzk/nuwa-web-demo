@@ -11,7 +11,7 @@ function classNames(...classes:any) {
 }
 import PreviewTitle from "./PreviewTitle";
 import PreviewWrapper from "./PreviewWrapper";
-import { useCharaListItem } from "../charas/CharaContext";
+import { useCharaListItem } from "@/app/contexts/CharasContextProvider";
 
 
 function Preview_Voice() {

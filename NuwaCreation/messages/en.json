@@ -325,5 +325,16 @@
   },
   "Error": {
     "localstoragefull": "The local storage space is full. Please delete it and perform operations again"
+  },
+  "User": {
+    "email": "Email",
+    "code": "Code",
+    "password": "Password",
+    "mailcodesuccess": "Sending the verification code succeeded",
+    "registersuccess": "Register succeeded",
+    "sysfail": "System fail",
+    "registertitle": "Sign Up",
+    "registersend": "send",
+    "registersubmit": "Sign Up"
   }
 }

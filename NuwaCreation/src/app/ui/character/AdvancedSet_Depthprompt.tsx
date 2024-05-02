@@ -1,7 +1,7 @@
 "use client";
 import React from "react";;
 import { useTranslations } from "next-intl";
-import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import NuwaInput from "../components/NuwaInput";
 import { textareaProps } from "../components/NuwaTextarea";
 import { Slider } from "@nextui-org/react";

@@ -5,7 +5,7 @@ import { useCoverHandler } from "@/app/lib/utils";
 import { Button } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 import UploadCoverIcon from "@/app/icons/UploadCoverIcon";
-import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 
 function InforMation_Cover() {
   const t = useTranslations();

@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { TagIcon } from "@heroicons/react/24/solid";
 import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { trim } from "lodash-es";
-import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import { TypeCharaListItem } from "@/app/lib/definitions";
 
 function Preview_AddTags() {

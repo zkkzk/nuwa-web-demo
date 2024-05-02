@@ -6,7 +6,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import PreviewTitle from "./PreviewTitle";
 import PreviewWrapper from "./PreviewWrapper";
-import { useCharaListItem } from "../charas/CharaContext";
+import { useCharaListItem } from "@/app/contexts/CharasContextProvider";
 import { Tooltip } from "@nextui-org/react";
 
 function Preview_PristMessage() {

@@ -9,7 +9,7 @@ import NuwaButton from "../components/NuwaButton";
 import { TypeCharaListItem } from "@/app/lib/definitions";
 import AlterMessage from "../components/AlterMessage";
 import CharacterEditWrapper from "./CharacterEditWrapper";
-import { CharaProvider } from "./CharaContext";
+import { CharaProvider } from "@/app/contexts/CharasContextProvider";
 import CharacterPreview from "./CharacterPreview";
 
 function CharacterEdit({ onDone, chara }: {

@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslations, useMessages } from "next-intl";
 import CCLicensesRadio from "../components/CCLicensesRadio";
 import { Link } from "@/navigation";
-import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import { textareaProps } from "../components/NuwaTextarea";
 
 

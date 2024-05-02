@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 
 import PreviewTitle from "./PreviewTitle";
 import IconCard from "../components/IconCard";
-import { useCharaListItem } from "../charas/CharaContext";
+import { useCharaListItem } from "@/app/contexts/CharasContextProvider";
 
 function Preview_Avatar() {
   const t = useTranslations();

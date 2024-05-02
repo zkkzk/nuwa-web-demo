@@ -4,7 +4,7 @@ import { useTranslations } from "next-intl";
 import { Button, Popover, PopoverContent, PopoverTrigger, Textarea } from "@nextui-org/react";
 import { PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import InsertUserOrChar from "../components/InsertUserOrChar";
-import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import { textareaProps } from "../components/NuwaTextarea";
 import NuwaButton from "../components/NuwaButton";
 

@@ -1,10 +1,10 @@
 'use client';
 
 import { createContext, useContext, useReducer } from 'react';
-import { TypeCharaList, TypeCharaListItem } from '@/app/lib/definitions';
-import { createChara, getCharaList, pushCharaList } from '@/app/lib/utils';
+import { TypeCharaListItem } from '@/app/lib/definitions';
+import { getCharaList, pushCharaList } from '@/app/lib/utils';
 
-export const CharaContext = createContext<TypeCharaListItem>(null as any);
+export const CharasContext = createContext<TypeCharaListItem>(null as any);
 export const CharaDispatchContext = createContext(null as any);
 
 export function CharaProvider({ children, value }: {children: React.ReactNode, value: TypeCharaListItem}) {
@@ -14,16 +14,16 @@ export function CharaProvider({ children, value }: {children: React.ReactNode, v
   );
 
   return (
-    <CharaContext.Provider value={charaListItem as any}>
+    <CharasContext.Provider value={charaListItem as any}>
       <CharaDispatchContext.Provider value={dispatch as any}>
         {children}
       </CharaDispatchContext.Provider>
-    </CharaContext.Provider>
+    </CharasContext.Provider>
   );
 }
 
 export function useCharaListItem() {
-  return useContext(CharaContext);
+  return useContext(CharasContext);
 }
 
 export function useCharaListItemDispatch() {

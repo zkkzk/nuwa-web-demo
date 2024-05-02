@@ -5,7 +5,7 @@ import { usePostCharaFun, getWorldBookList } from "@/app/lib/utils";
 import { useTranslations } from "next-intl";
 import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 import { TypeChara, TypeWorldBook } from "@/app/lib/definitions";
-import { useCharaListItem, useCharaListItemDispatch } from "../charas/CharaContext";
+import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import WorldBookItem from "../worldbook/WorldBookItem";
 import UnLinkIcon from "@/app/icons/UnLinkIcon";
 import { LinkIcon, PlusIcon } from "@heroicons/react/24/outline";

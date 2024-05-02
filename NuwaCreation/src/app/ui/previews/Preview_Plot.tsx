@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import PreviewTitle from "./PreviewTitle";
 import PreviewWrapper from "./PreviewWrapper";
 import { Divider } from "@nextui-org/react";
-import { useCharaListItem } from "../charas/CharaContext";
+import { useCharaListItem } from "@/app/contexts/CharasContextProvider";
 
 function Preview_Plot() {
   const t = useTranslations();

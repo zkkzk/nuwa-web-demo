@@ -76,7 +76,6 @@ export default function NuwaRadio({items, value, onChange}: {
         orientation="horizontal"
         value={value}
         onChange={(e) => {
-          debugger
           onChange(e)
         }}
         classNames={{

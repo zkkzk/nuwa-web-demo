@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 
 import PreviewTitle from "./PreviewTitle";
-import { useCharaListItem } from "../charas/CharaContext";
+import { useCharaListItem } from "@/app/contexts/CharasContextProvider";
 
 function Preview_MesExample() {
   const t = useTranslations();

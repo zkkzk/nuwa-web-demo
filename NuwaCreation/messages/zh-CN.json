@@ -325,5 +325,16 @@
   },
   "Error": {
     "localstoragefull": "本地存储空间已满，请删除后在操作"
+  },
+  "User": {
+    "email": "邮箱",
+    "code": "验证码",
+    "password": "密码",
+    "mailcodesuccess": "发送验证码成功",
+    "registersuccess": "注册成功",
+    "sysfail": "系统报错",
+    "registertitle": "注册",
+    "registersend": "发送验证码",
+    "registersubmit": "注册"
   }
 }
