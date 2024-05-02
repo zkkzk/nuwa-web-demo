@@ -73,7 +73,7 @@ export default function Register() {
           type="email"
           size="md"
           classNames={InputClassNames}
-          isInvalid={true}
+          isInvalid={false}
           errorMessage="Please enter a valid email"
           placeholder={t('User.email')}
           value={email}
