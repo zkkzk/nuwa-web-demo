@@ -76,7 +76,7 @@ export default function WorldBookList() {
         </div>
 
         <div>
-          <div className="text-black text-3xl font-semibold">草稿箱</div>
+          <div className="text-black text-3xl font-semibold">{t("WorldBook.drafts")}</div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 3xl:grid-cols-4 gap-4 py-10 overflow-visible h-auto">
             {worldBookList.map((worldBookItem, index) => (
               <div key={worldBookItem.uid} className="w-auto h-[280px]">
@@ -94,7 +94,7 @@ export default function WorldBookList() {
           </div>
           {isLogin && (
             <>
-              <div className="text-black text-3xl font-semibold">已发布</div>
+              <div className="text-black text-3xl font-semibold">{t("WorldBook.published")}</div>
               {(startInit || isLoading) ? (
                 <div className="w-full h-[300px] flex justify-center items-center">
                   <CircularProgress size="md" aria-label="Loading..."/>

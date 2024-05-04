@@ -98,7 +98,12 @@
     "insertuserorcharchat": "插入数字生命名称",
     "advancedsettip": "如果您不了解本页的内容，请将其保留为默认设置。",
     "advancedsetdoc": "查看文档",
-    "advancedsetreset": "重置"
+    "advancedsetreset": "重置",
+    "publishbtn": "发布",
+    "publishsuccess": "发布成功",
+    "deletesuccess": "删除成功",
+    "drafts": "草稿箱",
+    "published": "已发布"
   },
   "Preview": {
     "tags": "标签",
@@ -298,7 +303,9 @@
     "untitledbookEntry": "未命名章节",
     "publishbtn": "发布",
     "publishsuccess": "发布成功",
-    "deletesuccess": "删除成功"
+    "deletesuccess": "删除成功",
+    "drafts": "草稿箱",
+    "published": "已发布"
   },
   "Me": {
     "title": "个人信息",

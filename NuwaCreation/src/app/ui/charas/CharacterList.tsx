@@ -1,14 +1,15 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getCharaList, pushCharaList } from "@/app/lib/utils";
 import { useTranslations } from "next-intl";
-import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
-import Image from "next/image";
-import { Button, Popover, PopoverContent, PopoverTrigger, useDisclosure } from "@nextui-org/react";
 import CharacterCreate from "./CharacterCreate";
 import { TypeCharaList, TypeCharaListItem } from "@/app/lib/definitions";
 import CharacterEdit from "./CharacterEdit";
+import CharacterListItem from "./CharacterListItem";
+import { getIsLogin } from "@/app/lib/base.api";
+import { deleteCharacter, getCharacterAll } from "@/app/lib/character.api";
+import { CircularProgress } from "@nextui-org/react";
 
 
 export default function CharacterList() {
@@ -16,6 +17,50 @@ export default function CharacterList() {
   let initCharaList = getCharaList();
   const [charaList, setCharaList] = useState<TypeCharaList>(initCharaList);
   const [ editChara, setEditChara ] = useState<TypeCharaListItem>();
+
+
+  const [ characterPublishList, setCharacterPublishList ] = useState<{
+    uid: string,
+    ai: {
+      uid: string,
+      cover: string,
+      cover_url: string,
+      chara: any,
+    }
+  }[]>([]);
+  const [isInit, setIsInit] = useState(false);
+  const [startInit, setStartInit] = useState(true);
+  const isLogin = getIsLogin();
+  const getCharacterAllApi = getCharacterAll()
+  const deleteCharacterApi = deleteCharacter()
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  if (isLogin) {
+
+    useEffect(() => {
+      if (!isInit) {
+        setIsInit(true)
+      }
+    }, [])
+
+    useEffect(() => {
+      const init = async () => {
+        const res = await getCharacterAllApi.send();
+        if (res && res.code === 0) {
+          setCharacterPublishList(res.data);
+        }
+        
+        setIsInit(false);
+        setStartInit(false)
+      }
+      if (isInit) {
+        init();
+      }
+      
+    }, [isInit])
+  
+  }
 
   const deleteChara = ({index}: {index: number}) => {
     const newCharaList = charaList.filter((_, i) => i !== index);
@@ -35,67 +80,70 @@ export default function CharacterList() {
             }}
           />
         </div>
-        <div className="flex flex-wrap flex-row gap-4 min-h-[60vh]">
+        <div className="text-black text-3xl font-semibold">{t("Character.drafts")}</div>
+        <div className="py-10 flex flex-wrap flex-row gap-4 min-h-[60vh]">
           {charaList.map((chara, index) => (
-            <div className="w-[212px] group relative hover:scale-105" key={chara.uid}>
-              <Image
-                src={chara.cover}
-                width={212}
-                height={250}
-                alt=""
-                className="w-full h-[250px] flex-none object-cover rounded-[14px] border border-neutral-400 border-opacity-50"
-              />
-              <div className="w-full h-[250px] absolute top-0 bg-gray-50/50 hidden group-hover:block" />
-              <div className="truncate px-2 w-full h-[36px] text-center text-stone-950 text-lg font-semibold leading-loose tracking-tight">
-                {chara.chara.name}
-              </div>
-              <div className="absolute top-4 right-4 flex flex-col gap-4">
-                <Popover placement="top" color='danger'>
-                  <PopoverTrigger>
-                    <Button
-                      className="bg-black text-white opacity-0 group-hover:opacity-100"
-                      startContent={<TrashIcon className="h-5 w-5"/>}
-                      isIconOnly
-                    ></Button>
-                  </PopoverTrigger>
-                  <PopoverContent>
-                    <Button 
-                      className="w-full font-semibold" 
-                      size="sm" 
-                      color="danger"
-                      onClick={() => {
-                        deleteChara({index})
-                        // setChara(prev => ({
-                        //   ...prev,
-                        //   data: {
-                        //     ...prev.data,
-                        //     alternate_greetings: prev.data.alternate_greetings.filter((_, i) => i !== index)  
-                        //   }
-                        // }))
-                        // setDeleteCount(deleteCount + 1);
-                      }}
-                    >    
-                      {t('Previews.mymindismadeup')}
-                    </Button>
-                  </PopoverContent>
-                </Popover>
-
-                <Button
-                  className="bg-black text-white opacity-0 group-hover:opacity-100"
-                  startContent={<PencilIcon className="h-5 w-5"/>}
-                  isIconOnly
-                  onClick={() => {
-                    setEditChara(chara);
-                  }}
-                ></Button>
-              </div>
+            <div className="w-[212px]" key={chara.uid}>
+              <CharacterListItem
+                chara={chara}
+                onEdit={() => {
+                  setEditChara(chara);
+                }}
+                onDelete={() => {
+                  deleteChara({index})
+                }} />
             </div>
           ))}
         </div>
-        <CharacterEdit chara={editChara} onDone={() => {
-          setEditChara(undefined);
-          setCharaList(getCharaList());
-        }} />
+          {isLogin && (
+            <>
+              <div className="text-black text-3xl font-semibold">{t("Character.published")}</div>
+              {(startInit || isLoading) ? (
+                <div className="w-full h-[300px] flex justify-center items-center">
+                  <CircularProgress size="md" aria-label="Loading..."/>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 3xl:grid-cols-4 gap-4 py-10 overflow-visible h-auto">
+                  {characterPublishList.map((characterItem, index) => (
+                    <div key={characterItem.uid} className="w-auto h-[280px]">
+                      <CharacterListItem
+                        chara={characterItem.ai}
+                        onDelete={async () => {
+                          setIsLoading(true);
+                          const res = await deleteCharacterApi.send({
+                            uid: characterItem.ai.uid,
+                          })
+                          if (res && res.code === 0) {
+                            const res2 = await getCharacterAllApi.send();
+                            if (res2 && res2.code === 0) {
+                              setCharacterPublishList(res2.data);
+                            }
+                          }
+                          setIsLoading(false);
+                          return res;
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
+        <CharacterEdit
+          chara={editChara}
+          onDone={() => {
+            setEditChara(undefined);
+            setCharaList(getCharaList());
+          }}
+          onPublish={async () => {
+            setIsLoading(true);
+            const res = await getCharacterAllApi.send();
+            if (res && res.code === 0) {
+              setCharacterPublishList(res.data);
+            }
+            setIsLoading(false);
+          }}
+        />
       </div>
     </>
   );

@@ -330,6 +330,39 @@ export const createChara = (cover: string = defaultCoverBase64, chara: TypeChara
   return newChara;
 }
 
+export const getCharacterByUid = (uid:string): TypeCharaListItem | null => {
+  if (typeof window !== "undefined") {
+    const charaListJson = localStorage.getItem("charaList");
+    let charaList = [] as TypeCharaList;
+    if (charaListJson) {
+      charaList = JSON.parse(charaListJson) as TypeCharaList;
+    }
+    const index = findIndex(charaList, (item) => {
+      return item.uid === uid
+    })
+    return charaList ? charaList[index] : null
+  }
+  return null;
+};
+
+
+export const deleteCharacterByUid = (uid:string) => {
+  if (typeof window !== "undefined") {
+    const charaListJson = localStorage.getItem("charaList");
+    let charaList = [] as TypeCharaList;
+    if (charaListJson) {
+      charaList = JSON.parse(charaListJson) as TypeCharaList;
+    }
+    const index = findIndex(charaList, (item) => {
+      return item.uid === uid
+    })
+
+    const newWorldBookList = charaList.filter((_, i) => i !== index);
+    localStorage.setItem("charaList", JSON.stringify(newWorldBookList));
+  }
+  return null;
+};
+
 export const createWorldBook = () => {
   const uid = uuid();
   const uid2 = uuid();

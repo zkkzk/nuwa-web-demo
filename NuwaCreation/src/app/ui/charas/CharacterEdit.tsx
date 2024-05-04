@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
+import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 import {
   XMarkIcon
 } from '@heroicons/react/24/outline';
@@ -11,16 +11,25 @@ import AlterMessage from "../components/AlterMessage";
 import CharacterEditWrapper from "./CharacterEditWrapper";
 import { CharaProvider } from "@/app/contexts/CharasContextProvider";
 import CharacterPreview from "./CharacterPreview";
+import { publishCharacter } from "@/app/lib/character.api";
+import { getIsLogin } from "@/app/lib/base.api";
+import { useRouter } from "@/navigation";
+import { deleteCharacterByUid, getCharacterByUid } from "@/app/lib/utils";
 
-function CharacterEdit({ onDone, chara }: {
+function CharacterEdit({ onDone, onPublish, chara }: {
   onDone?: () => void,
+  onPublish?: () => void,
   chara?: TypeCharaListItem | undefined
 }) {
+  const router = useRouter();
   const t = useTranslations();
   const editModal = useDisclosure();
   const [isMakeCharLoding, setIsMakeCharLoding] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
+  const [isRelease, setIsRelease] = useState(false);
+  const publishCharacterApi = publishCharacter();
+  const isLogin = getIsLogin();
 
 
   useEffect(() => {
@@ -68,7 +77,37 @@ function CharacterEdit({ onDone, chara }: {
                     {chara && (
                         <CharacterPreview /> 
                     )}
-                    <NuwaButton color="black" isLoading={isMakeCharLoding} className="hidden" size="md">发布</NuwaButton>
+                    {chara && (
+                      <Button
+                        color="primary"
+                        isLoading={isRelease}
+                        size="md"
+                        onClick={async () => {
+                          if(!isLogin) {
+                            router.push('/login')
+                            return
+                          }
+                          setIsRelease(true);
+    
+                          const lastCharacter = getCharacterByUid(chara.uid);
+                          if (lastCharacter) {
+                            const res = await publishCharacterApi.send({
+                              "uid": lastCharacter.uid,
+                              "chara": lastCharacter.chara,
+                              "cover": lastCharacter.cover,
+                            })
+                            if (res && res.code === 0) {
+                              deleteCharacterByUid(chara.uid)
+                              onClose();
+                              onPublish && onPublish();
+                            }
+                          }
+    
+                          setIsRelease(false);
+                        }}
+                      >{t("Character.publishbtn")}</Button>
+                    )}
+                    
                   </div>
                 </div>
               </ModalHeader>

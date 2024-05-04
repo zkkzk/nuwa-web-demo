@@ -10,34 +10,36 @@ const apiUrlList = {
   getInfo: `/api/v1/ai/get_info`
 }
 
-export function create() {
+export function publishCharacter() {
   const t = useTranslations();
   return baseApiHander({
     url: apiUrlList.create,
-    successMsg: t("User.mailcodesuccess")
+    mustLogin: true,
+    successMsg: t("Character.publishsuccess")
   })
 }
 
-export function deleteByUid() {
+export function deleteCharacter() {
   const t = useTranslations();
   return baseApiHander({
     url: apiUrlList.delete,
-    successMsg: t("User.registersuccess")
+    mustLogin: true,
+    successMsg: t("Character.deletesuccess")
   })
 }
 
-export function getAll() {
+export function getCharacterAll() {
   const t = useTranslations();
   return baseApiHander({
     url: apiUrlList.getAll,
-    successMsg: t("User.resetpasswordsuccess")
+    mustLogin: true,
   })
 }
 
-export function getInfo() {
+export function getCharacterInfo() {
   const t = useTranslations();
   return baseApiHander({
     url: apiUrlList.getInfo,
-    successMsg: t("User.resetpasswordsuccess")
+    mustLogin: true,
   })
 }

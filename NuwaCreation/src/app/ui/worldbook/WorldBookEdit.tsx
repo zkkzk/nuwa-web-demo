@@ -82,35 +82,33 @@ function WorldBookEdit({ onDone, onPublish, worldBook }: {
                   <div className="grow overflow-hidden">
                     <WorldBook_Title />
                   </div>
-                  <div className="">
-                    <Button
-                      color="primary"
-                      isLoading={isRelease}
-                      size="md"
-                      onClick={async () => {
-                        if(!isLogin) {
-                          router.push('/login')
-                          return
-                        }
-                        setIsRelease(true);
+                  <Button
+                    color="primary"
+                    isLoading={isRelease}
+                    size="md"
+                    onClick={async () => {
+                      if(!isLogin) {
+                        router.push('/login')
+                        return
+                      }
+                      setIsRelease(true);
 
-                        const lastWorldBook = getWorldBookByUid(worldBook.uid);
-                        if (lastWorldBook) {
-                          const res = await createWorldBookApi.send({
-                            "uid": lastWorldBook.uid,
-                            "data": lastWorldBook.worldBook,
-                          })
-                          if (res && res.code === 0) {
-                            deleteWorldBookByUid(worldBook.uid)
-                            onClose();
-                            onPublish && onPublish();
-                          }
+                      const lastWorldBook = getWorldBookByUid(worldBook.uid);
+                      if (lastWorldBook) {
+                        const res = await createWorldBookApi.send({
+                          "uid": lastWorldBook.uid,
+                          "data": lastWorldBook.worldBook,
+                        })
+                        if (res && res.code === 0) {
+                          deleteWorldBookByUid(worldBook.uid)
+                          onClose();
+                          onPublish && onPublish();
                         }
+                      }
 
-                        setIsRelease(false);
-                      }}
-                    >{t("WorldBook.publishbtn")}</Button>
-                  </div>
+                      setIsRelease(false);
+                    }}
+                  >{t("WorldBook.publishbtn")}</Button>
                 </div>
               </ModalHeader>
               <ModalBody>
