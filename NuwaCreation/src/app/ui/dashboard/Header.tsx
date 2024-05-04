@@ -1,12 +1,7 @@
 'use client'
 import { Link } from "@/navigation";
 import { useTranslations } from 'next-intl';
-import LangSwitcher from "./sidebar/LangSwitcher";
-import { Avatar } from "@nextui-org/react";
-
-function classNames(...classes:any) {
-  return classes.filter(Boolean).join(' ')
-}
+import HeaderAvatar from "./HeaderAvatar";
 
 const teams = [
   { id: 1, name: 'Header.nuwaLabs', href: 'https://www.nuwalabs.org'},
@@ -16,6 +11,7 @@ const teams = [
 
 export default function Header() {
   const t = useTranslations();
+  
   return (
     <div className="lg:block hidden w-full">
       <div className="fixed top-0 left-0 z-40 bg-white w-full">
@@ -32,12 +28,7 @@ export default function Header() {
             </Link>
           ))}
           </div>
-          {/* <div className='flex flex-row text-black text-center mx-16'>
-            <LangSwitcher />
-          </div> */}
-          <Link href="/me" className="w-10 h-10 bg-zinc-800 rounded-full mx-10">
-            <Avatar />
-          </Link>
+          <HeaderAvatar />
         </div>
         <div className='flex flex-row justify-end'>
           <div className="w-9/12 h-px bg-gradient-to-r from-[#E2E2E2]/[.01] to-[#7C7C7C]/[.3] from-0% to-100%" />

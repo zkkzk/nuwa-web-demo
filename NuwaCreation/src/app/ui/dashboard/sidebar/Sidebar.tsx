@@ -15,6 +15,7 @@ import NuwaSettingsIcon from '@/app/icons/NuwaSettingsIcon';
 import SidebarItem from './SidebarItem';
 import LangSwitcher from './LangSwitcher';
 import { Avatar } from '@nextui-org/react';
+import HeaderAvatar from '../HeaderAvatar';
 
 const navigation = [
   { name: 'Navigation.home', href: '/overview', icon: NuwaHomePageIcon, current: false },
@@ -195,12 +196,7 @@ export default function Sidebar() {
           </button>
           <div className="flex-1 text-sm font-semibold leading-6">Nuwa</div>
 
-          <Link href="/me" className="w-10 h-10 bg-zinc-800 rounded-full mx-10">
-            <Avatar />
-          </Link>
-          {/* <div className='mr-4'>
-            <LangSwitcher />
-          </div> */}
+          <HeaderAvatar />
         </div>
       </div>
       <div className='h-20 lg:hidden'></div>

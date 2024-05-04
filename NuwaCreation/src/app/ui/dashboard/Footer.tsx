@@ -6,7 +6,7 @@ export default function Footer() {
   const t = useTranslations();
 
   return (
-    <div className='flex flex-row items-center justify-center text-[#B0B0B0] text-xs'>
+    <div className='flex flex-col sm:flex-row items-center justify-center text-[#B0B0B0] text-xs'>
       <div>©️Copyleft 2024 {t('Footer.nuwaLabs')}</div>
       <Spacer x={4} />
       <div>{t('Footer.protocol')}：AGPL V3</div>

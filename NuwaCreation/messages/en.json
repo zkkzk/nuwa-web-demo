@@ -212,7 +212,7 @@
     "BRC-1111": "BRC-1111"
   },
   "Metadata": {
-    "description": "Sweet as Honey",
+    "description": "Nuwa Character Editor",
     "title": "Character Editor | Nuwa"
   },
   "Navigation": {
@@ -330,11 +330,32 @@
     "email": "Email",
     "code": "Code",
     "password": "Password",
-    "mailcodesuccess": "Sending the verification code succeeded",
+    "mailcodesuccess": "A verification code has been sent, please check your mailbox.",
+    "loginsuccess": "Log in succeeded",
     "registersuccess": "Register succeeded",
+    "resetpasswordsuccess": "Reset password succeeded",
+    "deleteusersuccess": "Account cancellation succeeded",
     "sysfail": "System fail",
     "registertitle": "Sign Up",
-    "registersend": "send",
-    "registersubmit": "Sign Up"
+    "registersend": "Send",
+    "registersubmit": "Sign Up",
+    "logintitle": "Log In",
+    "logintitle2": "By continuing, you agree to our User Agreement and acknowledge that you understand the Privacy Policy.",
+    "loginsubmit": "Log In",
+    "loginforgotpassword": "Forgot password?",
+    "loginsignuptitle": "New to DDream.LAND? ",
+    "loginsignuplink": "Sign Up",
+    "resetpasswordtitle": "Reset Password",
+    "resetpasswordsend": "Send",
+    "resetpasswordsubmit": "Reset",
+    "deleteusertitle": "Account cancellation",
+    "deleteusersend": "Send",
+    "deleteusersubmit": "Cancel",
+    "edituserinfosuccess": "Save succeeded"
+  },
+  "UserFormSchema": {
+    "email": "Invalid email format, please check your email address.",
+    "password": "Password must be at least 6 characters.",
+    "code": "Incorrect verification code, please check the code."
   }
 }

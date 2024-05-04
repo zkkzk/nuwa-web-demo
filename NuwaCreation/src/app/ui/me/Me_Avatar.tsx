@@ -7,17 +7,16 @@ import { useTranslations } from "next-intl";
 import UploadCoverIcon from "@/app/icons/UploadCoverIcon";
 import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
 
-function Me_Avatar() {
+function Me_Avatar({avatar, onChange}:{avatar: string, onChange: (newAvatar: string) => void}) {
   const t = useTranslations();
   const { isReplacingTheCoverLoding, handleReplacingTheCover } = useCoverHandler();
-  const [avatar, setAvatar] = useState("");
 
   return (
     <div className="flex flex-row justify-center items-start gap-x-8 relative group">
       <div className="h-[200px] w-[200px] rounded-full overflow-hidden bg-black">
         <Avatar
           src={avatar}
-          alt="werwer"
+          alt="avatar"
           className="h-full w-full"
         />
       </div>
@@ -29,7 +28,7 @@ function Me_Avatar() {
           style={{ display: 'none' }}
           className="h-12 w-12"
           onChange={(e) => handleReplacingTheCover(e, (newCover: string) => {
-            setAvatar(newCover)
+            onChange(newCover)
           })}
         />
         <div className="w-[69px] h-[34px] -mb-4 bg-white rounded-[18px] shadow group">

@@ -2,17 +2,17 @@
 
 import { createContext } from "react";
 import { FC, ReactNode, useCallback, useMemo } from "react";
-import { User } from "@/app/lib/definitions.user";
+import { TypeUser } from "@/app/lib/definitions.user";
 import { useReducer } from "react";
 import { useContext } from "react";
 
 
-export const UserContext = createContext<User>(null as any);
+export const UserContext = createContext<TypeUser>(null as any);
 export const UserDispatchContext = createContext(null as any);
 
 
 
-export function UserProvider({ children, value }: {children: React.ReactNode, value: User}) {
+export function UserProvider({ children, value }: {children: React.ReactNode, value: TypeUser}) {
   const [user, dispatch] = useReducer(
     userReducer,
     value as never
@@ -35,7 +35,7 @@ export function useCharaListItemDispatch() {
   return useContext(UserDispatchContext);
 }
 
-function userReducer(value: User, action: any) {
+function userReducer(value: TypeUser, action: any) {
   switch (action.type) {
     case 'mailcode': {
       // const charaList = getCharaList();

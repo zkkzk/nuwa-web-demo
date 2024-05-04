@@ -1,27 +1,24 @@
 'use client';
 
 import { createContext, useContext, useReducer } from 'react';
-import AlterMessage from './AlterMessage';
+import AlterMessages from './AlterMessages';
+import { useImmerReducer } from 'use-immer';
 
-export const AmContext = createContext({message: '', isOpen: false});
+export const AmContext = createContext([]);
 export const AmDispatchContext = createContext(null as any);
 
-export function AlterMessageContextProvider({ children, message, isOpen }: {children: React.ReactNode, message?: string, isOpen?: boolean}) {
-  const [amObj, dispatch] = useReducer(
+export function AlterMessageContextProvider({ children }: {children: React.ReactNode}) {
+  const [messages, dispatch] = useImmerReducer(
     amReducer,
-    {
-      message: '',
-      isOpen: false
-    }
+    []
   );
 
   return (
-    <AmContext.Provider value={amObj}>
-      <AmDispatchContext.Provider value={dispatch as any}>
-        <AlterMessage isOpen={amObj.isOpen} message={amObj.message} onClose={() => {
+    <AmContext.Provider value={messages}>
+      <AmDispatchContext.Provider value={dispatch}>
+        <AlterMessages messages={messages} onClose={() => {
           dispatch({
-            type: "close",
-            payload: 'success',
+            type: "clear"
           })
         }} />
         {children}
@@ -38,19 +35,15 @@ export function useAmDispatch() {
   return useContext(AmDispatchContext);
 }
 
-function amReducer(value: {message: string, isOpen: boolean}, action: any) {
+function amReducer(draft: string[], action: any) {
   switch (action.type) {
-    case 'open': {
-      return {
-        message: action.payload,
-        isOpen: true,
-      }
+    case 'add': {
+      draft.push(action.payload);
+      break;
     }
-    case 'close': {
-      return {
-        message: "",
-        isOpen: false,
-      }
+    case 'clear': {
+      return [];
+      break;
     }
     default: {
       throw Error('Unknown action: ' + action.type);

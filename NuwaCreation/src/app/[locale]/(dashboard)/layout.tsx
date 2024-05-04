@@ -1,10 +1,11 @@
 import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-import Header from "@/app/ui/Header";
-import Footer from "@/app/ui/Footer";
+import Header from "@/app/ui/dashboard/Header";
+import Footer from "@/app/ui/dashboard/Footer";
 import { NextIntlClientProvider,useMessages } from "next-intl";
-import Sidebar from "@/app/ui/sidebar/Sidebar";
+import Sidebar from "@/app/ui/dashboard/sidebar/Sidebar";
+import { AlterMessageContextProvider } from "@/app/ui/components/AlterMessageContextProvider";
 
 const locales = ["en", "zh-CN"];
 
@@ -32,24 +33,23 @@ export default function RootLayout({
 }) {
   if (!locales.includes(locale as any)) notFound();
   const messages = useMessages();
+  
   return (
     <>
-        <NextIntlClientProvider messages={messages}>
-          <Sidebar/>
-        </NextIntlClientProvider>
+      <NextIntlClientProvider messages={messages}>
+        <AlterMessageContextProvider>
+        <Sidebar/>
         <main className="lg:pl-72">
           <div className="">
-            <NextIntlClientProvider messages={messages}>
               <Header />
-            </NextIntlClientProvider>
             <div className="px-4 sm:px-6 lg:px-8 pt-4">{children}</div>
             <div className="pb-10 pt-10">
-              <NextIntlClientProvider messages={messages}>
-                <Footer />
-              </NextIntlClientProvider>
+              <Footer />
             </div>
           </div>
         </main>
+        </AlterMessageContextProvider>
+      </NextIntlClientProvider>
     </>
   );
 }

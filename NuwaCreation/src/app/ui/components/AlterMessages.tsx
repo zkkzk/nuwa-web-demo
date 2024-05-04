@@ -1,33 +1,34 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Button, Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
-
+import { Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
 import { useTranslations } from "next-intl";
 
 
-function AlterMessage({message, isOpen = false, onClose}: {message: string, isOpen?: boolean, onClose: () => void }) {
+function AlterMessages({messages, isOpen = false, onClose}: {messages: string[], isOpen?: boolean, onClose: () => void }) {
   const t = useTranslations();
-  let [messsages, setMessages] = useState<string[]>([message]);
 
   const msgModal = useDisclosure();
   useEffect(() => {
-    if(isOpen) {
+    if (messages.length > 0) {
       msgModal.onOpen();
+      setTimeout(() => {
+        onClose();
+        msgModal.onClose();
+      }, 3000)
     } else {
       msgModal.onClose();
-      setMessages([]);
     }
-  }, [isOpen])
+  }, [messages])
   return ( 
     <Modal
       placement={"top"}
-      backdrop="blur"
+      backdrop="transparent"
       isOpen={msgModal.isOpen}
       onClose={onClose}
       hideCloseButton={true}
       classNames={{
-        body: "bg-transparent",
-        base: "bg-transparent",
+        body: "",
+        base: "bg-transparent shadow-none",
       }}
     >
       <ModalContent>
@@ -35,13 +36,12 @@ function AlterMessage({message, isOpen = false, onClose}: {message: string, isOp
           <>
             <ModalBody>
               <div className="flex flex-col gap-3">
-                {messsages.map((msg, index) => (
-                  <div key={index} className="w-full h-14 bg-white bg-opacity-20 rounded-[20px] flex justify-center items-center">
+                {messages.map((msg, index) => (
+                  <div key={index} className="w-full h-14 px-4 bg-gray-800 rounded-[20px] flex justify-center items-center">
                     <div className="text-white text-sm font-bold">{msg}</div>
                   </div>
                 ))}
               </div>
-              
             </ModalBody>
           </>
         )}
@@ -50,4 +50,4 @@ function AlterMessage({message, isOpen = false, onClose}: {message: string, isOp
   );
 }
 
-export default AlterMessage;
+export default AlterMessages;

@@ -5,12 +5,14 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { Button, Input } from "@nextui-org/react";
-import { mailCode, register } from "@/app/lib/user.api";
 import { z } from "zod";
 import { md5 } from "js-md5"
+import { useRouter } from "@/navigation";
+import { useAmDispatch } from "@/app/ui/components/AlterMessageContextProvider";
+import { mailCode, resetPassword } from "../../utils/login.api";
 
 
-const CountLimit = 10;
+const CountLimit = 60;
 
 const InputClassNames = {
   base: "w-full",
@@ -29,23 +31,26 @@ const InputClassNames = {
   ]
 }
 
-const FormSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
-  code: z.string().length(5),
-  password: z.string().min(6),
-  requestId: z.string()
-});
 
-export default function Register() {
+export default function ResetPassword() {
   const t = useTranslations();
+  const router = useRouter();
   const [ email, setEmail ] = useState('');
   const [ code, setCode ] = useState('');
   const [ password, setPassword ] = useState('');
   const [ requestId, setRequestId] = useState('');
   const [ count, setCount ] = useState(CountLimit);
+  const amDispatch = useAmDispatch();
 
   const mailCodeApi = mailCode();
-  const registerApi = register();
+  const resetPasswordApi = resetPassword();
+
+  const FormSchema = z.object({
+    email: z.string().email({ message: t("UserFormSchema.email") }),
+    code: z.string().length(5, { message: t("UserFormSchema.code") }),
+    password: z.string().min(6, { message: t("UserFormSchema.password") }),
+    requestId: z.string()
+  });
 
   useEffect(() => {
     if (count === CountLimit) {
@@ -62,19 +67,19 @@ export default function Register() {
 
   return (
     <div className="flex flex-row justify-center items-center h-full w-full">
-      <div className="w-[350px] flex flex-col gap-5">
+      <div className="w-[360px] flex flex-col gap-5">
         <div className="w-full flex flex-row justify-center items-center gap-2">
           <Image width={37} height={50} src="/registerIcon1.png" alt="" />
           <Image width={149} height={50} src="/registerIcon2.png" alt="" />
         </div>
-        <div className="w-full text-center text-white text-2xl font-bold mb-8 mt-5">{t("User.registertitle")}</div>
+        <div className="w-full text-center text-white text-2xl font-bold mb-8 mt-5">{t("User.resetpasswordtitle")}</div>
         <Input
           color="default"
           type="email"
           size="md"
           classNames={InputClassNames}
           isInvalid={false}
-          errorMessage="Please enter a valid email"
+          errorMessage=""
           placeholder={t('User.email')}
           value={email}
           onChange={(e) => {
@@ -89,19 +94,19 @@ export default function Register() {
             isDisabled={count !== CountLimit}
             onClick={async () => {
               const res = await mailCodeApi.send({email: email});
-              if (res && res.request_id) {
-                setRequestId(res.request_id)
+              if (res && res.code === 0) {
+                setRequestId(res.data.request_id)
                 setCount(CountLimit - 1)
               }
             }}
           >
-            {(count !== CountLimit) ? `${count}s` : t("User.registersend")}
+            {(count !== CountLimit) ? `${count}s` : t("User.resetpasswordsend")}
           </Button>
           }
         />
         <Input
           color="default"
-          type="passward"
+          type="text"
           size="md"
           classNames={InputClassNames}
           placeholder={t('User.code')}
@@ -124,10 +129,11 @@ export default function Register() {
         <Button
           color="default"
           size="lg"
-          isLoading={registerApi.loading}
+          isDisabled={(!code || !email || !password)}
+          isLoading={resetPasswordApi.loading}
           className="mt-16 w-full bg-zinc-800 rounded-2xl text-white"
           onClick={async () => {
-            const validatedFields = FormSchema.omit({email: true, code: true, password: true, requestId: true}).safeParse({
+            const validatedFields = FormSchema.safeParse({
               email: email,
               code: code,
               password: password,
@@ -135,18 +141,26 @@ export default function Register() {
             });
 
             if (validatedFields.success) {
-              const res = await registerApi.send({
+              const res = await resetPasswordApi.send({
                 email: email,
                 code: code,
-                password: md5(password),
-                requestId: requestId,
+                passwd: md5(password),
+                request_id: requestId,
               });
+              if (res && res.code === 0) {
+                // router.back();
+              }
+            } else {
+              validatedFields.error.issues.map((item) => {
+                amDispatch({
+                  type: "add",
+                  payload: item.message,
+                })
+              })
             }
-
-            
           }}
         >
-          {t("User.registersubmit")}
+          {t("User.resetpasswordsubmit")}
         </Button>
       </div>
     </div>
