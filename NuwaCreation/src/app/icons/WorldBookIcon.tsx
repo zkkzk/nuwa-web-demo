@@ -1,6 +1,3 @@
-import { twMerge } from 'tailwind-merge';
-
-
 const WorldBookIcon = ({ className }: { className: string}) => {
   return (
     <svg

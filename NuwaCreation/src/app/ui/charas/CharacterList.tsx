@@ -26,7 +26,7 @@ export default function CharacterList() {
 
   return (
     <>
-      <div className="relative bg-white h-full w-full pt-0 pb-40 rounded-[40px] px-8 flex flex-col justify-center">
+      <div className="relative bg-white h-full w-full pt-0 pb-40 rounded-[40px] flex flex-col justify-center">
         <div className="flex flex-row justify-end mt-2 z-4 mb-8">
           <CharacterCreate
             onCreateDone={(newChara) => {

@@ -42,7 +42,7 @@ export default function RootLayout({
         <main className="lg:pl-72">
           <div className="">
               <Header />
-            <div className="px-4 sm:px-6 lg:px-8 pt-4">{children}</div>
+            <div className="px-4 sm:px-12 lg:px-14 pt-4">{children}</div>
             <div className="pb-10 pt-10">
               <Footer />
             </div>

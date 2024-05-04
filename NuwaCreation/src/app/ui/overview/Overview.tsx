@@ -126,7 +126,7 @@ function Overview() {
     }
   }
   return (
-    <div className="mx-auto max-w-7xl pb-32 flex px-8 flex-col">
+    <div className="mx-auto max-w-7xl pb-32 flex flex-col">
     <AlterMessage isOpen={isOpen} message={message} onClose={() => {
       setIsOpen(false)
     }} />

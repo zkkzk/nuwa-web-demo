@@ -1,6 +1,3 @@
-import { twMerge } from 'tailwind-merge';
-
-
 const NuwaWorldBookIcon = ({ className }: { className: string}) => {
   return (
     <svg
