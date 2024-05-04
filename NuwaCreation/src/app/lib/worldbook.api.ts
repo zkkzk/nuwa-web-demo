@@ -9,26 +9,28 @@ const apiUrlList = {
   getAll: `/api/v1/world/get_all`
 }
 
-export function create() {
+export function createWorldBook() {
   const t = useTranslations();
   return baseApiHander({
     url: apiUrlList.create,
-    successMsg: t("User.mailcodesuccess")
+    mustLogin: true,
+    successMsg: t("WorldBook.publishsuccess")
   })
 }
 
-export function deleteByUid() {
+export function deleteWorldBook() {
   const t = useTranslations();
   return baseApiHander({
     url: apiUrlList.delete,
-    successMsg: t("User.registersuccess")
+    mustLogin: true,
+    successMsg: t("WorldBook.deletesuccess")
   })
 }
 
-export function getAll() {
+export function getWorldBookAll() {
   const t = useTranslations();
   return baseApiHander({
     url: apiUrlList.getAll,
-    successMsg: t("User.resetpasswordsuccess")
+    mustLogin: true
   })
 }

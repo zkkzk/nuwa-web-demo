@@ -295,7 +295,10 @@
     "title": "标题",
     "titletoken": "在这输入标题.",
     "untitledbook": "未命名世界书",
-    "untitledbookEntry": "未命名章节"
+    "untitledbookEntry": "未命名章节",
+    "publishbtn": "发布",
+    "publishsuccess": "发布成功",
+    "deletesuccess": "删除成功"
   },
   "Me": {
     "title": "个人信息",

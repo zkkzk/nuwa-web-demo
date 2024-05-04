@@ -295,7 +295,10 @@
     "title": "Title",
     "titletoken": "Type title here.",
     "untitledbook": "Untitled World Book",
-    "untitledbookEntry": "Untitled Chapter"
+    "untitledbookEntry": "Untitled Chapter",
+    "publishbtn": "Publish",
+    "publishsuccess": "Publish succeeded",
+    "deletesuccess": "Delete succeeded"
   },
   "Me": {
     "title": "My Profile",

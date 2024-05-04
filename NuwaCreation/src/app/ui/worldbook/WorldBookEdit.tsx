@@ -1,23 +1,31 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
-import NuwaButton from "../components/NuwaButton";
+import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 import { TypeWorldBookItem } from "@/app/lib/definitions";
 import AlterMessage from "../components/AlterMessage";
 import WorldBook from "./WorldBook";
 import { WorldBookProvider } from "./WorldBookContext";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import WorldBook_Title from "./WorldBook_Title";
+import { createWorldBook } from "@/app/lib/worldbook.api";
+import { getIsLogin } from "@/app/lib/base.api";
+import { useRouter } from "@/navigation";
+import { deleteWorldBookByUid, getWorldBookByUid } from "@/app/lib/utils";
 
-function WorldBookEdit({ onDone, worldBook }: {
+function WorldBookEdit({ onDone, onPublish, worldBook }: {
   onDone?: () => void,
+  onPublish?: () => void,
   worldBook?: TypeWorldBookItem | undefined
 }) {
+  const router = useRouter();
   const t = useTranslations();
   const editModal = useDisclosure();
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
+  const [isRelease, setIsRelease] = useState(false);
+  const createWorldBookApi = createWorldBook();
+  const isLogin = getIsLogin();
 
 
   useEffect(() => {
@@ -59,21 +67,49 @@ function WorldBookEdit({ onDone, worldBook }: {
                 <div
                   className="w-full flex flex-row items-center justify-between gap-4"
                 >
-                  <NuwaButton
+                  <Button
                     isIconOnly
                     className="w-12 text-xl"
-                    size="md" color="black"
-                    variant="flat"
+                    size="md"
+                    color="primary"
                     onPress={() => {
-                    onClose();
-                  }}>
+                      onClose();
+                    }
+                  }>
                     <XMarkIcon className="h-6 w-6" />
-                  </NuwaButton>
+                  </Button>
 
                   <div className="grow overflow-hidden">
                     <WorldBook_Title />
                   </div>
-                  <div className="w-12">
+                  <div className="">
+                    <Button
+                      color="primary"
+                      isLoading={isRelease}
+                      size="md"
+                      onClick={async () => {
+                        if(!isLogin) {
+                          router.push('/login')
+                          return
+                        }
+                        setIsRelease(true);
+
+                        const lastWorldBook = getWorldBookByUid(worldBook.uid);
+                        if (lastWorldBook) {
+                          const res = await createWorldBookApi.send({
+                            "uid": lastWorldBook.uid,
+                            "data": lastWorldBook.worldBook,
+                          })
+                          if (res && res.code === 0) {
+                            deleteWorldBookByUid(worldBook.uid)
+                            onClose();
+                            onPublish && onPublish();
+                          }
+                        }
+
+                        setIsRelease(false);
+                      }}
+                    >{t("WorldBook.publishbtn")}</Button>
                   </div>
                 </div>
               </ModalHeader>

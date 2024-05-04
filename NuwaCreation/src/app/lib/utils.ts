@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { TypeChara, TypeWorldBook, TypeWorldBookEntriy, TypeWorldBookItem, TypeWorldBookList, TypeCharaList, TypeCharaListItem } from "./definitions";
 import defaultCoverBase64 from "./defalutCover";
-import { keyBy, clone } from "lodash-es";
+import { keyBy, clone, findIndex } from "lodash-es";
 
 const defaultChara = {
   name: "",
@@ -376,4 +376,37 @@ export const getWorldBookList = (): TypeWorldBookList => {
     return worldBookList ? JSON.parse(worldBookList) || [] : []
   }
   return [] as TypeWorldBookList;
+};
+
+export const getWorldBookByUid = (uid:string): TypeWorldBookItem | null => {
+  if (typeof window !== "undefined") {
+    const worldBookListJson = localStorage.getItem("worldBookList");
+    let worldBookList = [] as TypeWorldBookList;
+    if (worldBookListJson) {
+      worldBookList = JSON.parse(worldBookListJson) as TypeWorldBookList;
+    }
+    const index = findIndex(worldBookList, (item) => {
+      return item.uid === uid
+    })
+    return worldBookList ? worldBookList[index] : null
+  }
+  return null;
+};
+
+
+export const deleteWorldBookByUid = (uid:string) => {
+  if (typeof window !== "undefined") {
+    const worldBookListJson = localStorage.getItem("worldBookList");
+    let worldBookList = [] as TypeWorldBookList;
+    if (worldBookListJson) {
+      worldBookList = JSON.parse(worldBookListJson) as TypeWorldBookList;
+    }
+    const index = findIndex(worldBookList, (item) => {
+      return item.uid === uid
+    })
+
+    const newWorldBookList = worldBookList.filter((_, i) => i !== index);
+    localStorage.setItem("worldBookList", JSON.stringify(newWorldBookList));
+  }
+  return null;
 };

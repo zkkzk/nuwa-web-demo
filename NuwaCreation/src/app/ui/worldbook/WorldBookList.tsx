@@ -1,25 +1,61 @@
 "use client"
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { getWorldBookList, pushWorldBookList } from "@/app/lib/utils";
 import { useTranslations } from "next-intl";
 import WorldBookEdit from "./WorldBookEdit";
-import { TypeWorldBookItem, TypeWorldBookList } from "@/app/lib/definitions";
+import { TypeWorldBook, TypeWorldBookItem, TypeWorldBookList } from "@/app/lib/definitions";
 import WorldBookCreate from "./WorldBookCreate";
 import WorldBookOperateWrapper from "./WorldBookOperateWrapper";
 import { getIsLogin } from "@/app/lib/base.api";
-import { getAll } from "@/app/lib/worldbook.api";
+import { getWorldBookAll, deleteWorldBook as deleteWorldBook2 } from "@/app/lib/worldbook.api";
+import { CircularProgress } from "@nextui-org/react";
 
 export default function WorldBookList() {
   const t = useTranslations();
 
   const initWorldBookList = getWorldBookList();
   const [ worldBookList, setWorldBookList ] = useState<TypeWorldBookList>(initWorldBookList);
+  const [ worldBookPublishList, setWorldBookPublishList ] = useState<{
+    world: {
+      data: TypeWorldBook,
+      uid: string,
+    }
+  }[]>([]);
   const [ editWorldBook, setEditWorldBook ] = useState<TypeWorldBookItem>();
 
+  const [isInit, setIsInit] = useState(false);
+  const [startInit, setStartInit] = useState(true);
   const isLogin = getIsLogin();
+  const getWorldBookAllApi = getWorldBookAll()
+  const deleteWorldBookApi = deleteWorldBook2()
+
+  const [isLoading, setIsLoading] = useState(false);
+
   if (isLogin) {
-    const getAllApi = getAll()
+
+    useEffect(() => {
+      if (!isInit) {
+        setIsInit(true)
+      }
+    }, [])
+
+    useEffect(() => {
+      const init = async () => {
+        const res = await getWorldBookAllApi.send();
+        if (res && res.code === 0) {
+          setWorldBookPublishList(res.data);
+        }
+        
+        setIsInit(false);
+        setStartInit(false)
+      }
+      if (isInit) {
+        init();
+      }
+      
+    }, [isInit])
+  
   }
 
   const deleteWorldBook = ({index}: {index: number}) => {
@@ -56,14 +92,58 @@ export default function WorldBookList() {
               </div>
             ))}
           </div>
-          <div className="text-black text-3xl font-semibold">已发布</div>
+          {isLogin && (
+            <>
+              <div className="text-black text-3xl font-semibold">已发布</div>
+              {(startInit || isLoading) ? (
+                <div className="w-full h-[300px] flex justify-center items-center">
+                  <CircularProgress size="md" aria-label="Loading..."/>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 3xl:grid-cols-4 gap-4 py-10 overflow-visible h-auto">
+                  {worldBookPublishList.map((worldBookItem, index) => (
+                    <div key={worldBookItem.world.uid} className="w-auto h-[280px]">
+                      <WorldBookOperateWrapper
+                        worldBookItem={worldBookItem.world.data}
+                        onDelete={async () => {
+                          setIsLoading(true);
+                          const res = await deleteWorldBookApi.send({
+                            uid: worldBookItem.world.uid,
+                          })
+                          if (res && res.code === 0) {
+                            const res2 = await getWorldBookAllApi.send();
+                            if (res2 && res2.code === 0) {
+                              setWorldBookPublishList(res2.data);
+                            }
+                          }
+                          setIsLoading(false);
+                          return res;
+                        }}
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
+          )}
         </div>
       </div>
 
-      <WorldBookEdit worldBook={editWorldBook} onDone={() => {
-        setEditWorldBook(undefined);
-        setWorldBookList(getWorldBookList());
-      }} />
+      <WorldBookEdit
+        worldBook={editWorldBook}
+        onDone={() => {
+          setEditWorldBook(undefined);
+          setWorldBookList(getWorldBookList());
+        }}
+        onPublish={async () => {
+          setIsLoading(true);
+          const res = await getWorldBookAllApi.send();
+          if (res && res.code === 0) {
+            setWorldBookPublishList(res.data);
+          }
+          setIsLoading(false);
+        }}
+      />
     </>
   );
 }
