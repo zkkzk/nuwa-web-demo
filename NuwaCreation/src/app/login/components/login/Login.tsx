@@ -34,8 +34,12 @@ const InputClassNames = {
 export default function Login() {
   const t = useTranslations();
   const pathname = usePathname();
-  const params =  new URLSearchParams(window.location.search);
-  const callbackUrl = params.get('callbackUrl');
+  let callbackUrl: string | null
+  if (typeof window !== "undefined") {
+    const params =  new URLSearchParams(window.location.search);
+    callbackUrl = params.get('callbackUrl');
+  }
+  
   const router = useRouter();
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
