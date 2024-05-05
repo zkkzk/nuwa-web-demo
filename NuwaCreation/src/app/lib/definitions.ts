@@ -57,6 +57,7 @@ export type TypeCharaList = TypeCharaListItem[];
 export type TypeCharaListItem = {
   uid: string;
   chara: TypeChara;
+  cover_url?: string,
   cover: string,
 };
 export type TypeWorldBook = {

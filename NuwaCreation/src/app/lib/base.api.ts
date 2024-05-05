@@ -12,9 +12,12 @@ export const NUWASESSION = "nuwa_session"
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const getIsLogin = () => {
-  const uid = getCookie(NUWAUID)
-  const session = getCookie(NUWASESSION)
-  return !!(uid && session)
+  if (typeof document !== "undefined") {
+    const uid = getCookie(NUWAUID)
+    const session = getCookie(NUWASESSION)
+    return !!(uid && session)
+  }
+  return false;
 }
 
 export const deleteLoginCookie = () => {

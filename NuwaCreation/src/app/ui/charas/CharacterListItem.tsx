@@ -8,25 +8,27 @@ import { Button, Popover, PopoverContent, PopoverTrigger } from "@nextui-org/rea
 import { TypeCharaListItem } from "@/app/lib/definitions";
 
 
-export default function CharacterListItem({chara, onEdit, onDelete}: {
+export default function CharacterListItem({chara, isPublished = false, onEdit, onDelete}: {
   chara: TypeCharaListItem;
+  isPublished?: boolean;
   onEdit?: () => void;
   onDelete?: () => void;
 }) {
   const t = useTranslations();
-
+  
   return (
     <>
-      <div className="w-full group relative hover:scale-105">
+      <div className="w-full group flex flex-col justify-center items-center relative hover:scale-105">
         <Image
-          src={chara.cover}
+          src={(isPublished && chara.cover_url) ? chara.cover_url : chara.cover}
           width={212}
           height={250}
           alt=""
-          className="w-full h-[250px] flex-none object-cover rounded-[14px] border border-neutral-400 border-opacity-50"
+          className="w-[212px] h-[250px] flex-none object-cover rounded-[14px] border border-neutral-400 border-opacity-50"
         />
+        
         <div className="w-full h-[250px] absolute top-0 bg-gray-50/50 hidden group-hover:block" />
-        <div className="truncate px-2 w-full h-[36px] text-center text-stone-950 text-lg font-semibold leading-loose tracking-tight">
+        <div className="w-[200px] truncate px-2 h-[36px] text-center text-stone-950 text-lg font-semibold leading-loose tracking-tight">
           {chara.chara.name}
         </div>
         <div className="absolute top-4 right-4 flex flex-col gap-4">
@@ -52,14 +54,16 @@ export default function CharacterListItem({chara, onEdit, onDelete}: {
             </PopoverContent>
           </Popover>
 
-          <Button
-            className="bg-black text-white opacity-0 group-hover:opacity-100"
-            startContent={<PencilIcon className="h-5 w-5"/>}
-            isIconOnly
-            onClick={() => {
-              onEdit && onEdit()
-            }}
-          ></Button>
+          {onEdit && (
+            <Button
+              className="bg-black text-white opacity-0 group-hover:opacity-100"
+              startContent={<PencilIcon className="h-5 w-5"/>}
+              isIconOnly
+              onClick={() => {
+                onEdit && onEdit()
+              }}
+            ></Button>
+          )}
         </div>
       </div>
     </>

@@ -15,6 +15,7 @@ import { publishCharacter } from "@/app/lib/character.api";
 import { getIsLogin } from "@/app/lib/base.api";
 import { useRouter } from "@/navigation";
 import { deleteCharacterByUid, getCharacterByUid } from "@/app/lib/utils";
+import { useAmDispatch } from "../components/AlterMessageContextProvider";
 
 function CharacterEdit({ onDone, onPublish, chara }: {
   onDone?: () => void,
@@ -30,6 +31,7 @@ function CharacterEdit({ onDone, onPublish, chara }: {
   const [isRelease, setIsRelease] = useState(false);
   const publishCharacterApi = publishCharacter();
   const isLogin = getIsLogin();
+  const amDispatch = useAmDispatch();
 
 
   useEffect(() => {
@@ -83,13 +85,38 @@ function CharacterEdit({ onDone, onPublish, chara }: {
                         isLoading={isRelease}
                         size="md"
                         onClick={async () => {
+
+                          const lastCharacter = getCharacterByUid(chara.uid);
+
+                          if (!lastCharacter?.chara?.data?.name) {
+                            amDispatch({
+                              type: "add",
+                              payload: t("Previews.charactercardnamesmust"),
+                            })
+                            return;
+                          }
+                          if (!lastCharacter?.chara?.data?.description) {
+                            amDispatch({
+                              type: "add",
+                              payload: t("Previews.charactercarddescsmust"),
+                            })
+                            return;
+                          }
+                          if (!lastCharacter?.chara?.data?.first_mes) {
+                            amDispatch({
+                              type: "add",
+                              payload: t("Previews.charactercardfirstmessmust"),
+                            })
+                            return;
+                          }
+
+
                           if(!isLogin) {
                             router.push('/login')
                             return
                           }
                           setIsRelease(true);
     
-                          const lastCharacter = getCharacterByUid(chara.uid);
                           if (lastCharacter) {
                             const res = await publishCharacterApi.send({
                               "uid": lastCharacter.uid,

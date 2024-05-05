@@ -103,11 +103,12 @@ export default function CharacterList() {
                   <CircularProgress size="md" aria-label="Loading..."/>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 3xl:grid-cols-4 gap-4 py-10 overflow-visible h-auto">
+                <div className="py-10 flex flex-wrap flex-row gap-4 min-h-[60vh]">
                   {characterPublishList.map((characterItem, index) => (
                     <div key={characterItem.uid} className="w-auto h-[280px]">
                       <CharacterListItem
                         chara={characterItem.ai}
+                        isPublished={true}
                         onDelete={async () => {
                           setIsLoading(true);
                           const res = await deleteCharacterApi.send({
