@@ -10,7 +10,6 @@ export const NUWASESSION = "nuwa_session"
 
 // const baseUrl = 'http://47.88.59.68:443';
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
-debugger
 
 export const getIsLogin = () => {
   const uid = getCookie(NUWAUID)
