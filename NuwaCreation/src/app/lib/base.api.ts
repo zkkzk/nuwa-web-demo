@@ -9,7 +9,7 @@ export const NUWAUID = "nuwa_uid"
 export const NUWASESSION = "nuwa_session"
 
 // const baseUrl = 'http://47.88.59.68:443';
-const baseUrl = ‘https://roleai-server.nuwalabs.org’;
+const baseUrl = 'https://roleai-server.nuwalabs.org';
 
 export const getIsLogin = () => {
   const uid = getCookie(NUWAUID)
