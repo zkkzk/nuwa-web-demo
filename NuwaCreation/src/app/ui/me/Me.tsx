@@ -15,11 +15,10 @@ import { useEffect } from "react";
 import { editUserInfo, getUserInfo } from "@/app/lib/user.api";
 import { TypeUser } from "@/app/lib/definitions.user";
 import { trim } from "lodash-es";
-import { removeCookie } from 'typescript-cookie'
-import { deleteLoginCookie, getIsLogin, NUWASESSION, NUWAUID } from "@/app/lib/base.api";
+import { deleteLoginCookie, getIsLogin } from "@/app/lib/base.api";
 import { logout } from "@/app/login/utils/login.api";
+import Me_Wallet from "./Me_Wallet";
 const MintNFTButton = dynamic(() => import('@/app/solana/components/MintNFTButton'), { ssr: false })
-const WalletMultiButton  = dynamic(() => import('@/app/solana/components/WalletMultiButton'), { ssr: false })
 
 const styles = {
   item: "flex flex-row justify-between items-center h-20"
@@ -63,7 +62,8 @@ export default function Me() {
     editUserInfoApi.send({
       uid: userInfo.uid,
       name: userInfo.username,
-      avatar: userInfo.avatar
+      avatar: userInfo.avatar,
+      wallet: userInfo.wallet,
     }).then((res) => {
       setIsSaving(false)
     })
@@ -197,11 +197,12 @@ export default function Me() {
 
                 <WalletContextProvider>
                   <WalletModalProvider>
-                    <WalletMultiButton
-                      size="sm"
-                      shadowghost="black"
-                      className="w-[140px]"
-                    />
+                    <Me_Wallet onChange={(walletPublicKey) => {
+                      setUserInfo({
+                        ...userInfo,
+                        wallet: walletPublicKey
+                      })
+                    }} />
                   </WalletModalProvider>
                   {/* <MintNFTButton /> */}
                 </WalletContextProvider>
