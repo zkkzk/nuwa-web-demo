@@ -91,7 +91,7 @@ export default function Register() {
             isLoading={mailCodeApi.loading}
             isDisabled={count !== CountLimit}
             onClick={async () => {
-              const res = await mailCodeApi.send({email: email});
+              const res = await mailCodeApi.send({email: email, type: 1});
               if (res && res.code === 0) {
                 setRequestId(res.data.request_id)
                 setCount(CountLimit - 1)
