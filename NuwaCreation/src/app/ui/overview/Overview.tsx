@@ -127,9 +127,9 @@ function Overview() {
   }
   return (
     <div className="mx-auto max-w-7xl pb-32 flex flex-col">
-    <AlterMessage isOpen={isOpen} message={message} onClose={() => {
-      setIsOpen(false)
-    }} />
+      <AlterMessage isOpen={isOpen} message={message} onClose={() => {
+        setIsOpen(false)
+      }} />
       <div className=" overflow-hidden flex flex-col min-w-full bg-[#110F0E] text-white min-h-80 rounded-[40px] w-full relative" style={{minHeight: 320}}>
         <div className="pt-8 text-base mb-6 px-8">{t('Overview.title1')}</div>
         <div className="grow  px-8 xl:mr-[400px] min-h-6 mb-2">
@@ -151,10 +151,10 @@ function Overview() {
         <div className="lg:col-span-3 min-w-full bg-gray-100 pb-7 rounded-[40px] px-8 w-full relative pt-6">
           <div className="text-black text-3xl font-semibold mb-5">{t('Overview.quickstart')}</div>
           <div className="grid grid-row-2 gap-4">
-            <div className="grid grid-cols-3 gap-4">
+            <div className="grid grid-cols-6 gap-4">
             <Link
               href="/character"
-              className="hover:scale-105 relative flex flex-row justify-between col-span-2 h-40 bg-black rounded-lg bg-no-repeat bg-center bg-[url('/overview-create-character-bg.png')]">
+              className="col-span-4 hover:scale-105 relative flex flex-row justify-between bg-black rounded-lg bg-no-repeat bg-center bg-[url('/overview-create-character-bg.png')]">
               <div className="p-2 flex justify-between h-full">
                 <div className="w-1 h-full bg-white"></div>
               </div>
@@ -168,19 +168,11 @@ function Overview() {
               <div className="absolute top-8 left-8">
                 <div className=" text-base text-white mb-2">{t('Overview.createDigitalLife')}</div>
                 <div className="font-semibold text-3xl text-white">{t('Overview.createDigitalLife2')}</div>
-                {/* <Image
-                  className="m-2"
-                  width={33}
-                  height={10}
-                  src="/overview-create-character-arraw.png"
-                  alt=""
-                /> */}
               </div>
-              
             </Link>
             <Link
               href="/worldbook"
-              className="bg-gray-200 relative rounded-lg flex items-center justify-center hover:scale-105"
+              className="col-span-2 bg-gray-200 relative rounded-lg flex items-center justify-center hover:scale-105"
             >
               {/* <div className="w-1 h-[9rem] bg-[#212121] absolute left-2 my-2"></div> */}
               <div className="flex flex-col items-center justify-between w-full h-full my-auto p-4">
@@ -199,8 +191,6 @@ function Overview() {
                 </div>
               </div>
             </Link>
-          </div>
-          <div className="grid grid-cols-2 gap-4">
             <Button
               isLoading={isReadCharLoding}
               onClick={() => {
@@ -209,7 +199,7 @@ function Overview() {
                   ReadChar.click();
                 }
               }}
-              className="col-span-1 bg-gray-200 h-[116px] relative rounded-lg flex items-center justify-center hover:scale-105 break-words"
+              className="col-span-3 bg-gray-200 h-[116px] relative rounded-lg flex items-center justify-center hover:scale-105 break-words"
             >
               <input
                 accept=".png"
@@ -232,7 +222,7 @@ function Overview() {
                   ReadWorldBook.click();
                 }
               }}
-              className="col-span-1 bg-gray-200 h-[116px] relative rounded-lg flex items-center justify-center hover:scale-105 text-wrap"
+              className="col-span-3 bg-gray-200 h-[116px] relative rounded-lg flex items-center justify-center hover:scale-105 text-wrap"
             >
               <input
                 accept=".json"
@@ -253,7 +243,7 @@ function Overview() {
         <div className="lg:col-span-2 min-w-full bg-gray-100 pb-7 rounded-[40px] px-5 w-full relative pt-6">
           <div className="text-black text-3xl font-semibold mb-5 px-3 flex flex-row justify-between">
             <div>{t('Overview.understandandlearn')}</div>
-            <Button className="h-[32px] bg-neutral-100 rounded-[11px]" >
+            <Button className="h-8 bg-transparent" >
               <div className="text-center text-zinc-500 text-xs font-normal">{t('Overview.morebtn')}{' >'}</div>
             </Button>
           </div>
@@ -264,8 +254,8 @@ function Overview() {
                 key={index}
                 className="flex flex-row items-center group hover:bg-black h-12 w-full rounded-[9px] px-3"
               >
-                <div className="w-10">
-                  <item.icon className="w-22 h-22 fill-[#797979] group-hover:fill-white" />
+                <div className=" shrink-0 w-10">
+                  <item.icon className="w-22 min-h-22 fill-[#797979] group-hover:fill-white" />
                 </div>
                 <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight group-hover:text-white">{t('Overview.'+item.label)}</div>
               </Link>

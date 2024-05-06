@@ -108,7 +108,7 @@ function Preview({charaItem}: {charaItem: TypeCharaListItem}) {
                   className="flex flex-row items-center justify-center gap-4 absolute right-10 top-6"
                 >
                   
-                  <Button isLoading={isMakeCharLoding} color="default" variant="bordered" onPress={handleMakeChar}>{t("Preview.exportbtn")}</Button>
+                  <Button className="bg-neutral-100" isLoading={isMakeCharLoding} color="default" variant="bordered" onPress={handleMakeChar}>{t("Preview.exportbtn")}</Button>
                   {/* <NuwaButton className="h-16 w-48 text-xl" color="black" variant="flat">导出并发布</NuwaButton> */}
                 </div>
               </ModalHeader>
