@@ -18,6 +18,7 @@ import { trim } from "lodash-es";
 import { deleteLoginCookie, getIsLogin } from "@/app/lib/base.api";
 import { logout } from "@/app/login/utils/login.api";
 import Me_Wallet from "./Me_Wallet";
+import { useUserDispatch } from "@/app/contexts/UserContextProvider";
 const MintNFTButton = dynamic(() => import('@/app/solana/components/MintNFTButton'), { ssr: false })
 
 const styles = {
@@ -37,6 +38,8 @@ export default function Me() {
   const [startInit, setStartInit] = useState(true);
   const [isSaving, setIsSaving] =  useState(false);
   const isLogin = getIsLogin();
+
+  const userDispatch = useUserDispatch();
 
   if (!isLogin) {
     router.push('/login')
@@ -59,14 +62,18 @@ export default function Me() {
 
   const saveUserInfo = async () => {
     setIsSaving(true)
-    const res = await editUserInfoApi.send({
+    const newUser = {
       uid: userInfo.uid,
       name: userInfo.username,
       avatar: userInfo.avatar,
       wallet: userInfo.wallet,
-    })
+    }
+    const res = await editUserInfoApi.send(newUser)
     if (res.code === 0) {
-      router.refresh();
+      userDispatch({
+        type: "set",
+        payload: newUser
+      });
     }
     setIsSaving(false)
   }
