@@ -1,6 +1,5 @@
 'use client'
 import { Link } from "@/navigation";
-import { useTranslations } from 'next-intl';
 import { Avatar } from "@nextui-org/react";
 import { useEffect, useState } from "react";
 import { TypeUser } from "../../lib/definitions.user";
@@ -8,7 +7,7 @@ import { getUserInfo } from "../../lib/user.api";
 import { getIsLogin } from "@/app/lib/base.api";
 
 export default function HeaderAvatar() {
-  const getUserInfoApi = getUserInfo()
+  const getUserInfoApi = getUserInfo({noLoginGotoLogin: false})
   const [isInit, setIsInit] = useState(false);
   const [userInfo, setUserInfo] = useState<TypeUser>({
     uid: '',

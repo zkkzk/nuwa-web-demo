@@ -26,10 +26,12 @@ export const deleteLoginCookie = () => {
 export const baseApiHander = ({
   url,
   mustLogin = false,
+  noLoginGotoLogin = false,
   successMsg
 }: {
   url: string,
   mustLogin?: boolean,
+  noLoginGotoLogin?: boolean,
   successMsg?: string
 }) => {
   const t = useTranslations();
@@ -85,7 +87,10 @@ export const baseApiHander = ({
 
         // session 过期
         if (data.code === 604) {
-
+          if(noLoginGotoLogin) {
+            router.push('/login');
+          }
+          return;
         }
 
         amDispatch({

@@ -26,7 +26,7 @@ const styles = {
 
 export default function Me() {
   const router = useRouter();
-  const getUserInfoApi = getUserInfo()
+  const getUserInfoApi = getUserInfo({noLoginGotoLogin: true})
   const editUserInfoApi = editUserInfo()
   const logoutApi = logout()
 
