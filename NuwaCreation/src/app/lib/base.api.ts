@@ -79,10 +79,6 @@ export const baseApiHander = ({
             type: "add",
             payload: successMsg,
           })
-          amDispatch({
-            type: "add",
-            payload: '11',
-          })
           setLoading(false)
           return data;
         }
