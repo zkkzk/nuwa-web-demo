@@ -90,7 +90,8 @@ export const baseApiHander = ({
           if(noLoginGotoLogin) {
             router.push('/login');
           }
-          return;
+          setLoading(false)
+          return data;
         }
 
         amDispatch({
