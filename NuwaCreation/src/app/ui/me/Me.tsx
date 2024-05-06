@@ -57,16 +57,18 @@ export default function Me() {
     })
   }
 
-  const saveUserInfo = () => {
+  const saveUserInfo = async () => {
     setIsSaving(true)
-    editUserInfoApi.send({
+    const res = await editUserInfoApi.send({
       uid: userInfo.uid,
       name: userInfo.username,
       avatar: userInfo.avatar,
       wallet: userInfo.wallet,
-    }).then((res) => {
-      setIsSaving(false)
     })
+    if (res.code === 0) {
+      router.refresh();
+    }
+    setIsSaving(false)
   }
 
   useEffect(() => {
