@@ -7,7 +7,7 @@ import { Button, Input } from "@nextui-org/react";
 import { z } from "zod";
 import { md5 } from "js-md5"
 import { Link, usePathname, useRouter } from "@/navigation";
-import { getCookie, setCookie } from 'typescript-cookie'
+import { setCookie } from 'typescript-cookie'
 import { useAmDispatch } from "@/app/ui/components/AlterMessageContextProvider";
 import { NUWASESSION, NUWAUID } from "@/app/lib/base.api";
 import { login } from "../../utils/login.api";

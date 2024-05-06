@@ -254,7 +254,7 @@ export default function Me() {
                   onClick={() => {
                     logoutApi.send();
                     deleteLoginCookie();
-                    router.replace('/');
+                    router.push('/overview');
                   }}
                 >{t('Me.logoutbtn')}</NuwaButton>
               </div>

@@ -1,14 +1,12 @@
 import { useState } from "react";
 import { useAmDispatch } from "@/app/ui/components/AlterMessageContextProvider";
 import { useLocale, useTranslations } from "next-intl";
-import { getCookie, removeCookie, setCookie } from 'typescript-cookie'
+import { getCookie, removeCookie } from 'typescript-cookie'
 import { usePathname, useRouter } from "@/navigation";
-
 
 export const NUWAUID = "nuwa_uid"
 export const NUWASESSION = "nuwa_session"
 
-// const baseUrl = 'http://47.88.59.68:443';
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
 
 export const getIsLogin = () => {
@@ -49,7 +47,7 @@ export const baseApiHander = ({
       const uid = getCookie(NUWAUID)
       const session = getCookie(NUWASESSION)
       if (!uid || !session) {
-        router.replace('/login?callbackUrl=' + pathname);
+        router.push('/login');
         return;
       }
       fetchUrl = `${baseUrl}${url}?${new URLSearchParams({
@@ -81,15 +79,23 @@ export const baseApiHander = ({
             type: "add",
             payload: successMsg,
           })
-          setLoading(false)
-          return data;
-        } else {
           amDispatch({
             type: "add",
-            payload: data.msg,
+            payload: '11',
           })
           setLoading(false)
+          return data;
         }
+
+        // session 过期
+        if (data.code === 604) {
+
+        }
+
+        amDispatch({
+          type: "add",
+          payload: data.msg,
+        })
   
         setLoading(false)
         return data;
