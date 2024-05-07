@@ -12,6 +12,7 @@ import { createWorldBook } from "@/app/lib/worldbook.api";
 import { getIsLogin } from "@/app/lib/base.api";
 import { useRouter } from "@/navigation";
 import { deleteWorldBookByUid, getWorldBookByUid } from "@/app/lib/utils";
+import LoginModal from "@/app/nuwa-login-ui/components/LoginModal";
 
 function WorldBookEdit({ onDone, onPublish, worldBook }: {
   onDone?: () => void,
@@ -22,10 +23,10 @@ function WorldBookEdit({ onDone, onPublish, worldBook }: {
   const t = useTranslations();
   const editModal = useDisclosure();
   const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState('');
   const [isRelease, setIsRelease] = useState(false);
   const createWorldBookApi = createWorldBook();
   const isLogin = getIsLogin();
+  
 
 
   useEffect(() => {
@@ -33,13 +34,28 @@ function WorldBookEdit({ onDone, onPublish, worldBook }: {
       editModal.onOpen();
     }
   }, [worldBook])
+
+  async function publishWorldBookToServer(worldBook: TypeWorldBookItem, onClose: () => void) {
+    setIsRelease(true);
+
+    const lastWorldBook = getWorldBookByUid(worldBook.uid);
+    if (lastWorldBook) {
+      const res = await createWorldBookApi.send({
+        "uid": lastWorldBook.uid,
+        "data": lastWorldBook.worldBook,
+      })
+      if (res && res.code === 0) {
+        deleteWorldBookByUid(worldBook.uid)
+        onClose();
+        onPublish && onPublish();
+      }
+    }
+
+    setIsRelease(false);
+  }
   
   return (
     <>
-      <AlterMessage isOpen={isOpen} message={message} onClose={() => {
-        setIsOpen(false)
-      }} />
-
       {worldBook && <WorldBookProvider value={worldBook}>
       <Modal
         isDismissable={!isOpen}
@@ -88,25 +104,10 @@ function WorldBookEdit({ onDone, onPublish, worldBook }: {
                     size="md"
                     onClick={async () => {
                       if(!isLogin) {
-                        router.push('/login')
+                        setIsOpen(true);
                         return
                       }
-                      setIsRelease(true);
-
-                      const lastWorldBook = getWorldBookByUid(worldBook.uid);
-                      if (lastWorldBook) {
-                        const res = await createWorldBookApi.send({
-                          "uid": lastWorldBook.uid,
-                          "data": lastWorldBook.worldBook,
-                        })
-                        if (res && res.code === 0) {
-                          deleteWorldBookByUid(worldBook.uid)
-                          onClose();
-                          onPublish && onPublish();
-                        }
-                      }
-
-                      setIsRelease(false);
+                      publishWorldBookToServer(worldBook, onClose)
                     }}
                   >{t("WorldBook.publishbtn")}</Button>
                 </div>
@@ -118,7 +119,19 @@ function WorldBookEdit({ onDone, onPublish, worldBook }: {
           )}
         </ModalContent>
       </Modal>
-      </WorldBookProvider>}
+      
+      <LoginModal
+        isOpen={isOpen}
+        openPage="login"
+        onClose={() => {
+          setIsOpen(false);
+        }}
+        onLogin={() => {
+          setIsOpen(false);
+        }}
+      />
+      </WorldBookProvider>
+      }
     </>
   );
 }

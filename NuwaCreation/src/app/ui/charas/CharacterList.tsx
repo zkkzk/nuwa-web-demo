@@ -36,31 +36,25 @@ export default function CharacterList() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  if (isLogin) {
+  useEffect(() => {
+    if (isLoading) {
+      !isInit && setIsInit(true)
+    } else {
+      setStartInit(false)
+    }
+  }, [])
 
-    useEffect(() => {
-      if (!isInit) {
-        setIsInit(true)
-      }
-    }, [])
-
-    useEffect(() => {
-      const init = async () => {
-        const res = await getCharacterAllApi.send();
-        if (res && res.code === 0) {
-          setCharacterPublishList(res.data);
-        }
-        
-        setIsInit(false);
-        setStartInit(false)
-      }
-      if (isInit) {
-        init();
+  useEffect(() => {
+    const init = async () => {
+      const res = await getCharacterAllApi.send();
+      if (res && res.code === 0) {
+        setCharacterPublishList(res.data);
       }
       
-    }, [isInit])
-  
-  }
+      setIsInit(false);
+      setStartInit(false)
+    }
+  }, [isInit])
 
   const deleteChara = ({index}: {index: number}) => {
     const newCharaList = charaList.filter((_, i) => i !== index);
@@ -83,7 +77,7 @@ export default function CharacterList() {
         <div className="text-black text-3xl font-semibold">{t("Character.drafts")}</div>
         <div className="py-10 flex flex-wrap flex-row gap-4 min-h-[60vh]">
           {charaList.map((chara, index) => (
-            <div className="w-[212px]" key={chara.uid}>
+            <div className="w-[212px]" key={`drafts-${chara.uid}`}>
               <CharacterListItem
                 chara={chara}
                 onEdit={() => {
@@ -98,14 +92,17 @@ export default function CharacterList() {
           {isLogin && (
             <>
               <div className="text-black text-3xl font-semibold">{t("Character.published")}</div>
-              {(startInit || isLoading) ? (
-                <div className="w-full h-[300px] flex justify-center items-center">
-                  <CircularProgress size="md" aria-label="Loading..."/>
-                </div>
-              ) : (
+              <div className="relative">
+                {(startInit || isLoading) ? (
+                  <div className="absolute left-0 top-0 w-full h-full min-h-[300px] flex justify-center items-center z-10 bg-gray-50/50">
+                    <CircularProgress size="md" aria-label="Loading..."/>
+                  </div>
+                ) : (
+                  <></>
+                )}
                 <div className="py-10 flex flex-wrap flex-row gap-4 min-h-[60vh]">
                   {characterPublishList.map((characterItem, index) => (
-                    <div key={characterItem.uid} className="w-auto h-[280px]">
+                    <div key={`pulish-${characterItem.ai.uid}`} className="w-auto h-[280px]">
                       <CharacterListItem
                         chara={characterItem.ai}
                         isPublished={true}
@@ -127,7 +124,8 @@ export default function CharacterList() {
                     </div>
                   ))}
                 </div>
-              )}
+              </div>
+              
             </>
           )}
         <CharacterEdit

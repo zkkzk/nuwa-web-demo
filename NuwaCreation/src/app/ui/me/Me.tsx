@@ -16,9 +16,9 @@ import { editUserInfo, getUserInfo } from "@/app/lib/user.api";
 import { TypeUser } from "@/app/lib/definitions.user";
 import { trim } from "lodash-es";
 import { deleteLoginCookie, getIsLogin } from "@/app/lib/base.api";
-import { logout } from "@/app/login/utils/login.api";
 import Me_Wallet from "./Me_Wallet";
 import { useUserDispatch } from "@/app/contexts/UserContextProvider";
+import LoginModal from "@/app/nuwa-login-ui/components/LoginModal";
 const MintNFTButton = dynamic(() => import('@/app/solana/components/MintNFTButton'), { ssr: false })
 
 const styles = {
@@ -29,7 +29,6 @@ export default function Me() {
   const router = useRouter();
   const getUserInfoApi = getUserInfo({noLoginGotoLogin: true})
   const editUserInfoApi = editUserInfo()
-  const logoutApi = logout()
 
   const t = useTranslations();
   const [ usernameIsEdit, setUsernameIsEdit ] = useState(false);
@@ -41,9 +40,14 @@ export default function Me() {
 
   const userDispatch = useUserDispatch();
 
+  let initOpen = false;
+  let initOpenPage = '';
   if (!isLogin) {
-    router.push('/login')
+    initOpen = true;
+    initOpenPage = 'login'
   }
+  const [isOpen, setIsOpen] = useState(initOpen);
+  const [openPage, setOpenPage] = useState<string>(initOpenPage)
 
   const [userInfo, setUserInfo] = useState<TypeUser>({
     uid: '',
@@ -79,31 +83,27 @@ export default function Me() {
   }
 
   useEffect(() => {
+    if ((openPage === 'resetPassword') || (openPage === "deleteUser")) {
+      setIsOpen(true);
+    }
+  }, [openPage])
+
+  useEffect(() => {
+    if (!isOpen) {
+      setOpenPage('')
+    }
+  }, [isOpen])
+
+  useEffect(() => {
     if (!isInit) {
       setIsInit(true)
     }
   }, [])
 
-  useEffect(() => {
-    const init = async () => {
-      const res = await getUserInfoApi.send();
-      if (res && res.code === 0) {
-        setUserInfo({
-          uid: res.data.uid,
-          username: res.data.name,
-          email: res.data.email,
-          wallet: res.data.wallet,
-          avatar: res.data.avatar
-        } as TypeUser)
-      }
-      
-      setIsInit(false);
-      setStartInit(false)
-    }
+  useEffect(() => { 
     if (isInit) {
       init();
-    }
-    
+    }  
   }, [isInit])
 
   useEffect(() => {
@@ -112,165 +112,213 @@ export default function Me() {
     }
   }, [usernameIsEdit])
 
+  const init = async () => {
+    getUserInfoSaveToUserContext();
+    
+    setIsInit(false);
+    setStartInit(false)
+  }
+  const getUserInfoSaveToUserContext = async () => {
+    const res = await getUserInfoApi.send();
+    if (res && res.code === 0) {
+      const newUser = {
+        uid: res.data.uid,
+        username: res.data.name,
+        email: res.data.email,
+        wallet: res.data.wallet,
+        avatar: res.data.avatar
+      } as TypeUser
+
+      setUserInfo(newUser)
+      userDispatch({
+        type: "set",
+        payload: newUser
+      });
+    }
+  }
+
   return (
-    <div className="px-4 md:px-10 lg:px-16 xl:px-36 relative min-h-[80vh]">
-      <div className="absolute right-6 top-6">
-        <Button
-          isLoading={isSaving}
-          isDisabled={startInit}
-          className="bg-black text-white z-40"
-          size="sm"
-          onClick={() => {
-            saveUserInfo();
-          }}
-        >{t('Me.savebtn')}</Button>
-      </div>
-      <div className="gap-8 flex flex-col sm:flex-row mb-20 pt-10">
-        <div className="w-full sm:w-[200px]">
-          <Me_Avatar avatar={userInfo.avatar} onChange={setAvatar} />
+    <>     
+      <div className="px-4 md:px-10 lg:px-16 xl:px-36 relative min-h-[80vh]">
+        <div className="absolute right-6 top-6">
+          <Button
+            isLoading={isSaving}
+            isDisabled={startInit}
+            className="bg-black text-white z-40"
+            size="sm"
+            onClick={() => {
+              saveUserInfo();
+            }}
+          >{t('Me.savebtn')}</Button>
         </div>
-        
-        <div
-          className="w-full sm:grow"
-        >
-          <div
-            className="mb-16 w-full h-[30px] text-black text-3xl font-bold leading-[54px] tracking-tight"
-          >
-            {t('Me.title')}
+        <div className="gap-8 flex flex-col sm:flex-row mb-20 pt-10">
+          <div className="w-full sm:w-[200px]">
+            <Me_Avatar avatar={userInfo.avatar} onChange={setAvatar} />
           </div>
-          <div className="grid grid-cols-1 divide-y">
-            <div className={styles.item}>
-              <div className="flex flex-row gap-2 items-center">
-                <div className="w-6">
-                  <UserIcon className={""} />
+          
+          <div
+            className="w-full sm:grow"
+          >
+            <div
+              className="mb-16 w-full h-[30px] text-black text-3xl font-bold leading-[54px] tracking-tight"
+            >
+              {t('Me.title')}
+            </div>
+            <div className="grid grid-cols-1 divide-y">
+              <div className={styles.item}>
+                <div className="flex flex-row gap-2 items-center">
+                  <div className="w-6">
+                    <UserIcon className={""} />
+                  </div>
+                  <div className="mr-10 opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.usename')}</div>
                 </div>
-                <div className="mr-10 opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.usename')}</div>
+                <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight flex flex-row">
+                  {!startInit ? (
+                    <>
+                      <Input
+                        ref={usernameRef}
+                        type="text"
+                        size="sm"
+                        variant="underlined"
+                        placeholder={t('Me.usenametoken')}
+                        className={`${usernameIsEdit ? "flex" : "hidden"}`}
+                        value={userInfo.username}
+                        onChange={(e) => {
+                          setUserInfo({
+                            ...userInfo,
+                            username: trim(e.target.value)
+                          })
+                        }}
+                        onBlur={() => {
+                          setUsernameIsEdit(false);
+                        }}
+                      />
+                        <div
+                        className={`${!usernameIsEdit ? "block" : "hidden"}`}
+                          onClick={() => {
+                            setUsernameIsEdit(true);
+                          }}
+                        >{userInfo.username || t('Me.usenametoken')}</div>
+                    </>
+                  ): (
+                    <Button variant="light" isLoading />
+                  )}
+                  
+                </div>
               </div>
-              <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight flex flex-row">
-                {!startInit ? (
-                  <>
-                    <Input
-                      ref={usernameRef}
-                      type="text"
-                      size="sm"
-                      variant="underlined"
-                      placeholder={t('Me.usenametoken')}
-                      className={`${usernameIsEdit ? "flex" : "hidden"}`}
-                      value={userInfo.username}
-                      onChange={(e) => {
+              <div className={styles.item}>
+                <div className="flex flex-row gap-2 items-center">
+                  <div className="w-6">
+                    <EnvelopeIcon className={""} />
+                  </div>
+                  <div className="mr-10 opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.email')}</div>
+                </div>
+                <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
+                  {!startInit ? (
+                      <div>{userInfo.email}</div>
+                  ): (
+                    <Button variant="light" isLoading />
+                  )}
+                </div>
+              </div>
+              <div className={styles.item}>
+                <div className="flex flex-row gap-2 items-center">
+                  <div className="w-6">
+                    <WalletIcon className={""} />
+                  </div>
+                  <div className="mr-10 opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.web3wallet')}</div>
+                </div>
+                <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
+
+                  <WalletContextProvider>
+                    <WalletModalProvider>
+                      <Me_Wallet onChange={(walletPublicKey) => {
                         setUserInfo({
                           ...userInfo,
-                          username: trim(e.target.value)
+                          wallet: walletPublicKey
                         })
-                      }}
-                      onBlur={() => {
-                        setUsernameIsEdit(false);
-                      }}
-                    />
-                      <div
-                      className={`${!usernameIsEdit ? "block" : "hidden"}`}
-                        onClick={() => {
-                          setUsernameIsEdit(true);
-                        }}
-                      >{userInfo.username || t('Me.usenametoken')}</div>
-                  </>
-                ): (
-                  <Button variant="light" isLoading />
-                )}
-                
-              </div>
-            </div>
-            <div className={styles.item}>
-              <div className="flex flex-row gap-2 items-center">
-                <div className="w-6">
-                  <EnvelopeIcon className={""} />
+                      }} />
+                    </WalletModalProvider>
+                    {/* <MintNFTButton /> */}
+                  </WalletContextProvider>
                 </div>
-                <div className="mr-10 opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.email')}</div>
               </div>
-              <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
-                {!startInit ? (
-                    <div>{userInfo.email}</div>
-                ): (
-                  <Button variant="light" isLoading />
-                )}
-              </div>
-            </div>
-            <div className={styles.item}>
-              <div className="flex flex-row gap-2 items-center">
-                <div className="w-6">
-                  <WalletIcon className={""} />
+              <div className={styles.item}>
+                <div className="flex flex-row gap-2 items-center">
+                  <div className="w-6">
+                    <LockClosedIcon className={""} />
+                  </div>
+                  <div className="mr-10 opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.updatepassword')}</div>
                 </div>
-                <div className="mr-10 opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.web3wallet')}</div>
+                <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
+                  <NuwaButton
+                    size="sm"
+                    shadowghost="black"
+                    className="w-[140px]"
+                    onClick={() => {
+                      setOpenPage('resetPassword')
+                    }}
+                  >{t('Me.updatepasswordbtn')}</NuwaButton>
+                </div>
               </div>
-              <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
-
-                <WalletContextProvider>
-                  <WalletModalProvider>
-                    <Me_Wallet onChange={(walletPublicKey) => {
-                      setUserInfo({
-                        ...userInfo,
-                        wallet: walletPublicKey
+              <div className={styles.item}>
+                <div className="flex flex-row gap-2 items-center">
+                  <div className="w-6">
+                    <PowerIcon className={""} />
+                  </div>
+                  <div className="mr-10 opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.deleteaccount')}</div>
+                </div>
+                <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
+                  <NuwaButton
+                    size="sm"
+                    shadowghost="black"
+                    className="w-[140px]"
+                    onClick={() => {
+                      setOpenPage('deleteUser')
+                    }}
+                  >{t('Me.deleteaccountbtn')}</NuwaButton>
+                </div>
+              </div>
+              <div className={styles.item}>
+                <div></div>
+                <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
+                  <NuwaButton
+                    size="sm"
+                    shadowghost="black"
+                    className="w-[140px]"
+                    onClick={() => {
+                      deleteLoginCookie();
+                      userDispatch({
+                        type: 'set',
+                        payload: null
                       })
-                    }} />
-                  </WalletModalProvider>
-                  {/* <MintNFTButton /> */}
-                </WalletContextProvider>
-              </div>
-            </div>
-            <div className={styles.item}>
-              <div className="flex flex-row gap-2 items-center">
-                <div className="w-6">
-                  <LockClosedIcon className={""} />
+                      router.push('/overview');
+                    }}
+                  >{t('Me.logoutbtn')}</NuwaButton>
                 </div>
-                <div className="mr-10 opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.updatepassword')}</div>
-              </div>
-              <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
-                <NuwaButton
-                  size="sm"
-                  shadowghost="black"
-                  className="w-[140px]"
-                  onClick={() => {
-                    router.push('/resetpassword')
-                  }}
-                >{t('Me.updatepasswordbtn')}</NuwaButton>
-              </div>
-            </div>
-            <div className={styles.item}>
-              <div className="flex flex-row gap-2 items-center">
-                <div className="w-6">
-                  <PowerIcon className={""} />
-                </div>
-                <div className="mr-10 opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.deleteaccount')}</div>
-              </div>
-              <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
-                <NuwaButton
-                  size="sm"
-                  shadowghost="black"
-                  className="w-[140px]"
-                  onClick={() => {
-                    router.push('/deleteuser')
-                  }}
-                >{t('Me.deleteaccountbtn')}</NuwaButton>
-              </div>
-            </div>
-            <div className={styles.item}>
-              <div></div>
-              <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
-                <NuwaButton
-                  size="sm"
-                  shadowghost="black"
-                  className="w-[140px]"
-                  onClick={() => {
-                    logoutApi.send();
-                    deleteLoginCookie();
-                    router.push('/overview');
-                  }}
-                >{t('Me.logoutbtn')}</NuwaButton>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+      <LoginModal
+        isOpen={isOpen}
+        openPage={openPage}
+        onClose={() => {
+          setIsOpen(false);
+        }}
+        onLogin={() => {
+          setIsOpen(false);
+          init();
+        }}
+        onResetPassword={() => {
+          setIsOpen(false);
+        }}
+        onDeleteUser={() => {
+          setIsOpen(false);
+          router.replace('/');
+        }}
+      />
+    </>
   );
 }

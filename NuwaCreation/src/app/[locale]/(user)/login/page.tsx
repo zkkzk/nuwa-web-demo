@@ -1,4 +1,5 @@
-import Login from '@/app/login/components/login/Login'
+
+import Login from '@/app/nuwa-login-ui/components/login/Login'
 import React from 'react'
 
 function LoginPage() {

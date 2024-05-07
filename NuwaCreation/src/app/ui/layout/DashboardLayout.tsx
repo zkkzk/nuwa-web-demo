@@ -26,10 +26,6 @@ export default function DashboardLayout({
   const [startInit, setStartInit] = useState(true);
   const isLogin = getIsLogin();
 
-  if (!isLogin) {
-    router.push('/login')
-  }
-
   const [userInfo, setUserInfo] = useState<TypeUser>({
     uid: '',
     username: '',
@@ -39,7 +35,7 @@ export default function DashboardLayout({
   });
   
   useEffect(() => {
-    if (!isInit) {
+    if (!isInit && isLogin) {
       setIsInit(true)
     }
   }, [])

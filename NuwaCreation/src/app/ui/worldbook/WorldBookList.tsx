@@ -32,31 +32,30 @@ export default function WorldBookList() {
 
   const [isLoading, setIsLoading] = useState(false);
 
-  if (isLogin) {
+  useEffect(() => {
+    if (isLoading) {
+      !isInit && setIsInit(true)
+    } else {
+      setStartInit(false)
+    }
+  }, [])
 
-    useEffect(() => {
-      if (!isInit) {
-        setIsInit(true)
-      }
-    }, [])
-
-    useEffect(() => {
-      const init = async () => {
-        const res = await getWorldBookAllApi.send();
-        if (res && res.code === 0) {
-          setWorldBookPublishList(res.data);
-        }
-        
-        setIsInit(false);
-        setStartInit(false)
-      }
-      if (isInit) {
-        init();
+  useEffect(() => {
+    const init = async () => {
+      const res = await getWorldBookAllApi.send();
+      if (res && res.code === 0) {
+        setWorldBookPublishList(res.data);
       }
       
-    }, [isInit])
-  
-  }
+      setIsInit(false);
+      setStartInit(false)
+    }
+
+    if (isInit && isLogin) {
+      init();
+    }
+    
+  }, [isInit])
 
   const deleteWorldBook = ({index}: {index: number}) => {
     const newWorldBookList = worldBookList.filter((_, i) => i !== index);
@@ -79,7 +78,7 @@ export default function WorldBookList() {
           <div className="text-black text-3xl font-semibold">{t("WorldBook.drafts")}</div>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 3xl:grid-cols-4 gap-4 py-10 overflow-visible h-auto">
             {worldBookList.map((worldBookItem, index) => (
-              <div key={worldBookItem.uid} className="w-auto h-[280px]">
+              <div key={`drafts-${worldBookItem.uid}`} className="w-auto h-[280px]">
                 <WorldBookOperateWrapper
                   worldBookItem={worldBookItem.worldBook}
                   onEdit={() => {
@@ -95,35 +94,37 @@ export default function WorldBookList() {
           {isLogin && (
             <>
               <div className="text-black text-3xl font-semibold">{t("WorldBook.published")}</div>
-              {(startInit || isLoading) ? (
-                <div className="w-full h-[300px] flex justify-center items-center">
-                  <CircularProgress size="md" aria-label="Loading..."/>
-                </div>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 3xl:grid-cols-4 gap-4 py-10 overflow-visible h-auto">
-                  {worldBookPublishList.map((worldBookItem, index) => (
-                    <div key={worldBookItem.world.uid} className="w-auto h-[280px]">
-                      <WorldBookOperateWrapper
-                        worldBookItem={worldBookItem.world.data}
-                        onDelete={async () => {
-                          setIsLoading(true);
-                          const res = await deleteWorldBookApi.send({
-                            uid: worldBookItem.world.uid,
-                          })
-                          if (res && res.code === 0) {
-                            const res2 = await getWorldBookAllApi.send();
-                            if (res2 && res2.code === 0) {
-                              setWorldBookPublishList(res2.data);
+              <div className="relative">
+                {(startInit || isLoading) ? (
+                  <div className="absolute left-0 top-0 w-full h-full min-h-[300px] flex justify-center items-center z-10 bg-gray-50/50">
+                    <CircularProgress size="md" aria-label="Loading..."/>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-3 2xl:grid-cols-3 3xl:grid-cols-4 3xl:grid-cols-4 gap-4 py-10 overflow-visible h-auto">
+                    {worldBookPublishList.map((worldBookItem, index) => (
+                      <div key={`publish-${worldBookItem.world.uid}`} className="w-auto h-[280px]">
+                        <WorldBookOperateWrapper
+                          worldBookItem={worldBookItem.world.data}
+                          onDelete={async () => {
+                            setIsLoading(true);
+                            const res = await deleteWorldBookApi.send({
+                              uid: worldBookItem.world.uid,
+                            })
+                            if (res && res.code === 0) {
+                              const res2 = await getWorldBookAllApi.send();
+                              if (res2 && res2.code === 0) {
+                                setWorldBookPublishList(res2.data);
+                              }
                             }
-                          }
-                          setIsLoading(false);
-                          return res;
-                        }}
-                      />
-                    </div>
-                  ))}
-                </div>
-              )}
+                            setIsLoading(false);
+                            return res;
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
             </>
           )}
         </div>

@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "@/navigation";
 export const NUWAUID = "nuwa_uid"
 export const NUWASESSION = "nuwa_session"
 
-const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+const baseUrl = 'https://roleai-server.nuwalabs.org';
 
 export const getIsLogin = () => {
   if (typeof document !== "undefined") {
@@ -49,7 +49,6 @@ export const baseApiHander = ({
       const uid = getCookie(NUWAUID)
       const session = getCookie(NUWASESSION)
       if (!uid || !session) {
-        // router.push('/login');
         return;
       }
       fetchUrl = `${baseUrl}${url}?${new URLSearchParams({

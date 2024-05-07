@@ -1,4 +1,4 @@
-import { baseApiHander } from "@/app/lib/base.api";
+import { baseApiHander } from "./base.api";
 import { useTranslations } from "next-intl";
 
 

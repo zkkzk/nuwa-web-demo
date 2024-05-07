@@ -1,4 +1,5 @@
-import ResetPassword from '@/app/login/components/resetPassword/ResetPassword'
+
+import ResetPassword from '@/app/nuwa-login-ui/components/resetPassword/ResetPassword'
 import React from 'react'
 
 function ResetpwdPage() {

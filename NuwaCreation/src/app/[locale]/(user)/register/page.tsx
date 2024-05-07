@@ -1,4 +1,5 @@
-import Register from '@/app/login/components/register/Register'
+
+import Register from '@/app/nuwa-login-ui/components/register/Register'
 import React from 'react'
 
 function RegisterPage() {
