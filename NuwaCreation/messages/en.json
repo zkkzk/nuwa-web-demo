@@ -305,7 +305,8 @@
     "publishsuccess": "Publish succeeded",
     "deletesuccess": "Delete succeeded",
     "drafts": "Drafts",
-    "published": "Published"
+    "published": "Published",
+    "savetip": "Automatically save after modification"
   },
   "Me": {
     "title": "My Profile",

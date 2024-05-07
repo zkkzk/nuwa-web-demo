@@ -5,7 +5,13 @@ import { useTranslations } from "next-intl";
 import { TypeWorldBook } from "@/app/lib/definitions";
 import Image from "next/image";
 
-export default function WorldBookItem({worldBookItem}: {worldBookItem: TypeWorldBook}) {
+export default function WorldBookItem({
+  worldBookItem,
+  btns
+}: {
+  worldBookItem: TypeWorldBook,
+  btns?: React.ReactNode
+}) {
   const t = useTranslations();
 
   return (
@@ -23,10 +29,18 @@ export default function WorldBookItem({worldBookItem}: {worldBookItem: TypeWorld
           <div className="ml-2 text-black font-semibold text-2xl line-clamp-1 border-b border-solid border-neutral-900">{worldBookItem.name}</div>
         </div>
         <div className="mt-6 overflow-y-hidden grow w-auto text-neutral-700 break-words">
-        {Object.keys(worldBookItem?.entries).map((key) => (
-          <p key={`${worldBookItem.name}-entries${key}`}>{worldBookItem.entries[key].comment}</p>
+        {Object.keys(worldBookItem?.entries).map((key, index) => (
+          <>
+            {index < 6 && (
+              <p className="truncate" key={`${worldBookItem.name}-entries${key}`}>{worldBookItem.entries[key].comment}</p>
+            )}
+          </>
         ))}
+          
         </div>
+        {btns && (
+          <div className="mt-4">{btns}</div>
+        )}
       </div>
     </>
   );

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "@/navigation";
 import NuwaButton from "../components/NuwaButton";
 import Me_Avatar from "./Me_Avatar";
@@ -27,6 +27,7 @@ const styles = {
 
 export default function Me() {
   const router = useRouter();
+  const locale = useLocale();
   const getUserInfoApi = getUserInfo({noLoginGotoLogin: true})
   const editUserInfoApi = editUserInfo()
 
@@ -36,7 +37,7 @@ export default function Me() {
   const [isInit, setIsInit] = useState(false);
   const [startInit, setStartInit] = useState(true);
   const [isSaving, setIsSaving] =  useState(false);
-  const isLogin = getIsLogin();
+  const [isLogin, setIsLogin] = useState(getIsLogin());
 
   const userDispatch = useUserDispatch();
 
@@ -95,6 +96,12 @@ export default function Me() {
   }, [isOpen])
 
   useEffect(() => {
+    if (isLogin) {
+      setIsInit(true)
+    }
+  }, [isLogin])
+
+  useEffect(() => {
     if (!isInit) {
       setIsInit(true)
     }
@@ -135,6 +142,21 @@ export default function Me() {
         payload: newUser
       });
     }
+  }
+
+  function logoutHandler() {
+    deleteLoginCookie();
+    userDispatch({
+      type: 'set',
+      payload: null
+    });
+    setUserInfo({
+      uid: '',
+      username: '',
+      email: '',
+      wallet: '',
+      avatar: ''
+    })
   }
 
   return (
@@ -287,11 +309,7 @@ export default function Me() {
                     shadowghost="black"
                     className="w-[140px]"
                     onClick={() => {
-                      deleteLoginCookie();
-                      userDispatch({
-                        type: 'set',
-                        payload: null
-                      })
+                      logoutHandler();
                       router.push('/overview');
                     }}
                   >{t('Me.logoutbtn')}</NuwaButton>
@@ -302,6 +320,8 @@ export default function Me() {
         </div>
       </div>
       <LoginModal
+        locale={locale}
+        isCloseable={isLogin}
         isOpen={isOpen}
         openPage={openPage}
         onClose={() => {
@@ -309,10 +329,11 @@ export default function Me() {
         }}
         onLogin={() => {
           setIsOpen(false);
-          init();
+          setIsLogin(true);
         }}
         onResetPassword={() => {
-          setIsOpen(false);
+          setOpenPage("login");
+          logoutHandler();
         }}
         onDeleteUser={() => {
           setIsOpen(false);
@@ -322,3 +343,7 @@ export default function Me() {
     </>
   );
 }
+function useLocal() {
+  throw new Error("Function not implemented.");
+}
+

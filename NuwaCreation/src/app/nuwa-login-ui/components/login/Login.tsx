@@ -2,11 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 import { Button, Input } from "@nextui-org/react";
 import { z } from "zod";
 import { md5 } from "js-md5"
-import { Link } from "@/navigation";
 import { setCookie } from 'typescript-cookie'
 import { NUWASESSION, NUWAUID } from "../../utils/base.api";
 import { login } from "../../utils/login.api";
@@ -15,22 +13,22 @@ import { useAlterDispatch } from "../Alter/AlterContextProvider";
 
 
 export default function Login({
+  labels,
   gotoRegister,
   gotoResetPassword,
   onLogin,
 }: {
+  labels: any,
   gotoRegister?: () => void,
   gotoResetPassword?: () => void,
   onLogin?: () => void;
 }) {
-  const t = useTranslations();
   
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
 
   const FormSchema = z.object({
-    email: z.string().email({ message: t("UserFormSchema.email") }),
-    password: z.string().min(6, { message: t("UserFormSchema.password") })
+    email: z.string().email({ message: labels.UserFormSchema.email })
   });
 
   const loginApi = login();
@@ -45,8 +43,8 @@ export default function Login({
             <Image width={37} height={50} src="/registerIcon1.png" alt="" />
             <Image width={149} height={50} src="/registerIcon2.png" alt="" />
           </div>
-          <div className="w-full text-center text-white text-2xl font-bold mb-8 mt-5">{t("User.logintitle")}</div>
-          <div className="w-full text-center text-white text-sm font-normal]">{t("User.logintitle2")}</div>
+          <div className="w-full text-center text-white text-2xl font-bold mb-8 mt-5">{labels.User.logintitle}</div>
+          <div className="w-full text-center text-white text-sm font-normal]">{labels.User.logintitle2}</div>
           <Input
             color="default"
             type="email"
@@ -54,7 +52,7 @@ export default function Login({
             classNames={InputClassNames}
             isInvalid={false}
             errorMessage=""
-            placeholder={t('User.email')}
+            placeholder={labels.User.email}
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -65,7 +63,7 @@ export default function Login({
             type="password"
             size="md"
             classNames={InputClassNames}
-            placeholder={t('User.password')}
+            placeholder={labels.User.password}
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
@@ -77,15 +75,15 @@ export default function Login({
               onClick={() => {
                 gotoResetPassword && gotoResetPassword();
               }}
-            >{t("User.loginforgotpassword")}</div>
+            >{labels.User.loginforgotpassword}</div>
             <div className="w-full mt-4">
-              <span className="text-white text-xs font-normal">{t("User.loginsignuptitle")}</span>
-              <div
+              <span className="text-white text-xs font-normal mr-2">{labels.User.loginsignuptitle}</span>
+              <span
                 className="text-blue-400 text-xs font-normal cursor-pointer"
                 onClick={() => {
                   gotoRegister && gotoRegister();
                 }}
-              >{t("User.loginsignuplink")}</div>
+              >{labels.User.loginsignuplink}</span>
             </div>
           </div>
         </div>
@@ -94,7 +92,7 @@ export default function Login({
           size="lg"
           isDisabled={(!email || !password)}
           isLoading={loginApi.loading}
-          className="mt-10 w-full bg-zinc-800 rounded-2xl text-white"
+          className="w-full bg-zinc-800 rounded-2xl text-white"
           onClick={async () => {
             const validatedFields = FormSchema.safeParse({
               email: email,
@@ -120,7 +118,7 @@ export default function Login({
             }
           }}
         >
-          {t("User.loginsubmit")}
+          {labels.User.loginsubmit}
         </Button>
       </div>
     </div>

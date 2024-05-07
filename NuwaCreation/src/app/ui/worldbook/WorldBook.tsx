@@ -7,7 +7,6 @@ import {
   PopoverTrigger,
   Tab,
   Tabs,
-  Tooltip,
 } from "@nextui-org/react";
 import { defaultWorldBookEntry, uuid } from "@/app/lib/utils";
 import { useTranslations } from "next-intl";
@@ -134,18 +133,6 @@ export default function WorldBook({worldBooka, isPreview = false}: {
         ...worldBookItem,
         worldBook: {
           ...worldBook,
-        }
-      },
-    })
-  }
-  const setWorldBookItemName = (newValue:string) => {
-    worldBookItemDispatch({
-      type: "changed",
-      payload: {
-        ...worldBookItem,
-        worldBook: {
-          ...worldBook,
-          name: newValue
         }
       },
     })

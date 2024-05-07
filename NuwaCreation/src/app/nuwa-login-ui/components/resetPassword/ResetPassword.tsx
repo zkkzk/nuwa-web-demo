@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
 import { useEffect } from "react";
 import { Button, Input } from "@nextui-org/react";
 import { z } from "zod";
@@ -15,11 +14,12 @@ import { useAlterDispatch } from "../Alter/AlterContextProvider";
 const CountLimit = 60;
 
 export default function ResetPassword({
+  labels,
   onResetPassword
 }: {
+  labels: any,
   onResetPassword?: () => void;
 }) {
-  const t = useTranslations();
   const [ email, setEmail ] = useState('');
   const [ code, setCode ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -31,9 +31,9 @@ export default function ResetPassword({
   const resetPasswordApi = resetPassword();
 
   const FormSchema = z.object({
-    email: z.string().email({ message: t("UserFormSchema.email") }),
-    code: z.string().length(5, { message: t("UserFormSchema.code") }),
-    password: z.string().min(6, { message: t("UserFormSchema.password") }),
+    email: z.string().email({ message: labels.UserFormSchema.email }),
+    code: z.string().length(5, { message: labels.UserFormSchema.code }),
+    password: z.string().min(6, { message: labels.UserFormSchema.password }),
     requestId: z.string()
   });
 
@@ -58,7 +58,7 @@ export default function ResetPassword({
             <Image width={37} height={50} src="/registerIcon1.png" alt="" />
             <Image width={149} height={50} src="/registerIcon2.png" alt="" />
           </div>
-          <div className="w-full text-center text-white text-2xl font-bold mb-8 mt-5">{t("User.resetpasswordtitle")}</div>
+          <div className="w-full text-center text-white text-2xl font-bold mb-8 mt-5">{labels.User.resetpasswordtitle}</div>
           <Input
             color="default"
             type="email"
@@ -66,7 +66,7 @@ export default function ResetPassword({
             classNames={InputClassNames}
             isInvalid={false}
             errorMessage=""
-            placeholder={t('User.email')}
+            placeholder={labels.User.email}
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -86,7 +86,7 @@ export default function ResetPassword({
                 }
               }}
             >
-              {(count !== CountLimit) ? `${count}s` : t("User.resetpasswordsend")}
+              {(count !== CountLimit) ? `${count}s` : labels.User.resetpasswordsend}
             </Button>
             }
           />
@@ -95,7 +95,7 @@ export default function ResetPassword({
             type="text"
             size="md"
             classNames={InputClassNames}
-            placeholder={t('User.code')}
+            placeholder={labels.User.code}
             value={code}
             onChange={(e) => {
               setCode(e.target.value);
@@ -106,7 +106,7 @@ export default function ResetPassword({
             type="password"
             size="md"
             classNames={InputClassNames}
-            placeholder={t('User.password')}
+            placeholder={labels.User.password}
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
@@ -147,7 +147,7 @@ export default function ResetPassword({
             }
           }}
         >
-          {t("User.resetpasswordsubmit")}
+          {labels.User.resetpasswordsubmit}
         </Button>
       </div>
       

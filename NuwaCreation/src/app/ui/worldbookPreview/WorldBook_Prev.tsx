@@ -1,18 +1,12 @@
 "use client";
 import React, { useEffect } from "react";
 import {
-  Button,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
   Tooltip,
 } from "@nextui-org/react";
-import { uuid } from "@/app/lib/utils";
 import { useTranslations } from "next-intl";
 import { isNull } from "lodash-es";
-import { PlusCircleIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import NuwaButton from "../components/NuwaButton";
-import { TypeWorldBook, TypeWorldBookEntriy } from "@/app/lib/definitions";
+import { TypeWorldBook } from "@/app/lib/definitions";
 import WorldBook_Entry from "./WorldBook_Entry";
 import { useWorldBookItem, useWorldBookItemDispatch } from "../worldbook/WorldBookContext";
 
@@ -33,40 +27,6 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
   }
   const [selectedEntry, setSelectedEntry] = React.useState(initSelectedEntry);
 
-  const handleDeleteButtonClick = (id: any) => {
-    // Implement the logic to delete the entry with the given id
-    setWorldBookItemDeleteEntries(id);
-    if (selectedEntry?.uid === id) {
-      setSelectedEntry(worldBook?.entries[Object.keys(worldBook?.entries)[0]])
-    }
-  };
-
-  const handleAddNewBookClick = () => {
-    const uid = uuid();
-    const defaultTemplate: TypeWorldBookEntriy = {
-      uid: uid,
-      keys: [],
-      secondary_keys: [],
-      comment: "",
-      content: "",
-      constant: true,
-      selective: true,
-      insertion_order: 100,
-      enabled: true,
-      position: 0,
-      depth: 4,
-      extensions: {
-        exclude_recursion: false,
-        display_index: uid,
-        probability: 100,
-        useProbability: true,
-      },
-    };
-
-    setWorldBookItemInNewEntries(defaultTemplate);
-    setSelectedEntry(defaultTemplate)
-  };
-
   useEffect(() => {
     isNull(selectedEntry) && worldBook?.entries && Object.keys(worldBook.entries).length > 0 &&setSelectedEntry(worldBook?.entries[0])
   }, [worldBook])
@@ -80,48 +40,6 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
       },
     })
   }
-  const setWorldBookItemInNewEntries = (newValue:TypeWorldBookEntriy) => {
-    worldBookItemDispatch({
-      type: "changed",
-      payload: {
-        ...worldBookItem,
-        worldBook: {
-          ...worldBook,
-          entries: {
-            ...worldBook?.entries,
-            [newValue.uid]: newValue
-          }
-        }
-      },
-    })
-  }
-  const setWorldBookItemDeleteEntries = (key: string) => {
-
-    delete worldBook?.entries[key];
-
-    
-    worldBookItemDispatch({
-      type: "changed",
-      payload: {
-        ...worldBookItem,
-        worldBook: {
-          ...worldBook,
-        }
-      },
-    })
-  }
-  const setWorldBookItemName = (newValue:string) => {
-    worldBookItemDispatch({
-      type: "changed",
-      payload: {
-        ...worldBookItem,
-        worldBook: {
-          ...worldBook,
-          name: newValue
-        }
-      },
-    })
-  }
   
   return (
     <>
@@ -131,7 +49,7 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
             className="z-10 -mb-9 pb-9 px-2 w-7/12 h-[132px] rounded-t-[40px] flex justify-center items-center bg-[#313131] text-white font-semibold text-[20px]"
           >
             
-            <Tooltip showArrow={true} color="primary" content={worldBook?.name || t('WorldBook.untitledbook')} className="text-lg">
+            <Tooltip classNames={{ content: [ "w-[80vh]"] }} color="primary" content={worldBook?.name || t('WorldBook.untitledbook')} className="text-lg">
               <div className="px-4 w-full bg-transparent outline-none disabled:bg-transparent truncate" >{worldBook?.name}</div>
             </Tooltip>
           </div>
@@ -147,8 +65,13 @@ export default function WorldBook_Prev({worldBooka, isPreview = false}: {
                   setSelectedEntry(worldBook.entries[key]);
                 }}
               >
-                <Tooltip showArrow={true} color="primary" content={worldBook.entries[key].comment || t('WorldBook.untitledbook')} className="text-lg">
-                  <div className="mx-2 w-full truncate">{worldBook.entries[key].comment || t('WorldBook.untitledbook')}</div>
+                <Tooltip classNames={{ content: [ "w-[80vh]"] }} color="primary" content={worldBook.entries[key].comment || t('WorldBook.untitledbook')} className="text-lg">
+                  <div
+                    className="mx-2 w-full truncate"
+                    onClick={() => {
+                      setSelectedEntry(worldBook.entries[key]);
+                    }}
+                  >{worldBook.entries[key].comment || t('WorldBook.untitledbook')}</div>
                 </Tooltip>
               </NuwaButton>
             ))}

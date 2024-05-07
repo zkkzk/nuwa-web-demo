@@ -305,7 +305,8 @@
     "publishsuccess": "发布成功",
     "deletesuccess": "删除成功",
     "drafts": "草稿箱",
-    "published": "已发布"
+    "published": "已发布",
+    "savetip": "修改后自动保存"
   },
   "Me": {
     "title": "个人信息",

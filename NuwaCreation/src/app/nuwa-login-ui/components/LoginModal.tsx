@@ -8,11 +8,16 @@ import Register from "./register/Register";
 import ResetPassword from "./resetPassword/ResetPassword";
 import DeleteUser from "./deleteUser/DeleteUser";
 import { ArrowLeftIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import zhCNLabels from "../labels/zh-CN";
+import enLabels from "../labels/en";
 
-export default function LoginModal({isOpen = false, openPage = 'login', onClose, onLogin, onRegister, onResetPassword, onDeleteUser}:
+
+export default function LoginModal({isOpen = false, openPage = 'login', locale = 'en', isCloseable = true, onClose, onLogin, onRegister, onResetPassword, onDeleteUser}:
   {
     isOpen?: boolean, 
     openPage?: string,
+    locale?: string,
+    isCloseable?: boolean,
     onClose: () => void,
     onLogin?: () => void, 
     onRegister?: () => void,
@@ -23,6 +28,7 @@ export default function LoginModal({isOpen = false, openPage = 'login', onClose,
   const msgModal = useDisclosure({isOpen: isOpen});
   const [page, setPage] = useState(openPage);
   const [isBack, setIsBack] = useState(false);
+  const labels = locale === 'en' ? enLabels : zhCNLabels;
 
   useEffect(() => {
     if (isOpen) {
@@ -30,8 +36,13 @@ export default function LoginModal({isOpen = false, openPage = 'login', onClose,
     }
   }, [isOpen])
 
+  useEffect(() => {
+    setPage(openPage);
+  }, [openPage])
+
   return (
     <Modal
+      isDismissable={isCloseable}
       isOpen={msgModal.isOpen}
       onClose={() => {
         onClose();
@@ -63,19 +74,23 @@ export default function LoginModal({isOpen = false, openPage = 'login', onClose,
                   </Button>
                   )}
                   
-                  <Button
-                    isIconOnly
-                    className="absolute right-2 top-2"
-                    size="md"
-                    variant="light"
-                    onPress={() => {
-                      onClose();
-                    }}
-                  >
-                      <XMarkIcon className="h-6 w-6 text-white fill-white" />
-                  </Button>
+                  {isCloseable && (
+                    <Button
+                      isIconOnly
+                      className="absolute right-2 top-2"
+                      size="md"
+                      variant="light"
+                      onPress={() => {
+                        onClose();
+                      }}
+                    >
+                        <XMarkIcon className="h-6 w-6 text-white fill-white" />
+                    </Button>
+                  )}
+                  
                   <div className={`${page === "login" ? 'block' : 'hidden'} w-full h-full`}>
                     <Login
+                      labels={labels}
                       onLogin={onLogin}
                       gotoRegister={() => {
                         setIsBack(true);
@@ -87,31 +102,41 @@ export default function LoginModal({isOpen = false, openPage = 'login', onClose,
                       }} />
                   </div>
                   <div className={`${page === "register" ? 'block' : 'hidden'} w-full h-full`}>
-                    <Register onRegister={() => {
-                      if (onRegister) {
-                        onRegister();
-                      } else {
-                        setPage("login")
-                      }
-                    }} />
+                    <Register
+                      labels={labels}
+                      gotoLogin={() => {
+                        setIsBack(false);
+                        setPage("login");
+                      }}
+                      onRegister={() => {
+                        if (onRegister) {
+                          onRegister();
+                        } else {
+                          setPage("login")
+                        }
+                      }} />
                   </div>
                   <div className={`${page === "resetPassword" ? 'block' : 'hidden'} w-full h-full`}>
-                    <ResetPassword onResetPassword={() => {
-                      if (onResetPassword) {
-                        onResetPassword();
-                      } else {
-                        setPage("login")
-                      }
-                    }} />
+                    <ResetPassword
+                      labels={labels}
+                      onResetPassword={() => {
+                        if (onResetPassword) {
+                          onResetPassword();
+                        } else {
+                          setPage("login")
+                        }
+                      }} />
                   </div>
                   <div className={`${page === "deleteUser" ? 'block' : 'hidden'} w-full h-full`}>
-                    <DeleteUser onDeleteUser={() => {
-                      if (onDeleteUser) {
-                        onDeleteUser();
-                      } else {
-                        setPage("login")
-                      }
-                    }} />
+                    <DeleteUser
+                      labels={labels}
+                      onDeleteUser={() => {
+                        if (onDeleteUser) {
+                          onDeleteUser();
+                        } else {
+                          setPage("login")
+                        }
+                      }} />
                   </div>
                 </div>
               </AlterContextProvider>

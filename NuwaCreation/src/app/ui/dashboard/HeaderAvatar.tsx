@@ -1,13 +1,15 @@
 'use client'
-import { Link, useRouter } from "@/navigation";
+import { useRouter } from "@/navigation";
 import { Avatar } from "@nextui-org/react";
 import { useUser } from "@/app/contexts/UserContextProvider";
 import { getIsLogin } from "@/app/lib/base.api";
 import LoginModal from "@/app/nuwa-login-ui/components/LoginModal";
 import { useState } from "react";
+import { useLocale } from "next-intl";
 
 export default function HeaderAvatar() {
   const router = useRouter();
+  const locale = useLocale();
 
   const user = useUser();
   const isLogin = getIsLogin();
@@ -29,6 +31,7 @@ export default function HeaderAvatar() {
       </div>
       <LoginModal
         isOpen={isOpen}
+        locale={locale}
         onClose={() => {
           setIsOpen(false);
         }}

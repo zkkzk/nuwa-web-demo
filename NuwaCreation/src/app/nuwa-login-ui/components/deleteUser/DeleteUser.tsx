@@ -1,9 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { useEffect } from "react";
 import { Button, Input } from "@nextui-org/react";
 import { z } from "zod";
 import { md5 } from "js-md5"
@@ -16,11 +14,12 @@ import { useAlterDispatch } from "../Alter/AlterContextProvider";
 const CountLimit = 60;
 
 export default function DeleteUser({
+  labels,
   onDeleteUser
 }: {
+  labels: any,
   onDeleteUser?: () => void;
 }) {
-  const t = useTranslations();
   const [ email, setEmail ] = useState('');
   const [ code, setCode ] = useState('');
   const [ password, setPassword ] = useState('');
@@ -32,9 +31,9 @@ export default function DeleteUser({
   const alterDispatch = useAlterDispatch();
 
   const FormSchema = z.object({
-    email: z.string().email({ message: t("UserFormSchema.email") }),
-    code: z.string().length(5, { message: t("UserFormSchema.code") }),
-    password: z.string().min(6, { message: t("UserFormSchema.password") }),
+    email: z.string().email({ message: labels.UserFormSchema.email }),
+    code: z.string().length(5, { message: labels.UserFormSchema.code }),
+    password: z.string().min(6, { message: labels.UserFormSchema.password }),
     requestId: z.string()
   });
 
@@ -59,7 +58,7 @@ export default function DeleteUser({
             <Image width={37} height={50} src="/registerIcon1.png" alt="" />
             <Image width={149} height={50} src="/registerIcon2.png" alt="" />
           </div>
-          <div className="w-full text-center text-white text-2xl font-bold mb-8 mt-5">{t("User.deleteusertitle")}</div>
+          <div className="w-full text-center text-white text-2xl font-bold mb-8 mt-5">{labels.User.deleteusertitle}</div>
           <Input
             color="default"
             type="email"
@@ -67,7 +66,7 @@ export default function DeleteUser({
             classNames={InputClassNames}
             isInvalid={false}
             errorMessage=""
-            placeholder={t('User.email')}
+            placeholder={labels.User.email}
             value={email}
             onChange={(e) => {
               setEmail(e.target.value);
@@ -87,7 +86,7 @@ export default function DeleteUser({
                 }
               }}
             >
-              {(count !== CountLimit) ? `${count}s` : t("User.deleteusersend")}
+              {(count !== CountLimit) ? `${count}s` : labels.User.deleteusersend}
             </Button>
             }
           />
@@ -96,7 +95,7 @@ export default function DeleteUser({
             type="text"
             size="md"
             classNames={InputClassNames}
-            placeholder={t('User.code')}
+            placeholder={labels.User.code}
             value={code}
             onChange={(e) => {
               setCode(e.target.value);
@@ -107,7 +106,7 @@ export default function DeleteUser({
             type="password"
             size="md"
             classNames={InputClassNames}
-            placeholder={t('User.password')}
+            placeholder={labels.User.password}
             value={password}
             onChange={(e) => {
               setPassword(e.target.value);
@@ -119,7 +118,7 @@ export default function DeleteUser({
           size="lg"
           isDisabled={(!code || !email || !password)}
           isLoading={deleteUserApi.loading}
-          className="mt-16 w-full bg-zinc-800 rounded-2xl text-white"
+          className="w-full bg-zinc-800 rounded-2xl text-white"
           onClick={async () => {
             const validatedFields = FormSchema.safeParse({
               email: email,
@@ -150,7 +149,7 @@ export default function DeleteUser({
             }
           }}
         >
-          {t("User.deleteusersubmit")}
+          {labels.User.deleteusersubmit}
         </Button>
       </div>
     </div>

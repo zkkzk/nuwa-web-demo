@@ -5,7 +5,7 @@ import React from 'react'
 function LoginPage() {
   return (
     <>
-      <Login />
+      {/* <Login /> */}
     </>
   )
 }

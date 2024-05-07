@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { Button, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 import {
   XMarkIcon
@@ -23,7 +23,7 @@ function CharacterEdit({ onDone, onPublish, chara }: {
   onPublish?: () => void,
   chara?: TypeCharaListItem | undefined
 }) {
-  const router = useRouter();
+  const locale = useLocale();
   const t = useTranslations();
   const editModal = useDisclosure();
 
@@ -152,6 +152,7 @@ function CharacterEdit({ onDone, onPublish, chara }: {
 
 
       <LoginModal
+        locale={locale}
         isOpen={isOpen}
         openPage="login"
         onClose={() => {

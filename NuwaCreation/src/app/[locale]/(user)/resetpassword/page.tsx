@@ -5,7 +5,7 @@ import React from 'react'
 function ResetpwdPage() {
   return (
     <>
-      <ResetPassword />
+      {/* <ResetPassword /> */}
     </>
   )
 }

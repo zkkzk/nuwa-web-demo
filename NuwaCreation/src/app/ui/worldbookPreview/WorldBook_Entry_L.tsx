@@ -17,7 +17,7 @@ export default function WorldBook_Entry_L({value, isPreview = false, onChange}: 
       <div className="min-h-[120px] py-8 w-full flex items-center flex-row text-neutral-950 text-2xl font-semibold font-['PingFang SC'] tracking-tight">
         <div>{value?.comment}</div>
       </div>
-      <div className="py-6 grow text-neutral-800 text-base font-normal font-['PingFang SC'] leading-[29px] tracking-tight">
+      <div className="py-6 grow text-neutral-800 text-base font-normal font-['PingFang SC'] leading-[29px] tracking-tight overflow-x-hidden">
         <div>{value?.content}</div>
       </div>
     </div>

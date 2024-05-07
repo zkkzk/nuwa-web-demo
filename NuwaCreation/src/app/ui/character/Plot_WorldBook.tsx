@@ -91,14 +91,6 @@ function Plot_WorldBook() {
             <>
               <ModalHeader className="flex flex-row justify-between items-center gap-1 py-6">
                 <div>{t('Character.plotWorldbookchoose')}</div>
-                {/* <div
-                  className="cursor-pointer flex flex-row items-center justify-center h-12 w-52 z-40 bg-[url('/character-inforMation-personality-model-insert-bg.png')] bg-no-repeat bg-center bg-contain"
-                  onClick={() => {
-                    createWorldBookModal.onOpen();
-                  }}
-                >
-                  <span className="text-black text-lg ont-semibold">创建新世界书</span>
-                </div> */}
                 <Button
                   className="bg-black text-white"
                   startContent={<PlusIcon className="h-4 w-4"/>}
@@ -109,7 +101,7 @@ function Plot_WorldBook() {
                 >{t('WorldBook.addnewbook')}</Button>
               </ModalHeader>
               <ModalBody>
-                <div className="grid md:grid-cols-4 sm:grid-cols-3 gap-10 py-10 px-7 overflow-visible h-auto min-h-[400px]">
+                <div className="grid grid-cols-2  md:grid-cols-3 xl:grid-cols-4 gap-10 py-10 px-7 overflow-visible h-auto min-h-[400px]">
                   {myWorldBooks && myWorldBooks.map((worldBookItem, index) => (
                     <div
                       key={`${worldBookItem.uid}+${index}`}
@@ -140,22 +132,26 @@ function Plot_WorldBook() {
           
             {charaListItem.chara.data.character_book && (
               <div className="relative w-auto h-[340px]">
-                <Button
-                  onClick={() => {
-                    handleRemoveSelectedWorldBook();
-                  }}
-                  className="absolute top-10 right-4 z-40"
-                  type="button"
-                  color="primary"
-                  variant="bordered"
-                  size="sm"
-                  startContent={
-                    <UnLinkIcon className="h-6 w-6" aria-hidden="true" />
+                <WorldBookItem
+                  worldBookItem={charaListItem.chara.data.character_book}
+                  btns={
+                    <Button
+                      onClick={() => {
+                        handleRemoveSelectedWorldBook();
+                      }}
+                      className=""
+                      type="button"
+                      color="primary"
+                      variant="bordered"
+                      size="sm"
+                      startContent={
+                        <UnLinkIcon className="h-6 w-6" aria-hidden="true" />
+                      }
+                    >
+                      {t('Character.plotWorldbookunlinkbtn')}
+                    </Button>
                   }
-                >
-                  {t('Character.plotWorldbookunlinkbtn')}
-                </Button>
-                <WorldBookItem worldBookItem={charaListItem.chara.data.character_book} />
+                  />
               </div>
             )}
         </div>
