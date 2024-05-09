@@ -123,6 +123,28 @@ function Plot_WorldBook() {
           header: "rounded-t-lg overflow-hidden"
         }}
         hideCloseButton={true}
+        motionProps={{
+          variants: {
+            enter: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                opacity: {
+                  duration: 0.15,
+                },
+              },
+            },
+            exit: {
+              y: "50%",
+              opacity: 0,
+              transition: {
+                opacity: {
+                  duration: 0.1,
+                },
+              },
+            },
+          },
+        }}
       >
         <ModalContent>
           {(onClose) => (

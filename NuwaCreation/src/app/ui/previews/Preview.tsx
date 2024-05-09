@@ -98,6 +98,28 @@ function Preview({charaItem}: {charaItem: TypeCharaListItem}) {
           body: "h-full bg-neutral-100 rounded-t-3xl",
         }}
         hideCloseButton={true}
+        motionProps={{
+          variants: {
+            enter: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                opacity: {
+                  duration: 0.15,
+                },
+              },
+            },
+            exit: {
+              y: "50%",
+              opacity: 0,
+              transition: {
+                opacity: {
+                  duration: 0.1,
+                },
+              },
+            },
+          },
+        }}
       >
         <ModalContent>
           {(onClose) => (
