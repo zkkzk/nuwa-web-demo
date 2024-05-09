@@ -9,15 +9,14 @@ import { deleteLoginCookie } from "../../utils/base.api";
 import { deleteUser, mailCode } from "../../utils/login.api";
 import { InputClassNames } from "../InputStyle";
 import { useAlterDispatch } from "../Alter/AlterContextProvider";
+import { useLabels } from "../../context/LabelsContext";
 
 
 const CountLimit = 60;
 
 export default function DeleteUser({
-  labels,
   onDeleteUser
 }: {
-  labels: any,
   onDeleteUser?: () => void;
 }) {
   const [ email, setEmail ] = useState('');
@@ -29,6 +28,7 @@ export default function DeleteUser({
   const mailCodeApi = mailCode();
   const deleteUserApi = deleteUser();
   const alterDispatch = useAlterDispatch();
+  const labels = useLabels();
 
   const FormSchema = z.object({
     email: z.string().email({ message: labels.UserFormSchema.email }),

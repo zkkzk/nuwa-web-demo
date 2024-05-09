@@ -12,7 +12,7 @@ const enLabels = {
     "registertitle": "Sign Up",
     "registersend": "Send",
     "registersubmit": "Sign Up",
-    "registerlogintitle": "Already a DDream.LAND?",
+    "registerlogintitle": "Already a DDreamer",
     "registerloginlink": "Log In",
     "logintitle": "Log In",
     "logintitle2": "By continuing, you agree to our User Agreement and acknowledge that you understand the Privacy Policy.",

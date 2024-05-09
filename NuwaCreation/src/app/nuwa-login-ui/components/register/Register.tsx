@@ -9,16 +9,15 @@ import { md5 } from "js-md5"
 import { mailCode, register } from "../../utils/login.api";
 import { InputClassNames } from "../InputStyle";
 import { useAlterDispatch } from "../Alter/AlterContextProvider";
+import { useLabels } from "../../context/LabelsContext";
 
 
 const CountLimit = 60;
 
 export default function Register({
-  labels,
   gotoLogin,
   onRegister,
 }: {
-  labels: any,
   gotoLogin?: () => void,
   onRegister?: () => void;
 }) {
@@ -28,6 +27,7 @@ export default function Register({
   const [ requestId, setRequestId] = useState('');
   const [ count, setCount ] = useState(CountLimit);
   const alterDispatch = useAlterDispatch();
+  const labels = useLabels();
 
   const mailCodeApi = mailCode();
   const registerApi = register();

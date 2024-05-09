@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useAmDispatch } from "@/app/ui/components/AlterMessageContextProvider";
-import { useLocale, useTranslations } from "next-intl";
 import { getCookie, removeCookie } from 'typescript-cookie'
-import { usePathname, useRouter } from "@/navigation";
+import { useLabels } from "../context/LabelsContext";
+import { useAlterDispatch } from "../components/Alter/AlterContextProvider";
+import { useLocale } from "../context/LocaleContext";
 
 export const NUWAUID = "nuwa_uid"
 export const NUWASESSION = "nuwa_session"
@@ -34,13 +34,11 @@ export const baseApiHander = ({
   noLoginGotoLogin?: boolean,
   successMsg?: string
 }) => {
-  const t = useTranslations();
+  const labels = useLabels();
   const locale = useLocale();
-  const router = useRouter();
-  const pathname = usePathname();
   const [loading, setLoading] = useState(false);
 
-  const amDispatch = useAmDispatch();
+  const alterDispatch = useAlterDispatch();
   const send = async (params?: any) => {
     const isLogin = getIsLogin();
     setLoading(true);
@@ -76,7 +74,7 @@ export const baseApiHander = ({
       if(response.ok){
         const data = await response.json();
         if (data.code === 0) {
-          successMsg && amDispatch({
+          successMsg && alterDispatch({
             type: "add",
             payload: successMsg,
           })
@@ -93,7 +91,7 @@ export const baseApiHander = ({
           return data;
         }
 
-        amDispatch({
+        alterDispatch({
           type: "add",
           payload: data.msg,
         })
@@ -103,9 +101,9 @@ export const baseApiHander = ({
       }
       setLoading(false)
     } catch (e) {
-      amDispatch({
+      alterDispatch({
         type: "add",
-        payload: t("User.sysfail"),
+        payload: labels.User.sysfail,
       })
       setLoading(false)
     }    

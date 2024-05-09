@@ -10,15 +10,14 @@ import { NUWASESSION, NUWAUID } from "../../utils/base.api";
 import { login } from "../../utils/login.api";
 import { InputClassNames } from "../InputStyle";
 import { useAlterDispatch } from "../Alter/AlterContextProvider";
+import { useLabels } from "../../context/LabelsContext";
 
 
 export default function Login({
-  labels,
   gotoRegister,
   gotoResetPassword,
   onLogin,
 }: {
-  labels: any,
   gotoRegister?: () => void,
   gotoResetPassword?: () => void,
   onLogin?: () => void;
@@ -26,6 +25,8 @@ export default function Login({
   
   const [ email, setEmail ] = useState('');
   const [ password, setPassword ] = useState('');
+  const alterDispatch = useAlterDispatch();
+  const labels = useLabels();
 
   const FormSchema = z.object({
     email: z.string().email({ message: labels.UserFormSchema.email })
@@ -33,7 +34,6 @@ export default function Login({
 
   const loginApi = login();
 
-  const alterDispatch = useAlterDispatch();
 
   return (
     <div className="flex flex-row justify-center items-center h-full w-full">

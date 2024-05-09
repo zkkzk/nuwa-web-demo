@@ -3,7 +3,6 @@
 import { createContext, useContext, useReducer } from 'react';
 import AlterMessages from './AlterMessages';
 import { useImmerReducer } from 'use-immer';
-import { findIndex } from 'lodash-es';
 
 export const AlterContext = createContext([]);
 export const AlterDispatchContext = createContext(null as any);

@@ -9,15 +9,14 @@ import { md5 } from "js-md5"
 import { mailCode, resetPassword } from "../../utils/login.api";
 import { InputClassNames } from "../InputStyle";
 import { useAlterDispatch } from "../Alter/AlterContextProvider";
+import { useLabels } from "../../context/LabelsContext";
 
 
 const CountLimit = 60;
 
 export default function ResetPassword({
-  labels,
   onResetPassword
 }: {
-  labels: any,
   onResetPassword?: () => void;
 }) {
   const [ email, setEmail ] = useState('');
@@ -26,6 +25,7 @@ export default function ResetPassword({
   const [ requestId, setRequestId] = useState('');
   const [ count, setCount ] = useState(CountLimit);
   const alterDispatch = useAlterDispatch();
+  const labels = useLabels();
 
   const mailCodeApi = mailCode();
   const resetPasswordApi = resetPassword();

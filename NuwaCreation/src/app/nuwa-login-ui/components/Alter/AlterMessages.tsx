@@ -1,12 +1,8 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/react";
-import { useTranslations } from "next-intl";
-
 
 function AlterMessages({messages, isOpen = false, onClose}: {messages: string[], isOpen?: boolean, onClose: () => void }) {
-  const t = useTranslations();
-
   const msgModal = useDisclosure();
   useEffect(() => {
     if (messages.length > 0) {
