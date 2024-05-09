@@ -37,7 +37,10 @@ const defaultChara = {
       fav: false,
       world: "",
       depth_prompt: { prompt: "", depth: 4 },
-      avatars: [],
+      nuwa_avatars: {
+        version:"v1",
+        list: []
+      },
       languages: [],
       level: "",
       cclicense: "",

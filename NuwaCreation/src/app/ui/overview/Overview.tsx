@@ -13,23 +13,23 @@ import { createChara, pushCharaList, getCharaList, pushWorldBookList, getWorldBo
 import AlterMessage from "@/app/ui/components/AlterMessage";
 
 const understandandlearnList = [{
-  url: '',
+  url: 'https://docs.nuwalabs.org/nuewa-creation-platform/digital-life-design',
   label: 'understandandlearnListItem1',
   icon: RoleDesignIcon
 }, {
-  url: '',
+  url: 'https://docs.nuwalabs.org/nuewa-creation-platform/digital-life-management',
   label: 'understandandlearnListItem2',
   icon: CFGIcon
 }, {
-  url: '',
+  url: 'https://docs.nuwalabs.org/nuewa-creation-platform/model-selection-coming-soon',
   label: 'understandandlearnListItem3',
   icon: ModelSelectIcon
 }, {
-  url: '',
+  url: 'https://docs.nuwalabs.org/nuewa-creation-platform/world-book-writing',
   label: 'understandandlearnListItem4',
   icon: NuwaWorldBookIcon
 }, {
-  url: '',
+  url: 'https://docs.nuwalabs.org/nuewa-creation-platform/hotkeys-comming-soon',
   label: 'understandandlearnListItem5',
   icon: HotKeyIcon
 }]
@@ -153,7 +153,7 @@ function Overview() {
           <div className="grid grid-row-2 gap-4">
             <div className="grid grid-cols-6 gap-4">
             <Link
-              href="/character"
+              href="/charas"
               className="col-span-4 hover:scale-105 relative flex flex-row justify-between bg-black rounded-lg bg-no-repeat bg-center bg-[url('/overview-create-character-bg.png')]">
               <div className="p-2 flex justify-between h-full">
                 <div className="w-1 h-full bg-white"></div>
@@ -243,14 +243,16 @@ function Overview() {
         <div className="lg:col-span-2 min-w-full bg-gray-100 pb-7 rounded-[40px] px-5 w-full relative pt-6">
           <div className="text-black text-3xl font-semibold mb-5 px-3 flex flex-row justify-between">
             <div>{t('Overview.understandandlearn')}</div>
-            <Button className="h-8 bg-transparent" >
+            <Link target="_blank" rel="noopener noreferrer" href={"https://docs.nuwalabs.org/nuewa-creation-platform"} className="h-8 bg-transparent" >
               <div className="text-center text-zinc-500 text-xs font-normal">{t('Overview.morebtn')}{' >'}</div>
-            </Button>
+            </Link>
           </div>
           <div className="flex flex-col gap-4">
             {understandandlearnList.map((item,index) => (
               <Link
                 href={item.url}
+                target="_blank"
+                rel="noopener noreferrer"
                 key={index}
                 className="flex flex-row items-center group hover:bg-black h-12 w-full rounded-[9px] px-3"
               >

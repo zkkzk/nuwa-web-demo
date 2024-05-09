@@ -35,7 +35,7 @@ export default function Me() {
   const [ usernameIsEdit, setUsernameIsEdit ] = useState(false);
   const usernameRef = useRef<HTMLInputElement>(null);
   const [isInit, setIsInit] = useState(false);
-  const [startInit, setStartInit] = useState(true);
+  const [firstInit, setFirstInit] = useState(true);
   const [isSaving, setIsSaving] =  useState(false);
   const [isLogin, setIsLogin] = useState(getIsLogin());
 
@@ -123,7 +123,7 @@ export default function Me() {
     getUserInfoSaveToUserContext();
     
     setIsInit(false);
-    setStartInit(false)
+    setFirstInit(false)
   }
   const getUserInfoSaveToUserContext = async () => {
     const res = await getUserInfoApi.send();
@@ -165,7 +165,7 @@ export default function Me() {
         <div className="absolute right-6 top-6">
           <Button
             isLoading={isSaving}
-            isDisabled={startInit}
+            isDisabled={firstInit}
             className="bg-black text-white z-40"
             size="sm"
             onClick={() => {
@@ -195,7 +195,7 @@ export default function Me() {
                   <div className="mr-10 opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.usename')}</div>
                 </div>
                 <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight flex flex-row">
-                  {!startInit ? (
+                  {!firstInit ? (
                     <>
                       <Input
                         ref={usernameRef}
@@ -236,7 +236,7 @@ export default function Me() {
                   <div className="mr-10 opacity-80 text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">{t('Me.email')}</div>
                 </div>
                 <div className="text-neutral-700 text-sm font-normal leading-relaxed tracking-tight">
-                  {!startInit ? (
+                  {!firstInit ? (
                       <div>{userInfo.email}</div>
                   ): (
                     <Button variant="light" isLoading />

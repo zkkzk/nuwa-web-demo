@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import { useTranslations, useMessages } from "next-intl";
 import { PlayCircleIcon, PauseCircleIcon } from "@heroicons/react/24/outline";
 import MicrosoftTTSIcon from "@/app/icons/MicrosoftTTSIcon";
@@ -24,10 +24,10 @@ function Preview_Voice() {
   const { Voices } = messages;
   const initVoiceNameList = Voices;
 
-  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(chara.data.extensions.voice?.type as TypeVoiceType || TypeVoiceType.None);
+  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(chara.data.extensions.nuwa_voice?.type as TypeVoiceType || TypeVoiceType.None);
   
-  const [selectedVoiceSex, setSelectedVoiceSex] = React.useState<voiceSex>(chara.data.extensions.voice?.sex as voiceSex || voiceSex.Male);
-  const [selectedVoiceName, setSelectedVoiceName] = React.useState<string>(chara.data.extensions.voice?.name || '');
+  const [selectedVoiceSex, setSelectedVoiceSex] = React.useState<voiceSex>(chara.data.extensions.nuwa_voice?.sex as voiceSex || voiceSex.Male);
+  const [selectedVoiceName, setSelectedVoiceName] = React.useState<string>(chara.data.extensions.nuwa_voice?.name || '');
 
   const [voiceNameList, setVoiceNameList] = React.useState<TypeVoiceNameList>(initVoiceNameList as unknown as TypeVoiceNameList);
 

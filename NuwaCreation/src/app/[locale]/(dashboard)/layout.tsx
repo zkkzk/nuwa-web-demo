@@ -34,7 +34,9 @@ export default function RootLayout({
       <NextIntlClientProvider messages={messages}>
         <AlterMessageContextProvider>
           <DashboardLayout>
-            {children}
+            <div className=" min-h-[80vh]">
+              {children}
+            </div>
           </DashboardLayout>
         </AlterMessageContextProvider>
       </NextIntlClientProvider>

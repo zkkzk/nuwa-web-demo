@@ -1,15 +1,12 @@
 "use client"
 
 import React, { useEffect, useRef } from "react";
-import { useChara } from "@/app/lib/utils";
-import { useTranslations, useMessages } from "next-intl";
+import { useTranslations, useMessages, useLocale } from "next-intl";
 import { NoSymbolIcon, PlayCircleIcon, PauseCircleIcon } from "@heroicons/react/24/outline";
 import MicrosoftTTSIcon from "@/app/icons/MicrosoftTTSIcon";
 import { Divider, Listbox, ListboxItem, Tab, Tabs } from "@nextui-org/react";
 import Image from "next/image";
-import { Link } from "@/navigation";
 import { TypeVoiceName, TypeVoiceNameList, TypeVoiceType, voiceSex } from "@/app/lib/definitions.voice";
-import { TypeAvatar } from "@/app/lib/definitions.avatar";
 import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import { textareaProps } from "../components/NuwaTextarea";
 
@@ -18,6 +15,7 @@ function classNames(...classes:any) {
 }
 
 export default function Voice() {
+  const locale = useLocale();
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlay, setIsPlay] = React.useState({name: '', isPlay: false} as {name: string, isPlay: boolean});
   const t = useTranslations();
@@ -27,17 +25,17 @@ export default function Voice() {
   const charaListItem = useCharaListItem();
   const charaListItemDispatch = useCharaListItemDispatch();
 
-  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(charaListItem.chara.data.extensions.voice?.type as TypeVoiceType || TypeVoiceType.None);
+  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(charaListItem.chara.data.extensions.nuwa_voice?.type as TypeVoiceType || TypeVoiceType.None);
   
-  const [selectedVoiceSex, setSelectedVoiceSex] = React.useState<voiceSex>(charaListItem.chara.data.extensions.voice?.sex as voiceSex || voiceSex.Male);
-  const [selectedVoiceName, setSelectedVoiceName] = React.useState<string>(charaListItem.chara.data.extensions.voice?.name || '');
+  const [selectedVoiceSex, setSelectedVoiceSex] = React.useState<voiceSex>(charaListItem.chara.data.extensions.nuwa_voice?.sex as voiceSex || voiceSex.Male);
+  const [selectedVoiceName, setSelectedVoiceName] = React.useState<string>(charaListItem.chara.data.extensions.nuwa_voice?.name || '');
 
   const [voiceNameList, setVoiceNameList] = React.useState<TypeVoiceNameList>(initVoiceNameList as unknown as TypeVoiceNameList);
 
   const setCharaListItem = (newValue: {
     type: string,
     sex: string,
-    name: string,
+    name: string
   } | null) => {
     charaListItemDispatch({
       type: "changed",
@@ -49,7 +47,11 @@ export default function Voice() {
             ...charaListItem.chara.data,
             extensions: {
               ...charaListItem.chara.data.extensions,
-              voice: newValue
+              nuwa_voice: {
+                version: 'v1',
+                language: locale,
+                ...newValue
+              }
             }
           }
         }

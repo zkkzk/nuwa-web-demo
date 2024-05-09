@@ -21,9 +21,8 @@ export default function DashboardLayout({
   const router = useRouter();
   const getUserInfoApi = getUserInfo({noLoginGotoLogin: true})
 
-  const t = useTranslations();
+  const t = useTranslations();``
   const [isInit, setIsInit] = useState(false);
-  const [startInit, setStartInit] = useState(true);
   const isLogin = getIsLogin();
 
   const [userInfo, setUserInfo] = useState<TypeUser>({
@@ -55,7 +54,6 @@ export default function DashboardLayout({
       }
       
       setIsInit(false);
-      setStartInit(false)
     }
     if (isInit) {
       init();
