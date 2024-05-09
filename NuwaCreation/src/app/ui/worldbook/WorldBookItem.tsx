@@ -28,7 +28,7 @@ export default function WorldBookItem({
         <div className="ml-2 text-black font-semibold text-2xl line-clamp-1 border-b border-solid border-neutral-900">{worldBookItem.name}</div>
       </div>
       <div className="mt-6 overflow-y-hidden grow w-auto text-neutral-700 break-words">
-      {Object.keys(worldBookItem?.entries).map((key, index) => (
+      {worldBookItem.entries && Object.keys(worldBookItem?.entries).map((key, index) => (
         <>
           {index < 6 && (
             <p className="truncate" key={`${worldBookItem.name}-entries-${key}`}>{worldBookItem.entries[key].comment}</p>

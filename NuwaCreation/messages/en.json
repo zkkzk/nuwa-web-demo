@@ -325,7 +325,8 @@
     "detected": "Detected"
   },
   "Error": {
-    "localstoragefull": "The local storage space is full. Please delete it and perform operations again"
+    "localstoragefull": "The local storage space is full. Please delete it and perform operations again",
+    "draftscharacterlimit": "Limit 3"
   },
   "User": {
     "email": "Email",

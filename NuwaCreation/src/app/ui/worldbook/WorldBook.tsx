@@ -67,7 +67,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
     }
 
     // 选择新添加的
-    if (latestWorldBook?.current) {
+    if (latestWorldBook?.current && latestWorldBook?.current.entries) {
       if (Object.keys(worldBook.entries).length > Object.keys(latestWorldBook?.current.entries).length) {
         const keys = Object.keys(worldBook?.entries);
         const length = keys.length;
@@ -158,7 +158,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
           </div>
         )}
       </div>
-      {(!worldBook || Object.keys(worldBook.entries).length === 0) && (
+      {(!worldBook || !worldBook.entries|| Object.keys(worldBook.entries).length === 0) && (
         <div className="h-40"></div>
       )}
       <Tabs
@@ -179,7 +179,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
           }}
         >
 
-          {worldBook && Object.keys(worldBook.entries).map((key, index) => (
+          {worldBook && worldBook.entries && Object.keys(worldBook.entries).map((key, index) => (
             <Tab
               key={key}
               id={uid}

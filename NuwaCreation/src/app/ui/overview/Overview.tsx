@@ -10,7 +10,7 @@ import NuwaWorldBookIcon from "@/app/icons/NuwaWorldBookIcon";
 import HotKeyIcon from "@/app/icons/HotKeyIcon";
 import { Button } from "@nextui-org/react";
 import { createChara, pushCharaList, getCharaList, pushWorldBookList, getWorldBookList, InsertWorldBook } from "@/app/lib/utils";
-import AlterMessage from "@/app/ui/components/AlterMessage";
+import { useAmDispatch } from "../components/AlterMessageContextProvider";
 
 const understandandlearnList = [{
   url: 'https://docs.nuwalabs.org/nuewa-creation-platform/digital-life-design',
@@ -38,10 +38,9 @@ function Overview() {
   const t = useTranslations();
   const [isReadCharLoding, setIsReadCharLoding] = useState(false);
   const [isReadWorldBookLoding, setIsReadWorldBookLoding] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
-  const [message, setMessage] = useState(t('Previews.importok'))
   const charaList  = getCharaList();
   const worldBookList  = getWorldBookList();
+  const amDispatch = useAmDispatch();
 
   const handleReadChar = async(e:any) =>{
     if(typeof window !== "undefined"){
@@ -58,20 +57,18 @@ function Overview() {
         delete data.Nuwa_ORG_cover;
 
         const newChara = createChara(cover, data);
-        try {
-          pushCharaList([...charaList, newChara]);
-        } catch (e: any) {
-          setMessage(t("Error.localstoragefull"));
-          setIsReadCharLoding(false)
-          setIsOpen(true);
-          return
-        }
-        
-        setIsReadCharLoding(false)
-        setMessage(t('Previews.importok'))
-        setIsOpen(true);
 
-        router.replace('/charas');
+        const pushRes = pushCharaList([...charaList, newChara]);
+        if (pushRes.success) {
+          setIsReadCharLoding(false)
+          router.replace('/charas');
+        } else {
+          amDispatch({
+            type: "add",
+            payload: t(pushRes.message),
+          })
+          setIsReadCharLoding(false)
+        }
       }else{
         setIsReadCharLoding(false)
       }
@@ -90,34 +87,26 @@ function Overview() {
       });
       if(res.ok){
         const data = await res.json();
-
-        const newWorldBook = InsertWorldBook(data);
-        try {
-          pushWorldBookList([...worldBookList, newWorldBook]);
-        } catch (e: any) {
-          setMessage(t("Error.localstoragefull"));
-          setIsOpen(true);
-          return
-        }
         
         if(data){
           const newWorldBook = InsertWorldBook({
             entries: data.entries,
             name: file.name.split(".json")[0]
           });
-          try {
-            pushWorldBookList([...worldBookList, newWorldBook]);
-          } catch (e: any) {
-            setMessage(t("Error.localstoragefull"));
-            setIsOpen(true);
-            return
+          const pushRes = pushWorldBookList([...worldBookList, newWorldBook]);
+          if (pushRes.success) {
+            setIsReadCharLoding(false)
+            router.replace('/worldbook');
+          } else {
+            amDispatch({
+              type: "add",
+              payload: t(pushRes.message),
+            })
+            setIsReadCharLoding(false)
           }
         }
-        setIsReadWorldBookLoding(false)
-        setMessage(t('Previews.importok'))
-        setIsOpen(true);
 
-        router.replace('/worldbook');
+        setIsReadWorldBookLoding(false)
       }else{
         setIsReadWorldBookLoding(false)
       }
@@ -127,9 +116,6 @@ function Overview() {
   }
   return (
     <div className="mx-auto max-w-7xl pb-32 flex flex-col">
-      <AlterMessage isOpen={isOpen} message={message} onClose={() => {
-        setIsOpen(false)
-      }} />
       <div className=" overflow-hidden flex flex-col min-w-full bg-[#110F0E] text-white min-h-80 rounded-[40px] w-full relative" style={{minHeight: 320}}>
         <div className="pt-8 text-base mb-6 px-8">{t('Overview.title1')}</div>
         <div className="grow  px-8 xl:mr-[400px] min-h-6 mb-2">

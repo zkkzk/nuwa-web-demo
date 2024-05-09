@@ -325,7 +325,8 @@
     "detected": "已识别"
   },
   "Error": {
-    "localstoragefull": "本地存储空间已满，请删除后在操作"
+    "localstoragefull": "本地存储空间已满，请删除后在操作",
+    "draftscharacterlimit": "限制3个"
   },
   "User": {
     "email": "邮箱",
