@@ -1,7 +1,8 @@
 "use client";
-import React, { useEffect, useRef } from "react";
+import React, { RefObject, useEffect, useRef, useState } from "react";
 import {
   Button,
+  Input,
   Popover,
   PopoverContent,
   PopoverTrigger,
@@ -27,14 +28,15 @@ export default function WorldBook({worldBooka, isPreview = false}: {
   let latestWorldBook = useRef(worldBook);
   const uid = isPreview ? worldBooka?.name : worldBookItem.uid;
   const worldBookItemDispatch = useWorldBookItemDispatch();
+  const titleInputRefs = useRef<{ [key: string]: RefObject<HTMLInputElement> | null }>({});
+  const [editEntryUid, setEditEntryUid] = useState<string | undefined>(undefined);
 
   let initSelectedEntry = undefined;
 
   if (worldBook?.entries && Object.keys(worldBook.entries).length > 0) {
     initSelectedEntry = worldBook.entries[Object.keys(worldBook.entries)[0]] 
   }
-  const [selectedEntry, setSelectedEntry] = React.useState(initSelectedEntry);
-  const [editEntry, setEditEntry] = React.useState<TypeWorldBookEntriy>();
+  const [selectedEntry, setSelectedEntry] = useState(initSelectedEntry);
 
   const handleDeleteButtonClick = (id: any) => {
     // Implement the logic to delete the entry with the given id
@@ -175,7 +177,7 @@ export default function WorldBook({worldBooka, isPreview = false}: {
           }}
         >
 
-          {worldBook && Object.keys(worldBook.entries).map((key) => (
+          {worldBook && Object.keys(worldBook.entries).map((key, index) => (
             <Tab
               key={key}
               id={uid}
@@ -183,18 +185,53 @@ export default function WorldBook({worldBooka, isPreview = false}: {
                 <div
                   className="flex flex-row items-center group justify-center"
                   onClick={() => {
-                    if (selectedEntry?.uid === worldBook.entries[key].uid) {
-                      setEditEntry(worldBook.entries[key])
-                      return
-                    } else {
-                      setSelectedEntry(worldBook.entries[key])
-                    }
-                    
                   }}
                 >
                   <div
-                    className="truncate w-40"
+                    className={`truncate ${editEntryUid === worldBook.entries[key].uid ? 'opacity-0 w-0' : 'opacity-100 w-40'}`}
+                    onClick={() => {
+                      if (selectedEntry?.uid === worldBook.entries[key].uid) {
+                        setEditEntryUid(worldBook.entries[key].uid)
+                        const inputRef = titleInputRefs.current[worldBook.entries[key].uid];
+                        inputRef?.current?.focus();
+                      } else {
+                        setSelectedEntry(worldBook.entries[key])
+                      }
+                    }}
                   >{worldBook.entries[key].comment}</div>
+                  <Input
+                    ref={(r) => {
+                      titleInputRefs.current[worldBook.entries[key].uid]= {
+                        current: r,
+                      };
+                    }}
+                    value={worldBook.entries[key].comment}
+                    variant="flat"
+                    onChange={(e) => {
+                      const newWorldBook =  {
+                        ...worldBook,
+                        entries: {
+                          ...worldBook.entries,
+                          [key]: {
+                            ...worldBook.entries[key],
+                            comment: e.target.value
+                          }
+                        }
+                      }
+  
+                      setWorldBookItem(newWorldBook)
+                    }}
+                    onBlur={() => {
+                      setEditEntryUid(undefined)
+                    }}
+                    size="sm"
+                    classNames={{
+                      input: "h-6",
+                      innerWrapper: "h-6 py-0 bg-transparent",
+                      inputWrapper: "h-6 py-0 shadow-none bg-transparent",
+                    }}
+                    className={`${editEntryUid === worldBook.entries[key].uid ? 'opacity-100 w-40' : 'opacity-0 w-0'}`}
+                  />
                   {!isPreview && 
                     <Popover
                       key={`${worldBook.entries[key].uid}-${worldBook?.entries.length}`}
@@ -240,8 +277,6 @@ export default function WorldBook({worldBooka, isPreview = false}: {
                     }
 
                     setWorldBookItem(newWorldBook)
-
-                    // setSelectedEntry(newSelectedEntry);
                   }}
                 />
               </div>
