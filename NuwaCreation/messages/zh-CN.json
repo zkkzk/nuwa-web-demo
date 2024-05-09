@@ -115,16 +115,6 @@
     "unnamed": "未命名",
     "plot": "情景"
   },
-  "Voices": {
-    "male": [
-      { "name": "小明", "value": "ming5", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"},
-      { "name": "小黑", "value": "hei6", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/e8f4c1c0-c6f6-43d0-9885-8e0a87ebd9cb.wav"}
-    ],
-    "female": [
-      { "name": "小红", "value": "hong7", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"},
-      { "name": "小美", "value": "mei8", "audio": "https://cvoiceprodeus.blob.core.windows.net/acc-public-files/285eecc3370e47dcb1a3263c3b6de892/52a21082-b98d-4f5d-8671-989490e588ec.wav"}
-    ]
-  },
   "Languages": [{
     "name": "英语",
     "value": "en"
