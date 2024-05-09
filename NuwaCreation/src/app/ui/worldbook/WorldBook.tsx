@@ -167,12 +167,14 @@ export default function WorldBook({worldBooka, isPreview = false}: {
           ref={tabsRef}
           selectedKey={selectedEntry?.uid}
           size="lg"
+          keyboardActivation="manual"
+          shouldSelectOnPressUp={false}
           classNames={{
             base: "sticky top-0 ml-0 z-30 overflow-x-scroll scrollbar-hide bg-white w-full h-full shrink-0",
             tabList: "overflow-x-scroll scrollbar-hide gap-10 py-0 border-b border-solid border-black/20 max-w-full pr-20 h-full",
             cursor: "w-full bg-[#0C0C0C] text-white",
             tab:"h-10 group-data-[selected=true]:bg-[#0C0C0C]",
-            tabContent: "text-neutral-700 h-full group-data-[selected=true]:text-neutral-800 group-data-[selected=true]:font-bold",
+            tabContent: "h-full group-data-[selected=true]:text-neutral-800 group-data-[selected=true]:font-bold",
             panel: "overflow-y-scroll scrollbar-hide",
           }}
         >
@@ -181,60 +183,88 @@ export default function WorldBook({worldBooka, isPreview = false}: {
             <Tab
               key={key}
               id={uid}
+              shouldSelectOnPressUp={false}
               title={
-                <div
-                  className="flex flex-row items-center group justify-center"
-                  onClick={() => {
-                  }}
-                >
-                  <div
-                    className={`truncate ${editEntryUid === worldBook.entries[key].uid ? 'opacity-0 w-0' : 'opacity-100 w-40'}`}
-                    onClick={() => {
-                      if (selectedEntry?.uid === worldBook.entries[key].uid) {
-                        setEditEntryUid(worldBook.entries[key].uid)
-                        const inputRef = titleInputRefs.current[worldBook.entries[key].uid];
-                        inputRef?.current?.focus();
-                      } else {
+                <div className="flex flex-row items-center group justify-center">
+                  {selectedEntry?.uid === worldBook.entries[key].uid ? (
+                    <Popover
+                      placement="top"
+                      color="danger"
+                      className=""
+                      offset={-26}
+                      onClose={() => {setEditEntryUid(undefined)}}
+                      classNames={{
+                        base: [  
+                          // arrow color
+                          "bg-transparent",
+                          "border-none",
+                        ],
+                        content: [
+                          "bg-transparent",
+                          "border-none",
+                          "shadow-none",
+                          "p-0"
+                        ],
+                      }}
+                    >
+                      <PopoverTrigger>
+                        <div
+                          className={`truncate w-40 text-neutral-700`}
+                          onClick={() => {
+                            if (selectedEntry?.uid === worldBook.entries[key].uid) {
+                              setEditEntryUid(worldBook.entries[key].uid)
+                              const inputRef = titleInputRefs.current[worldBook.entries[key].uid];
+                              inputRef?.current?.focus();
+                            }
+                          }}
+                        >{worldBook.entries[key].comment}</div>
+                      </PopoverTrigger>
+                      <PopoverContent>  
+                        <Input
+                          ref={(r) => {
+                            titleInputRefs.current[worldBook.entries[key].uid]= {
+                              current: r,
+                            };
+                          }}
+                          value={worldBook.entries[key].comment}
+                          variant="flat"
+                          onChange={(e) => {
+                            const newWorldBook =  {
+                              ...worldBook,
+                              entries: {
+                                ...worldBook.entries,
+                                [key]: {
+                                  ...worldBook.entries[key],
+                                  comment: e.target.value
+                                }
+                              }
+                            }
+        
+                            setWorldBookItem(newWorldBook)
+                          }}
+                          size="sm"
+                          classNames={{
+                            input: "h-6 bg-transparent",
+                            innerWrapper: "h-6 py-0 bg-transparent",
+                            inputWrapper: "h-6 py-0 shadow-none bg-white data-[hover=true]:bg-white group-data-[focus=true]:bg-white",
+                          }}
+                          className={`w-48 bg-transparent`}
+                        />
+                      </PopoverContent>
+                    </Popover>
+                  
+                  ): (
+                    <div
+                      className={`truncate w-40 text-neutral-700`}
+                      onClick={() => {
                         setSelectedEntry(worldBook.entries[key])
-                      }
-                    }}
-                  >{worldBook.entries[key].comment}</div>
-                  <Input
-                    ref={(r) => {
-                      titleInputRefs.current[worldBook.entries[key].uid]= {
-                        current: r,
-                      };
-                    }}
-                    value={worldBook.entries[key].comment}
-                    variant="flat"
-                    onChange={(e) => {
-                      const newWorldBook =  {
-                        ...worldBook,
-                        entries: {
-                          ...worldBook.entries,
-                          [key]: {
-                            ...worldBook.entries[key],
-                            comment: e.target.value
-                          }
-                        }
-                      }
-  
-                      setWorldBookItem(newWorldBook)
-                    }}
-                    onBlur={() => {
-                      setEditEntryUid(undefined)
-                    }}
-                    size="sm"
-                    classNames={{
-                      input: "h-6",
-                      innerWrapper: "h-6 py-0 bg-transparent",
-                      inputWrapper: "h-6 py-0 shadow-none bg-transparent",
-                    }}
-                    className={`${editEntryUid === worldBook.entries[key].uid ? 'opacity-100 w-40' : 'opacity-0 w-0'}`}
-                  />
+                      }}
+                    >{worldBook.entries[key].comment}</div>
+                  )}
+                 
+                  
                   {!isPreview && 
                     <Popover
-                      key={`${worldBook.entries[key].uid}-${worldBook?.entries.length}`}
                       placement="top"
                       color="danger"
                       className=""
