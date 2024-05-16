@@ -8,7 +8,7 @@ const config = withNextIntl({
         protocol: 'https',
         hostname: 'rewuai-foreign.oss-us-west-1.aliyuncs.com',
         port: '',
-        pathname: '/nuwa/ai/**',
+        pathname: '/nuwa/**',
       },
     ],
   },

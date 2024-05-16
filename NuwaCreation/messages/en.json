@@ -326,7 +326,9 @@
   },
   "Error": {
     "localstoragefull": "The local storage space is full. Please delete it and perform operations again",
-    "draftscharacterlimit": "Limit 3"
+    "draftscharacterlimit": "Limit 3",
+    "uploadfailed": "Upload failed.",
+    "invalidfile": "Invalid file."
   },
   "User": {
     "email": "Email",

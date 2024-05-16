@@ -1,14 +1,19 @@
 "use client"
 
-import React from "react";
-import { useTranslations } from "next-intl";
+import React, { useState } from "react";
+import { NextIntlClientProvider, useLocale, useMessages, useTranslations } from "next-intl";
 import { NoSymbolIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { TypeAvatar, TypeAvatarType } from "@/app/lib/definitions.avatar";
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, useDisclosure } from "@nextui-org/react";
 import IconCard from "../components/IconCard";
+import CharacterAvatarCard from "../components/CharacterAvatarCard";
 import NuwaButton from "../components/NuwaButton";
 import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import { textareaProps } from "../components/NuwaTextarea";
+import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
+import { uploadLive2dZip } from "@/app/lib/oss";
+import Avatar_Upload_Live2d from "./Avatar_Upload_Live2d";
+import Avatar_Upload_Image from "./Avatar_Upload_Image";
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
@@ -16,7 +21,11 @@ function classNames(...classes:any) {
 
 export default function Avatar() {
   const t = useTranslations();
+  const locale = useLocale();
+  const messages = useMessages();
   const uploadModal = useDisclosure();
+
+  const [ isUploading, setIsUploading ] = useState(false);
 
   const [selectedAvatarType, setSelectedAvatarType] = React.useState<TypeAvatarType>(TypeAvatarType.LIVE2D);
   
@@ -52,7 +61,7 @@ export default function Avatar() {
     setCharaListItem([]);
   }
 
-  const handleAddAvatar = () => {
+  const handleAddAvatar = (url:string) => {
     let newAvatars: any[] = [];
     if (charaListItem.chara.data.extensions. nuwa_avatars) {
       newAvatars = [
@@ -60,7 +69,7 @@ export default function Avatar() {
       ]
     }
     newAvatars.push({
-      url: "demo",
+      url: url,
       type: selectedAvatarType
     })
     setCharaListItem(newAvatars);
@@ -114,10 +123,8 @@ export default function Avatar() {
                 </div>
                 <div className="w-full">
                 <div className="w-fit group relative">
-                  <IconCard 
-                    onClick={() => {}}
-                    isActive={true}
-                    iconType={item.type}
+                  <CharacterAvatarCard 
+                    avatar={item}
                   />
 
                 <Popover placement="top" color='danger'>
@@ -226,7 +233,14 @@ export default function Avatar() {
                 </ModalBody>
                 <ModalFooter>
                   <NuwaButton className="h-16 w-48 text-xl" color="gray" variant="flat" onPress={uploadModal.onClose}>{t(`Character.avatarmodalcancelbtn`)}</NuwaButton>
-                  <NuwaButton className="h-16 w-48 text-xl" color="black" onPress={handleAddAvatar}>{t(`Character.avatarmodaladdbtn`)}</NuwaButton>
+                  {/* <NuwaButton className="h-16 w-48 text-xl" color="black" onPress={handleAddAvatar}>{t(`Character.avatarmodaladdbtn`)}</NuwaButton> */}
+                  {selectedAvatarType === TypeAvatarType.LIVE2D && (
+                    <Avatar_Upload_Live2d onDone={handleAddAvatar} />   
+                  )}
+                  {selectedAvatarType === TypeAvatarType.IMAGE && (
+                    <Avatar_Upload_Image onDone={handleAddAvatar} />   
+                  )}
+                     
                 </ModalFooter>
               </>
             )}

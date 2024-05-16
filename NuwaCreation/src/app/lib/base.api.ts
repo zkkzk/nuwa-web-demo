@@ -1,3 +1,4 @@
+'use client'
 import { useState } from "react";
 import { useAmDispatch } from "@/app/ui/components/AlterMessageContextProvider";
 import { useLocale, useTranslations } from "next-intl";
@@ -8,6 +9,7 @@ export const NUWAUID = "nuwa_uid"
 export const NUWASESSION = "nuwa_session"
 
 const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+const stBaseUrl = process.env.NEXT_PUBLIC_ST_API_URL;
 
 export const getIsLogin = () => {
   if (typeof document !== "undefined") {
@@ -27,11 +29,13 @@ export const baseApiHander = ({
   url,
   mustLogin = false,
   noLoginGotoLogin = false,
+  isSt = false,
   successMsg
 }: {
   url: string,
   mustLogin?: boolean,
   noLoginGotoLogin?: boolean,
+  isSt?: boolean,
   successMsg?: string
 }) => {
   const t = useTranslations();
@@ -42,9 +46,10 @@ export const baseApiHander = ({
 
   const amDispatch = useAmDispatch();
   const send = async (params?: any) => {
+    const apiUrl = isSt ? stBaseUrl : baseUrl;
     const isLogin = getIsLogin();
     setLoading(true);
-    let fetchUrl = `${baseUrl}${url}`;
+    let fetchUrl = `${apiUrl}${url}`;
     if (mustLogin) {
       const uid = getCookie(NUWAUID)
       const session = getCookie(NUWASESSION)
@@ -52,7 +57,7 @@ export const baseApiHander = ({
         // router.push('/login');
         return;
       }
-      fetchUrl = `${baseUrl}${url}?${new URLSearchParams({
+      fetchUrl = `${apiUrl}${url}?${new URLSearchParams({
         uid: uid,
         session: session,
       }).toString()}`;
@@ -76,6 +81,9 @@ export const baseApiHander = ({
 
       if(response.ok){
         const data = await response.json();
+        // if (isSt) {
+        //   return data;
+        // }
         if (data.code === 0) {
           successMsg && amDispatch({
             type: "add",

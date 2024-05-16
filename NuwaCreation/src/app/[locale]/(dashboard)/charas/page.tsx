@@ -6,14 +6,7 @@ const CharacterList = dynamic(() => import('@/app/ui/charas/CharacterList'), { s
 import dynamic from "next/dynamic";
 
 export default function TabKeyPage() {
-  const messages = useMessages();
   return (
-    <>
-      <div className="">
-        <NextIntlClientProvider messages={messages}>
-          <CharacterList />
-        </NextIntlClientProvider>
-      </div>
-    </>
+    <CharacterList />
   );
 }

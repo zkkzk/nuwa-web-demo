@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { TypeChara, TypeWorldBook, TypeWorldBookEntriy, TypeWorldBookItem, TypeWorldBookList, TypeCharaList, TypeCharaListItem } from "./definitions";
 import defaultCoverBase64 from "./defalutCover";
 import { keyBy, clone, findIndex } from "lodash-es";
-import { useTranslations } from "next-intl";
 
 const defaultChara = {
   name: "",
