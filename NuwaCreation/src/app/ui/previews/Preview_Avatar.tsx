@@ -3,7 +3,7 @@ import React from "react";
 import { useTranslations } from "next-intl";
 
 import PreviewTitle from "./PreviewTitle";
-import IconCard from "../components/IconCard";
+import CharacterAvatarCard from "../components/CharacterAvatarCard";
 import { useCharaListItem } from "@/app/contexts/CharasContextProvider";
 
 function Preview_Avatar() {
@@ -19,11 +19,12 @@ function Preview_Avatar() {
           {chara.data.extensions.nuwa_avatars.list.map((item, index) => {
             return (
               <div key={index} className="w-full flex flex-row justify-between items-center">
-                <IconCard 
-                  onClick={() => {}}
-                  isActive={true}
-                  iconType={item.type}
-                />
+                <div className="w-fit relative">
+                  <CharacterAvatarCard
+                    avatar={item}
+                  />
+                </div>
+                
                 <div className="text-black text-[32px] font-['SF Pro'] leading-[57.98px] tracking-tight">
                   {t(`Character.avatartip4`, {type: t(`Character.${item.type}`)})}
                 </div>

@@ -1,7 +1,7 @@
 "use client"
 
 import React, { useState } from "react";
-import { NextIntlClientProvider, useLocale, useMessages, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 import { NoSymbolIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import { TypeAvatar, TypeAvatarType } from "@/app/lib/definitions.avatar";
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, useDisclosure } from "@nextui-org/react";
@@ -10,8 +10,6 @@ import CharacterAvatarCard from "../components/CharacterAvatarCard";
 import NuwaButton from "../components/NuwaButton";
 import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import { textareaProps } from "../components/NuwaTextarea";
-import { ArrowUpCircleIcon } from "@heroicons/react/24/outline";
-import { uploadLive2dZip } from "@/app/lib/oss";
 import Avatar_Upload_Live2d from "./Avatar_Upload_Live2d";
 import Avatar_Upload_Image from "./Avatar_Upload_Image";
 
@@ -21,11 +19,8 @@ function classNames(...classes:any) {
 
 export default function Avatar() {
   const t = useTranslations();
-  const locale = useLocale();
-  const messages = useMessages();
   const uploadModal = useDisclosure();
 
-  const [ isUploading, setIsUploading ] = useState(false);
 
   const [selectedAvatarType, setSelectedAvatarType] = React.useState<TypeAvatarType>(TypeAvatarType.LIVE2D);
   
