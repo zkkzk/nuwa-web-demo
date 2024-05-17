@@ -19,6 +19,7 @@ export default function Avatar_Upload_Live2d({onDone}:{onDone:(url:string)=>void
   const amDispatch = useAmDispatch();
 
   useEffect(() => {
+    setIsUnmount(false);
     return () => {
       setIsUnmount(true);
     };
@@ -34,6 +35,7 @@ export default function Avatar_Upload_Live2d({onDone}:{onDone:(url:string)=>void
     if (file) {
       try {
         const res = await uploadLive2dZip(file, ossToken);
+        debugger
         if (!isUnmount) {
           onDone(res[1])
         }

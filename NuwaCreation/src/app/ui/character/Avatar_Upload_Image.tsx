@@ -17,6 +17,7 @@ export default function Avatar_Upload_Image({onDone}:{onDone:(url:string)=>void}
   const amDispatch = useAmDispatch();
 
   useEffect(() => {
+    setIsUnmount(false);
     return () => {
       setIsUnmount(true);
     };
