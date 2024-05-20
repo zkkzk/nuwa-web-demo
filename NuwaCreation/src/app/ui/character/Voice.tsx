@@ -9,6 +9,7 @@ import Image from "next/image";
 import { TypeVoiceName, TypeVoiceNameList, TypeVoiceType, voiceSex } from "@/app/lib/definitions.voice";
 import { useCharaListItem, useCharaListItemDispatch } from "@/app/contexts/CharasContextProvider";
 import { textareaProps } from "../components/NuwaTextarea";
+import { NuwaExtensionVersion, NuwaVoicesExtensionConfig } from "@/app/lib/definitions";
 
 function classNames(...classes:any) {
   return classes.filter(Boolean).join(' ')
@@ -42,13 +43,25 @@ export default function Voice() {
   const charaListItem = useCharaListItem();
   const charaListItemDispatch = useCharaListItemDispatch();
 
-  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(charaListItem.chara.data.extensions.nuwa_voice?.type as TypeVoiceType || TypeVoiceType.None);
-  let initSelectedVoiceSex:voiceSex = voiceSex.Female;
-  if (charaListItem.chara.data.extensions.nuwa_voice?.sex && voiceList[charaListItem.chara.data.extensions.nuwa_voice?.sex as voiceSex].length > 0) {
-    initSelectedVoiceSex = charaListItem.chara.data.extensions.nuwa_voice?.sex as voiceSex;
+  let initNuwaVoices: NuwaVoicesExtensionConfig = {
+    version: NuwaExtensionVersion.V1,
+    list: [{
+      language: locale === 'zh-CN' ? 'zh-cn' : 'en',
+      type: TypeVoiceType.None,
+      sex: voiceSex.Female,
+      name: '',
+      version: NuwaExtensionVersion.V1,
+    }]
+    
   }
+  if (charaListItem.chara.data.extensions.nuwa_voices && charaListItem.chara.data.extensions.nuwa_voices.list && charaListItem.chara.data.extensions.nuwa_voices.list.length > 0) {
+    initNuwaVoices =  charaListItem.chara.data.extensions.nuwa_voices
+  }
+
+  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(initNuwaVoices.list[0]?.type);
+  let initSelectedVoiceSex:voiceSex = initNuwaVoices.list[0].sex;
   const [selectedVoiceSex, setSelectedVoiceSex] = React.useState<voiceSex>(initSelectedVoiceSex);
-  const [selectedVoiceName, setSelectedVoiceName] = React.useState<string>(charaListItem.chara.data.extensions.nuwa_voice?.name || '');
+  const [selectedVoiceName, setSelectedVoiceName] = React.useState<string>(initNuwaVoices.list[0].name);
 
   const setCharaListItem = (newValue: {
     type: string,
@@ -65,10 +78,14 @@ export default function Voice() {
             ...charaListItem.chara.data,
             extensions: {
               ...charaListItem.chara.data.extensions,
-              nuwa_voice: {
-                version: 'v1',
-                language: locale === 'zh-CN' ? 'zh-cn' : 'en',
-                ...newValue
+              nuwa_voices: {
+                ...charaListItem.chara.data.extensions.nuwa_voices,
+                list: [{
+                  version: NuwaExtensionVersion.V1,
+                  language: locale === 'zh-CN' ? 'zh-cn' : 'en',
+                  ...newValue
+                }]
+                
               }
             }
           }

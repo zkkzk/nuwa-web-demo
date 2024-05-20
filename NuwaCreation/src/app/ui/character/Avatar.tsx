@@ -3,7 +3,7 @@
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import { NoSymbolIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
-import { TypeAvatar, TypeAvatarType } from "@/app/lib/definitions.avatar";
+import { TypeAvatar, CharacterAvatarType } from "@/app/lib/definitions.avatar";
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, Popover, PopoverContent, PopoverTrigger, useDisclosure } from "@nextui-org/react";
 import IconCard from "../components/IconCard";
 import CharacterAvatarCard from "../components/CharacterAvatarCard";
@@ -22,7 +22,7 @@ export default function Avatar() {
   const uploadModal = useDisclosure();
 
 
-  const [selectedAvatarType, setSelectedAvatarType] = React.useState<TypeAvatarType>(TypeAvatarType.LIVE2D);
+  const [selectedAvatarType, setSelectedAvatarType] = React.useState<CharacterAvatarType>(CharacterAvatarType.LIVE2D);
   
   const charaListItem = useCharaListItem();
   const charaListItemDispatch = useCharaListItemDispatch();
@@ -48,7 +48,7 @@ export default function Avatar() {
     })
   }
 
-  const handleSetSelectedAvatarType = (avatarType : TypeAvatarType) => {
+  const handleSetSelectedAvatarType = (avatarType : CharacterAvatarType) => {
     setSelectedAvatarType(avatarType)
   }
 
@@ -179,8 +179,8 @@ export default function Avatar() {
                         className="shrink-0"
                       >
                         <IconCard 
-                          onClick={() => handleSetSelectedAvatarType(TypeAvatarType.IMAGE)}
-                          isActive={selectedAvatarType === TypeAvatarType.IMAGE }
+                          onClick={() => handleSetSelectedAvatarType(CharacterAvatarType.IMAGE)}
+                          isActive={selectedAvatarType === CharacterAvatarType.IMAGE }
                           iconType="IMAGE"
                         />
                         <div></div>
@@ -189,8 +189,8 @@ export default function Avatar() {
                         className="shrink-0"
                       >
                         <IconCard 
-                          onClick={() => handleSetSelectedAvatarType(TypeAvatarType.LIVE2D)}
-                          isActive={selectedAvatarType === TypeAvatarType.LIVE2D }
+                          onClick={() => handleSetSelectedAvatarType(CharacterAvatarType.LIVE2D)}
+                          isActive={selectedAvatarType === CharacterAvatarType.LIVE2D }
                           iconType="LIVE2D"
                         />
                       </div>
@@ -198,27 +198,27 @@ export default function Avatar() {
                         className="shrink-0"
                       >
                         <IconCard 
-                          onClick={() => handleSetSelectedAvatarType(TypeAvatarType["VRM"])}
-                          isActive={selectedAvatarType === TypeAvatarType["VRM"] }
+                          onClick={() => handleSetSelectedAvatarType(CharacterAvatarType["VRM"])}
+                          isActive={selectedAvatarType === CharacterAvatarType["VRM"] }
                           iconType="VRM"
                           disabled={true}
                         />
                         <div className="w-full text-center text-sm py-2 text-gray-400">{t('Character.3Dtip2')}</div>
                       </div>
                     </div>
-                    {selectedAvatarType === TypeAvatarType.LIVE2D && (
+                    {selectedAvatarType === CharacterAvatarType.LIVE2D && (
                       <div className="h-20">
                         <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.LIVE2Dtip`)}</div>
                         <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.LIVE2Dlinktip`)}{t(`Character.LIVE2Dlink`)}</div>
                       </div>
                     )}
-                    {selectedAvatarType === TypeAvatarType["VRM"] && (
+                    {selectedAvatarType === CharacterAvatarType["VRM"] && (
                       <div className="h-20">
                         <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.3Dtiptip`)}</div>
                         <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.3Dtiplink`)}</div>
                       </div>
                     )}
-                    {selectedAvatarType === TypeAvatarType.IMAGE && (
+                    {selectedAvatarType === CharacterAvatarType.IMAGE && (
                       <div className="h-20">
                         <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.IMAGEtip`)}</div>
                         <div className="mt-2 text-black text-sm leading-relaxed tracking-tight">{t(`Character.IMAGElink`)}</div>
@@ -229,10 +229,10 @@ export default function Avatar() {
                 <ModalFooter>
                   <NuwaButton className="h-16 w-48 text-xl" color="gray" variant="flat" onPress={uploadModal.onClose}>{t(`Character.avatarmodalcancelbtn`)}</NuwaButton>
                   {/* <NuwaButton className="h-16 w-48 text-xl" color="black" onPress={handleAddAvatar}>{t(`Character.avatarmodaladdbtn`)}</NuwaButton> */}
-                  {selectedAvatarType === TypeAvatarType.LIVE2D && (
+                  {selectedAvatarType === CharacterAvatarType.LIVE2D && (
                     <Avatar_Upload_Live2d onDone={handleAddAvatar} />   
                   )}
-                  {selectedAvatarType === TypeAvatarType.IMAGE && (
+                  {selectedAvatarType === CharacterAvatarType.IMAGE && (
                     <Avatar_Upload_Image onDone={handleAddAvatar} />   
                   )}
                      

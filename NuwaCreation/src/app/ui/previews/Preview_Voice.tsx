@@ -13,6 +13,7 @@ import PreviewTitle from "./PreviewTitle";
 import PreviewWrapper from "./PreviewWrapper";
 import { useCharaListItem } from "@/app/contexts/CharasContextProvider";
 import { enVoices, zhCnVoices } from "../character/Voice";
+import { NuwaExtensionVersion, NuwaVoicesExtensionConfig } from "@/app/lib/definitions";
 
 
 function Preview_Voice() {
@@ -24,11 +25,27 @@ function Preview_Voice() {
   const t = useTranslations();
   const voiceList = locale === 'en' ? enVoices : zhCnVoices;
 
-  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(chara.data.extensions.nuwa_voice?.type as TypeVoiceType || TypeVoiceType.None);
-  
-  const [selectedVoiceSex, setSelectedVoiceSex] = React.useState<voiceSex>(chara.data.extensions.nuwa_voice?.sex as voiceSex || voiceSex.Male);
-  const [selectedVoiceName, setSelectedVoiceName] = React.useState<string>(chara.data.extensions.nuwa_voice?.name || '');
+  let initNuwaVoices: NuwaVoicesExtensionConfig = {
+    version: NuwaExtensionVersion.V1,
+    list: [{
+      language: locale === 'zh-CN' ? 'zh-cn' : 'en',
+      type: TypeVoiceType.None,
+      sex: voiceSex.Female,
+      name: '',
+      version: NuwaExtensionVersion.V1,
+    }]
+    
+  }
+  if (charaListItem.chara.data.extensions.nuwa_voices && charaListItem.chara.data.extensions.nuwa_voices.list && charaListItem.chara.data.extensions.nuwa_voices.list.length > 0) {
+    initNuwaVoices =  charaListItem.chara.data.extensions.nuwa_voices
+  }
 
+  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(initNuwaVoices.list[0]?.type);
+  let initSelectedVoiceSex:voiceSex = initNuwaVoices.list[0].sex;
+  const [selectedVoiceSex, setSelectedVoiceSex] = React.useState<voiceSex>(initSelectedVoiceSex);
+  const [selectedVoiceName, setSelectedVoiceName] = React.useState<string>(initNuwaVoices.list[0].name);
+  
+  
   const voiceListExist = voiceList[selectedVoiceSex].filter((item) => (item.value === selectedVoiceName));
 
   return (

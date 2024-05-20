@@ -17,7 +17,11 @@ function CharacterPreview({charaItem}: {charaItem: TypeCharaListItem}) {
   const t = useTranslations();
   const { chara } = charaItem;
 
-  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(chara.data.extensions.nuwa_voice?.type as TypeVoiceType || TypeVoiceType.None);
+  let initSelectedVoiceType =  TypeVoiceType.None;
+  if (chara.data.extensions.nuwa_voices && chara.data.extensions.nuwa_voices.list && chara.data.extensions.nuwa_voices.list.length > 0) {
+    initSelectedVoiceType = chara.data.extensions.nuwa_voices.list[0]?.type as TypeVoiceType;
+  }
+  const [selectedVoiceType, setSelectedVoiceType] = React.useState<TypeVoiceType>(initSelectedVoiceType);
   
   return (
   
