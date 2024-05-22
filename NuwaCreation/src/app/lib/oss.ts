@@ -2,10 +2,9 @@
 
 import OSS from 'ali-oss'
 import { customAlphabet } from 'nanoid'
-import { useAmDispatch } from "@/app/ui/components/AlterMessageContextProvider";
 
 type OssTokenDto = {
-  resp: {
+  data: {
     RequestId: string
     AssumedRoleUser: {
       Arn: string
@@ -41,11 +40,11 @@ export function generateId() {
 export async function prepearOssClient(ossToken: any): Promise<[OSS, OssTokenDto]> {
   const token = ossToken
   const client = new OSS({
-    region: token.resp.Region,
-    accessKeyId: token.resp.Credentials.AccessKeyId,
-    accessKeySecret: token.resp.Credentials.AccessKeySecret,
-    stsToken: token.resp.Credentials.SecurityToken,
-    bucket: token.resp.Bucket,
+    region: token.data.Region,
+    accessKeyId: token.data.Credentials.AccessKeyId,
+    accessKeySecret: token.data.Credentials.AccessKeySecret,
+    stsToken: token.data.Credentials.SecurityToken,
+    bucket: token.data.Bucket,
     secure: true,
   })
 
@@ -75,7 +74,6 @@ export async function getModelJson(name: string, ossToken: any) {
       delimiter: '/',
       "max-keys": 100
     }, {});
-    debugger
     return true
   } catch (error: any) {
     if (error.code === 'NoSuchKey') {
@@ -109,7 +107,7 @@ export async function uploadLive2dZip(file: File, ossToken: any): Promise<[strin
     throw new Error('Error.uploadfailed')
   }
   
-  return [modelname, `${token.resp.Endpoint}${live2dJsonUrl}`]
+  return [modelname, `${token.data.Endpoint}${live2dJsonUrl}`]
 }
 
 export async function uploadImage(file: File, ossToken: any): Promise<[string, string]> {
@@ -126,5 +124,5 @@ export async function uploadImage(file: File, ossToken: any): Promise<[string, s
     throw new Error('Error.uploadfailed')
   }
   
-  return [modelname, `${token.resp.Endpoint}${newFilenameFullUrl}`]
+  return [modelname, `${token.data.Endpoint}${newFilenameFullUrl}`]
 }
