@@ -39,7 +39,7 @@ function VoiceListHeader() {
   }]);
 
   return (
-    <div className="self-stretch justify-between items-center inline-flex bg-neutral-900 p-8 w-full">
+    <div className="self-stretch justify-between items-center inline-flex bg-neutral-900 px-8 pt-10 w-full">
       <div className="h-[41px] justify-start items-center gap-6 flex">
         <div className="text-white text-xl font-semibold font-['Archivo'] leading-normal">
           Voices
@@ -60,8 +60,7 @@ function VoiceListHeader() {
       </div>
 
       <NuwaTabs
-        aria-label="Options"
-        variant="bordered"        
+        aria-label="Options"  
         selectedKey={selected}
         onSelectionChange={(key) => setSelected(key as string)}
       >

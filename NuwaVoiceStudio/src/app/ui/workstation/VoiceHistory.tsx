@@ -22,7 +22,7 @@ function VoiceHistory() {
         <VoiceHistoryControl />
       </div>
 			
-      <div className="self-stretch pt-[140px] overflow-hidden">
+      <div className="self-stretch pt-[118px] overflow-hidden">
 			  <VoiceHistoryList />
       </div>
     </div>

@@ -53,15 +53,14 @@ function MainStationControlParameters() {
               <Button
                 variant="light"
                 className="text-gray-500 text-sm font-semibold font-['Inter']"
-                startContent={<ResetIcon className={`h-5 w-5 text-current ${isReset && "animate-spin"}`} />}
+                startContent={<ResetIcon className={`h-5 w-5 text-current ${isReset && "-animate-spin"}`} />}
                 onClick={handleReset}
               >
               Reset
               </Button> 
             </div>
             <NuwaTabs
-              aria-label="Options"
-              variant="bordered"        
+              aria-label="Options"     
               selectedKey={selected}
               onSelectionChange={(key) => setSelected(key as string)}
             >

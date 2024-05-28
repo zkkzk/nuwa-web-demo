@@ -11,11 +11,11 @@ const NuwaSlider = extendVariants(Slider, {
     },
     classNames: {
       default: {
-        base: "max-w-md",
-        trackWrapper: "h-12",
-        thumb: ["after:w-2 after:h-2 after:bg-primary", "w-3 h-3 bg-white"],
+        // base: "max-w-md",
+        // trackWrapper: "h-12",
+        // thumb: ["after:w-2 after:h-2 after:bg-primary", "w-3 h-3 bg-white"],
         label: "text-gray-500 text-sm font-semibold font-['Inter'] leading-normal",
-        labelWrapper: 'mb-px'
+        // labelWrapper: 'mb-px'
       },
     }
   },

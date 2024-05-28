@@ -51,7 +51,8 @@ function VoiceModelList() {
         id: i + count,
         src: 'https://via.placeholder.com/160x90',
         name: `大叔成熟男声音${i + count}`,
-        count: 3500,
+        count: 3500000,
+        star: i%2 === 1,
       })
     }
     setCount(count + limit);
@@ -65,7 +66,7 @@ function VoiceModelList() {
 
   return (
     <div className="self-stretch flex-col justify-start items-start gap-8 flex h-full">
-      <ScrollShadow visibility="top" hideScrollBar id="scrollableVoiceModelDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto py-8 px-8">
+      <ScrollShadow size={32} visibility="top" hideScrollBar id="scrollableVoiceModelDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto py-8 px-8">
         <InfiniteScroll
           dataLength={voiceList.length}
           next={loadMoreData}

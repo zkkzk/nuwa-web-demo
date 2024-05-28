@@ -3,8 +3,8 @@ import {useRadio, Chip, VisuallyHidden, tv, RadioGroup} from "@nextui-org/react"
 
 const radio = tv({
   slots: {
-    base: "border-black hover:bg-gray-200 bg-white h-10 rounded-md border border-black border-opacity-20",
-    content: "text-black text-center"
+    // base: "border-black hover:bg-gray-200 bg-transparent h-10 rounded-md border border-black border-opacity-20",
+    // content: "text-black text-center"
   },
   variants: {
     isSelected: {
@@ -50,12 +50,13 @@ const CustomRadio = (props : any) => {
         <input {...getInputProps()} />
       </VisuallyHidden>
       <Chip
-        classNames={{
-          base: styles.base(),
-          content: styles.content(),
-        }}
-        color="primary"
-        variant="faded"
+        // classNames={{
+        //   base: styles.base(),
+        //   content: styles.content(),
+        // }}
+        color="default"
+        variant={isSelected ? "solid" : "light"}
+        size="lg"
         // {...getLabelProps()}
       >
         {children ? children : isSelected ? "Enabled" : "Disabled"}

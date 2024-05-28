@@ -3,6 +3,7 @@ export type TypeVoiceModel = {
   src: string,
   name: string,
   count: number,
+  star: boolean,
 };
 
 export type TypeVoice = {

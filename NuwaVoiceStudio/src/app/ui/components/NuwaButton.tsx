@@ -6,12 +6,11 @@ const NuwaButton = extendVariants(Button, {
     // <- modify/add variants
     color: {
       indigo: "bg-primary text-white",
-      default: "bg-neutral-700 text-white"
     },
     isDisabled: {
     },
     size: {
-      xl: "h-12 text-base rounded-xl rounded-xl px-12 py-3 gap-4",
+      // xl: "h-12 text-base rounded-xl rounded-xl px-12 py-3 gap-4",
     },
   },
   defaultVariants: { // <- modify/add default variants

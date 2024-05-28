@@ -70,7 +70,7 @@ function VoiceHistoryList() {
 
   return (
     <div className="self-stretch flex-col justify-start items-start gap-8 flex h-full">
-			<ScrollShadow visibility="top" hideScrollBar id="scrollableVoiceHistoryDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto">
+			<ScrollShadow size={32} visibility="top" hideScrollBar id="scrollableVoiceHistoryDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto py-8">
 				<InfiniteScroll
 					dataLength={voiceList.length}
 					next={loadMoreData}
@@ -80,7 +80,7 @@ function VoiceHistoryList() {
 					className="w-full self-stretch grow shrink basis-0 flex-col justify-start items-center gap-6 flex"
 				>
 					{voiceList.map((voice) => (
-						<VoiceHistoryListItem key={voice.id} />
+						<VoiceHistoryListItem voice={voice} key={voice.id} />
 					))}
 				</InfiniteScroll>
 			</ScrollShadow>

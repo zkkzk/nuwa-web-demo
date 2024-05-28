@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link, useRouter } from "@/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
@@ -12,7 +12,7 @@ import { TypeVoice } from "@/app/lib/definitions.voice";
 import { ArrowDownTrayIcon, PlayIcon } from "@heroicons/react/24/outline";
 import NuwaButton from "../components/NuwaButton";
 import { PauseIcon } from "@heroicons/react/24/solid";
-import { useWavesurfer } from '@wavesurfer/react'
+import { create } from "lodash";
 
 const formWaveSurferOptions = (ref: any) => ({
   container: ref,
@@ -27,8 +27,6 @@ const formWaveSurferOptions = (ref: any) => ({
   partialRender: true
 });
 
-const formatTime = (seconds: any) => [seconds / 60, seconds % 60].map((v) => `0${Math.floor(v)}`.slice(-2)).join(':')
-
 function VoiceHistoryListItem({voice}: {
   voice: TypeVoice
 }) {
@@ -42,25 +40,105 @@ function VoiceHistoryListItem({voice}: {
 	const [init, setInit] = useState(false);
 
 
-	const containerRef = useRef(null)
-  const [urlIndex, setUrlIndex] = useState(0)
+	const waveformRef = useRef(null);
+  const wavesurfer = useRef(null);
+  const [playing, setPlaying] = useState(false);
 
-  const { wavesurfer, isPlaying, currentTime } = useWavesurfer({
-    container: containerRef,
-    height: 40,
-		barWidth: 3,
-		barRadius: 3,
-		waveColor: "#eee",
-		progressColor: "#0178FF",
-		cursorColor: "OrangeRed",
-    url: 'https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3',
-  })
+  const url =
+    "https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3";
+
+		const submitLink = async (event) => {
+			event.preventDefault();
+			const link = event.target.link.value;
+			const radius = event.target.radius.value;
+			const width = event.target.width.value;
+			const color = event.target.color.value;
 	
-	const onPlayPause = useCallback(() => {
-    wavesurfer && wavesurfer.playPause()
-  }, [wavesurfer])
+			const formWaveSurferOptions = (ref) => ({
+				container: ref,
+				waveColor: color,
+				progressColor: "#0178FF",
+				cursorColor: "OrangeRed",
+				barWidth: width,
+				barRadius: radius,
+				responsive: true,
+				height: 500,
+				normalize: true,
+				backgroundColor: 'white',
+				partialRender: true
+			});
+	
+			console.log(color)
+	
+			// make variable url to be equals to the provided link
+			const url = link
+	
+			const WaveSurfer = (await import("wavesurfer.js")).default;
+	
+			// destroy the current displayed waveform
+			wavesurfer.current.destroy();
+	
+			// get the options again
+			const options = formWaveSurferOptions(waveformRef.current);
+			wavesurfer.current = WaveSurfer.create(options);
+			wavesurfer.current.load(url)
+		};
+	
+	
+		useEffect(() => {
+			setInit(true);
+		}, []);
 
-	const duration = wavesurfer && wavesurfer.getDuration();
+		useEffect(() => {
+			if (!init) return;
+			create();
+	
+			return () => {
+				if (wavesurfer.current) {
+					wavesurfer.current.destroy();
+				}
+			};
+		}, [init]);
+	
+		const create = async () => {
+			const WaveSurfer = (await import("wavesurfer.js")).default;
+	
+			const options = formWaveSurferOptions(waveformRef.current);
+			wavesurfer.current = WaveSurfer.create(options);
+			wavesurfer.current.load(url);
+			wavesurfer.current.on('timeupdate', (currentTime) => {
+				console.log('Time', currentTime + 's')
+			})
+		};
+	
+		const handlePlayPause = () => {
+			setPlaying(!playing);
+			wavesurfer.current.playPause();
+		};
+	
+	
+		// const download = () => {
+			
+		// 	console.log(wavesurfer.current.exportImage('image/png',1))
+		// 	console.log("Saved")
+	
+	
+		// 	var image = new Image();
+		// 	image.src = wavesurfer.current.exportImage('image/png',1);
+		// 	document.body.appendChild(image);
+		// 	//document.body.style = 'background: red;';
+	
+		// 	return (<a href={image} download>Click to download</a>)
+		
+		// }
+	
+		const MyButton = React.forwardRef(({ onClick, href }, ref) => {
+			return (
+				<a href={href} onClick={onClick} ref={ref}>
+					Next
+				</a>
+			)
+		})
 
   return (
 		<div className="self-stretch h-[360px] flex-col justify-center items-start gap-6 flex">
@@ -89,17 +167,17 @@ function VoiceHistoryListItem({voice}: {
 								<div className=" shrink-0 cursor-pointer w-8 h-8 bg-white rounded-full flex items-center justify-center">
 									{isPlay 
 									? <PauseIcon className="h-5 w-5 fill-black stroke-black stroke-1" onClick={() => {
-										onPlayPause();
+										handlePlayPause();
 										setIsPlay(false);
 									}} />
 									: <PlayIcon className="h-5 w-5 fill-black stroke-black ml-0.5" onClick={() => {
-										onPlayPause();
+										handlePlayPause();
 										setIsPlay(true);
 									}} />
 								}
 								</div>
 								<div className="w-full">
-									<div ref={containerRef}  className="w-full" />
+									<div id="waveform" ref={waveformRef}  className="w-full" />
 								</div>
 								{/* <div className="self-stretch rounded-sm justify-start items-center gap-0.5 inline-flex">
 										<div className="w-0.5 h-px bg-primary rounded-sm" />
@@ -258,8 +336,8 @@ function VoiceHistoryListItem({voice}: {
 								</div> */}
 						</div>
 						<div className="self-stretch justify-between items-center inline-flex">
-							<div className="text-gray-500 text-xs font-medium font-['Inter']">{formatTime(currentTime)}</div>
-							<div className="text-gray-500 text-xs font-medium font-['Inter']">{formatTime(duration)}</div>
+							<div className="text-gray-500 text-xs font-medium font-['Inter']">0:21</div>
+							<div className="text-gray-500 text-xs font-medium font-['Inter']">1:02</div>
 						</div>
 					</div>
 					<div className="self-stretch justify-start items-start gap-4 inline-flex">
