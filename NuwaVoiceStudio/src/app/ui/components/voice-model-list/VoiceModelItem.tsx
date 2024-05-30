@@ -1,9 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Link, useRouter } from "@/navigation";
 import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/AlterMessageContextProvider";
 import { classNames } from "@/app/lib/utils";
 import { PlayIcon } from "@heroicons/react/24/outline";
 import { StarIcon, PauseIcon } from "@heroicons/react/24/solid";

@@ -1,14 +1,14 @@
 
 
-import WorkStation from "@/app/ui/workstation/WorkStation";
+import VoiceAsset from "@/app/ui/voice-asset/VoiceAsset";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 
-export default function VoiceAsset() {
+export default function voiceAsset() {
   const messages = useMessages();
   return (
     <>
       <NextIntlClientProvider messages={messages}>
-        <WorkStation />
+        <VoiceAsset />
       </NextIntlClientProvider>
     </>
   );

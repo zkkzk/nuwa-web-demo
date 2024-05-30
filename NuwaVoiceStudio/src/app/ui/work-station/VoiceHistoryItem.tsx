@@ -4,15 +4,15 @@ import { TypeVoice } from "@/app/lib/definitions.voice";
 import NuwaButton from "../components/NuwaButton";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import APIIcon from "@/app/icons/APIIcon";
-import VoiceHistoryListItemVideo from "./VoiceHistoryListItemVideo";
+import VoiceHistoryItemVideo from "./VoiceHistoryItemVideo";
 import NuwaTabs from "../components/NuwaTabs";
 import { Code, Tab } from "@nextui-org/react";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import CopyIcon from "@/app/icons/CopyIcon";
-import VoiceHistoryListItemAPI from "./VoiceHistoryListItemAPI";
+import VoiceHistoryItemAPI from "./VoiceHistoryItemAPI";
 
-function VoiceHistoryListItem({voice}: {
+function VoiceHistoryItem({voice}: {
   voice: TypeVoice
 }) {
 	const tagsList = voice.tags.split(",");
@@ -42,7 +42,7 @@ function VoiceHistoryListItem({voice}: {
 					</div>
 					{voice.type === 'FILE' ? (
 						<>
-							<VoiceHistoryListItemVideo videoSrc={voice.voiceSrc} />
+							<VoiceHistoryItemVideo videoSrc={voice.voiceSrc} />
 							<div className="self-stretch justify-start items-start gap-4 inline-flex">
 								<NuwaButton
 									color="default"
@@ -61,7 +61,7 @@ function VoiceHistoryListItem({voice}: {
 							</div>
 						</>
 					) : (
-						<VoiceHistoryListItemAPI voice={voice} />
+						<VoiceHistoryItemAPI voice={voice} />
 					)}
 					
 				</div>
@@ -84,4 +84,4 @@ function VoiceHistoryListItem({voice}: {
   );
 }
 
-export default VoiceHistoryListItem;
+export default VoiceHistoryItem;

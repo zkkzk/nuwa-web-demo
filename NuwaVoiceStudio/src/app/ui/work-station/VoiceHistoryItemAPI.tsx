@@ -7,7 +7,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import CopyIcon from "@/app/icons/CopyIcon";
 
-function VoiceHistoryListItemAPI({voice}: {
+function VoiceHistoryItemAPI({voice}: {
   voice: TypeVoice
 }) {
 	const tagsList = voice.tags.split(",");
@@ -57,4 +57,4 @@ function VoiceHistoryListItemAPI({voice}: {
   );
 }
 
-export default VoiceHistoryListItemAPI;
+export default VoiceHistoryItemAPI;

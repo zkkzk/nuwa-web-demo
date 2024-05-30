@@ -1,4 +1,4 @@
-import WorkStation from "@/app/ui/workstation/WorkStation";
+import WorkStation from "@/app/ui/work-station/WorkStation";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 
 export default function MyVoiceModels() {

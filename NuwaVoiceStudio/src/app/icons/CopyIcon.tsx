@@ -1,4 +1,4 @@
-const FilterIcon = ({ className }: { className: string}) => {
+const CopyIcon = ({ className }: { className: string}) => {
   return (
     <svg
       xmlns='http://www.w3.org/2000/svg'
@@ -17,4 +17,4 @@ const FilterIcon = ({ className }: { className: string}) => {
   );
 };
 
-export default FilterIcon;
+export default CopyIcon;

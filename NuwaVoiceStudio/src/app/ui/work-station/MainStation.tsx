@@ -10,7 +10,7 @@ import { Tab } from "@nextui-org/react";
 import { classNames } from "@/app/lib/utils";
 import NuwaChipRadioGroup from "../components/NuwaChipRadioGroup";
 import VoiceModelListHeader from "./VoiceModelListHeader";
-import VoiceModelList from "./VoiceModelList";
+import VoiceModelList from "../components/voice-model-list/VoiceModelList";
 
 type TypeFilterItem = {
   label: string;

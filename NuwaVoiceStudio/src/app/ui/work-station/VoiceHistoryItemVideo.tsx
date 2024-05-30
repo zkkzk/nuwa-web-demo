@@ -8,7 +8,7 @@ import { useWavesurfer } from '@wavesurfer/react'
 
 const formatTime = (seconds: any) => [seconds / 60, seconds % 60].map((v) => `0${Math.floor(v)}`.slice(-2)).join(':')
 
-function VoiceHistoryListItemVideo({videoSrc}: {
+function VoiceHistoryItemVideo({videoSrc}: {
   videoSrc: string
 }) {
 
@@ -61,4 +61,4 @@ function VoiceHistoryListItemVideo({videoSrc}: {
   );
 }
 
-export default VoiceHistoryListItemVideo;
+export default VoiceHistoryItemVideo;

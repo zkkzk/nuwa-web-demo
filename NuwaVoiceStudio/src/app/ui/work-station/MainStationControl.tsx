@@ -4,8 +4,6 @@ import { Link, useRouter } from "@/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
-import VoiceModelList from "./VoiceModelList";
-import { Button, Input, Select, SelectItem } from "@nextui-org/react";
 import NuwaButton from "../components/NuwaButton";
 import FlashIcon from "@/app/icons/FlashIcon";
 import { TypeTone } from "@/app/lib/definitions.tone";
@@ -37,9 +35,7 @@ function MainStationControl() {
     <div className="flex-col justify-end items-center flex bottom-0 w-full">
       <MainStationControlParameters />
       <div className="self-stretch h-[188px] p-8 bg-neutral-900 shadow border-t border-neutral-800 flex-col justify-start items-start gap-5 flex">
-        <NuwaInput type="text" variant="bordered" placeholder="Type context you want to convert here."
-
-        />
+        <NuwaInput type="text" variant="bordered" placeholder="Type context you want to convert here." />
         <div className="self-stretch justify-between items-start inline-flex">
           <NuwaSelect
             items={toneList}

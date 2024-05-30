@@ -9,9 +9,9 @@ import { ScrollShadow, Tab } from "@nextui-org/react";
 import FilterIcon from "@/app/icons/FilterIcon";
 import VoiceHistoryControl from "./VoiceHistoryControl";
 import { TypeVoice } from "@/app/lib/definitions.voice";
-import VoiceHistoryListItem from "./VoiceHistoryListItem";
+import VoiceHistoryItem from "./VoiceHistoryItem";
 import InfiniteScroll from "../components/infinite-scroll/InfiniteScroll";
-import VoiceModelItemSkeleton from "./VoiceModelItemSkeleton";
+import VoiceHistoryItemSkeleton from "./VoiceHistoryItemSkeleton";
 
 const limit = 4;
 
@@ -76,12 +76,12 @@ function VoiceHistoryList() {
 					dataLength={voiceList.length}
 					next={loadMoreData}
 					hasMore={voiceList.length < 9990}
-					loader={<><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /></>}
+					loader={<><VoiceHistoryItemSkeleton /><VoiceHistoryItemSkeleton /><VoiceHistoryItemSkeleton /><VoiceHistoryItemSkeleton /><VoiceHistoryItemSkeleton /><VoiceHistoryItemSkeleton /><VoiceHistoryItemSkeleton /><VoiceHistoryItemSkeleton /><VoiceHistoryItemSkeleton /><VoiceHistoryItemSkeleton /></>}
 					scrollableTarget="scrollableVoiceHistoryDiv"
 					className="w-full self-stretch grow shrink basis-0 flex-col justify-start items-center gap-6 flex"
 				>
 					{voiceList.map((voice) => (
-						<VoiceHistoryListItem voice={voice} key={voice.id} />
+						<VoiceHistoryItem voice={voice} key={voice.id} />
 					))}
 				</InfiniteScroll>
 			</ScrollShadow>

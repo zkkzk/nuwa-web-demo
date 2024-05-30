@@ -1,21 +1,18 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Link, useRouter } from "@/navigation";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/AlterMessageContextProvider";
 import VoiceModelItem from "./VoiceModelItem";
 import { TypeVoiceModel } from "@/app/lib/definitions.voice";
-import InfiniteScroll from "../components/infinite-scroll/InfiniteScroll";
 import VoiceModelItemSkeleton from "./VoiceModelItemSkeleton";
 import { ScrollShadow } from "@nextui-org/react";
+import InfiniteScroll from "../infinite-scroll/InfiniteScroll";
 
 const limit = 10;
 
 function VoiceModelList() {
   const router = useRouter();
   const t = useTranslations();
-  const amDispatch = useAmDispatch();
 
   const [selectedVoiceModel, setSelectedVoiceModel] = useState<TypeVoiceModel | null >(null);
 
