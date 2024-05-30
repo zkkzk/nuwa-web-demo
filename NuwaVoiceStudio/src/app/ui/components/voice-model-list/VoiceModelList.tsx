@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { Link, useRouter } from "@/navigation";
-import { useTranslations } from "next-intl";
 import VoiceModelItem from "./VoiceModelItem";
 import { TypeVoiceModel } from "@/app/lib/definitions.voice";
 import VoiceModelItemSkeleton from "./VoiceModelItemSkeleton";
@@ -10,9 +8,11 @@ import InfiniteScroll from "../infinite-scroll/InfiniteScroll";
 
 const limit = 10;
 
-function VoiceModelList() {
-  const router = useRouter();
-  const t = useTranslations();
+function VoiceModelList({
+  onItemClick,
+}: {
+  onItemClick?: (voiceModel: TypeVoiceModel) => void;
+}) {
 
   const [selectedVoiceModel, setSelectedVoiceModel] = useState<TypeVoiceModel | null >(null);
 
@@ -74,6 +74,7 @@ function VoiceModelList() {
         >
           {voiceList.map((voice) => (
             <div key={voice.id} onClick={() => {
+              onItemClick && onItemClick(voice);
               if(selectedVoiceModel && (voice.id === selectedVoiceModel.id)) {
                 setSelectedVoiceModel(null);
                 return;

@@ -4,13 +4,13 @@ import { TypeVoice } from "@/app/lib/definitions.voice";
 import NuwaButton from "../components/NuwaButton";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import APIIcon from "@/app/icons/APIIcon";
-import VoiceHistoryItemVideo from "./VoiceHistoryItemVideo";
 import NuwaTabs from "../components/NuwaTabs";
 import { Code, Tab } from "@nextui-org/react";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import CopyIcon from "@/app/icons/CopyIcon";
 import VoiceHistoryItemAPI from "./VoiceHistoryItemAPI";
+import VoiceHistoryItemVoiceRreview from "./VoiceHistoryItemVoicePreview";
 
 function VoiceHistoryItem({voice}: {
   voice: TypeVoice
@@ -42,7 +42,7 @@ function VoiceHistoryItem({voice}: {
 					</div>
 					{voice.type === 'FILE' ? (
 						<>
-							<VoiceHistoryItemVideo videoSrc={voice.voiceSrc} />
+							<VoiceHistoryItemVoiceRreview voiceSrc={voice.voiceSrc} />
 							<div className="self-stretch justify-start items-start gap-4 inline-flex">
 								<NuwaButton
 									color="default"

@@ -1,16 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { Link, useRouter } from "@/navigation";
-import Image from "next/image";
-import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/AlterMessageContextProvider";
 import VoiceModelListHeader from "./VoiceModelListHeader";
 import VoiceModelList from "../components/voice-model-list/VoiceModelList";
+import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
+import VoiceAssetDetail from "./VoiceModelDetail";
 
 function VoiceAsse() {
-  const router = useRouter();
-  const t = useTranslations();
-  const amDispatch = useAmDispatch();
+
+  const voiceDetailModal = useDisclosure();
 
   return (
     <div className="w-full h-screen pt-14 overflow-hidden bg-neutral-900 rounded-bl-xl rounded-br-xl justify-start items-end inline-flex">
@@ -19,10 +16,57 @@ function VoiceAsse() {
           <VoiceModelListHeader />
         </div>
         <div className="self-stretch pt-[170px] overflow-hidden w-full">
-          <VoiceModelList />
+          <VoiceModelList onItemClick={() => {
+            voiceDetailModal.onOpen();
+          }} />
         </div>
       </div>
-  </div>
+
+      <Modal 
+        size="full"
+        isOpen={voiceDetailModal.isOpen}
+        placement={'bottom'}
+        scrollBehavior="inside"
+        onOpenChange={voiceDetailModal.onOpenChange}
+        classNames={{
+          base: "h-11/12 rounded-t-lg overflow-hidden",
+          header: "rounded-t-lg overflow-hidden"
+        }}
+        hideCloseButton={true}
+        motionProps={{
+          variants: {
+            enter: {
+              y: 0,
+              opacity: 1,
+              transition: {
+                opacity: {
+                  duration: 0.15,
+                },
+              },
+            },
+            exit: {
+              y: "50%",
+              opacity: 0,
+              transition: {
+                opacity: {
+                  duration: 0.1,
+                },
+              },
+            },
+          },
+        }}
+      >
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalBody>
+                <VoiceAssetDetail />
+              </ModalBody>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
+    </div>
   );
 }
 

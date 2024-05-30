@@ -3,14 +3,11 @@ import React, { useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
-import NuwaTabs from "../components/NuwaTabs";
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Tab } from "@nextui-org/react";
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
 import NuwaChipRadioGroup from "../components/NuwaChipRadioGroup";
 import NuwaInput from "../components/NuwaInput";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import FilterIcon from "@/app/icons/FilterIcon";
-import NuwaButton from "../components/NuwaButton";
-import NuwaSelect, { NuwaSelectItem } from "../components/NuwaSelect";
 import DCubeIcon from "@/app/icons/3DCubeIcon";
 
 type TypeFilterItem = {
@@ -20,10 +17,6 @@ type TypeFilterItem = {
 
 
 function VoiceListHeader() {
-  const router = useRouter();
-  const t = useTranslations();
-  const amDispatch = useAmDispatch();
-  const [selected, setSelected] = useState("recent");
   const [selectedFilter, setSelectedFilter] = useState<TypeFilterItem | null>();
   const [filters, setFilters] = useState<Array<TypeFilterItem>>([{
     label: "Girl-12",

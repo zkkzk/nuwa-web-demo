@@ -8,8 +8,18 @@ import { useWavesurfer } from '@wavesurfer/react'
 
 const formatTime = (seconds: any) => [seconds / 60, seconds % 60].map((v) => `0${Math.floor(v)}`.slice(-2)).join(':')
 
-function VoiceHistoryItemVideo({videoSrc}: {
-  videoSrc: string
+function VoicePreview({
+	voiceSrc,
+	hideTimeline = true,
+	classNames = {
+		voicePreview: "",
+	},
+}: {
+  voiceSrc: string
+	hideTimeline: boolean,
+	classNames?: {
+		voicePreview: string
+	}
 }) {
 
   const [isPlay, setIsPlay] = useState(false);
@@ -35,8 +45,8 @@ function VoiceHistoryItemVideo({videoSrc}: {
 	const duration = wavesurfer && wavesurfer.getDuration();
 
   return (
-		<div className="self-stretch h-[83px] flex-col justify-start items-start gap-2 flex overflow-hidden">
-			<div className="w-full pl-3.5 pr-[18px] pt-[11px] pb-2.5 bg-neutral-900 rounded-xl justify-start items-center gap-3 inline-flex scrollbar-hide overflow-scroll">
+		<div className="self-stretch h-full w-full flex-col justify-start items-start gap-2 flex overflow-hidden">
+			<div className={[classNames.voicePreview, 'h-16 px-4 py-3 w-full rounded-xl justify-start items-center gap-3 inline-flex scrollbar-hide overflow-scroll'].join(' ')}>
 					<div className=" shrink-0 cursor-pointer w-8 h-8 bg-white rounded-full flex items-center justify-center">
 						{isPlay 
 						? <PauseIcon className="h-5 w-5 fill-black stroke-black stroke-1" onClick={() => {
@@ -53,12 +63,15 @@ function VoiceHistoryItemVideo({videoSrc}: {
 						<div ref={containerRef}  className="w-full" />
 					</div>
 			</div>
-			<div className="self-stretch justify-between items-center inline-flex">
-				<div className="text-gray-500 text-xs font-medium font-['Inter']">{formatTime(currentTime)}</div>
-				<div className="text-gray-500 text-xs font-medium font-['Inter']">{formatTime(duration)}</div>
-			</div>
+			{!hideTimeline && (
+				<div className="self-stretch justify-between items-center inline-flex">
+					<div className="text-gray-500 text-xs font-medium font-['Inter']">{formatTime(currentTime)}</div>
+					<div className="text-gray-500 text-xs font-medium font-['Inter']">{formatTime(duration)}</div>
+				</div>
+			)}
+			
 		</div>
   );
 }
 
-export default VoiceHistoryItemVideo;
+export default VoicePreview;
