@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
 import VoiceModelItem from "./VoiceModelItem";
 import { TypeVoiceModel } from "@/app/lib/definitions.voice";
-import InfiniteScroll from "../infinite-scroll/InfiniteScroll";
+import InfiniteScroll from "../components/infinite-scroll/InfiniteScroll";
 import VoiceModelItemSkeleton from "./VoiceModelItemSkeleton";
 import { ScrollShadow } from "@nextui-org/react";
 
@@ -76,7 +76,7 @@ function VoiceModelList() {
           className="w-full self-stretch items-start grid gap-8 grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
         >
           {voiceList.map((voice) => (
-            <div onClick={() => {
+            <div key={voice.id} onClick={() => {
               if(selectedVoiceModel && (voice.id === selectedVoiceModel.id)) {
                 setSelectedVoiceModel(null);
                 return;

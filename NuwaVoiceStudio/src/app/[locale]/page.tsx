@@ -1,6 +1,7 @@
 import { redirect } from "@/navigation";
 import { NextIntlClientProvider, useMessages } from "next-intl";
-import Overview from "../ui/overview/Overview";
+
+
 export default function Home() {
   const messages = useMessages();
   
@@ -9,7 +10,7 @@ export default function Home() {
   return (
     <>
       <NextIntlClientProvider messages={messages}>
-        <Overview />
+        <div></div>
       </NextIntlClientProvider>
     </>
   );

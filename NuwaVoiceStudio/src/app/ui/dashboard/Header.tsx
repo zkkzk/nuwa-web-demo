@@ -1,4 +1,5 @@
 'use client'
+import { useState } from "react";
 import { Link, usePathname } from "@/navigation";
 import { useTranslations } from 'next-intl';
 import HeaderAvatar from "./HeaderAvatar";
@@ -7,6 +8,7 @@ import HeaderArrowIcon from "@/app/icons/HeaderArrowIcon";
 import HeaderVoiceAssetIcon from "@/app/icons/HeaderVoiceAssetIcon";
 import { classNames } from "@/app/lib/utils";
 import FlashIcon from "@/app/icons/FlashIcon";
+import { DDLSidebar } from "@ddreamland/common";
 
 const navigation = [
   { name: 'Navigation.voiceasset', href: '/voiceasset', icon: HeaderVoiceAssetIcon, current: false },
@@ -24,25 +26,36 @@ export default function Header() {
         item.current = true;
       }
     });
+  const [showSidebar, setShowSidebar] = useState(false)
   
   return (
     <>
-      <div className="fixed top-0 left-0 z-40 w-full h-14 px-6 bg-zinc-800 justify-between items-center inline-flex">
+      {showSidebar && (
+        <div className={`fixed left-6 top-0 pt-20 pb-14 w-[280px] z-50 h-screen`}>
+          <div className="w-full h-full">
+            <DDLSidebar lang="en"></DDLSidebar>
+          </div>         
+        </div>
+      )}
+      <div className="fixed top-0 left-0 z-[60] w-full h-14 px-6 bg-zinc-800 justify-between items-center inline-flex">
         <div className="self-stretch justify-start items-center gap-8 flex">
           <div className="rounded-lg flex-col justify-center items-center gap-2 inline-flex">
             <div className="py-2 rounded-lg justify-start items-center gap-3 inline-flex">
-              <div className="px-4 py-2 bg-zinc-900 rounded-3xl justify-start items-center gap-3 flex">
-              <LogoIcon className="" />
-              <HeaderArrowIcon className="" />
+              <div
+                onClick={() => setShowSidebar(!showSidebar)}
+                className="px-4 py-2 bg-zinc-900 rounded-3xl justify-start items-center gap-3 flex"
+              >
+                <LogoIcon className="" />
+                <HeaderArrowIcon className="" />
               </div>
+      
               <div className="text-slate-100 text-lg font-semibold font-['Inter'] leading-tight">Voice Studio</div>
             </div>
           </div>
           <div className="justify-start items-center gap-0.5 flex">
             {navigation.map((item, index) => (
-              <div className="group/item">
+              <div className="group/item" key={`${item.href}${index}`}>
                 <Link
-                  key={`${item.href}${index}`}
                   href={item.href}
                   className={classNames(
                     item.current

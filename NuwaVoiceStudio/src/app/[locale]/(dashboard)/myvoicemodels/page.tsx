@@ -1,5 +1,4 @@
-
-import Overview from "@/app/ui/overview/Overview";
+import WorkStation from "@/app/ui/workstation/WorkStation";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 
 export default function MyVoiceModels() {
@@ -7,7 +6,7 @@ export default function MyVoiceModels() {
   return (
     <>
       <NextIntlClientProvider messages={messages}>
-        <Overview />
+        <WorkStation />
       </NextIntlClientProvider>
     </>
   );

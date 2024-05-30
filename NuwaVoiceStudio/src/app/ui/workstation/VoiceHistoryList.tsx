@@ -10,7 +10,7 @@ import FilterIcon from "@/app/icons/FilterIcon";
 import VoiceHistoryControl from "./VoiceHistoryControl";
 import { TypeVoice } from "@/app/lib/definitions.voice";
 import VoiceHistoryListItem from "./VoiceHistoryListItem";
-import InfiniteScroll from "../infinite-scroll/InfiniteScroll";
+import InfiniteScroll from "../components/infinite-scroll/InfiniteScroll";
 import VoiceModelItemSkeleton from "./VoiceModelItemSkeleton";
 
 const limit = 4;
@@ -54,9 +54,10 @@ function VoiceHistoryList() {
 				name: `大叔成熟男声音${i + count}`,
 				tone: 'tone',
 				content: 'Your audio has been successfully generated. You may',
-				voiceSrc: '',
+				voiceSrc: 'https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3',
 				datetime: 'Just now',
 				tags: 'tag1,tag2,tag3',
+        type: (i%2 === 0) ? 'API' : 'FILE',
       })
     }
     setCount(count + limit);

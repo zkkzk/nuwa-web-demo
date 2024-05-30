@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import "./globals.css";
 import { Providers } from "./providers";
+import '@ddreamland/common/style.css'
 
 const locales = ["en"];
 

@@ -15,6 +15,7 @@ export type TypeVoice = {
   voiceSrc: string,
   datetime: string,
   tags: string,
+  type: 'API' | 'FILE'
 };
 
 export type TypeVoiceApi = {

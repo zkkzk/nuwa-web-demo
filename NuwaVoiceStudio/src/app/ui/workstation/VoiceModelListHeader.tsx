@@ -1,15 +1,10 @@
 "use client";
 import React, { useState } from "react";
-import { Link, useRouter } from "@/navigation";
-import Image from "next/image";
+import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
-import VoiceHistory from "./VoiceHistory";
-import VoiceList from "./VoiceList";
-import MainStationControl from "./MainStationControl";
 import NuwaTabs from "../components/NuwaTabs";
 import { Tab } from "@nextui-org/react";
-import { classNames } from "@/app/lib/utils";
 import NuwaChipRadioGroup from "../components/NuwaChipRadioGroup";
 
 type TypeFilterItem = {

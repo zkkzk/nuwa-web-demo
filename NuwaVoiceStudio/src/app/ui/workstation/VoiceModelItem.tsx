@@ -15,12 +15,7 @@ function VocieItem({voice, isSelected = false}: {
   voice: any,
   isSelected: boolean,
 }) {
-  const router = useRouter();
-  const t = useTranslations();
-  const amDispatch = useAmDispatch();
-
   const [isPlay, setIsPlay] = useState(false);
-
 
   return (
     <div className="group/item" key={voice.id}>
