@@ -23,13 +23,13 @@ function VoiceAssetDetailLeft() {
         </div>
         
       </div>
-      <div className="self-stretch h-[492px] flex-col justify-start items-start gap-6 flex">
+      <div className="self-stretch flex-col justify-start items-start gap-6 flex">
         <div className="self-stretch justify-start items-center gap-2.5 inline-flex">
           <div className="text-white text-xl font-semibold font-['Inter'] leading-7">
             Tones Preview
           </div>
         </div>
-        <div className="self-stretch h-[440px] flex-col justify-start items-start gap-4 flex">
+        <div className="self-stretch flex-col justify-start items-start gap-4 flex">
           <ToneVoicePreview voiceSrc="" />
         </div>
       </div>

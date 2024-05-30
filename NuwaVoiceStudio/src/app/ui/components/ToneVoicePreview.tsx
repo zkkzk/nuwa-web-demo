@@ -39,7 +39,7 @@ function ToneVoicePreview({ voiceSrc }: { voiceSrc: string }) {
     <div className="self-stretch bg-zinc-800 rounded-xl justify-start items-center gap-4 inline-flex py-1">
       <div className="grow shrink basis-0 flex-col justify-start items-start gap-4 inline-flex">
         <div className="self-stretch justify-start items-start gap-3 inline-flex">
-          <VoicePreview voiceSrc={voiceSrc} hideTimeline={true} />
+          <VoicePreview voiceSrc={voiceSrc} hideTimeline={true} size="md" />
         </div>
         <div className="self-stretch justify-between items-start gap-3 inline-flex px-4 pb-3">
           <div className="w-[120px] h-full pl-3.5 py-3.5 bg-zinc-700 rounded-xl shadow justify-start items-center flex">
@@ -54,7 +54,7 @@ function ToneVoicePreview({ voiceSrc }: { voiceSrc: string }) {
           </div>
 					<Input classNames={{
 						base: 'grow',
-					}} type="text" variant="flat" color="default" placeholder="With Error Message" />
+					}} type="text" variant="bordered" color="default" placeholder="With Error Message" />
         </div>
       </div>
     </div>

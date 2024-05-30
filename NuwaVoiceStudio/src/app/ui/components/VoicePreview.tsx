@@ -11,12 +11,14 @@ const formatTime = (seconds: any) => [seconds / 60, seconds % 60].map((v) => `0$
 function VoicePreview({
 	voiceSrc,
 	hideTimeline = true,
+	size = 'sm',
 	classNames = {
 		voicePreview: "",
 	},
 }: {
   voiceSrc: string
 	hideTimeline: boolean,
+	size?: 'sm' | 'md',
 	classNames?: {
 		voicePreview: string
 	}
@@ -47,7 +49,7 @@ function VoicePreview({
   return (
 		<div className="self-stretch h-full w-full flex-col justify-start items-start gap-2 flex overflow-hidden">
 			<div className={[classNames.voicePreview, 'h-16 px-4 py-3 w-full rounded-xl justify-start items-center gap-3 inline-flex scrollbar-hide overflow-scroll'].join(' ')}>
-					<div className=" shrink-0 cursor-pointer w-8 h-8 bg-white rounded-full flex items-center justify-center">
+					<div className={`${size === 'sm' ? 'w-8 h-8' : 'h-10 w-10'} shrink-0 cursor-pointer bg-white rounded-full flex items-center justify-center`}>
 						{isPlay 
 						? <PauseIcon className="h-5 w-5 fill-black stroke-black stroke-1" onClick={() => {
 							onPlayPause();
