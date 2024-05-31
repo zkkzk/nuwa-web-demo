@@ -29,7 +29,7 @@ function VoiceAsse() {
         scrollBehavior="inside"
         onOpenChange={voiceDetailModal.onOpenChange}
         classNames={{
-          base: "h-11/12 rounded-t-lg overflow-hidden bg-transparent",
+          base: "h-11/12 rounded-t-lg overflow-hidden bg-transparent shadow-none",
           header: "rounded-t-lg overflow-hidden bg-transparent",
           body: "bg-zinc-900 rounded-tl-2xl rounded-tr-2xl rounded-bl-xl rounded-br-xl px-[120px]",
         }}

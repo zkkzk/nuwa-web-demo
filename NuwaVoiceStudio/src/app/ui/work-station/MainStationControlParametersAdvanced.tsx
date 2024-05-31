@@ -1,8 +1,8 @@
 "use client";
 import React from "react";
-import NuwaInput from "../components/NuwaInput";
 import NuwaSliderInput from "../components/NuwaSliderInput";
 import { TypeInstantGenerateParamster } from "@/app/lib/definitions.InstantGenerateParamster";
+import { Input } from "@nextui-org/react";
 
 function MainStationControlParametersAdvanced({
   value,
@@ -34,7 +34,8 @@ function MainStationControlParametersAdvanced({
 
   return (
     <div className="self-stretch rounded-xl justify-end items-center gap-12 grid grid-cols-1 lg:grid-cols-2">
-      <NuwaInput
+      <Input
+        color="primary"
         variant="bordered"
         size="lg"
         label="Seed"

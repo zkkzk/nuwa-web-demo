@@ -1,14 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { TypeVoice } from "@/app/lib/definitions.voice";
-import NuwaButton from "../components/NuwaButton";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import APIIcon from "@/app/icons/APIIcon";
-import NuwaTabs from "../components/NuwaTabs";
-import { Code, Tab } from "@nextui-org/react";
-import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import CopyIcon from "@/app/icons/CopyIcon";
+import { Button } from "@nextui-org/react";
 import VoiceHistoryItemAPI from "./VoiceHistoryItemAPI";
 import VoiceHistoryItemVoiceRreview from "./VoiceHistoryItemVoicePreview";
 
@@ -44,20 +39,20 @@ function VoiceHistoryItem({voice}: {
 						<>
 							<VoiceHistoryItemVoiceRreview voiceSrc={voice.voiceSrc} />
 							<div className="self-stretch justify-start items-start gap-4 inline-flex">
-								<NuwaButton
+								<Button
 									color="default"
 									size="lg"
 									variant="ghost"
 									className='px-0 grow'
 									endContent={<ArrowDownTrayIcon className="w-5 h-5 fill-zinc-400 shrink-zinc-400" />}
-								>Download</NuwaButton>
-								<NuwaButton
+								>Download</Button>
+								<Button
 									color="default"
 									size="lg"
 									variant="ghost"
 									className='px-0 grow'
 									endContent={<APIIcon className="w-5 h-5" />}
-								>API</NuwaButton>
+								>API</Button>
 							</div>
 						</>
 					) : (

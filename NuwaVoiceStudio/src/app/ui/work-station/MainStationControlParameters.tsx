@@ -8,7 +8,6 @@ import ResetIcon from "@/app/icons/ResetIcon";
 import MainStationControlParametersBasics from "./MainStationControlParametersBasics";
 import MainStationControlParametersAdvanced from "./MainStationControlParametersAdvanced";
 import { DefaultInstantGenerateParamster, TypeInstantGenerateParamster } from "@/app/lib/definitions.InstantGenerateParamster";
-import NuwaTabs from "../components/NuwaTabs";
 
 
 function MainStationControlParameters() {
@@ -59,10 +58,13 @@ function MainStationControlParameters() {
               Reset
               </Button> 
             </div>
-            <NuwaTabs
+            <Tabs
               aria-label="Options"     
               selectedKey={selected}
               onSelectionChange={(key) => setSelected(key as string)}
+              classNames={{
+                panel: "p-0 w-full"
+              }}
             >
               <Tab key="basics" title="Basics">
                 <MainStationControlParametersBasics value={parameters} onChange={setParameters} />
@@ -70,7 +72,7 @@ function MainStationControlParameters() {
               <Tab key="advanced" title="Advanced">
                 <MainStationControlParametersAdvanced value={parameters} onChange={setParameters} />
               </Tab>
-            </NuwaTabs>
+            </Tabs>
           </div>
         </AccordionItem>
       </Accordion>

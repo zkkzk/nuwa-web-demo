@@ -1,8 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { TypeVoice } from "@/app/lib/definitions.voice";
-import NuwaTabs from "../components/NuwaTabs";
-import { Tab } from "@nextui-org/react";
+import { Tab, Tabs } from "@nextui-org/react";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import CopyIcon from "@/app/icons/CopyIcon";
@@ -15,10 +14,13 @@ function VoiceHistoryItemAPI({voice}: {
 
   return (
 		<div className="w-[268px] rounded-xl border border-zinc-700 flex-col justify-start items-start inline-flex overflow-hidden">
-			<NuwaTabs
+			<Tabs
 				aria-label="Options"     
 				selectedKey={selected}
 				onSelectionChange={(key) => setSelected(key as string)}
+				classNames={{
+					panel: "p-0 w-full"
+				}}
 				fullWidth
 			>
 				<Tab key="GET" title="get">
@@ -52,7 +54,7 @@ function VoiceHistoryItemAPI({voice}: {
 						</SyntaxHighlighter>
 					</div>
 				</Tab>
-			</NuwaTabs>
+			</Tabs>
 		</div>
   );
 }

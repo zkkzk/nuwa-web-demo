@@ -1,19 +1,15 @@
 "use client";
 import React, { useState } from "react";
-import { Link, useRouter } from "@/navigation";
-import Image from "next/image";
+
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
-import NuwaButton from "../components/NuwaButton";
 import FlashIcon from "@/app/icons/FlashIcon";
 import { TypeTone } from "@/app/lib/definitions.tone";
 import { UserIcon } from "@heroicons/react/24/outline";
-import NuwaInput from "../components/NuwaInput";
 import MainStationControlParameters from "./MainStationControlParameters";
-import NuwaSelect, { NuwaSelectItem } from "../components/NuwaSelect";
+import { Button, Input, Select, SelectItem } from "@nextui-org/react";
 
 function MainStationControl() {
-  const router = useRouter();
   const t = useTranslations();
   const amDispatch = useAmDispatch();
 
@@ -35,28 +31,31 @@ function MainStationControl() {
     <div className="flex-col justify-end items-center flex bottom-0 w-full">
       <MainStationControlParameters />
       <div className="self-stretch h-[188px] p-8 bg-neutral-900 shadow border-t border-neutral-800 flex-col justify-start items-start gap-5 flex">
-        <NuwaInput type="text" variant="bordered" placeholder="Type context you want to convert here." />
+        <Input color="primary" type="text" variant="bordered" placeholder="Type context you want to convert here." />
         <div className="self-stretch justify-between items-start inline-flex">
-          <NuwaSelect
+          <Select
             items={toneList}
             variant="bordered"
             size="sm"
             className="w-[180px]"
-            startContent={<div className="text-gray-500 text-sm font-semibold font-['Inter'] leading-normal"><p>Tones | </p></div>}
+            startContent={<div className="w-40 text-gray-500 text-sm font-semibold font-['Inter'] leading-normal"><p>Tones | </p></div>}
           >
             {toneList.map((tone) => (
-                <NuwaSelectItem
+                <SelectItem
                   key={tone.value}
                   value={tone.value}
+                  classNames={{
+                    base: 'h-12 pl-2 pr-3 py-2 rounded-xl gap-4',
+                  }}
                   startContent={<UserIcon className="h-4 w-4"/>}
                 >
                   {tone.name}
-                </NuwaSelectItem>
+                </SelectItem>
             ))}
-          </NuwaSelect>
+          </Select>
           <div className="justify-start items-start gap-3 flex">
-            <NuwaButton
-              color="indigo"
+            <Button
+              color="primary"
               size="lg"
               endContent={
                 <div className="h-6 pl-1 pr-2 py-0.5 bg-green-500 rounded-md justify-center items-center gap-1 flex">
@@ -67,11 +66,11 @@ function MainStationControl() {
                   </div>
                 </div>
               }
-            >Instant Generate</NuwaButton>
-            <NuwaButton
+            >Instant Generate</Button>
+            <Button
               color="default"
               size="lg"
-            >Generate API Address</NuwaButton>
+            >Generate API Address</Button>
           </div>
         </div>
       </div>

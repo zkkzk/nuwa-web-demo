@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
-import NuwaSelect, { NuwaSelectItem } from "../components/NuwaSelect";
 import NuwaSliderInput from "../components/NuwaSliderInput";
 import { TypeInstantGenerateParamster } from "@/app/lib/definitions.InstantGenerateParamster";
+import { Select, SelectItem } from "@nextui-org/react";
 
 
 function MainStationControlParametersBasics({
@@ -41,7 +41,7 @@ function MainStationControlParametersBasics({
 
   return (
     <div className="self-stretch rounded-xl justify-end items-center gap-12 grid grid-cols-1 lg:grid-cols-2">
-      <NuwaSelect
+      <Select
         variant="bordered"
         size="lg"
         label="Language"
@@ -51,14 +51,17 @@ function MainStationControlParametersBasics({
         onChange={(e) => onChange({ ...value, language: e.target.value })}
       >
         {languageList.map((Language) => (
-            <NuwaSelectItem
+            <SelectItem
               key={Language.value}
               value={Language.value}
+              classNames={{
+                base: 'h-12 pl-2 pr-3 py-2 rounded-xl gap-4',
+              }}
             >
               {Language.label}
-            </NuwaSelectItem>
+            </SelectItem>
         ))}
-      </NuwaSelect>
+      </Select>
       <NuwaSliderInput
         label="Speed"
         step={0.01} 
@@ -67,7 +70,7 @@ function MainStationControlParametersBasics({
         value={value.speed}
         onChange={(speed) => onChange({ ...value, speed: speed })}
       />
-      <NuwaSelect
+      <Select
         variant="bordered"
         size="lg"
         label="Segmentation Method"
@@ -77,14 +80,17 @@ function MainStationControlParametersBasics({
         onChange={(e) => onChange({ ...value, segmentationMethod: e.target.value })}
       >
         {languageList.map((Language) => (
-            <NuwaSelectItem
+            <SelectItem
               key={Language.value}
               value={Language.value}
+              classNames={{
+                base: 'h-12 pl-2 pr-3 py-2 rounded-xl gap-4',
+              }}
             >
               {Language.label}
-            </NuwaSelectItem>
+            </SelectItem>
         ))}
-      </NuwaSelect>
+      </Select>
       <NuwaSliderInput
         label="Max words allowed per sentence"
         step={1} 

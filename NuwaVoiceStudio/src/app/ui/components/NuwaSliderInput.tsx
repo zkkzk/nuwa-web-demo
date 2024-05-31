@@ -2,9 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
-import { Tooltip } from "@nextui-org/react";
-import NuwaInput from "../components/NuwaInput";
-import NuwaSlider from "../components/NuwaSlider";
+import { Input, Slider, Tooltip } from "@nextui-org/react";
 
 function NuwaSliderInput({
   label,
@@ -38,7 +36,7 @@ function NuwaSliderInput({
   }, [value])
 
   return (
-    <NuwaSlider 
+    <Slider 
       label={label} 
       size="sm"
       step={step} 
@@ -48,6 +46,13 @@ function NuwaSliderInput({
       hideValue={true}
       value={value}
       onChange={handleChange}
+      classNames={{
+        // base: "max-w-md",
+        // trackWrapper: "h-12",
+        // thumb: ["after:w-2 after:h-2 after:bg-primary", "w-3 h-3 bg-white"],
+        label: "text-gray-500 text-sm font-semibold font-['Inter'] leading-normal",
+        // labelWrapper: 'mb-px'
+      }}
       // we extract the default children to render the input
       endContent={
         <output>
@@ -56,7 +61,8 @@ function NuwaSliderInput({
             content="Press Enter to confirm"
             placement="left"
           >
-            <NuwaInput
+            <Input
+              color="primary"
               className="w-16"
               size="sm"
               type="text"

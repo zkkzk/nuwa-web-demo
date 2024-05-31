@@ -3,8 +3,7 @@ import React, { useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
-import NuwaTabs from "../components/NuwaTabs";
-import { Tab } from "@nextui-org/react";
+import { Tab, Tabs } from "@nextui-org/react";
 import NuwaChipRadioGroup from "../components/NuwaChipRadioGroup";
 
 type TypeFilterItem = {
@@ -54,16 +53,19 @@ function VoiceListHeader() {
         </div>
       </div>
 
-      <NuwaTabs
+      <Tabs
         aria-label="Options"  
         selectedKey={selected}
         onSelectionChange={(key) => setSelected(key as string)}
+        classNames={{
+          panel: "p-0 w-full"
+        }}
       >
         <Tab key="recent" title="Recent">
         </Tab>
         <Tab key="collection" title="Collection">
         </Tab>
-      </NuwaTabs>
+      </Tabs>
     </div>
   );
 }

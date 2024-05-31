@@ -4,6 +4,7 @@ import { TypeVoice } from "@/app/lib/definitions.voice";
 import { PlayIcon } from "@heroicons/react/24/outline";
 import { PauseIcon, ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import { useWavesurfer } from '@wavesurfer/react'
+import PlayButton from "./PlayButton";
 
 
 const formatTime = (seconds: any) => [seconds / 60, seconds % 60].map((v) => `0${Math.floor(v)}`.slice(-2)).join(':')
@@ -11,16 +12,16 @@ const formatTime = (seconds: any) => [seconds / 60, seconds % 60].map((v) => `0$
 function VoicePreview({
 	voiceSrc,
 	hideTimeline = true,
-	size = 'sm',
 	classNames = {
 		voicePreview: "",
+		playButton: ""
 	},
 }: {
   voiceSrc: string
 	hideTimeline: boolean,
-	size?: 'sm' | 'md',
 	classNames?: {
-		voicePreview: string
+		voicePreview?: string,
+		playButton?: string
 	}
 }) {
 
@@ -46,20 +47,18 @@ function VoicePreview({
 
 	const duration = wavesurfer && wavesurfer.getDuration();
 
+	const onChangePlay = (play:boolean) => {
+		onPlayPause();
+		setIsPlay(play);
+	}
+
   return (
 		<div className="self-stretch h-full w-full flex-col justify-start items-start gap-2 flex overflow-hidden">
 			<div className={[classNames.voicePreview, 'h-16 px-4 py-3 w-full rounded-xl justify-start items-center gap-3 inline-flex scrollbar-hide overflow-scroll'].join(' ')}>
-					<div className={`${size === 'sm' ? 'w-8 h-8' : 'h-10 w-10'} shrink-0 cursor-pointer bg-white rounded-full flex items-center justify-center`}>
-						{isPlay 
-						? <PauseIcon className="h-5 w-5 fill-black stroke-black stroke-1" onClick={() => {
-							onPlayPause();
-							setIsPlay(false);
+					<div className={`shrink-0 `}>
+						<PlayButton onChange={onChangePlay} classNames={{
+							base: classNames.playButton
 						}} />
-						: <PlayIcon className="h-5 w-5 fill-black stroke-black ml-0.5" onClick={() => {
-							onPlayPause();
-							setIsPlay(true);
-						}} />
-					}
 					</div>
 					<div className="w-full">
 						<div ref={containerRef}  className="w-full" />

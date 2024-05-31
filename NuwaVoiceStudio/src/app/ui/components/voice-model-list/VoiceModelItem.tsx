@@ -7,6 +7,7 @@ import { StarIcon, PauseIcon } from "@heroicons/react/24/solid";
 import { Avatar } from "@nextui-org/react";
 import CommercialStarIcon from "@/app/icons/CommercialStarIcon";
 import numbro from "numbro";
+import PlayButton from "../PlayButton";
 
 function VocieItem({voice, isSelected = false}: {
   voice: any,
@@ -33,15 +34,10 @@ function VocieItem({voice, isSelected = false}: {
           <div className="absolute right-2 top-2 z-30 w-8 h-8 p-2 bg-black/opacity-30 rounded-[32px] justify-center items-center gap-2 inline-flex">
             <StarIcon className={`w-4 h-4 ${voice.star ? 'fill-amber-500' : 'fill-zinc-400'}`} />
           </div>
-          <div className="cursor-pointer bg-white rounded-full flex items-center justify-center h-8 w-8 absolute right-4 -bottom-4">
-            {isPlay 
-              ? <PauseIcon className="h-5 w-5 fill-black stroke-black stroke-1" onClick={() => {
-                setIsPlay(false);
-              }} />
-              : <PlayIcon className="h-5 w-5 fill-black stroke-black ml-0.5" onClick={() => {
-                setIsPlay(true);
-              }} />
-            }
+          <div className="absolute right-4 -bottom-4">
+            <PlayButton onChange={(play: boolean) => {
+              setIsPlay(false);
+            }} />
           </div>
         </div>
         

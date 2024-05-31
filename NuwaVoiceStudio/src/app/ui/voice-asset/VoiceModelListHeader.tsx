@@ -1,11 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { useRouter } from "@/navigation";
-import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/AlterMessageContextProvider";
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger } from "@nextui-org/react";
+import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input } from "@nextui-org/react";
 import NuwaChipRadioGroup from "../components/NuwaChipRadioGroup";
-import NuwaInput from "../components/NuwaInput";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import FilterIcon from "@/app/icons/FilterIcon";
 import DCubeIcon from "@/app/icons/3DCubeIcon";
@@ -63,7 +59,7 @@ function VoiceListHeader() {
       </div>
 
       <div className="justify-start items-center gap-6 flex w-full">
-        <NuwaInput size="sm" className="w-[400px]" type="text" variant="bordered" placeholder="Search" startContent={<MagnifyingGlassIcon className="w-6 h-6 fill-zinc-400" />} />
+        <Input size="sm" className="w-[400px]" type="text" variant="bordered" placeholder="Search" startContent={<MagnifyingGlassIcon className="w-6 h-6 fill-zinc-400" />} />
         <div className="grow justify-start items-center gap-2.5 flex">
           <NuwaChipRadioGroup
             items={filters}

@@ -4,8 +4,7 @@ import { Link, useRouter } from "@/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
-import NuwaTabs from "../components/NuwaTabs";
-import { Tab } from "@nextui-org/react";
+import { Tab, Tabs } from "@nextui-org/react";
 import FilterIcon from "@/app/icons/FilterIcon";
 
 function VoiceHistoryControl() {
@@ -23,17 +22,20 @@ function VoiceHistoryControl() {
 							<FilterIcon className="w-6 h-6" />
 					</div>
 			</div>
-			<NuwaTabs
+			<Tabs
 				aria-label="Options"     
 				selectedKey={selected}
 				onSelectionChange={(key) => setSelected(key as string)}
+				classNames={{
+					panel: "p-0 w-full"
+				}}
 				fullWidth
 			>
 				<Tab key="Voices" title="Voices">
 				</Tab>
 				<Tab key="API" title="API">
 				</Tab>
-			</NuwaTabs>
+			</Tabs>
 		</div>
   );
 }

@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
 import MainStationControl from "./MainStationControl";
-import NuwaTabs from "../components/NuwaTabs";
+import NuwaTabs from "../components/extend-nextui/NuwaTabs";
 import { Tab } from "@nextui-org/react";
 import { classNames } from "@/app/lib/utils";
 import NuwaChipRadioGroup from "../components/NuwaChipRadioGroup";
