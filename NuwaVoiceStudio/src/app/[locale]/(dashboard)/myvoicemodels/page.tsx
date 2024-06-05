@@ -1,12 +1,12 @@
-import WorkStation from "@/app/ui/work-station/WorkStation";
+import MyVoiceModels from "@/app/ui/myvoicemodels/MyVoiceModels";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 
-export default function MyVoiceModels() {
+export default function myVoiceModels() {
   const messages = useMessages();
   return (
     <>
       <NextIntlClientProvider messages={messages}>
-        <WorkStation />
+        <MyVoiceModels />
       </NextIntlClientProvider>
     </>
   );

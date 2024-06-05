@@ -11,7 +11,7 @@ function UploadFile({
 
 }: {
   label:ReactNode
-  icon: ReactNode
+  icon?: ReactNode
   onClick?: () => void
   fileName?: ReactNode
   fileNameIcon?: ReactNode
