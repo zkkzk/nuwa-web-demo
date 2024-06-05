@@ -1,6 +1,6 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Radio, RadioGroup, Select, SelectItem } from "@nextui-org/react";
+import React, { useState } from "react";
+import { Select, SelectItem } from "@nextui-org/react";
 import {
   DefaultInstantGenerateParamster,
   TypeInstantGenerateParamster,
@@ -8,7 +8,6 @@ import {
 import VoiceParametersBasics from "../voice-parameters/VoiceParametersBasics";
 import VoiceParametersAdvanced from "../voice-parameters/VoiceParametersAdvanced";
 import { ArrowUpTrayIcon, XMarkIcon } from "@heroicons/react/24/solid";
-import DCubeIcon from "@/app/icons/3DCubeIcon";
 import ToneVoiceFile from "../ToneVoiceFile";
 import ExportIcon from "@/app/icons/ExportIcon";
 import UploadFile from "../UploadFile";
@@ -39,7 +38,7 @@ function PublishUploadVoiceModelModal({}: {}) {
 
   return (
     <div className="w-full px-8 py-16 flex-col justify-start items-end gap-12 inline-flex">
-      <div className="flex-col justify-start items-start gap-12 flex">
+      <div className="w-full flex-col justify-start items-start gap-12 flex">
         <TitleModal title="Upload Model" />
         <div className="self-stretch flex-col justify-start items-start gap-8 flex">
           <LabelForm label='Type' isRequired={true}>

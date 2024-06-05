@@ -17,7 +17,6 @@ import {
   ArrowRightIcon,
   ArrowLeftIcon
 } from "@heroicons/react/24/solid";
-import SelectVoiceModelModal from "./SelectVoiceModelModal";
 import SelectVoiceModelForm from "./SelectVoiceModelForm";
 import VoiceInformationForm from "./VoiceInformationForm";
 import confetti from 'canvas-confetti';
@@ -66,7 +65,6 @@ function PublishVoiceModelModal({
     },
   ];
 
-  const [selectModalOpen, setSelectModalOpen] = useState(false);
   const [step, setStep] = useState<1|2>(1);
 
   return (
@@ -128,13 +126,6 @@ function PublishVoiceModelModal({
           )}
         </ModalContent>
       </DrawerModal>
-
-      <SelectVoiceModelModal
-        isOpen={selectModalOpen}
-        onChange={(isOpen) => {
-          setSelectModalOpen(isOpen);
-        }}
-      />
     </>
   );
 }

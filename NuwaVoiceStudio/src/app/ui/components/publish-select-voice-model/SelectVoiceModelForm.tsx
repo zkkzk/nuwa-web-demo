@@ -46,7 +46,7 @@ function SelectVoiceModelForm({
   return (
     <>
       <div className="w-full px-8 py-16 flex-col justify-start items-end gap-12 inline-flex">
-        <div className="flex-col justify-start items-start gap-12 flex">
+        <div className="w-full flex-col justify-start items-start gap-12 flex">
           <TitleModal title="Select Model" />
           <div className="self-stretch flex-col justify-start items-start gap-8 flex">
             <LabelForm label='Type' isRequired={true}>

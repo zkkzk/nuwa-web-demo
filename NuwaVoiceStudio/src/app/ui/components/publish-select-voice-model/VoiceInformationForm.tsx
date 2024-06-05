@@ -15,12 +15,7 @@ import {
   DefaultInstantGenerateParamster,
   TypeInstantGenerateParamster,
 } from "@/app/lib/definitions.InstantGenerateParamster";
-import VoiceParametersBasics from "../voice-parameters/VoiceParametersBasics";
-import VoiceParametersAdvanced from "../voice-parameters/VoiceParametersAdvanced";
-import ToneVoiceFile from "../ToneVoiceFile";
-import ExportIcon from "@/app/icons/ExportIcon";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
-import SelectVoiceModelModal from "./SelectVoiceModelModal";
 import UploadFile from "../UploadFile";
 import LabelForm from "../form/LabelForm";
 import TitleModal from "./TitleModal";
@@ -47,7 +42,6 @@ function VoiceInformationForm({}: {}) {
   ];
 
   const [type, setType] = useState<string>("GPT-Sovits");
-  const [selectModalOpen, setSelectModalOpen] = useState(false);
   const [source, setSource] = useState("Original");
   const [downloadPermissions, setDownloadPermissions] = useState("FreeDownload");
   const [permissions, setPermissions] = useState<any[]>([]);
@@ -191,13 +185,6 @@ function VoiceInformationForm({}: {}) {
           </div>
         </div>
       </div>
-
-      <SelectVoiceModelModal
-        isOpen={selectModalOpen}
-        onChange={(isOpen) => {
-          setSelectModalOpen(isOpen);
-        }}
-      />
     </>
   );
 }

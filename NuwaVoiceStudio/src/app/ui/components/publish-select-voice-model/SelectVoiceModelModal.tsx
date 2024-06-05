@@ -9,11 +9,6 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import DrawerModal from "../DrawerModal";
-import {
-  DefaultInstantGenerateParamster,
-  TypeInstantGenerateParamster,
-} from "@/app/lib/definitions.InstantGenerateParamster";
 import ToneVoiceFile from "../ToneVoiceFile";
 
 function SelectVoiceModelModal({

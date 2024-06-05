@@ -21,6 +21,7 @@ function TrainList() {
           variant="bordered"
           color="default"
           placeholder="Search"
+          size="sm"
         />
         <Button color="danger" startContent={<TrashIcon className="w-5 h-5" />}>delete</Button>
       </div>
