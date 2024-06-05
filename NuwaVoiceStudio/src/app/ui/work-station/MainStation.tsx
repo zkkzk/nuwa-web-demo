@@ -1,14 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { Link, useRouter } from "@/navigation";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
 import MainStationControl from "./MainStationControl";
-import NuwaTabs from "../components/extend-nextui/NuwaTabs";
-import { Tab } from "@nextui-org/react";
-import { classNames } from "@/app/lib/utils";
-import NuwaChipRadioGroup from "../components/NuwaChipRadioGroup";
 import VoiceModelListHeader from "./VoiceModelListHeader";
 import VoiceModelList from "../components/voice-model-list/VoiceModelList";
 

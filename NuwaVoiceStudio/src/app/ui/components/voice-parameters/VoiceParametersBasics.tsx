@@ -1,13 +1,12 @@
 "use client";
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/AlterMessageContextProvider";
-import NuwaSliderInput from "../components/NuwaSliderInput";
 import { TypeInstantGenerateParamster } from "@/app/lib/definitions.InstantGenerateParamster";
 import { Select, SelectItem } from "@nextui-org/react";
+import NuwaSliderInput from "../NuwaSliderInput";
 
 
-function MainStationControlParametersBasics({
+function VoiceParametersBasics({
   value,
   onChange,
 }: {
@@ -15,7 +14,6 @@ function MainStationControlParametersBasics({
   onChange: (value:TypeInstantGenerateParamster)=>void,
 }) {
   const t = useTranslations();
-  const amDispatch = useAmDispatch();
   const [selected, setSelected] = useState("photos");
   const [isReset, setIsReset] = useState(false);
 
@@ -40,7 +38,7 @@ function MainStationControlParametersBasics({
   }];
 
   return (
-    <div className="self-stretch rounded-xl justify-end items-center gap-12 grid grid-cols-1 lg:grid-cols-2">
+    <div className="self-stretch rounded-xl justify-end items-center gap-x-12 gap-y-7 grid grid-cols-1 lg:grid-cols-2">
       <Select
         variant="bordered"
         size="lg"
@@ -48,6 +46,9 @@ function MainStationControlParametersBasics({
         placeholder="Select an language"
         labelPlacement="outside"
         selectedKeys={[value.language]}
+        classNames={{
+          label: "group[data-filled=true]:text-gray-500 group-data-[filled=true]:text-gray-500 text-gray-500 text-sm font-semibold font-['Inter'] leading-normal",
+        }}
         onChange={(e) => onChange({ ...value, language: e.target.value })}
       >
         {languageList.map((Language) => (
@@ -78,6 +79,9 @@ function MainStationControlParametersBasics({
         labelPlacement="outside"
         selectedKeys={[value.segmentationMethod]}
         onChange={(e) => onChange({ ...value, segmentationMethod: e.target.value })}
+        classNames={{
+          label: "group[data-filled=true]:text-gray-500 group-data-[filled=true]:text-gray-500 text-gray-500 text-sm font-semibold font-['Inter'] leading-normal",
+        }}
       >
         {languageList.map((Language) => (
             <SelectItem
@@ -104,4 +108,4 @@ function MainStationControlParametersBasics({
   );
 }
 
-export default MainStationControlParametersBasics;
+export default VoiceParametersBasics;

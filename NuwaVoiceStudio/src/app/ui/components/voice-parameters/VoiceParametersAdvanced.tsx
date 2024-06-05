@@ -1,10 +1,10 @@
 "use client";
 import React from "react";
-import NuwaSliderInput from "../components/NuwaSliderInput";
 import { TypeInstantGenerateParamster } from "@/app/lib/definitions.InstantGenerateParamster";
 import { Input } from "@nextui-org/react";
+import NuwaSliderInput from "../NuwaSliderInput";
 
-function MainStationControlParametersAdvanced({
+function VoiceParametersAdvanced({
   value,
   onChange,
 }: {
@@ -33,7 +33,7 @@ function MainStationControlParametersAdvanced({
   }];
 
   return (
-    <div className="self-stretch rounded-xl justify-end items-center gap-12 grid grid-cols-1 lg:grid-cols-2">
+    <div className="self-stretch rounded-xl justify-end items-center gap-x-12 gap-y-7 grid grid-cols-1 lg:grid-cols-2">
       <Input
         color="primary"
         variant="bordered"
@@ -44,6 +44,9 @@ function MainStationControlParametersAdvanced({
         placeholder="Input seed"
         labelPlacement="outside"
         value={String(value.seed)}
+        classNames={{
+          label: "text-gray-500 text-sm font-semibold font-['Inter'] leading-normal",
+        }}
         onChange={(e) => {
           let newSeed = Math.floor(Number(e.target.value))
           if (newSeed < -1) {
@@ -81,4 +84,4 @@ function MainStationControlParametersAdvanced({
   );
 }
 
-export default MainStationControlParametersAdvanced;
+export default VoiceParametersAdvanced;

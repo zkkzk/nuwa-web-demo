@@ -5,9 +5,9 @@ import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
 import { Accordion, AccordionItem, Button, Tab, Tabs } from "@nextui-org/react";
 import ResetIcon from "@/app/icons/ResetIcon";
-import MainStationControlParametersBasics from "./MainStationControlParametersBasics";
-import MainStationControlParametersAdvanced from "./MainStationControlParametersAdvanced";
 import { DefaultInstantGenerateParamster, TypeInstantGenerateParamster } from "@/app/lib/definitions.InstantGenerateParamster";
+import VoiceParametersBasics from "../components/voice-parameters/VoiceParametersBasics";
+import VoiceParametersAdvanced from "../components/voice-parameters/VoiceParametersAdvanced";
 
 
 function MainStationControlParameters() {
@@ -67,10 +67,10 @@ function MainStationControlParameters() {
               }}
             >
               <Tab key="basics" title="Basics">
-                <MainStationControlParametersBasics value={parameters} onChange={setParameters} />
+                <VoiceParametersBasics value={parameters} onChange={setParameters} />
               </Tab>
               <Tab key="advanced" title="Advanced">
-                <MainStationControlParametersAdvanced value={parameters} onChange={setParameters} />
+                <VoiceParametersAdvanced value={parameters} onChange={setParameters} />
               </Tab>
             </Tabs>
           </div>

@@ -5,6 +5,7 @@ import NuwaChipRadioGroup from "../components/NuwaChipRadioGroup";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import FilterIcon from "@/app/icons/FilterIcon";
 import DCubeIcon from "@/app/icons/3DCubeIcon";
+import PublishVoiceModelModal from "../components/publish-select-voice-model/PublishVoiceModelModal";
 
 type TypeFilterItem = {
   label: string;
@@ -28,6 +29,9 @@ function VoiceListHeader() {
     value: "female",
   }]);
 
+  const [uploadModalOpen, setUploadModalOpen] = useState(false);
+  const [selectModalOpen, setSelectModalOpen] = useState(false);
+
   return (
     <div className="self-stretch justify-between items-center flex flex-col bg-neutral-900 px-8 pt-10 w-full">
       <div className="h-[40px] justify-between items-center gap-6 flex w-full mb-4">
@@ -48,10 +52,17 @@ function VoiceListHeader() {
             </DropdownTrigger>
             <DropdownMenu 
               aria-label="Action event example" 
-              onAction={(key) => alert(key)}
+              onAction={(key) => {
+                if (key === 'local') {
+                  setUploadModalOpen(true);
+                }
+                if (key === 'online') {
+                  setSelectModalOpen(true);
+                }
+              }}
             >
-              <DropdownItem key="new">From Local</DropdownItem>
-              <DropdownItem key="copy">From My Voice Lib</DropdownItem>
+              <DropdownItem key="local">From Local</DropdownItem>
+              <DropdownItem key="online">From My Voice Lib</DropdownItem>
             </DropdownMenu>
           </Dropdown>
           <Button size="lg" variant="flat" className="w-[200px]" startContent={<DCubeIcon className="h-6 w-6 fill-zinc-400" />}>Train My Voice</Button>
@@ -75,7 +86,8 @@ function VoiceListHeader() {
         </div>
         <Button size="lg" className="text-zinc-400" variant="light" endContent={<FilterIcon className="w-6 h-6 fill-zinc-500" />}>Filters</Button>
       </div>
-
+      <PublishVoiceModelModal isOpen={uploadModalOpen} onChange={(isOpen) => {setUploadModalOpen(isOpen)}} variant="ONLINE"  />
+      <PublishVoiceModelModal isOpen={selectModalOpen} onChange={(isOpen) => {setSelectModalOpen(isOpen)}} variant="LOCAL" />
     </div>
   );
 }

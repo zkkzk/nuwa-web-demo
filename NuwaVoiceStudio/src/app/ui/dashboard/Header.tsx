@@ -6,9 +6,9 @@ import HeaderAvatar from "./HeaderAvatar";
 import LogoIcon from "@/app/icons/LogoIcon";
 import HeaderArrowIcon from "@/app/icons/HeaderArrowIcon";
 import HeaderVoiceAssetIcon from "@/app/icons/HeaderVoiceAssetIcon";
-import { classNames } from "@/app/lib/utils";
 import FlashIcon from "@/app/icons/FlashIcon";
 import { DDLSidebar } from "@ddreamland/common";
+import { cn } from "@nextui-org/react";
 
 const navigation = [
   { name: 'Navigation.voiceasset', href: '/voiceasset', icon: HeaderVoiceAssetIcon, current: false },
@@ -57,7 +57,7 @@ export default function Header() {
               <div className="group/item" key={`${item.href}${index}`}>
                 <Link
                   href={item.href}
-                  className={classNames(
+                  className={cn(
                     item.current
                       ? 'bg-neutral-900'
                       : 'group-hover/item:bg-neutral-900',
@@ -66,7 +66,7 @@ export default function Header() {
                 >
                   <item.icon className="w-5 h-5 relative" />
                   <div
-                    className={classNames(
+                    className={cn(
                       item.current
                         ? 'text-slate-100'
                         : 'group-hover/item:text-slate-100 text-gray-500',

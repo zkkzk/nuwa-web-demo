@@ -1,10 +1,8 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import { classNames } from "@/app/lib/utils";
-import { PlayIcon } from "@heroicons/react/24/outline";
-import { StarIcon, PauseIcon } from "@heroicons/react/24/solid";
-import { Avatar } from "@nextui-org/react";
+import { StarIcon } from "@heroicons/react/24/solid";
+import { Avatar, cn } from "@nextui-org/react";
 import CommercialStarIcon from "@/app/icons/CommercialStarIcon";
 import numbro from "numbro";
 import PlayButton from "../PlayButton";
@@ -18,7 +16,7 @@ function VocieItem({voice, isSelected = false}: {
   return (
     <div className="group/item" key={voice.id}>
       <div
-        className={classNames(
+        className={cn(
           isSelected
             ? 'border-primary'
             : 'group-hover/item:border-primary border-transparent',

@@ -4,6 +4,7 @@ import VoiceModelListHeader from "./VoiceModelListHeader";
 import VoiceModelList from "../components/voice-model-list/VoiceModelList";
 import { Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 import VoiceAssetDetail from "./VoiceModelDetail";
+import DrawerModal from "../components/DrawerModal";
 
 function VoiceAsse() {
 
@@ -22,40 +23,8 @@ function VoiceAsse() {
         </div>
       </div>
 
-      <Modal 
-        size="full"
-        isOpen={voiceDetailModal.isOpen}
-        placement={'bottom'}
-        scrollBehavior="inside"
-        onOpenChange={voiceDetailModal.onOpenChange}
-        classNames={{
-          base: "h-11/12 rounded-t-lg overflow-hidden bg-transparent shadow-none",
-          header: "rounded-t-lg overflow-hidden bg-transparent",
-          body: "bg-zinc-900 rounded-tl-2xl rounded-tr-2xl rounded-bl-xl rounded-br-xl px-[120px]",
-        }}
-        hideCloseButton={false}
-        motionProps={{
-          variants: {
-            enter: {
-              y: 0,
-              opacity: 1,
-              transition: {
-                opacity: {
-                  duration: 0.15,
-                },
-              },
-            },
-            exit: {
-              y: "50%",
-              opacity: 0,
-              transition: {
-                opacity: {
-                  duration: 0.1,
-                },
-              },
-            },
-          },
-        }}
+      <DrawerModal
+        modalDisclosure={voiceDetailModal}
       >
         <ModalContent>
           {(onClose) => (
@@ -67,7 +36,7 @@ function VoiceAsse() {
             </>
           )}
         </ModalContent>
-      </Modal>
+      </DrawerModal>
     </div>
   );
 }

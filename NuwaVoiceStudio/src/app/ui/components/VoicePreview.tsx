@@ -1,8 +1,5 @@
 "use client";
 import React, { useCallback, useRef, useState } from "react";
-import { TypeVoice } from "@/app/lib/definitions.voice";
-import { PlayIcon } from "@heroicons/react/24/outline";
-import { PauseIcon, ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import { useWavesurfer } from '@wavesurfer/react'
 import PlayButton from "./PlayButton";
 
@@ -54,9 +51,9 @@ function VoicePreview({
 
   return (
 		<div className="self-stretch h-full w-full flex-col justify-start items-start gap-2 flex overflow-hidden">
-			<div className={[classNames.voicePreview, 'h-16 px-4 py-3 w-full rounded-xl justify-start items-center gap-3 inline-flex scrollbar-hide overflow-scroll'].join(' ')}>
+			<div className={[classNames.voicePreview, hideTimeline ? 'h-10' : 'h-16 p-4', 'w-full rounded-xl justify-start items-center gap-3 inline-flex scrollbar-hide overflow-scroll'].join(' ')}>
 					<div className={`shrink-0 `}>
-						<PlayButton onChange={onChangePlay} classNames={{
+						<PlayButton isPlay={isPlaying} onChange={onChangePlay} classNames={{
 							base: classNames.playButton
 						}} />
 					</div>

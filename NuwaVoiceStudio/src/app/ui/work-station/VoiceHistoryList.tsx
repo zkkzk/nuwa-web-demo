@@ -1,13 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { Link, useRouter } from "@/navigation";
-import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/AlterMessageContextProvider";
-import NuwaTabs from "../components/extend-nextui/NuwaTabs";
 import { ScrollShadow, Tab } from "@nextui-org/react";
-import FilterIcon from "@/app/icons/FilterIcon";
-import VoiceHistoryControl from "./VoiceHistoryControl";
 import { TypeVoice } from "@/app/lib/definitions.voice";
 import VoiceHistoryItem from "./VoiceHistoryItem";
 import InfiniteScroll from "../components/infinite-scroll/InfiniteScroll";

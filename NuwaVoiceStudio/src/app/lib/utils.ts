@@ -16,10 +16,6 @@ export const uuid = () => {
   return uuid;
 }
 
-export const classNames = (...classes:any) => {
-  return classes.filter(Boolean).join(' ')
-}
-
 export const useCoverHandler = () => {
 
   const [isReplacingTheCoverLoding, setIsReplacingTheCoverLoding] = useState(false);
