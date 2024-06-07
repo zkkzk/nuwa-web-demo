@@ -35,6 +35,7 @@ function VoicePreview({
 		waveColor: "#eee",
 		progressColor: "#0178FF",
 		cursorColor: "OrangeRed",
+		dragToSeek: true,
     url: 'https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3',
   })
 	

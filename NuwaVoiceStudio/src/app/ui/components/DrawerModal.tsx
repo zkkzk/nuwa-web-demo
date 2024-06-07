@@ -29,7 +29,7 @@ function DrawerModal({
         scrollBehavior="inside"
         onOpenChange={modalDisclosure.onOpenChange}
         classNames={{
-          base: "h-11/12 rounded-t-lg overflow-hidden bg-transparent shadow-none",
+          base: "h-11/12 rounded-t-lg overflow-hidden bg-transparent shadow-none h-full",
           header: "rounded-t-lg overflow-hidden bg-transparent h-16",
           body: "bg-zinc-900 rounded-tl-2xl rounded-tr-2xl px-[120px]",
           footer: "bg-zinc-900 rounded-bl-xl rounded-br-xl px-[120px]",
