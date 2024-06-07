@@ -4,7 +4,7 @@ import ToneVoicePreview from "../components/ToneVoicePreview";
 
 function VoiceAssetDetailLeft() {
   return (
-    <div className="basis-0 flex-col justify-start items-start gap-8 inline-flex">
+    <div className="w-full flex-col justify-start items-start gap-8 inline-flex">
       <div className="self-stretch justify-start items-start gap-6 inline-flex">
         <img
           className="w-[200px] h-[200px] rounded-xl"
@@ -21,8 +21,8 @@ function VoiceAssetDetailLeft() {
             exclusive tips and tutorials, or feel free to buy me a coffee ☕
           </div>
         </div>
-        
       </div>
+
       <div className="self-stretch flex-col justify-start items-start gap-6 flex">
         <div className="self-stretch justify-start items-center gap-2.5 inline-flex">
           <div className="text-white text-xl font-semibold font-['Inter'] leading-7">

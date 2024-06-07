@@ -10,6 +10,7 @@ import {
   useDisclosure,
 } from "@nextui-org/react";
 import ToneVoiceFile from "../ToneVoiceFile";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 function SelectVoiceModelModal({
   isOpen = false,
@@ -27,16 +28,12 @@ function SelectVoiceModelModal({
 
   return (
       <Modal 
-        size="xl"
+        size="4xl"
         isOpen={selectModal.isOpen}
         placement={'center'}
         scrollBehavior="inside"
         onOpenChange={selectModal.onOpenChange}
-        // classNames={{
-        //   base: "h-11/12 rounded-t-lg overflow-hidden bg-transparent shadow-none",
-        //   header: "rounded-t-lg overflow-hidden bg-transparent",
-        //   body: "bg-zinc-900 rounded-tl-2xl rounded-tr-2xl rounded-bl-xl rounded-br-xl px-[120px]",
-        // }}
+        closeButton={<div><XMarkIcon className="w-10 h-10 fill-zinc-400" /></div>}
         hideCloseButton={false}
       >
       <ModalContent>

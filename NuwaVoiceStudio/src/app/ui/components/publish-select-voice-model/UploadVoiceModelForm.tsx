@@ -64,7 +64,7 @@ function PublishUploadVoiceModelModal({}: {}) {
             </Select>
           </LabelForm>
 
-          <div className="grid grid-cols-2 gap-12">
+          <div className="w-full grid grid-cols-2 gap-12">
             <LabelForm label='GPT Model{" "}' isRequired={true}>
               <UploadFile
                 label={

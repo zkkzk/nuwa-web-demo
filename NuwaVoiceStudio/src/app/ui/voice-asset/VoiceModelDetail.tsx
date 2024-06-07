@@ -13,8 +13,8 @@ function VoiceAssetDetail() {
             <div className="w-full">
               <VoiceAssetDetailHeader />
             </div>
-            <div className="justify-between items-start gap-12 flex">
-              <div className="grow-1 shrink-1 overflow-hidden">
+            <div className="w-full justify-between items-start gap-12 flex">
+              <div className="grow overflow-hidden">
                 <VoiceAssetDetailLeft />
               </div>
               <div className="shrink">

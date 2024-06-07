@@ -18,6 +18,7 @@ import UploadFile from "../components/UploadFile";
 import BDocumentIcon from "@/app/icons/BDocumentIcon";
 import LabelForm from "../components/form/LabelForm";
 import FlashIcon from "@/app/icons/FlashIcon";
+import { XMarkIcon } from "@heroicons/react/24/outline";
 
 function TrainVoiceModelModal({
   isOpen = false,
@@ -35,7 +36,7 @@ function TrainVoiceModelModal({
 
   return (
       <Modal 
-        size="xl"
+        size="4xl"
         isOpen={trainVoiceModelModal.isOpen}
         placement={'center'}
         scrollBehavior="inside"
@@ -45,6 +46,7 @@ function TrainVoiceModelModal({
         //   header: "rounded-t-lg overflow-hidden bg-transparent",
         //   body: "bg-zinc-900 rounded-tl-2xl rounded-tr-2xl rounded-bl-xl rounded-br-xl px-[120px]",
         // }}
+        closeButton={<div><XMarkIcon className="w-10 h-10 fill-zinc-400" /></div>}
         hideCloseButton={false}
       >
       <ModalContent>
