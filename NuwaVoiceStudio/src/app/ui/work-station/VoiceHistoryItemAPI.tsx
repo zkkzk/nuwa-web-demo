@@ -1,10 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import { TypeVoice } from "@/app/lib/definitions.voice";
-import { Tab, Tabs } from "@nextui-org/react";
+import { Snippet, Tab, Tabs } from "@nextui-org/react";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import CopyIcon from "@/app/icons/CopyIcon";
 
 function VoiceHistoryItemAPI({voice}: {
   voice: TypeVoice
@@ -23,13 +22,17 @@ function VoiceHistoryItemAPI({voice}: {
 				}}
 				fullWidth
 			>
-				<Tab key="GET" title="get">
-					
-					<div className="w-full bg-zinc-900 h-full relative">
-						<CopyIcon className=" cursor-pointer w-5 h-5 fill-neutral-900 stroke-neutral-900 absolute top-5 right-6" />
+				<Tab key="GET" title="get">				
+					<Snippet classNames={{
+						base: "bg-zinc-900 rounded-none overflow-scroll w-full relative",
+						content: "",
+						copyButton: " top-5 right-6 absolute"
+					}}>
+						{/* <CopyIcon className=" cursor-pointer w-5 h-5 fill-neutral-900 stroke-neutral-900 absolute top-5 right-6" /> */}
 						<SyntaxHighlighter
 							language="javascript"
 							style={a11yDark}
+							wrapLongLines={true}
 							customStyle={{
 								margin: '0 0',
 								background: 'transparent',
@@ -37,14 +40,17 @@ function VoiceHistoryItemAPI({voice}: {
 						>
 							{"function get(classNames) {\n  return classNames.join(' ');\n}\n"}
 						</SyntaxHighlighter>
-					</div>
+					</Snippet>
 				</Tab>
 				<Tab key="POST" title="Post">
 
-					<div className="w-full bg-zinc-900 h-full">
+				<Snippet classNames={{
+						base: "bg-zinc-900 rounded-none"
+					}}>
 						<SyntaxHighlighter
 							language="javascript"
 							style={a11yDark}
+							wrapLongLines={true}
 							customStyle={{
 								margin: '0 0',
 								background: 'transparent',
@@ -52,7 +58,7 @@ function VoiceHistoryItemAPI({voice}: {
 						>
 							{"function post(classNames) {\n  return classNames.join(' ');\n}\n"}
 						</SyntaxHighlighter>
-					</div>
+					</Snippet>
 				</Tab>
 			</Tabs>
 		</div>
