@@ -3,9 +3,9 @@ import { useRouter } from "@/navigation";
 import { Avatar } from "@nextui-org/react";
 import { useUser } from "@/app/contexts/UserContextProvider";
 import { getIsLogin } from "@/app/lib/base.api";
-import LoginModal from "@/app/nuwa-login-ui/components/LoginModal";
 import { useState } from "react";
 import { useLocale } from "next-intl";
+import { LoginModal } from "@ddreamland/common";
 
 export default function HeaderAvatar() {
   const router = useRouter();
@@ -31,7 +31,7 @@ export default function HeaderAvatar() {
       </div>
       <LoginModal
         isOpen={isOpen}
-        locale={locale}
+        locale={locale === 'en' ? 'en' : 'en'}
         onClose={() => {
           setIsOpen(false);
         }}

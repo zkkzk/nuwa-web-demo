@@ -74,14 +74,14 @@ function VoiceModelList({
         >
           {voiceList.map((voice) => (
             <div key={voice.id} onClick={() => {
-              onItemClick && onItemClick(voice);
+              // onItemClick && onItemClick(voice);
               if(selectedVoiceModel && (voice.id === selectedVoiceModel.id)) {
                 setSelectedVoiceModel(null);
                 return;
               };
               setSelectedVoiceModel(voice);
             }}>
-              <VoiceModelItem voice={voice} key={voice.id} isSelected={(selectedVoiceModel !== null) && (voice.id === selectedVoiceModel.id)} />
+              <VoiceModelItem onItemClick={onItemClick} voice={voice} key={voice.id} isSelected={(selectedVoiceModel !== null) && (voice.id === selectedVoiceModel.id)} />
             </div>
           ))}
         </InfiniteScroll>
