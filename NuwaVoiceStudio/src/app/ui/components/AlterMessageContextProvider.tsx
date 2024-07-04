@@ -1,7 +1,7 @@
 'use client';
 
 import { createContext, useContext, useReducer } from 'react';
-import AlterMessages from './AlterMessages';
+import AlterMessages, { messageType } from './AlterMessages';
 import { useImmerReducer } from 'use-immer';
 import { findIndex } from 'lodash-es';
 
@@ -36,11 +36,19 @@ export function useAmDispatch() {
   return useContext(AmDispatchContext);
 }
 
-function amReducer(draft: string[], action: any) {
+function amReducer(draft: Array<messageType>, action: any) {
   switch (action.type) {
     case 'add': {
-      const isHas = draft.find((item) => (item === action.payload));
-      !isHas && draft.push(action.payload);
+      const isHas = draft.find((item) => {
+        return item.message === action.payload.message
+      });
+      if(!isHas) {
+        draft.push({
+          message: action.payload.message,
+          title: action.payload.title || undefined,
+          type: action.payload.type || 'error',
+        })
+      }
       break;
     }
     case 'clear': {

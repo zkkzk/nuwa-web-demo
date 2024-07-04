@@ -12,47 +12,54 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import {
-  DefaultInstantGenerateParamster,
-  TypeInstantGenerateParamster,
+  VoiceModelInfoType,
 } from "@/app/lib/definitions.InstantGenerateParamster";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import UploadFile from "../UploadFile";
 import LabelForm from "../form/LabelForm";
 import TitleModal from "./TitleModal";
 import TagsInput from "../TagsInput";
+import { voiceModelTypeList } from "@/app/lib/definitions.voice";
 
-function VoiceInformationForm({}: {}) {
-  const [parameters, setParameters] = useState<TypeInstantGenerateParamster>(
-    DefaultInstantGenerateParamster
-  );
+function VoiceInformationForm({
+  value,
+  onChange,
+}: {
+  value: VoiceModelInfoType,
+  onChange: (value: VoiceModelInfoType) => void,
+}) {
 
-  const languageList = [
-    {
-      value: "GPT-Sovits",
-      label: "GPT-Sovits",
-    },
-    {
-      value: "zh",
-      label: "GPT-Sovits",
-    },
-    {
-      value: "ja",
-      label: "GPT-Sovits",
-    },
-  ];
+  const [sourceType, setSourceType] = useState(value.source);
 
-  const [type, setType] = useState<string>("GPT-Sovits");
-  const [source, setSource] = useState("Original");
-  const [downloadPermissions, setDownloadPermissions] = useState("FreeDownload");
-  const [permissions, setPermissions] = useState<any[]>([]);
-  const [tags, setTags] = useState<string[]>([]);
+  const initPermissions = []
+  if (value.permission.credit_free) {
+    initPermissions.push('credit-free')
+  }
+  if (value.permission.reprint_allowed) {
+    initPermissions.push('reprint-allowed')
+  }
+  if (value.permission.modification_allowed) {
+    initPermissions.push('modification-allowed')
+  }
+  if (value.permission.permission_change_allowed) {
+    initPermissions.push('permission-change-allowed')
+  }
+  const [permissions, setPermissions] = useState<string[]>(initPermissions);
 
   useEffect(() => {
-    if (!permissions.includes('download-allowed') && permissions.includes('permission-change-allowed')) {
-      let newPermissions = [...permissions];
+    let newPermissions = [...permissions];
+    if (!permissions.includes('modification-allowed') && permissions.includes('permission-change-allowed')) {
       delete newPermissions[permissions.indexOf('permission-change-allowed')];
       setPermissions(newPermissions);
     }
+
+    onChange({ ...value, permission: {
+      ...value.permission,
+      credit_free: newPermissions.includes('credit-free'),
+      reprint_allowed: newPermissions.includes('reprint-allowed'),
+      modification_allowed: newPermissions.includes('modification-allowed'),
+      permission_change_allowed: newPermissions.includes('permission-change-allowed'),
+    }})
   }, [permissions])
 
   return (
@@ -80,34 +87,37 @@ function VoiceInformationForm({}: {}) {
                 variant="bordered"
                 isRequired
                 color="default"
-                placeholder="Email"
+                placeholder="Please enter name"
+                value={value.name as string}
+                onChange={(e) => onChange({ ...value, name: e.target.value })}
               />
             </LabelForm>
             <LabelForm label="Type" isRequired={true}>
               <Select
+                disallowEmptySelection={true}
                 variant="bordered"
                 size="md"
                 isRequired
-                placeholder="Select an language"
-                selectedKeys={[type]}
-                onChange={(e) => setType(e.target.value)}
+                placeholder="Select an type"
+                selectedKeys={[value.type as string]}
+                onChange={(e) => onChange({ ...value, type: e.target.value })}
               >
-                {languageList.map((Language) => (
+                {voiceModelTypeList.map((vmtItem) => (
                   <SelectItem
-                    key={Language.value}
-                    value={Language.value}
+                    key={vmtItem.value}
+                    value={vmtItem.value}
                     classNames={{
                       base: "h-12 pl-2 pr-3 py-2 rounded-xl gap-4",
                     }}
                   >
-                    {Language.label}
+                    {vmtItem.label}
                   </SelectItem>
                 ))}
               </Select>
             </LabelForm>
 
             <LabelForm label="Tag" isRequired={false}>
-              <TagsInput value={tags} onValueChange={setTags}/>
+              <TagsInput value={value.tag} onValueChange={(e) => onChange({ ...value, tag: e })} />
             </LabelForm>
 
             <LabelForm label="Description" isRequired={false}>
@@ -120,13 +130,22 @@ function VoiceInformationForm({}: {}) {
                 variant="bordered"
                 isRequired
                 color="default"
-                placeholder="Email"
+                placeholder="Please enter something"
+                value={value.desc as string}
+                onChange={(e) => onChange({ ...value, desc: e.target.value })}
               />
             </LabelForm>
 
             <LabelForm label="Source" isRequired={true}>
               <div className="w-full flex flex-row gap-3 items-end">
-                <RadioGroup value={source} onValueChange={setSource}>
+                <RadioGroup value={sourceType} onValueChange={(e) => {
+                  setSourceType(e);
+                  if (e === "Original") {
+                    onChange({ ...value, source: "Original" });
+                  } else {
+                    onChange({ ...value, source: "" });
+                  }
+                }}>
                   <Radio value="Original" classNames={{ base: "py-6" }}>
                     Original
                   </Radio>
@@ -134,14 +153,16 @@ function VoiceInformationForm({}: {}) {
                     Reprinting
                   </Radio>
                 </RadioGroup>
-                {source === "Reprinting" && (
+                {sourceType === "Reprinting" && (
                   <Input
                     type="text"
                     size="md"
                     variant="bordered"
                     isRequired
                     color="default"
-                    placeholder="Email"
+                    placeholder="(Optional) Original author’s address"
+                    value={value.source as string}
+                    onChange={(e) => onChange({ ...value, source: e.target.value })}
                   />
                 )}
               </div>
@@ -149,8 +170,16 @@ function VoiceInformationForm({}: {}) {
 
             <LabelForm label="Model download permissions" isRequired={true}>
               <RadioGroup
-                value={downloadPermissions}
-                onValueChange={setDownloadPermissions}
+                value={value.permission.download_permission ? 'FreeDownload' : 'DoNotAllowDownloads'}
+                onValueChange={(e) => {
+                  onChange({
+                    ...value,
+                    permission: {
+                      ...value.permission,
+                      download_permission: e === 'FreeDownload',
+                    },
+                  });
+                }}
               >
                 <Radio value="FreeDownload">Free download</Radio>
                 <Radio value="DoNotAllowDownloads">Do not allow downloads</Radio>
@@ -165,9 +194,9 @@ function VoiceInformationForm({}: {}) {
               >
                 <Checkbox value="credit-free">Credit Free</Checkbox>
                 <Checkbox value="reprint-allowed">Reprint Allowed</Checkbox>
-                <Checkbox value="download-allowed">Download Allowed</Checkbox>
+                <Checkbox value="modification-allowed">Modification Allowed</Checkbox>
                 <Checkbox value="permission-change-allowed" classNames={{ base: 'pl-10'}} isDisabled={(() => {
-                  return !permissions.includes('download-allowed');
+                  return !permissions.includes('modification-allowed');
                 })()}>Permission Change Allowed</Checkbox>
               </CheckboxGroup>
               
@@ -175,11 +204,19 @@ function VoiceInformationForm({}: {}) {
 
             <LabelForm label="Commercial license" isRequired={true}>
               <RadioGroup
-                value={downloadPermissions}
-                onValueChange={setDownloadPermissions}
+                value={value.permission.commercial_license ? 'CommercialUseAllowe' : 'CommercialUseDeclined'}
+                onValueChange={(e) => {
+                  onChange({
+                    ...value,
+                    permission: {
+                      ...value.permission,
+                      commercial_license: e === 'CommercialUseAllowe',
+                    },
+                  });
+                }}
               >
-                <Radio value="FreeDownload">Commercial Use Allowed</Radio>
-                <Radio value="DoNotAllowDownloads">Commercial Use Allowed</Radio>
+                <Radio value="CommercialUseAllowe">Commercial Use Allowed</Radio>
+                <Radio value="CommercialUseDeclined">Commercial Use Declined</Radio>
               </RadioGroup>
             </LabelForm>
           </div>

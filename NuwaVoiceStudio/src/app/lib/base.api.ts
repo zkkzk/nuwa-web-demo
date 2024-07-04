@@ -4,6 +4,7 @@ import { useAmDispatch } from "@/app/ui/components/AlterMessageContextProvider";
 import { useLocale, useTranslations } from "next-intl";
 import { getCookie, removeCookie } from 'typescript-cookie'
 import { usePathname, useRouter } from "@/navigation";
+import { useLoginDispatch } from "@ddreamland/common";
 
 export const NUWAUID = "nuwa_uid"
 export const NUWASESSION = "nuwa_session"
@@ -42,6 +43,7 @@ export const baseApiHander = ({
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
+  const loginDispatch = useLoginDispatch();
   const [loading, setLoading] = useState(false);
 
   const amDispatch = useAmDispatch();
@@ -54,7 +56,16 @@ export const baseApiHander = ({
       const uid = getCookie(NUWAUID)
       const session = getCookie(NUWASESSION)
       if (!uid || !session) {
-        // router.push('/login');
+        loginDispatch({
+          type: "open",
+          payload: {
+            isCloseable: false,
+            onLogin: () => {
+              loginDispatch({type: "close"});
+              router.refresh();
+            }
+          },
+        })
         return;
       }
       fetchUrl = `${apiUrl}${url}?${new URLSearchParams({
@@ -87,7 +98,9 @@ export const baseApiHander = ({
         if (data.code === 0) {
           successMsg && amDispatch({
             type: "add",
-            payload: successMsg,
+            payload: {
+              message: successMsg,
+            },
           })
           setLoading(false)
           return data;
@@ -96,7 +109,16 @@ export const baseApiHander = ({
         // session 过期
         if (data.code === 604) {
           if(noLoginGotoLogin) {
-            // router.push('/login');
+            loginDispatch({
+              type: "open",
+              payload: {
+                isCloseable: false,
+                onLogin: () => {
+                  loginDispatch({type: "close"});
+                  router.refresh();
+                }
+              },
+            })
           }
           setLoading(false)
           return data;
@@ -104,7 +126,9 @@ export const baseApiHander = ({
 
         amDispatch({
           type: "add",
-          payload: data.msg,
+          payload: {
+            message: data.msg
+          },
         })
   
         setLoading(false)
@@ -114,7 +138,9 @@ export const baseApiHander = ({
     } catch (e) {
       amDispatch({
         type: "add",
-        payload: t("User.sysfail"),
+        payload: {
+          message: t("Error.sysfail")
+        },
       })
       setLoading(false)
     }    

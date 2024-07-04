@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { TypeInstantGenerateParamster } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelAdvancedParamsType } from "@/app/lib/definitions.InstantGenerateParamster";
 import { Input } from "@nextui-org/react";
 import NuwaSliderInput from "../NuwaSliderInput";
 
@@ -8,8 +8,8 @@ function VoiceParametersAdvanced({
   value,
   onChange,
 }: {
-  value:TypeInstantGenerateParamster,
-  onChange: (value:TypeInstantGenerateParamster)=>void,
+  value:VoiceModelAdvancedParamsType,
+  onChange: (value:VoiceModelAdvancedParamsType)=>void,
 }) {
 
   const languageList = [{
@@ -60,23 +60,23 @@ function VoiceParametersAdvanced({
         step={1} 
         maxValue={30} 
         minValue={1}
-        value={value.topK}
-        onChange={(topK) => onChange({ ...value, topK: topK })}
+        value={value.top_k as number}
+        onChange={(topK) => onChange({ ...value, top_k: topK })}
       />
       <NuwaSliderInput
         label="Top P"
         step={0.1} 
         maxValue={1} 
         minValue={0} 
-        value={value.topP}
-        onChange={(topP) => onChange({ ...value, topP: topP })}
+        value={value.top_p as number}
+        onChange={(topP) => onChange({ ...value, top_p: topP })}
       />
       <NuwaSliderInput
         label="Temperature"
         step={0.1} 
         maxValue={1} 
         minValue={0}
-        value={value.temperature}
+        value={value.temperature as number}
         onChange={(temperature) => onChange({ ...value, temperature: temperature })}
       />
 

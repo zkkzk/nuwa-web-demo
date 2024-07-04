@@ -24,3 +24,18 @@ export type TypeVoiceApi = {
   name: string,
   count: number,
 };
+
+
+export const voiceModelTypeList = [{
+  value: "male",
+  label: "male",
+}, {
+  value: "female",
+  label: "female",
+}, {
+  value: "boy",
+  label: "boy",
+}, {
+  value: "girl",
+  label: "girl",
+}]

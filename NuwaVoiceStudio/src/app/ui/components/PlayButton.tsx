@@ -19,17 +19,31 @@ function PlayButton({
   const [play, setPlay] = useState(isPlay);
 
   return (
-    <div className={`${classNames.base} cursor-pointer bg-white rounded-full flex items-center justify-center`}>
+    <div>
       {isPlay 
-      ? <PauseIcon className="h-5 w-5 fill-black stroke-black stroke-1" onClick={() => {
-        onChange && onChange(false);
-        setPlay(false);
-      }} />
-      : <PlayIcon className="h-5 w-5 fill-black stroke-black ml-0.5" onClick={() => {
-        onChange && onChange(true);
-        setPlay(true);
-      }} />
-    }
+        ? (
+          <div
+            className={`${classNames.base} cursor-pointer bg-white rounded-full flex items-center justify-center`}
+            onClick={() => {
+              onChange && onChange(false);
+              setPlay(false);
+            }} 
+          >
+            <PauseIcon className="h-5 w-5 fill-black stroke-black stroke-1" />
+          </div>
+        )
+        : (
+          <div
+            className={`${classNames.base} cursor-pointer bg-white rounded-full flex items-center justify-center`}
+            onClick={() => {
+              onChange && onChange(true);
+              setPlay(true);
+            }}
+          >
+            <PlayIcon className="h-5 w-5 fill-black stroke-black ml-0.5" />
+          </div>
+        )
+      }
     </div>
   );
 }

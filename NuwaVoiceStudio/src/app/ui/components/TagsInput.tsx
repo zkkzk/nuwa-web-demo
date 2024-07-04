@@ -26,7 +26,7 @@ function TagsInput({
   const [newTag, setNewTag] = useState("");
 
   return (
-    <div className="w-full min-h-[52px] px-4 py-3 rounded-xl border-2 border-zinc-700 justify-start items-center gap-2 inline-flex">
+    <div className="w-full min-h-[52px] px-4 py-3 rounded-xl border-2 border-zinc-700 hover:border-white justify-start items-center gap-2 inline-flex">
       <div className="grow shrink basis-0 min-h-7 justify-start items-center gap-4 flex flex-row flex-wrap">
         {tags.map((tag, index) => (
           <div

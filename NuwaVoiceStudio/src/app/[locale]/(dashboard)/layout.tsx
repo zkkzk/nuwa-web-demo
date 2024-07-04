@@ -3,6 +3,7 @@ import { getTranslations } from "next-intl/server";
 import { NextIntlClientProvider,useMessages } from "next-intl";
 import { AlterMessageContextProvider } from "@/app/ui/components/AlterMessageContextProvider";
 import DashboardLayout from "@/app/ui/dashboard/DashboardLayout";
+import { LoginContextProvider } from "@ddreamland/common";
 
 const locales = ["en"];
 
@@ -33,11 +34,13 @@ export default function RootLayout({
     <>
       <NextIntlClientProvider messages={messages}>
         <AlterMessageContextProvider>
-          <DashboardLayout>
-            <div className=" min-h-[80vh]">
-              {children}
-            </div>
-          </DashboardLayout>
+          <LoginContextProvider>
+            <DashboardLayout>
+              <div className=" min-h-[80vh]">
+                {children}
+              </div>
+            </DashboardLayout>
+          </LoginContextProvider>
         </AlterMessageContextProvider>
       </NextIntlClientProvider>
     </>

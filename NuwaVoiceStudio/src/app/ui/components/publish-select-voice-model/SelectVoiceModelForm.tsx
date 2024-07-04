@@ -25,22 +25,14 @@ function SelectVoiceModelForm({
     DefaultInstantGenerateParamster
   );
 
-  const languageList = [
+  const modalTypeList = [
     {
-      value: "GPT-Sovits",
+      value: "shide",
       label: "GPT-Sovits",
-    },
-    {
-      value: "zh",
-      label: "GPT-Sovits",
-    },
-    {
-      value: "ja",
-      label: "GPT-Sovits",
-    },
+    }
   ];
 
-  const [type, setType] = useState<string>("GPT-Sovits");
+  const [type, setType] = useState<string>("shide");
   const [selectModalOpen, setSelectModalOpen] = useState(false);
 
   return (
@@ -53,20 +45,20 @@ function SelectVoiceModelForm({
               <Select
                 variant="bordered"
                 size="md"
-                placeholder="Select an language"
+                placeholder="Select model type"
                 labelPlacement="outside"
                 selectedKeys={[type]}
                 onChange={(e) => setType(e.target.value)}
               >
-                {languageList.map((Language) => (
+                {modalTypeList.map((mtItem) => (
                   <SelectItem
-                    key={Language.value}
-                    value={Language.value}
+                    key={mtItem.value}
+                    value={mtItem.value}
                     classNames={{
                       base: "h-12 pl-2 pr-3 py-2 rounded-xl gap-4",
                     }}
                   >
-                    {Language.label}
+                    {mtItem.label}
                   </SelectItem>
                 ))}
               </Select>

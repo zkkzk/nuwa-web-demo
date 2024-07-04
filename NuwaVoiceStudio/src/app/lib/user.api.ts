@@ -3,8 +3,8 @@ import { useTranslations } from "next-intl";
 
 
 const apiUrlList = {
-  getUserInfo: `/api/v1/user/info/get`,
-  editUserInfo: `/api/v1/user/info/edit`,
+  getUserInfo: `/ddream/api/v1/user/info/get`,
+  editUserInfo: `/ddream/api/v1/user/info/edit`,
 }
 
 export function getUserInfo({noLoginGotoLogin = false}: {noLoginGotoLogin?: boolean}) {

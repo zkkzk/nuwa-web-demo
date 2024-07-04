@@ -2,43 +2,35 @@
 import React, { useState } from "react";
 import VoicePreview from "./VoicePreview";
 import { Checkbox, cn, Input, Select, SelectItem } from "@nextui-org/react";
-import { TypeTone } from "@/app/lib/definitions.tone";
+import { toneList, TypeTone } from "@/app/lib/definitions.tone";
 import { TrashIcon } from "@heroicons/react/24/outline";
 
 
 function ToneVoiceFile({
   voiceSrc,
+  toneType,
+  text,
+  onTextChange,
+  onToneTypeChange,
   hideTrash=true,
+  onTrashClick,
   hideCheckbox=true,
   isDisabled=false,
   selected=false,
 }: {
   voiceSrc: string
+  toneType?: string
+  text?: string
+  onTextChange?: (newText: string) => void
+  onToneTypeChange?: (newToneType: string) => void
   hideTrash?: boolean
+  onTrashClick?: () => void
   hideCheckbox?: boolean
   isDisabled?: boolean
   selected?: boolean
 }) {
   const [isSelected, setIsSelected] = useState(selected);
 
-  const [tone, setTone] = useState<TypeTone>({
-    value: "1",
-    name: "1"
-  });
-
-  const toneList:Array<TypeTone> = [{
-    value: "1",
-    name: "1",
-  }, {
-    value: "2",
-    name: "2",
-  }, {
-    value: "3",
-    name: "3",
-  }, {
-    value: "4",
-    name: "5",
-  }]
 
   return (
     <div className={cn([isDisabled ? "opacity-30": "", isSelected ? "border-2  border-blue-600 p-[14px]" : "p-4", "relative self-stretch bg-zinc-600 rounded-xl justify-start items-center gap-4 inline-flex"])}>
@@ -53,39 +45,46 @@ function ToneVoiceFile({
               variant="flat"
               size="md"
               placeholder="Select an tone"
-              selectedKeys={[tone.value]}
+              selectedKeys={[toneType as string]}
               classNames={{
                 // trigger: 'bg-zinc-700'
               }}
               onChange={(e) => {
-                setTone({
-                  name: e.target.value,
-                  value: e.target.value
-                });
+                onToneTypeChange && onToneTypeChange(e.target.value)
               }}
             >
               {toneList.map((tone) => (
-                  <SelectItem
-                    key={tone.value}
-                    value={tone.value}
-                    classNames={{
-                      base: 'h-12 pl-2 pr-3 py-2 rounded-xl gap-4',
-                    }}
-                  >
-                    {tone.name}
-                  </SelectItem>
+                <SelectItem
+                  key={tone.value}
+                  value={tone.value}
+                  classNames={{
+                    base: 'h-12 pl-2 pr-3 py-2 rounded-xl gap-4',
+                  }}
+                >
+                  {tone.name}
+                </SelectItem>
               ))}
           </Select>
           </div>
-					<Input classNames={{
-						base: 'grow',
-            // inputWrapper: 'bg-zinc-700'
-					}} type="text" variant="flat" color="default" placeholder="With Error Message" />
+					<Input
+            classNames={{
+              base: 'grow',
+              // inputWrapper: 'bg-zinc-700'
+            }}
+            type="text"
+            variant="flat"
+            color="default"
+            placeholder="Type context you want to convert here."
+            value={text}
+            onChange={(e) => {
+              onTextChange && onTextChange(e.target.value)
+            }}
+          />
         </div>
       </div>
       {(!hideTrash || !hideCheckbox) && (
         <div className="flex items-center h-full cursor-pointer flex-col gap-4 justify-center">
-          {!hideTrash && (<TrashIcon className="w-5 h-5 fill-zinc-500" />)}
+          {!hideTrash && (<TrashIcon className="w-5 h-5 fill-zinc-500"  onClick={onTrashClick}/>)}
           {!hideCheckbox && (
             <Checkbox
               isDisabled={isDisabled}
