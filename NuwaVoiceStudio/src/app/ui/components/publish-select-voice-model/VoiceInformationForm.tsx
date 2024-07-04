@@ -15,7 +15,7 @@ import {
   VoiceModelInfoType,
 } from "@/app/lib/definitions.InstantGenerateParamster";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
-import UploadFile from "../UploadFile";
+import UploadFile from "../upload-file/UploadFile";
 import LabelForm from "../form/LabelForm";
 import TitleModal from "./TitleModal";
 import TagsInput from "../TagsInput";

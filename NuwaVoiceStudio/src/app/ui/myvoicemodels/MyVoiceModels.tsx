@@ -1,13 +1,41 @@
 "use client";
-import React, { useState } from "react";
-import UploadFile from "../components/UploadFile";
+import React, { useEffect, useState } from "react";
+import UploadFile from "../components/upload-file/UploadFile";
 import TrainIcon from "@/app/icons/TrainIcon";
 import TrainList from "./TrainList";
 import TrainVoiceModelModal from "./TrainVoiceModelModal";
+import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
+import { getVoiceTrainRecords } from "@/app/lib/voice.api";
 
 function MyVoiceModels() {
 
-  const [selectModalOpen, setSelectModalOpen] = useState(false);
+  const [trainVoiceModelOpen, setTrainVoiceModelOpen] = useState(false);
+  const amDispatch = useAmDispatch();
+  const [loading, setLoading] = useState(false);
+  const [isInit, setInit] = useState(false);
+
+  const getVoiceTrainRecordsApi = getVoiceTrainRecords();
+  const getVoiceTrainRecordsServer = async () => {
+
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    const res = await getVoiceTrainRecordsApi.send({
+    });
+    if (res && res.code === 0) {
+
+    }
+
+    setLoading(false);
+    if (!isInit) {
+      setInit(true);
+    }
+  };
+
+  useEffect(() => {
+    getVoiceTrainRecordsServer();
+  }, []);
 
   return (
     <>
@@ -16,16 +44,19 @@ function MyVoiceModels() {
           My Voice Models
         </div>
         <div className="self-stretch h-[72px]">
-          <UploadFile
-            label={<div className="justify-center items-center flex gap-3">
+          <div
+            onClick={() => {
+              setTrainVoiceModelOpen(true);
+            }}
+            className=" cursor-pointer grow shrink basis-0 w-full h-full p-4 rounded-2xl border-dashed border-2 border-zinc-700 flex-col justify-center items-center gap-2 inline-flex"
+          >
+            <div className="text-center text-zinc-400 text-xs font-medium font-['Inter']">
+            <div className="justify-center items-center flex gap-3">
               <TrainIcon className="w-6 h-6 fill-blue-600" />
               <span>Train My Voice Model</span>
-            </div>}
-            onClick={() => {
-              setSelectModalOpen(true);
-            }}
-          >
-          </UploadFile>
+            </div>
+            </div>
+          </div> 
         </div>
         <div className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">
           You haven't created any voice
@@ -34,9 +65,9 @@ function MyVoiceModels() {
       </div>
 
       <TrainVoiceModelModal
-        isOpen={selectModalOpen}
+        isOpen={trainVoiceModelOpen}
         onChange={(isOpen) => {
-          setSelectModalOpen(isOpen);
+          setTrainVoiceModelOpen(isOpen);
         }}
       />
     </>

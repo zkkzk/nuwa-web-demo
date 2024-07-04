@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import VoicePreview from "../components/VoicePreview";
+import VoicePreview from "../components/voice-preview/VoicePreview";
 
 
 

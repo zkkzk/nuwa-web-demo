@@ -1,8 +1,5 @@
 "use client";
 import React, { useCallback, useRef, useState } from "react";
-import { TypeVoice } from "@/app/lib/definitions.voice";
-import { PlayIcon } from "@heroicons/react/24/outline";
-import { PauseIcon, ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import { useWavesurfer } from "@wavesurfer/react";
 import VoicePreview from "./VoicePreview";
 import { Input } from "@nextui-org/react";

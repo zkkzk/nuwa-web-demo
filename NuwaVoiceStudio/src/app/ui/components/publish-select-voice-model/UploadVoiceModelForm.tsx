@@ -6,10 +6,10 @@ import {
   VoiceModelFormDataProps,
 } from "@/app/lib/definitions.InstantGenerateParamster";
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
-import UploadFile from "../UploadFile";
+import UploadFile from "../upload-file/UploadFile";
 import LabelForm from "../form/LabelForm";
 import TitleModal from "./TitleModal";
-import ToneVoiceFileList from "../ToneVoiceFileList";
+import ToneVoiceFileList from "../voice-preview/ToneVoiceFileList";
 
 
 function UploadVoiceModelForm({

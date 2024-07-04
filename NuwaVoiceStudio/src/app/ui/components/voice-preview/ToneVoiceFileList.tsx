@@ -4,7 +4,7 @@ import { Button } from "@nextui-org/react";
 import { toneListEn } from "@/app/lib/definitions.tone";
 import { VoiceModelToneType } from "@/app/lib/definitions.InstantGenerateParamster";
 import ToneVoiceFile from "./ToneVoiceFile";
-import UploadFile from "./UploadFile";
+import UploadFile from "../upload-file/UploadFile";
 import ExportIcon from "@/app/icons/ExportIcon";
 
 
@@ -68,9 +68,6 @@ function ToneVoiceFileList({
       >add</Button>
       <UploadFile
         label={<div>Drag and drop files here or click to upload<br />CKPT format</div>}
-        onClick={() => {
-          // setSelectModalOpen(true);
-        }}
         icon={<ExportIcon className="w-6 h-6" />}
       >
       </UploadFile>

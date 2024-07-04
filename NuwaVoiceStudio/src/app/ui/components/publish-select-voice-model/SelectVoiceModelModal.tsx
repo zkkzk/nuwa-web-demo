@@ -9,7 +9,7 @@ import {
   ModalHeader,
   useDisclosure,
 } from "@nextui-org/react";
-import ToneVoiceFile from "../ToneVoiceFile";
+import ToneVoiceFile from "../voice-preview/ToneVoiceFile";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 
 function SelectVoiceModelModal({

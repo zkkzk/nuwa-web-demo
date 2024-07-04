@@ -40,7 +40,7 @@ export default function DashboardLayout({
 
   useEffect(() => {
     const init = async () => {
-      const res = await getUserInfoApi.send();
+      const res = await getUserInfoApi.send({});
       if (res && res.code === 0) {
         const user = {
           uid: res.data.uid,

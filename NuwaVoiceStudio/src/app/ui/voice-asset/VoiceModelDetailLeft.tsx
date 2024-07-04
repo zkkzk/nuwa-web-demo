@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import ToneVoicePreview from "../components/ToneVoicePreview";
+import ToneVoicePreview from "../components/voice-preview/ToneVoicePreview";
 
 function VoiceAssetDetailLeft() {
   return (

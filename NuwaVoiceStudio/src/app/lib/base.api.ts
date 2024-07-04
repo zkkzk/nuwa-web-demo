@@ -31,13 +31,17 @@ export const baseApiHander = ({
   mustLogin = false,
   noLoginGotoLogin = false,
   isSt = false,
-  successMsg
+  successMsg,
+  isBody = false,
+  isUpload = false,
 }: {
-  url: string,
-  mustLogin?: boolean,
-  noLoginGotoLogin?: boolean,
-  isSt?: boolean,
+  url: string
+  mustLogin?: boolean
+  noLoginGotoLogin?: boolean
+  isSt?: boolean
   successMsg?: string
+  isBody?: boolean
+  isUpload?: boolean
 }) => {
   const t = useTranslations();
   const locale = useLocale();
@@ -75,20 +79,19 @@ export const baseApiHander = ({
     }
     
     try {
-      let body = null;
-      if (params) {
-        body = JSON.stringify(params);
+      let fetchParams = {
+        method: 'POST',
+        body: isBody ? params : JSON.stringify(params),
+        headers: {
+          'Accept-Language': locale
+        } as any
+      }
+
+      if (!isUpload) {
+        fetchParams.headers['Content-Type'] = 'application/json'
       }
       
-      const response = await fetch(fetchUrl, {
-          method: 'POST',
-          body: body,
-          headers: {
-            'Accept-Language': locale,
-            'Content-Type': 'application/json'
-          }
-        }
-      );
+      const response = await fetch(fetchUrl, fetchParams);
 
       if(response.ok){
         const data = await response.json();
@@ -100,6 +103,7 @@ export const baseApiHander = ({
             type: "add",
             payload: {
               message: successMsg,
+              type: "success"
             },
           })
           setLoading(false)

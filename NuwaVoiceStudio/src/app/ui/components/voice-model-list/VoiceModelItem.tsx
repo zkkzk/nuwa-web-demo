@@ -5,7 +5,7 @@ import { StarIcon } from "@heroicons/react/24/solid";
 import { Avatar, Button, cn, Tooltip } from "@nextui-org/react";
 import CommercialStarIcon from "@/app/icons/CommercialStarIcon";
 import numbro from "numbro";
-import PlayButton from "../PlayButton";
+import PlayButton from "../voice-preview/PlayButton";
 import DownloadIcon from "@/app/icons/DownloadIcon";
 import { BeakerIcon } from "@heroicons/react/24/outline";
 import GPTSovitsIcon from "@/app/icons/GPTSovitsIcon";

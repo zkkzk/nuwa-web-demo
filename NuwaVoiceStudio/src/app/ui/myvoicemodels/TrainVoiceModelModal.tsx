@@ -13,12 +13,13 @@ import {
   RadioGroup,
   useDisclosure,
 } from "@nextui-org/react";
-import ToneVoiceFile from "../components/ToneVoiceFile";
-import UploadFile from "../components/UploadFile";
+import ToneVoiceFile from "../components/voice-preview/ToneVoiceFile";
+import UploadFile from "../components/upload-file/UploadFile";
 import BDocumentIcon from "@/app/icons/BDocumentIcon";
 import LabelForm from "../components/form/LabelForm";
 import FlashIcon from "@/app/icons/FlashIcon";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import TrainVoiceFilePreview from "../components/voice-preview/TrainVoiceFilePreview";
 
 function TrainVoiceModelModal({
   isOpen = false,
@@ -33,6 +34,8 @@ function TrainVoiceModelModal({
     onClose: () => onChange(false),
     onOpen: () => onChange(true),
   });
+
+  const [ voiceSrc, setVoiceSrc ] = useState<string | null>(null);
 
   return (
       <Modal 
@@ -61,21 +64,30 @@ function TrainVoiceModelModal({
             <ModalBody>
               <div className="w-full bg-zinc-900 rounded-2xl shadow flex-col justify-start items-start gap-8 inline-flex">
                 <div className="self-stretch flex-col justify-start items-start gap-6 flex">
-                  <div className="self-stretch h-40">
-                    <UploadFile
-                      label={
-                        <div className="flex-col justify-center items-center gap-2.5 flex">
-                          <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">Upload Sound File</div>
-                          <div className="w-[405px] text-center text-zinc-400 text-xs font-medium font-['Inter']">Click or drag to upload an audio file Supported formats: MP3/WAV/FLAC</div>
-                        </div>
-                      }
-                      icon={<BDocumentIcon className='h-6 w-6' />}
-                      onClick={() => {
-                      }}
-                      >
-                    </UploadFile>
-                  </div>
-                  <ToneVoiceFile voiceSrc={"voiceSrc"} hideTrash={false} />
+                  { !voiceSrc && (
+                    <div className="self-stretch h-40">
+                      <UploadFile
+                        label={
+                          <div className="flex-col justify-center items-center gap-2.5 flex">
+                            <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">Upload Sound File</div>
+                            <div className="w-[405px] text-center text-zinc-400 text-xs font-medium font-['Inter']">Click or drag to upload an audio file Supported formats: MP3/WAV/FLAC</div>
+                          </div>
+                        }
+                        icon={<BDocumentIcon className='h-6 w-6' />}
+                        accept="audio"
+                        onDone={(url) => {
+                          setVoiceSrc(url);
+                        }}
+                        >
+                      </UploadFile>
+                    </div>
+                  )}
+                  
+                  { voiceSrc && (
+                    <TrainVoiceFilePreview voiceSrc={voiceSrc} onTrashClick={() => setVoiceSrc(null)} />
+                  )}
+                  
+                  {/* <TrainVoiceFilePreview voiceSrc={"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"} onTrashClick={() => setVoiceSrc(null)} /> */}
 
                   <LabelForm label="Voice Model Name" isRequired={true}>
                     <Input

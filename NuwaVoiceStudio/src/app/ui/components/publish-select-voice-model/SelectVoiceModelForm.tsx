@@ -12,7 +12,7 @@ import {
 import SelectVoiceModelModal from "./SelectVoiceModelModal";
 import LabelForm from "../form/LabelForm";
 import TitleModal from "./TitleModal";
-import ToneVoiceFileList from "../ToneVoiceFileList";
+import ToneVoiceFileList from "../voice-preview/ToneVoiceFileList";
 import { getModelList } from "@/app/lib/voice.api";
 
 type myModelType = {

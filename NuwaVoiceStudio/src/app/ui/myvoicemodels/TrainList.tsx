@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import UploadFile from "../components/UploadFile";
+import UploadFile from "../components/upload-file/UploadFile";
 import TrainIcon from "@/app/icons/TrainIcon";
 import TrainItem from "./TrainItem";
 import { Button, Input, Pagination } from "@nextui-org/react";
