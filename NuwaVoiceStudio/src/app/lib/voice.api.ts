@@ -9,6 +9,7 @@ const voiceUrlList = {
   getModelList: `/ddream/api/v1/voice/model/list`,
   getMyPublish: `/ddream/api/v1/voice/publish/my_publish`,
   getVoiceTrainRecords: `/ddream/api/v1/voice/train/records`,
+  createVoiceTrain: `/ddream/api/v1/voice/train`,
 }
 
 export function getPublishSquare() {
@@ -60,6 +61,15 @@ export function getVoiceTrainRecords() {
   const t = useTranslations();
   return baseApiHander({
     url: voiceUrlList.getVoiceTrainRecords,
+    mustLogin: true,
+    noLoginGotoLogin: true,
+  })
+}
+
+export function createVoiceTrain() {
+  const t = useTranslations();
+  return baseApiHander({
+    url: voiceUrlList.createVoiceTrain,
     mustLogin: true,
     noLoginGotoLogin: true,
   })

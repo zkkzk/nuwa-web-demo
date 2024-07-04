@@ -20,6 +20,10 @@ import LabelForm from "../components/form/LabelForm";
 import FlashIcon from "@/app/icons/FlashIcon";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import TrainVoiceFilePreview from "../components/voice-preview/TrainVoiceFilePreview";
+import { createVoiceTrain } from "@/app/lib/voice.api";
+import { z } from "zod";
+import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
+import confetti from "canvas-confetti";
 
 function TrainVoiceModelModal({
   isOpen = false,
@@ -29,6 +33,8 @@ function TrainVoiceModelModal({
   onChange: (isOpen: boolean) => void; // 类型定义为函数，用于处理模态框的打开和关闭
 }) {
 
+  const [sending, setSending] = useState(false);
+
   const trainVoiceModelModal = useDisclosure({
     isOpen,
     onClose: () => onChange(false),
@@ -36,6 +42,47 @@ function TrainVoiceModelModal({
   });
 
   const [ voiceSrc, setVoiceSrc ] = useState<string | null>(null);
+  const [ taskName, setTaskName ] = useState<string>("")
+  const [ isAgree, setIsAgree] = useState(false);
+  const amDispatch = useAmDispatch();
+
+  const createVoiceTrainApi = createVoiceTrain();
+
+  const handleConfetti = () => {
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 }
+    });
+  };
+  
+  const createVoiceTrainServer = async () => {
+
+    if (sending) {
+      return;
+    }
+    setSending(true);
+    const res = await createVoiceTrainApi.send({
+      file: voiceSrc,
+      task_name: taskName,
+    });
+    if (res && res.code === 0) {
+      handleConfetti()
+    }
+
+    setSending(false);
+  };
+
+  const FormSchema = z.object({
+    file: z.string({
+      required_error: "video file is required",
+      invalid_type_error: "video file is required",
+    }).url({message: 'Please upload a video file'}), 
+    task_name: z.string({
+      required_error: "task name is required",
+      invalid_type_error: "task name must be a string",
+    }).min(1, { message: "task namel is required" }),
+  });
 
   return (
       <Modal 
@@ -89,7 +136,7 @@ function TrainVoiceModelModal({
                   
                   {/* <TrainVoiceFilePreview voiceSrc={"https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"} onTrashClick={() => setVoiceSrc(null)} /> */}
 
-                  <LabelForm label="Voice Model Name" isRequired={true}>
+                  <LabelForm label="Task Name" isRequired={true}>
                     <Input
                       classNames={{
                         base: "grow",
@@ -99,10 +146,12 @@ function TrainVoiceModelModal({
                       isRequired
                       color="default"
                       placeholder="e.g. Alan Turing"
+                      value={taskName}
+                      onChange={(e) => setTaskName(e.target.value)}
                     />
                   </LabelForm>
 
-                  <LabelForm label='Quality' subTitle="Please select 'Slight background noise' in most cases, unless your audio has undergone professional sound processing." isRequired={true}>
+                  {/* <LabelForm label='Quality' subTitle="Please select 'Slight background noise' in most cases, unless your audio has undergone professional sound processing." isRequired={true}>
                     <RadioGroup orientation="horizontal">
                       <Radio value="Original">
                       Slight background noise
@@ -111,14 +160,19 @@ function TrainVoiceModelModal({
                       No background noise
                       </Radio>
                     </RadioGroup>
-                  </LabelForm>
-                  <div className="self-stretch h-[76px] flex-col justify-start items-start flex">
+                  </LabelForm> */}
+                  <div className="self-stretch flex-col justify-start items-start flex">
                     <div className="self-stretch py-2 justify-start items-center gap-2 inline-flex">
-                      <Checkbox defaultSelected size="sm"></Checkbox>
+                      <Checkbox isSelected={isAgree} onValueChange={setIsAgree} size="sm"></Checkbox>
                       <div className="grow shrink basis-0 text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">I agree with the following information</div>
                     </div>
-                    <div className="self-stretch px-6 justify-start items-start gap-2.5 inline-flex">
-                      <div className="grow shrink basis-0"><span className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">Only English, Mandarin, and Japanese are supported currently. Please follow us for future updates...</span><span className="text-zinc-400 text-sm font-semibold font-['Inter'] leading-tight">See more</span></div>
+                    <div className="self-stretch px-12 justify-start items-start inline-flex">
+                      <ul className="w-full list-disc">
+                        <li className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">Only English, Mandarin, and Japanese are supported currently. Please follow us for future updates...</li>
+                        <li className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">Please make sure the sound is clear and in single-character.</li>
+                        <li className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">Please ensure your audio file is free from intellectual property conflicts. We cannot differentiate user-generated content and therefore cannot assume any associated liability.</li>
+                        <li className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">Please ensure the audio quality meets the minimum standards for the training model. Extremely low quality may result in training failure, and any fees paid for this process will not be refundable.</li>
+                      </ul>
                     </div>
                   </div>
                 </div>
@@ -138,6 +192,27 @@ function TrainVoiceModelModal({
                     </div>
                   </div>
                 }
+                isDisabled={!isAgree}
+                onPress={() => {
+                  const validatedFields = FormSchema.required().safeParse({
+                    file: voiceSrc, 
+                    task_name: taskName,
+                  });
+                
+                  if (validatedFields.success) {
+                    createVoiceTrainServer();
+                  } else {
+                    validatedFields.error.issues.map((item) => {
+                      amDispatch({
+                        type: "add",
+                        payload: {
+                          type: "error",
+                          message: item.message,
+                        },
+                      })
+                    })
+                  }
+                }}
               >Start Training</Button>
             </ModalFooter>
           </>
