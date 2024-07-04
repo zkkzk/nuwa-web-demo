@@ -1,9 +1,8 @@
 'use client';
 
-import { createContext, useContext, useReducer } from 'react';
+import { createContext, useContext } from 'react';
 import AlterMessages, { messageType } from './AlterMessages';
 import { useImmerReducer } from 'use-immer';
-import { findIndex } from 'lodash-es';
 
 export const AmContext = createContext([]);
 export const AmDispatchContext = createContext(null as any);

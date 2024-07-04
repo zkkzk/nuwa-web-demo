@@ -1,6 +1,6 @@
 'use client'
 import { useState } from "react";
-import { useAmDispatch } from "@/app/ui/components/AlterMessageContextProvider";
+import { useAmDispatch } from "@/app/ui/components/alter-message/AlterMessageContextProvider";
 import { useLocale, useTranslations } from "next-intl";
 import { getCookie, removeCookie } from 'typescript-cookie'
 import { usePathname, useRouter } from "@/navigation";

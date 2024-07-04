@@ -4,7 +4,7 @@ import { XMarkIcon } from "@heroicons/react/24/solid";
 import { useTranslations } from "next-intl";
 import { uploadImage, uploadFile } from "@/app/lib/oss";
 import { getOssToken } from "@/app/lib/oss.api";
-import { useAmDispatch } from "./AlterMessageContextProvider";
+import { useAmDispatch } from "./alter-message/AlterMessageContextProvider";
 
 function UploadFile({
   label,

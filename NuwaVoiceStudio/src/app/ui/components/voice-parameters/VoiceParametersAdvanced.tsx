@@ -58,7 +58,7 @@ function VoiceParametersAdvanced({
       <NuwaSliderInput
         label="Top K"
         step={1} 
-        maxValue={30} 
+        maxValue={50} 
         minValue={1}
         value={value.top_k as number}
         onChange={(topK) => onChange({ ...value, top_k: topK })}
@@ -66,7 +66,7 @@ function VoiceParametersAdvanced({
       <NuwaSliderInput
         label="Top P"
         step={0.1} 
-        maxValue={1} 
+        maxValue={2} 
         minValue={0} 
         value={value.top_p as number}
         onChange={(topP) => onChange({ ...value, top_p: topP })}
@@ -74,8 +74,8 @@ function VoiceParametersAdvanced({
       <NuwaSliderInput
         label="Temperature"
         step={0.1} 
-        maxValue={1} 
-        minValue={0}
+        maxValue={2} 
+        minValue={0.1}
         value={value.temperature as number}
         onChange={(temperature) => onChange({ ...value, temperature: temperature })}
       />

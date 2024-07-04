@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { uploadImage } from "@/app/lib/oss";
 import { getOssToken } from "@/app/lib/oss.api";
 import { Button } from "@nextui-org/react";
-import { useAmDispatch } from "../AlterMessageContextProvider";
+import { useAmDispatch } from "../alter-message/AlterMessageContextProvider";
 
 export default function Avatar_Upload_Image({onDone}:{onDone:(url:string)=>void}) {
   const t = useTranslations();

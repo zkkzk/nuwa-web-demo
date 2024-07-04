@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import VoicePreview from "./VoicePreview";
 import { Checkbox, cn, Input, Select, SelectItem } from "@nextui-org/react";
-import { toneList, TypeTone } from "@/app/lib/definitions.tone";
+import { toneListEn, TypeTone } from "@/app/lib/definitions.tone";
 import { TrashIcon } from "@heroicons/react/24/outline";
 
 
@@ -31,7 +31,6 @@ function ToneVoiceFile({
 }) {
   const [isSelected, setIsSelected] = useState(selected);
 
-
   return (
     <div className={cn([isDisabled ? "opacity-30": "", isSelected ? "border-2  border-blue-600 p-[14px]" : "p-4", "relative self-stretch bg-zinc-600 rounded-xl justify-start items-center gap-4 inline-flex"])}>
       {isDisabled && (<div className="w-full h-full absolute top-0 left-0 z-10" />)}
@@ -40,8 +39,9 @@ function ToneVoiceFile({
           <VoicePreview voiceSrc={voiceSrc} hideTimeline={true} classNames={{playButton: 'h-10 w-10'}} />
         </div>
         <div className="self-stretch justify-between items-start gap-3 inline-flex">
-          <div className="w-[120px] h-full">
+          <div className="w-[240px] h-full">
             <Select
+              disallowEmptySelection={true}
               variant="flat"
               size="md"
               placeholder="Select an tone"
@@ -53,7 +53,7 @@ function ToneVoiceFile({
                 onToneTypeChange && onToneTypeChange(e.target.value)
               }}
             >
-              {toneList.map((tone) => (
+              {toneListEn.map((tone) => (
                 <SelectItem
                   key={tone.value}
                   value={tone.value}
@@ -61,10 +61,10 @@ function ToneVoiceFile({
                     base: 'h-12 pl-2 pr-3 py-2 rounded-xl gap-4',
                   }}
                 >
-                  {tone.name}
+                  {tone.label}
                 </SelectItem>
               ))}
-          </Select>
+            </Select>
           </div>
 					<Input
             classNames={{

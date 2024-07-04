@@ -105,8 +105,8 @@ function VoiceAsse() {
         </ModalContent>
       </DrawerModal>
 
-      <PublishVoiceModelModal isOpen={uploadModalOpen} onChange={(isOpen) => {setUploadModalOpen(isOpen)}} variant="ONLINE"  />
-      <PublishVoiceModelModal isOpen={selectModalOpen} onChange={(isOpen) => {setSelectModalOpen(isOpen)}} variant="LOCAL" />
+      <PublishVoiceModelModal isOpen={uploadModalOpen} onChange={(isOpen) => {setUploadModalOpen(isOpen)}} variant="UPLOAD"  />
+      <PublishVoiceModelModal isOpen={selectModalOpen} onChange={(isOpen) => {setSelectModalOpen(isOpen)}} variant="SELECT" />
     </div>
   );
 }

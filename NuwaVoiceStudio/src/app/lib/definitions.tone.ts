@@ -1,18 +1,176 @@
 export type TypeTone = {
   value: string,
-  name: string,
+  label: string,
 };
 
-export const toneList:Array<TypeTone> = [{
-  value: "1",
-  name: "1",
+export const toneListEn:Array<TypeTone> = [{
+  value: "neutral",
+  label: "neutral",
 }, {
-  value: "2",
-  name: "2",
+  value: "admiration",
+  label: "admiration",
 }, {
-  value: "3",
-  name: "3",
+  value: "amusement",
+  label: "amusement",
 }, {
-  value: "4",
-  name: "4",
+  value: "anger",
+  label: "anger",
+}, {
+  value: "annoyance",
+  label: "annoyance",
+}, {
+  value: "approval",
+  label: "approval",
+}, {
+  value: "caring",
+  label: "caring",
+}, {
+  value: "confusion",
+  label: "confusion",
+}, {
+  value: "curiosity",
+  label: "curiosity",
+}, {
+  value: "desire",
+  label: "desire",
+}, {
+  value: "disappointment",
+  label: "disappointment",
+}, {
+  value: "disapproval",
+  label: "disapproval",
+}, {
+  value: "disgust",
+  label: "disgust",
+}, {
+  value: "embarrassment",
+  label: "embarrassment",
+}, {
+  value: "excitement",
+  label: "excitement",
+}, {
+  value: "fear",
+  label: "fear",
+}, {
+  value: "gratitude",
+  label: "gratitude",
+}, {
+  value: "grief",
+  label: "grief",
+}, {
+  value: "joy",
+  label: "joy",
+}, {
+  value: "love",
+  label: "love",
+}, {
+  value: "nervousness",
+  label: "nervousness",
+}, {
+  value: "optimism",
+  label: "optimism",
+}, {
+  value: "pride",
+  label: "pride",
+}, {
+  value: "realization",
+  label: "realization",
+}, {
+  value: "relief",
+  label: "relief",
+}, {
+  value: "remorse",
+  label: "remorse",
+}, {
+  value: "sadness",
+  label: "sadness",
+}, {
+  value: "surprise",
+  label: "surprise",
+}]
+
+export const toneListZhcn:Array<TypeTone> = [{
+  value: "neutral",
+  label: "中立",
+}, {
+  value: "admiration",
+  label: "钦佩",
+}, {
+  value: "amusement",
+  label: "娱乐",
+}, {
+  value: "anger",
+  label: "愤怒",
+}, {
+  value: "annoyance",
+  label: "烦恼",
+}, {
+  value: "approval",
+  label: "赞许",
+}, {
+  value: "caring",
+  label: "关心",
+}, {
+  value: "confusion",
+  label: "困惑",
+}, {
+  value: "curiosity",
+  label: "好奇",
+}, {
+  value: "desire",
+  label: "欲望",
+}, {
+  value: "disappointment",
+  label: "失望",
+}, {
+  value: "disapproval",
+  label: "反对",
+}, {
+  value: "disgust",
+  label: "厌恶",
+}, {
+  value: "embarrassment",
+  label: "尴尬",
+}, {
+  value: "excitement",
+  label: "兴奋",
+}, {
+  value: "fear",
+  label: "恐惧",
+}, {
+  value: "gratitude",
+  label: "感激",
+}, {
+  value: "grief",
+  label: "悲伤",
+}, {
+  value: "joy",
+  label: "喜悦",
+}, {
+  value: "love",
+  label: "爱",
+}, {
+  value: "nervousness",
+  label: "紧张",
+}, {
+  value: "optimism",
+  label: "乐观",
+}, {
+  value: "pride",
+  label: "自豪",
+}, {
+  value: "realization",
+  label: "领悟",
+}, {
+  value: "relief",
+  label: "宽慰",
+}, {
+  value: "remorse",
+  label: "懊悔",
+}, {
+  value: "sadness",
+  label: "悲哀",
+}, {
+  value: "surprise",
+  label: "惊讶",
 }]

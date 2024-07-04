@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/AlterMessageContextProvider";
+import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import { Input, Slider, Tooltip } from "@nextui-org/react";
 
 function NuwaSliderInput({

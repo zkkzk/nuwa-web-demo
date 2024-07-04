@@ -2,9 +2,9 @@
 import React, { useState } from "react";
 
 import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/AlterMessageContextProvider";
+import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import FlashIcon from "@/app/icons/FlashIcon";
-import { TypeTone } from "@/app/lib/definitions.tone";
+import { toneListEn, TypeTone } from "@/app/lib/definitions.tone";
 import { UserIcon } from "@heroicons/react/24/outline";
 import MainStationControlParameters from "./MainStationControlParameters";
 import { Button, Input, Select, SelectItem } from "@nextui-org/react";
@@ -13,20 +13,6 @@ function MainStationControl() {
   const t = useTranslations();
   const amDispatch = useAmDispatch();
 
-  const toneList:Array<TypeTone> = [{
-    value: "1",
-    name: "1",
-  }, {
-    value: "2",
-    name: "2",
-  }, {
-    value: "3",
-    name: "3",
-  }, {
-    value: "4",
-    name: "5",
-  }]
-
   return (
     <div className="flex-col justify-end items-center flex bottom-0 w-full">
       <MainStationControlParameters />
@@ -34,13 +20,13 @@ function MainStationControl() {
         <Input color="primary" type="text" variant="bordered" placeholder="Type context you want to convert here." />
         <div className="self-stretch justify-between items-start inline-flex">
           <Select
-            items={toneList}
+            items={toneListEn}
             variant="bordered"
             size="sm"
             className="w-[180px]"
             startContent={<div className="w-40 text-gray-500 text-sm font-semibold font-['Inter'] leading-normal"><p>Tones | </p></div>}
           >
-            {toneList.map((tone) => (
+            {toneListEn.map((tone) => (
                 <SelectItem
                   key={tone.value}
                   value={tone.value}
@@ -49,7 +35,7 @@ function MainStationControl() {
                   }}
                   startContent={<UserIcon className="h-4 w-4"/>}
                 >
-                  {tone.name}
+                  {tone.label}
                 </SelectItem>
             ))}
           </Select>

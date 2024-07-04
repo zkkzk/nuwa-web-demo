@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/AlterMessageContextProvider";
+import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import { Tab, Tabs } from "@nextui-org/react";
 import NuwaChipRadioGroup from "../components/NuwaChipRadioGroup";
 

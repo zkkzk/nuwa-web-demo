@@ -1,11 +1,11 @@
 
 
-const defaultLanguage = 'en';
-const defaultSegmentationMethod = 'zh';
+const defaultLanguage = 'auto';
+const defaultSegmentationMethod = 'auto_cut';
 const defaultSpeed = 1;
-const defaultMaxWords = 25;
+const defaultMaxWords = 50;
 const defaultSeed = -1;
-const defaultTopK = 3;
+const defaultTopK = 5;
 const defaultTopP = 0.8;
 const defaultTemperature = 0.8;
 
@@ -33,23 +33,14 @@ export type TypeInstantGenerateParamster = {
 
 export const DefaultVoiceModelFormData: VoiceModelFormDataProps = {
   model_id: null,
-  publish_type: "1",
+  publish_type: 1,
   local_model: {
     type: "shide",
     "gpt-weights_url": "https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3",
     "sovits-weights_url": "https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3"
   },
   basic_params: {
-    language: defaultLanguage,
-    speed: defaultSpeed,
-    seg_method: defaultSegmentationMethod,
-    "m_w_a_p_s": defaultMaxWords,
-  },
-  dvance_params: {
-    seed: defaultSeed,
-    top_k: defaultTopK,
-    top_p: defaultTopP,
-    temperature: defaultTemperature,
+    language: defaultLanguage
   },
   tone: [],
   publish_info: {
@@ -58,7 +49,7 @@ export const DefaultVoiceModelFormData: VoiceModelFormDataProps = {
     type: "",
     tag: [],
     desc: "",
-    source: "",
+    source: "original",
     permission: {
       credit_free: true,
       reprint_allowed: true,
@@ -73,14 +64,15 @@ export const DefaultVoiceModelFormData: VoiceModelFormDataProps = {
 
 export type VoiceModelFormDataProps = {
   model_id: string | null
-  publish_type: "1" | "2"
+  publish_type: 1 | 2
   local_model: {
     type: string
     "gpt-weights_url": string
     "sovits-weights_url": string
   },
-  basic_params: VoiceModelBasicParamsType,
-  dvance_params: VoiceModelAdvancedParamsType,
+  basic_params: {
+    language: string
+  },
   tone:  Array<VoiceModelToneType>,
   publish_info: VoiceModelInfoType
 }
@@ -121,3 +113,89 @@ export type VoiceModelInfoType = {
     commercial_license: boolean
   }
 }
+
+export const languageListEn = [{
+  value: "auto",
+  label: "Automatic Recognition"
+}, {
+  value: "all_zh",
+  label: "Chinese Recognition"
+}, {
+  value: "en",
+  label: "English Recognition"
+}, {
+  value: "all_ja",
+  label: "Japanese Recognition"
+}, {
+  value: "zh",
+  label: "Chinese-English Mixed"
+}, {
+  value: "ja",
+  label: "Japanese-English Mixed"
+}];
+
+export const languageListZhcn = [{
+  value: "auto",
+  label: "自动识别"
+}, {
+  value: "all_zh",
+  label: "按中文识别"
+}, {
+  value: "en",
+  label: "按英文识别"
+}, {
+  value: "all_ja",
+  label: "按日文识别"
+}, {
+  value: "zh",
+  label: "中英混合"
+}, {
+  value: "ja",
+  label: "日英混合"
+}];
+
+export const segmentationMethodListZhcn = [{
+  value: "auto_cut",
+  label: "智能切分"
+}, {
+  value: "cut0",
+  label: "仅凭换行切分"
+}, {
+  value: "cut1",
+  label: "凑四句一切"
+}, {
+  value: "cut2",
+  label: "凑50字一切"
+}, {
+  value: "cut3",
+  label: "按中文句号切。"
+}, {
+  value: "cut4",
+  label: "按英文句号切."
+}, {
+  value: "cut5",
+  label: "按标点符号切"
+}];
+
+export const segmentationMethodListEn = [{
+  value: "auto_cut",
+  label: "Smart Segmentation"
+}, {
+  value: "cut0",
+  label: "Segment by Line Break"
+}, {
+  value: "cut1",
+  label: "Segment Every Four Sentences"
+}, {
+  value: "cut2",
+  label: "Segment Every 50 Characters"
+}, {
+  value: "cut3",
+  label: "Segment by Chinese Period"
+}, {
+  value: "cut4",
+  label: "Segment by English Period"
+}, {
+  value: "cut5",
+  label: "Segment by Punctuation"
+}];

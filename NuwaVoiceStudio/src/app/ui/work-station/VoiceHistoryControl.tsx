@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, useRouter } from "@/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/AlterMessageContextProvider";
+import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import { Tab, Tabs } from "@nextui-org/react";
 import FilterIcon from "@/app/icons/FilterIcon";
 

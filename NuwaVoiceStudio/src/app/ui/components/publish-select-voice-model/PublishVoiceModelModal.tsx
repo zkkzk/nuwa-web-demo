@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   ModalBody,
@@ -19,7 +19,8 @@ import confetti from 'canvas-confetti';
 import UploadVoiceModelForm from "./UploadVoiceModelForm";
 import { DefaultVoiceModelFormData, VoiceModelFormDataProps, VoiceModelInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
 import { z } from "zod";
-import { useAmDispatch } from "../AlterMessageContextProvider";
+import { useAmDispatch } from "../alter-message/AlterMessageContextProvider";
+import { getModelId, voiceModelPublish } from "@/app/lib/voice.api";
 
 function PublishVoiceModelModal({
   isOpen = false,
@@ -27,7 +28,7 @@ function PublishVoiceModelModal({
   onChange = () => {},
 }: {
   isOpen: boolean
-  variant: 'LOCAL' | 'ONLINE'
+  variant: 'SELECT' | 'UPLOAD'
   onChange: (isOpen: boolean) => void // 类型定义为函数，用于处理模态框的打开和关闭
 }) {
   const handleConfetti = () => {
@@ -46,10 +47,15 @@ function PublishVoiceModelModal({
 
   const [step, setStep] = useState<1|2>(1);
   const amDispatch = useAmDispatch();
+  const [loading, setLoading] = useState(false);
+  const [isInit, setInit] = useState(false);
 
-  const [formData, setFormData] = useState(DefaultVoiceModelFormData);
+  const [formData, setFormData] = useState({
+    ...DefaultVoiceModelFormData,
+    publish_type: variant === 'UPLOAD' ? 1 : 2
+  } as VoiceModelFormDataProps);
 
-  const OnLineFormSchema = z.object({
+  const UploadFormSchema = z.object({
     gptWeightsUrl: z.string({
       required_error: "gptWeightsUrl is required",
       invalid_type_error: "gptWeightsUrl must be a string",
@@ -73,7 +79,10 @@ function PublishVoiceModelModal({
     })).min(1, {message: 'Please upload at least one tone'}),
   });
 
-  const LocalFormSchema = z.object({
+  const SelectFormSchema = z.object({
+    modelId: z.string({
+      required_error: "select model is required",
+    }).min(1, { message: "select model is required" }),
     gptWeightsUrl: z.string({
       required_error: "gptWeightsUrl is required",
       invalid_type_error: "gptWeightsUrl must be a string",
@@ -98,6 +107,10 @@ function PublishVoiceModelModal({
   });
 
   const VoiceInfoSchema = z.object({
+    modelId: z.string({
+      required_error: "modelId is required",
+      invalid_type_error: "modelId must be a string",
+    }).min(1, { message: "modelId is required" }),
     cover:z.string({
       required_error: "cover is required",
       invalid_type_error: "cover must be a string",
@@ -112,6 +125,44 @@ function PublishVoiceModelModal({
     }).min(1, { message: "type is required" }),
   });
 
+  const getModelIdApi = getModelId();
+  const getModelIdToServer = async () => {
+
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    const res = await getModelIdApi.send({
+    });
+    if (res && res.code === 0) {
+      setFormData({
+        ...formData,
+        model_id: res.data.modelId,
+      })
+    }
+
+    setLoading(false);
+    if (!isInit) {
+      setInit(true);
+    }
+  };
+
+  const voiceModelPublishApi = voiceModelPublish();
+
+  useEffect(() => {
+    if (isOpen) {
+      if (variant === 'UPLOAD') {
+        getModelIdToServer();
+      } else {
+        setFormData({
+          ...formData,
+          model_id: '',
+        })
+      }
+    }
+    
+  }, [isOpen]);
+
   return (
     <>
       <DrawerModal modalDisclosure={uploadModal}>
@@ -123,8 +174,13 @@ function PublishVoiceModelModal({
                 <div className="px-[198px]">
                   {step === 1 && (
                     <>
-                      {variant === 'LOCAL' && (<SelectVoiceModelForm />)}
-                      {variant === 'ONLINE' && (
+                      {variant === 'SELECT' && (
+                        <SelectVoiceModelForm
+                          formData={formData}
+                          onChange={(newFormData: VoiceModelFormDataProps) => setFormData(newFormData) }
+                        />
+                      )}
+                      {variant === 'UPLOAD' && (
                         <UploadVoiceModelForm
                           formData={formData}
                           onChange={(newFormData: VoiceModelFormDataProps) => setFormData(newFormData) }
@@ -154,14 +210,15 @@ function PublishVoiceModelModal({
                         endContent={<ArrowRightIcon className="w-6 h-6 fill-white" />}
                         onPress={() => {
                           let validatedFields; 
-                          if (variant === 'ONLINE') {
-                            validatedFields = OnLineFormSchema.required().safeParse({
+                          if (variant === 'UPLOAD') {
+                            validatedFields = UploadFormSchema.required().safeParse({
                               gptWeightsUrl: formData.local_model["gpt-weights_url"], 
                               sovitsWeightsUrl: formData.local_model["sovits-weights_url"],
                               tone: formData.tone
                             });
                           } else {
-                            validatedFields = LocalFormSchema.required().safeParse({
+                            validatedFields = SelectFormSchema.required().safeParse({
+                              modelId: formData.model_id,
                               gptWeightsUrl: formData.local_model["gpt-weights_url"], 
                               sovitsWeightsUrl: formData.local_model["sovits-weights_url"],
                               tone: formData.tone
@@ -200,7 +257,7 @@ function PublishVoiceModelModal({
                           size="lg"
                           color="primary"
                           variant="solid"
-                          onPress={() => {
+                          onPress={async () => {
                             const validatedFields = VoiceInfoSchema.required().safeParse({
                               cover: formData.publish_info.cover_url, 
                               name: formData.publish_info.name,
@@ -208,7 +265,10 @@ function PublishVoiceModelModal({
                             });
                           
                             if (validatedFields.success) {
-                              handleConfetti()
+                              const res = await voiceModelPublishApi.send(formData);
+                              if (res && res.code === 0) {
+                                handleConfetti()
+                              }
                             } else {
                               validatedFields.error.issues.map((item) => {
                                 amDispatch({

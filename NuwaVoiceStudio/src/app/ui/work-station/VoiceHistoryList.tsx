@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/AlterMessageContextProvider";
+import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import { ScrollShadow, Tab } from "@nextui-org/react";
 import { TypeVoice } from "@/app/lib/definitions.voice";
 import VoiceHistoryItem from "./VoiceHistoryItem";

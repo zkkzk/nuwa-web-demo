@@ -140,20 +140,20 @@ function VoiceInformationForm({
               <div className="w-full flex flex-row gap-3 items-end">
                 <RadioGroup value={sourceType} onValueChange={(e) => {
                   setSourceType(e);
-                  if (e === "Original") {
-                    onChange({ ...value, source: "Original" });
+                  if (e === "original") {
+                    onChange({ ...value, source: "original" });
                   } else {
                     onChange({ ...value, source: "" });
                   }
                 }}>
-                  <Radio value="Original" classNames={{ base: "py-6" }}>
+                  <Radio value="original" classNames={{ base: "py-6" }}>
                     Original
                   </Radio>
-                  <Radio value="Reprinting" classNames={{ base: "py-6" }}>
+                  <Radio value="reprinting" classNames={{ base: "py-6" }}>
                     Reprinting
                   </Radio>
                 </RadioGroup>
-                {sourceType === "Reprinting" && (
+                {sourceType === "reprinting" && (
                   <Input
                     type="text"
                     size="md"

@@ -4,7 +4,6 @@ import { cn, Modal, ModalBody, ModalContent, useDisclosure } from "@nextui-org/r
 import { useTranslations } from "next-intl";
 import { ExclamationCircleIcon } from "@heroicons/react/24/solid";
 
-
 export type messageType = {
   message: string,
   title?: string,

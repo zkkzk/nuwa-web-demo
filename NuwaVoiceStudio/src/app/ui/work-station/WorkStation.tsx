@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Link, useRouter } from "@/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/AlterMessageContextProvider";
+import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import MainStation from "./MainStation";
 import VoiceHistory from "./VoiceHistory";
 
