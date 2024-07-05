@@ -1,22 +1,33 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { PlayIcon } from "@heroicons/react/24/outline";
 import { PauseIcon } from "@heroicons/react/24/solid";
 
 function PlayButton({
 	isPlay = false,
   onChange,
+  voiceSrc,
   classNames= {
     base: 'w-8 h-8',
   }
 }: {
 	isPlay?: boolean,
   onChange?: (isPlay: boolean) => void,
+  voiceSrc?: string,
   classNames?: {
     base?: string
   }
 }) {
   const [play, setPlay] = useState(isPlay);
+  const audioRef = useRef<HTMLAudioElement>();
+
+  useEffect(() => {
+    if (play) {
+      audioRef.current?.play();
+    } else {
+      audioRef.current?.pause();
+    }
+  }, [play]);
 
   return (
     <div>
@@ -44,6 +55,9 @@ function PlayButton({
           </div>
         )
       }
+      {voiceSrc && (
+        <audio src={voiceSrc} ref={audioRef as any} />
+      )}
     </div>
   );
 }

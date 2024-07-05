@@ -167,7 +167,7 @@ function PublishVoiceModelModal({
             <>
               <ModalHeader></ModalHeader>
               <ModalBody>
-                <div className="px-[198px]">
+                <div className="sm:px-0 md:[px-50px] lg:px-[100px] xl:px-[150px] 2xl:px-[198px]">
                   {step === 1 && (
                     <>
                       {variant === 'SELECT' && (
