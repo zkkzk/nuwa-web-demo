@@ -7,6 +7,7 @@ import Dropzone from 'react-dropzone'
 import { uploadFileToServer } from "@/app/lib/common.api";
 import { Spinner } from "@nextui-org/react";
 import { customAlphabet } from "nanoid";
+import { uploadModelFile } from "@/app/lib/voice.api";
 
 export function generateId() {
   /**
@@ -17,16 +18,18 @@ export function generateId() {
   return customAlphabet('0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_', 16)()
 }
 
-function UploadFile({
+function UploadVoiceModelFile({
   label,
-  accept = "image",
+  type,
+  modelId,
   icon,
   fileName,
   fileNameIcon,
   onDone,
 }: {
   label:ReactNode
-  accept?: string
+  type: 'gpt_weights_file' | 'sovits_weights_file' | 'audio'
+  modelId: string
   icon?: ReactNode
   fileName?: ReactNode
   fileNameIcon?: ReactNode
@@ -41,14 +44,19 @@ function UploadFile({
   const [ isUnmount, setIsUnmount ] = useState(false);
 
   let initDropzoneAccept = {};
-  if (accept === "image") {
-    initDropzoneAccept = {
-      'image/*': ['.jpg', '.jpeg', '.png', '.gif'],
-    }
-  }
-  if (accept === "audio") {
+  if (type === "audio") {
     initDropzoneAccept = {
       'audio/mp3': ['.mp3', '.wav', '.flac'],
+    }
+  }
+  if (type === "gpt_weights_file") {
+    initDropzoneAccept = {
+      'file/ckpt': ['.ckpt'],
+    }
+  }
+  if (type === "sovits_weights_file") {
+    initDropzoneAccept = {
+      'file/pth': ['.pth'],
     }
   }
 
@@ -62,7 +70,7 @@ function UploadFile({
     };
   }, [])
 
-  const uploadFileApi = uploadFileToServer();
+  const uploadModelFileApi = uploadModelFile();
 
   const onDropHander = async (acceptedFiles: any) => {
     console.log(acceptedFiles)
@@ -71,16 +79,16 @@ function UploadFile({
     if (!file) return;
 
     const formData = new FormData(); // 创建FormData对象
-    formData.append('file', file); // 将文件添加到FormData中
-    if (accept === "image") {
-      formData.append('type', 'picture')
+    if (type === 'gpt_weights_file') {
+      formData.append('gpt_weights_file', file); // 将文件添加到FormData中
     }
-    if (accept === "audio") {
-      formData.append('type', 'audio')
+    if (type === 'sovits_weights_file') {
+      formData.append('sovits_weights_file', file); // 将文件添加到FormData中
     }
-    if (accept === "live2d") {
-      formData.append('type', 'live2d')
+    if (type === 'audio') {
+      formData.append('audio', file); // 将文件添加到FormData中
     }
+    formData.append('model_id', modelId)
 
     const filename = file.name
     setFileNameStr(filename);
@@ -92,17 +100,28 @@ function UploadFile({
 
     try {
       setIsUploading(true)
-      const response =  await uploadFileApi.send(formData)
-      
+      const response =  await uploadModelFileApi.send(formData)
+
       if (response.code === 0) {
+
+        let url = '';
+        if (type === 'gpt_weights_file') {
+          url = response.data.gpt_url
+        }
+        if (type === 'sovits_weights_file') {
+          url = response.data.sovits_url
+        }
+        if (type === 'audio') {
+          url = response.data.audio_url
+        }
         onDone && onDone({
-          url: response.data.url,
+          url: url,
           file: file,
         })
       } else {
         setFileNameStr('')
       }
-
+      
       setIsUploading(false)
     } catch (error) {
       setIsUploading(false)
@@ -160,4 +179,4 @@ function UploadFile({
   );
 }
 
-export default UploadFile;
+export default UploadVoiceModelFile;

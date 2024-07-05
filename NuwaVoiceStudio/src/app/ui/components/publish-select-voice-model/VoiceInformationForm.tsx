@@ -71,8 +71,14 @@ function VoiceInformationForm({
             <LabelForm label="Cover" isRequired={true}>
               <div className="w-full h-[136px]">
                 <UploadFile
+                  accept="image"
                   label="Drag and drop files here or click to upload"
-                  onClick={() => {}}
+                  onDone={(res) => {
+                    onChange && onChange({
+                      ...value,
+                      cover_url: res.url
+                    })
+                  }}
                   icon={<PlusCircleIcon className="w-6 h-6 stroke-zinc-400" />}
                 ></UploadFile>
               </div>

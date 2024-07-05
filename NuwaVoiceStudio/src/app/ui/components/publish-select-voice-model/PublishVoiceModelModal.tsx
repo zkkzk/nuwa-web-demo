@@ -107,10 +107,6 @@ function PublishVoiceModelModal({
   });
 
   const VoiceInfoSchema = z.object({
-    modelId: z.string({
-      required_error: "modelId is required",
-      invalid_type_error: "modelId must be a string",
-    }).min(1, { message: "modelId is required" }),
     cover:z.string({
       required_error: "cover is required",
       invalid_type_error: "cover must be a string",
@@ -137,7 +133,7 @@ function PublishVoiceModelModal({
     if (res && res.code === 0) {
       setFormData({
         ...formData,
-        model_id: res.data.modelId,
+        model_id: res.data,
       })
     }
 
@@ -218,7 +214,6 @@ function PublishVoiceModelModal({
                             });
                           } else {
                             validatedFields = SelectFormSchema.required().safeParse({
-                              modelId: formData.model_id,
                               gptWeightsUrl: formData.local_model["gpt-weights_url"], 
                               sovitsWeightsUrl: formData.local_model["sovits-weights_url"],
                               tone: formData.tone

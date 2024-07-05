@@ -7,35 +7,22 @@ import TrainVoiceModelModal from "./TrainVoiceModelModal";
 import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import { getVoiceTrainRecords } from "@/app/lib/voice.api";
 
+type voiceTrainRecordType = {
+  id: number;
+}
+
 function MyVoiceModels() {
 
   const [trainVoiceModelOpen, setTrainVoiceModelOpen] = useState(false);
   const amDispatch = useAmDispatch();
   const [loading, setLoading] = useState(false);
   const [isInit, setInit] = useState(false);
+  const [voiceTrainRecordsList, setVoiceTrainRecordsList] = useState<any[]>([]) 
+  const [refreshKey, setRefreshKey] = useState(0);
 
-  const getVoiceTrainRecordsApi = getVoiceTrainRecords();
-  const getVoiceTrainRecordsServer = async () => {
-
-    if (loading) {
-      return;
-    }
-    setLoading(true);
-    const res = await getVoiceTrainRecordsApi.send({
-    });
-    if (res && res.code === 0) {
-
-    }
-
-    setLoading(false);
-    if (!isInit) {
-      setInit(true);
-    }
-  };
-
-  useEffect(() => {
-    getVoiceTrainRecordsServer();
-  }, []);
+  const refreshVoiceTrainRecords = async () => {
+    setRefreshKey(refreshKey + 1)
+  }
 
   return (
     <>
@@ -61,7 +48,9 @@ function MyVoiceModels() {
         <div className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">
           You haven't created any voice
         </div>
-        <TrainList />
+        <TrainList key={refreshKey} onChange={(voiceTrainRecordsList) => {
+          setVoiceTrainRecordsList(voiceTrainRecordsList);
+        }} />
       </div>
 
       <TrainVoiceModelModal
@@ -71,7 +60,7 @@ function MyVoiceModels() {
         }}
         onDone={() => {
           setTrainVoiceModelOpen(false);
-          getVoiceTrainRecordsServer();
+          refreshVoiceTrainRecords();
         }}
       />
     </>

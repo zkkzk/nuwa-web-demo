@@ -39,3 +39,11 @@ export const voiceModelTypeList = [{
   value: "girl",
   label: "girl",
 }]
+
+export type voiceTrainRecordType = {
+  id: string
+  task_id: number
+  task_name: string
+  status: number
+  result: number
+}

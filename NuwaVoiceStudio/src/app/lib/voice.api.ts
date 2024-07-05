@@ -11,6 +11,7 @@ const voiceUrlList = {
   getVoiceTrainRecords: `/ddream/api/v1/voice/train/records`,
   createVoiceTrain: `/ddream/api/v1/voice/train`,
   getVoiceInfHistory: `/ddream/api/v1/voice/inf/history`,
+  uploadModelFile: `/ddream/api/v1/voice/upload_model_file`,
 }
 
 export function getPublishSquare() {
@@ -86,3 +87,15 @@ export function getVoiceInfHistory() {
     noLoginGotoLogin: true,
   })
 }
+
+export function uploadModelFile() {
+  const t = useTranslations();
+  return baseApiHander({
+    url: voiceUrlList.uploadModelFile,
+    mustLogin: true,
+    noLoginGotoLogin: true,
+    isBody: true,
+    isUpload: true,
+  })
+}
+

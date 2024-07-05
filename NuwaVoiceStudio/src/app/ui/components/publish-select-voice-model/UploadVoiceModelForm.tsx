@@ -10,6 +10,7 @@ import UploadFile from "../upload-file/UploadFile";
 import LabelForm from "../form/LabelForm";
 import TitleModal from "./TitleModal";
 import ToneVoiceFileList from "../voice-preview/ToneVoiceFileList";
+import UploadVoiceModelFile from "../upload-file/UploadVoiceModelFile";
 
 
 function UploadVoiceModelForm({
@@ -64,9 +65,9 @@ function UploadVoiceModelForm({
             </Select>
           </LabelForm>
 
-          <div className="w-full grid grid-cols-2 gap-12">
+          <div className="w-full h-32 grid grid-cols-2 gap-12">
             <LabelForm label='GPT Model' isRequired={true}>
-              <UploadFile
+              <UploadVoiceModelFile
                 label={
                   <div>
                     Drag and drop files here or click to upload
@@ -74,26 +75,42 @@ function UploadVoiceModelForm({
                     CKPT format
                   </div>
                 }
-                onClick={() => {
-                  //setSelectModalOpen(true);
-                }}
                 icon={<ArrowUpTrayIcon className="w-6 h-6 fill-zinc-400 " />}
-              ></UploadFile>
+                modelId={formData.model_id}
+                type="gpt_weights_file"
+                onDone={(res) => {
+                  onChange && onChange({
+                    ...formData,
+                    local_model: {
+                      ...formData.local_model,
+                      "gpt-weights_url": res.url
+                    }
+                  } as VoiceModelFormDataProps)
+                }}
+              ></UploadVoiceModelFile>
             </LabelForm>
             <LabelForm label='Sovits Model' isRequired={true}>
-              <UploadFile
+              <UploadVoiceModelFile
                 label={
                   <div>
                     Drag and drop files here or click to upload
                     <br />
-                    CKPT format
+                    PTH format
                   </div>
                 }
-                onClick={() => {
-                  //setSelectModalOpen(true);
-                }}
                 icon={<ArrowUpTrayIcon className="w-6 h-6 fill-zinc-400 " />}
-              ></UploadFile>
+                modelId={formData.model_id}
+                type="sovits_weights_file"
+                onDone={(res) => {
+                  onChange && onChange({
+                    ...formData,
+                    local_model: {
+                      ...formData.local_model,
+                      "sovits-weights_url": res.url
+                    }
+                  } as VoiceModelFormDataProps)
+                }}
+              ></UploadVoiceModelFile>
             </LabelForm>
           </div>
           <LabelForm label='Basic Parameters' isRequired={true}>
@@ -133,12 +150,16 @@ function UploadVoiceModelForm({
           </LabelForm>
 
           <LabelForm label='Tone Audio Files（Sentimental Voices）' subTitle="You may add up to 21 different tones, and the first one will be set as default." isRequired={true}>
-            <ToneVoiceFileList toneList={formData.tone} onChange={(newTone) => {
-              onChange && onChange({
-                ...formData,
-                tone: newTone
-              } as VoiceModelFormDataProps)
-            }} />
+            <ToneVoiceFileList
+              toneList={formData.tone}
+              modelId={formData.model_id}
+              onChange={(newTone) => {
+                onChange && onChange({
+                  ...formData,
+                  tone: newTone
+                } as VoiceModelFormDataProps)
+              }}
+            />
           </LabelForm>
         </div>
       </div>

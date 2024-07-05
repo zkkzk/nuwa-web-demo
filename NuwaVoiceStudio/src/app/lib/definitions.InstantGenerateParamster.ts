@@ -32,19 +32,19 @@ export type TypeInstantGenerateParamster = {
 };
 
 export const DefaultVoiceModelFormData: VoiceModelFormDataProps = {
-  model_id: null,
+  model_id: '',
   publish_type: 1,
   local_model: {
     type: "shide",
-    "gpt-weights_url": "https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3",
-    "sovits-weights_url": "https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3"
+    "gpt-weights_url": "https://us-west-ddream-audiomodel.s3.us-west-2.amazonaws.com/model_24070510070079/lisa123-e15.ckpt",
+    "sovits-weights_url": "https://us-west-ddream-audiomodel.s3.us-west-2.amazonaws.com/model_24070510070079/lisa123_e8_s96.pth"
   },
   basic_params: {
     language: defaultLanguage
   },
   tone: [],
   publish_info: {
-    cover_url: "https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3",
+    cover_url: "",
     name: "",
     type: "",
     tag: [],
@@ -63,7 +63,7 @@ export const DefaultVoiceModelFormData: VoiceModelFormDataProps = {
 
 
 export type VoiceModelFormDataProps = {
-  model_id: string | null
+  model_id: string
   publish_type: 1 | 2
   local_model: {
     type: string

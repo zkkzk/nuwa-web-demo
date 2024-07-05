@@ -33,7 +33,7 @@ function LabelForm({
           )}
         </div>
       </div>
-      <div className="w-full">{children}</div>
+      <div className="w-full h-full">{children}</div>
     </div>
   );
 }
