@@ -35,10 +35,10 @@ function MainStation() {
 
   return (
     <div className="grow shrink basis-0 self-stretch rounded-bl-[20px] border-r border-neutral-800 flex-col justify-between items-center inline-flex">
-      <div className="fixed top-14 left-0 pr-[382px] w-full z-40">
+      <div className="fixed top-20 left-0 pr-[382px] w-full z-40">
         <VoiceModelListHeader />
       </div>
-      <div className="self-stretch pt-[88px] pb-[248px] overflow-hidden">
+      <div className="self-stretch pt-[112px] pb-[248px] overflow-hidden">
         <VoiceModelList />
       </div>
 

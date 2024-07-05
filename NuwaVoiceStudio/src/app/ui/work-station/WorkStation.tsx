@@ -13,7 +13,7 @@ function WorkStation() {
   const amDispatch = useAmDispatch();
 
   return (
-    <div className="w-full h-screen pt-14 overflow-hidden bg-neutral-900 rounded-bl-xl rounded-br-xl justify-start items-end inline-flex">
+    <div className="w-full h-screen pt-20 overflow-hidden bg-neutral-900 rounded-bl-xl rounded-br-xl justify-start items-end inline-flex">
       <div className="w-full self-stretch justify-start items-start flex h-screen">
         <MainStation />
         <VoiceHistory />

@@ -32,7 +32,7 @@ function UploadFile({
   icon?: ReactNode
   fileName?: ReactNode
   fileNameIcon?: ReactNode
-  onDone?: (url:string)=>void
+  onDone?: ({url, file} :{url:string, file: any})=>void
 }) {
 
   const [fileNameStr, setFileNameStr] = React.useState(fileName);
@@ -96,7 +96,10 @@ function UploadFile({
       setIsUploading(true)
       const response =  await uploadFileApi.send(formData)
 
-      onDone && onDone(response.data.url)
+      onDone && onDone({
+        url: response.data.url,
+        file: file,
+      })
       setIsUploading(false)
     } catch (error) {
       setIsUploading(false)

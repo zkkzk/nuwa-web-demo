@@ -9,11 +9,8 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Radio,
-  RadioGroup,
   useDisclosure,
 } from "@nextui-org/react";
-import ToneVoiceFile from "../components/voice-preview/ToneVoiceFile";
 import UploadFile from "../components/upload-file/UploadFile";
 import BDocumentIcon from "@/app/icons/BDocumentIcon";
 import LabelForm from "../components/form/LabelForm";
@@ -28,9 +25,11 @@ import confetti from "canvas-confetti";
 function TrainVoiceModelModal({
   isOpen = false,
   onChange = () => {},
+  onDone= () => {},
 }: {
   isOpen: boolean;
   onChange: (isOpen: boolean) => void; // 类型定义为函数，用于处理模态框的打开和关闭
+  onDone?: () => void; // 类型定义为函数，用于处理模态框的完成
 }) {
 
   const [sending, setSending] = useState(false);
@@ -42,8 +41,10 @@ function TrainVoiceModelModal({
   });
 
   const [ voiceSrc, setVoiceSrc ] = useState<string | null>(null);
+  const [ voiceFile, setVoiceFile ] = useState<File | null>(null);
   const [ taskName, setTaskName ] = useState<string>("")
   const [ isAgree, setIsAgree] = useState(false);
+  const [ isLoading, setIsLoading ] = useState(false);
   const amDispatch = useAmDispatch();
 
   const createVoiceTrainApi = createVoiceTrain();
@@ -61,12 +62,19 @@ function TrainVoiceModelModal({
     if (sending) {
       return;
     }
+    if (voiceSrc === null || voiceFile === null) {
+      return
+    }
     setSending(true);
-    const res = await createVoiceTrainApi.send({
-      file: voiceSrc,
-      task_name: taskName,
-    });
+
+
+    const formData = new FormData(); 
+    formData.append('file', voiceFile);
+    formData.append('task_name', taskName); 
+    const res = await createVoiceTrainApi.send(formData);
     if (res && res.code === 0) {
+      onDone();
+      trainVoiceModelModal.onClose();
       handleConfetti()
     }
 
@@ -83,6 +91,32 @@ function TrainVoiceModelModal({
       invalid_type_error: "task name must be a string",
     }).min(1, { message: "task namel is required" }),
   });
+
+  const submitHandler = async () => {
+    if(isLoading) {
+      return;
+    }
+    setIsLoading(true);
+    const validatedFields = FormSchema.required().safeParse({
+      file: voiceSrc, 
+      task_name: taskName,
+    });
+  
+    if (validatedFields.success) {
+      createVoiceTrainServer();
+    } else {
+      validatedFields.error.issues.map((item) => {
+        amDispatch({
+          type: "add",
+          payload: {
+            type: "error",
+            message: item.message,
+          },
+        })
+      })
+    }
+    setIsLoading(false);
+  }
 
   return (
       <Modal 
@@ -122,8 +156,9 @@ function TrainVoiceModelModal({
                         }
                         icon={<BDocumentIcon className='h-6 w-6' />}
                         accept="audio"
-                        onDone={(url) => {
-                          setVoiceSrc(url);
+                        onDone={(result) => {
+                          setVoiceSrc(result.url);
+                          setVoiceFile(result.file);
                         }}
                         >
                       </UploadFile>
@@ -192,26 +227,10 @@ function TrainVoiceModelModal({
                     </div>
                   </div>
                 }
-                isDisabled={!isAgree}
+                isDisabled={!isAgree || sending || voiceSrc === null}
+                isLoading={sending}
                 onPress={() => {
-                  const validatedFields = FormSchema.required().safeParse({
-                    file: voiceSrc, 
-                    task_name: taskName,
-                  });
-                
-                  if (validatedFields.success) {
-                    createVoiceTrainServer();
-                  } else {
-                    validatedFields.error.issues.map((item) => {
-                      amDispatch({
-                        type: "add",
-                        payload: {
-                          type: "error",
-                          message: item.message,
-                        },
-                      })
-                    })
-                  }
+                  submitHandler();
                 }}
               >Start Training</Button>
             </ModalFooter>

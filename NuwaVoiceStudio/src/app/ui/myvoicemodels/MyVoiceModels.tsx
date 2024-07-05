@@ -39,7 +39,7 @@ function MyVoiceModels() {
 
   return (
     <>
-      <div className="w-full h-screen pt-20 px-8 pb-6 bg-zinc-900 rounded-bl-xl rounded-br-xl flex-col justify-start items-start gap-6 inline-flex">
+      <div className="w-full h-screen pt-28 px-8 pb-6 bg-zinc-900 rounded-bl-xl rounded-br-xl flex-col justify-start items-start gap-6 inline-flex">
         <div className="text-white text-xl font-semibold font-['Inter'] leading-7">
           My Voice Models
         </div>
@@ -68,6 +68,10 @@ function MyVoiceModels() {
         isOpen={trainVoiceModelOpen}
         onChange={(isOpen) => {
           setTrainVoiceModelOpen(isOpen);
+        }}
+        onDone={() => {
+          setTrainVoiceModelOpen(false);
+          getVoiceTrainRecordsServer();
         }}
       />
     </>
