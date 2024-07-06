@@ -5,74 +5,19 @@ import { CheckBadgeIcon, CheckCircleIcon, XCircleIcon } from "@heroicons/react/2
 import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
 import { voicePublishInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
-import { downloadVoiceModel } from "@/app/lib/voice.api";
 import { getStarNumStr } from "@/app/lib/utils";
 import moment from 'moment';
-import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import VoiceModelCollectButton from "./VoiceModelCollectButton";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
+import VoiceModelDownloadButton from "../components/voice-model-download-button/VoiceModelDownloadButton";
 
 function VoiceAssetDetailRight({
   voicePublishInfo, 
 }: {
   voicePublishInfo: voicePublishInfoType
 }) {
-  const [downlanding, setDownlanding] = useState(false);
-  const amDispatch = useAmDispatch();
-
-  const downloadVoiceModelApi = downloadVoiceModel();
-  const downloadVoiceModelServer = async () => {
-    if (downlanding) {
-      return;
-    }
-    setDownlanding(true);
-
-    const res = await downloadVoiceModelApi.send({
-      "publish_id": voicePublishInfo.publish_id,
-      // gpt_path
-      // sovits_path
-    });
-    if (res && res.code === 0) {
-      setDownlanding(true);
-
-      if (res.data.gpt_path) {
-        const gptA = document.createElement("a");
-        gptA.href = res.data.gpt_path;
-        gptA.download = res.data.gpt_path;
-        document.body.appendChild(gptA);
-        gptA.click();
-        document.body.removeChild(gptA);
-      } else {
-        amDispatch({
-          type: "add",
-          payload: {
-            message: 'gpt file not exist',
-            type: "error"
-          },
-        })
-      }
-
-      if (res.data.sovits_path) {
-        const sovitsA = document.createElement("a");
-        sovitsA.href = res.data.sovits_path;
-        sovitsA.download = res.data.sovits_path;
-        document.body.appendChild(sovitsA);
-        sovitsA.click();
-        document.body.removeChild(sovitsA);
-      } else {
-        amDispatch({
-          type: "add",
-          payload: {
-            message: 'sovits file not exist',
-            type: "error"
-          },
-         })
-      }
-      setDownlanding(false);
-    }
-
-    setDownlanding(false);
-  };
+  const [startDownload, setStartDownload] = useState(0);
+  
   return (
     <div className="flex-col justify-start items-start gap-6 inline-flex">
       <div className="self-stretch justify-between items-end inline-flex">
@@ -83,7 +28,14 @@ function VoiceAssetDetailRight({
       </div>
       <div className="justify-start items-start gap-2 inline-flex">
         <Button size="lg" color="primary" variant="solid" className="w-[230px]" startContent={<DCubeIcon className="h-6 w-6 fill-white" />}>Run on WorkStation</Button>
-        {voicePublishInfo.publish_info.permission.download_permission && (<Button size="lg" variant="bordered" startContent={<ArrowDownTrayIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} onPress={downloadVoiceModelServer} />) }
+        {voicePublishInfo.publish_info.permission.download_permission && (
+          <>
+            <VoiceModelDownloadButton publishId={voicePublishInfo.publish_id} startDownload={startDownload} />
+            <Button disableRipple={false} size="lg" variant="bordered" startContent={<ArrowDownTrayIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} onPress={() => {
+              setStartDownload(startDownload + 1);
+            }} />
+          </>
+        ) }
         <Button size="lg" variant="bordered" startContent={<ShareIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} />
       </div>
       <div className="self-stretch h-[396px] flex-col justify-start items-start flex">

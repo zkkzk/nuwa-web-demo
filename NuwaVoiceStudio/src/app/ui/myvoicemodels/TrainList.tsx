@@ -25,35 +25,32 @@ function TrainList({
 }) {
   const amDispatch = useAmDispatch();
   const [loading, setLoading] = useState(false);
-  const [isInit, setInit] = useState(false);
   const [voiceTrainRecordsList, setVoiceTrainRecordsList] = useState<voiceTrainRecordType[]>([]) 
+  const [total, setTotal] = useState(0)
+  const pageSize = 4;
+  const [currentPage, setCurrentPage] = useState(1);
 
   const getVoiceTrainRecordsApi = getVoiceTrainRecords();
-  const getVoiceTrainRecordsServer = async () => {
-
-    if (loading) {
-      return;
-    }
-    setLoading(true);
+  const getVoiceTrainRecordsServer = async (page: number) => {
+    // if (loading) {
+    //   return;
+    // }
+    // setLoading(true);
     const res = await getVoiceTrainRecordsApi.send({
+      page_size: pageSize,
+      page: page,
     });
     if (res && res.code === 0) {
       setVoiceTrainRecordsList(res.data.list);
-
+      setTotal(res.data.total);
       onChange(res.data.list);
+      setLoading(false);
     }
-
     setLoading(false);
-    if (!isInit) {
-      setInit(true);
-    }
   };
 
   useEffect(() => {
-    if (!isInit) {
-      setInit(true);
-      getVoiceTrainRecordsServer();
-    }
+    getVoiceTrainRecordsServer(1);
   }, []);
   
   return (
@@ -78,9 +75,15 @@ function TrainList({
       ))}
       <div className="w-full h-8 justify-between items-center inline-flex">
         <div className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">
-          1-10 of 85 items
+          {(currentPage-1)*pageSize+1}-{currentPage === Math.ceil(total/pageSize) ? total : pageSize*currentPage} of {total} items
         </div>
-        <Pagination total={10} initialPage={1} />
+        {total > 0 && (
+          <Pagination total={ Math.ceil(total/pageSize) } page={currentPage} onChange={(page)=> {
+            getVoiceTrainRecordsServer(page);
+            setCurrentPage(page)
+          }} />
+        )}
+        
       </div>
     </div>
   );

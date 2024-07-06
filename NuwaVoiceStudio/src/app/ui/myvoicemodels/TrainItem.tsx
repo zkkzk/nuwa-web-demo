@@ -6,6 +6,7 @@ import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { Button, Checkbox, cn } from "@nextui-org/react";
 import React, { useState } from "react";
 import PublishVoiceModelModal from "../components/publish-select-voice-model/PublishVoiceModelModal";
+import VoiceModelDownloadButton from "../components/voice-model-download-button/VoiceModelDownloadButton";
 
 function TrainItem({
   value,
@@ -17,6 +18,7 @@ function TrainItem({
   onSelectedChange?: (selected: boolean) => void;
 }) {
   const [selectModalOpen, setSelectModalOpen] = useState(false);
+  const [startDownload, setStartDownload] = useState(0);
 
   return (
     <div className="w-full h-[76px] px-4 py-2.5 bg-zinc-800 rounded-2xl justify-between items-center inline-flex">
@@ -64,7 +66,8 @@ function TrainItem({
         <>
           <div className="justify-start items-center gap-2 flex">
             <Button variant="light" className="text-zinc-400" startContent={<BeakerIcon className="w-5 h-5" />}>Run on WorkStation</Button>
-            <Button variant="light" className="text-zinc-400">Download</Button>
+            <VoiceModelDownloadButton modelId={value.task_param.model_id} startDownload={startDownload} />
+            <Button variant="light" className="text-zinc-400" onPress={() => {setStartDownload(startDownload + 1)}}>Download</Button>
             <Button variant="light" className="text-zinc-400" onPress={() => {setSelectModalOpen(true)}}>Publish</Button>
           </div>
           <PublishVoiceModelModal
