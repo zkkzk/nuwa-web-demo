@@ -64,7 +64,7 @@ function VocieItem({
         </div>
         
         <div className="w-full px-4 py-3 flex-col justify-start items-start gap-2 inline-flex">
-          <div className="h-7 w-full overflow-hidden justify-start items-center inline-flex">
+          <div className="h-7 w-full overflow-hidden justify-start items-center inline-flex pr-10">
             <div className="text-white text-lg font-semibold font-['Inter'] leading-7 truncate">
               {voice.publish_info.name}
             </div>

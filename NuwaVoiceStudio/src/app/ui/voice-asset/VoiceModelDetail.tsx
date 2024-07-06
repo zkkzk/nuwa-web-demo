@@ -40,10 +40,10 @@ function VoiceAssetDetail({
   return (
     <div className="w-full bg-black/opacity-30 rounded-2xl flex-col justify-start items-end gap-2.5 inline-flex">
       <div className="self-stretch pb-16 bg-zinc-900 rounded-tl-2xl rounded-tr-2xl rounded-bl-xl rounded-br-xl flex-col justify-start items-center gap-2.5 flex">
-          <div className="w-full pt-16 pb-6 flex-col justify-end items-start gap-8 flex">
-            <div className="w-full">
+          <div className="w-full pt-16 pb-6">
+            {/* <div className="w-full">
               {voicePublishInfo && (<VoiceAssetDetailHeader voicePublishInfo={voicePublishInfo}/>)}
-            </div>
+            </div> */}
             <div className="w-full justify-between items-start gap-12 flex">
               <div className="grow overflow-hidden">
                 {voicePublishInfo && (<VoiceAssetDetailLeft voicePublishInfo={voicePublishInfo}/>)}

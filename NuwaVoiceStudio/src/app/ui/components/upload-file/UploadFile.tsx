@@ -7,6 +7,7 @@ import Dropzone from 'react-dropzone'
 import { uploadFileToServer } from "@/app/lib/common.api";
 import { Spinner } from "@nextui-org/react";
 import { customAlphabet } from "nanoid";
+import Image from "next/image";
 
 export function generateId() {
   /**
@@ -34,6 +35,7 @@ function UploadFile({
 }) {
 
   const [fileNameStr, setFileNameStr] = React.useState(fileName);
+  const [fileUrl, setFileUrl] = useState("");
 
   const t = useTranslations();
 
@@ -99,7 +101,9 @@ function UploadFile({
           url: response.data.url,
           file: file,
         })
+        setFileUrl(response.data.url)
       } else {
+        setFileUrl('')
         setFileNameStr('')
       }
 
@@ -116,28 +120,69 @@ function UploadFile({
   return (
     <div className="w-full h-full relative">
       {fileNameStr ? (
-        <div className="w-full h-full px-6 bg-zinc-800 rounded-xl justify-between items-center gap-3 inline-flex">
-          <div className="justify-start items-center gap-3 flex text-slate-100 text-base font-normal font-['Inter'] leading-normal">
-            {fileNameIcon && (
-              <div className="w-6 h-6 justify-center items-center flex">
-                {fileNameIcon}
+        <>
+          {accept !== "image" && (
+            <div className="w-full h-full px-6 bg-zinc-800 rounded-xl justify-between items-center gap-3 inline-flex">
+              <div className="justify-start items-center gap-3 flex text-slate-100 text-base font-normal font-['Inter'] leading-normal">
+                {fileNameIcon && (
+                  <div className="w-6 h-6 justify-center items-center flex">
+                    {fileNameIcon}
+                  </div>
+                )}
+                <div className="text-slate-100 text-base font-normal font-['Inter'] leading-normal">
+                  {fileNameStr}
+                </div>
+                
               </div>
-            )}
-            <div className="text-slate-100 text-base font-normal font-['Inter'] leading-normal">
-              {fileNameStr}
-            </div>
-            
-          </div>
-          {isUploading ? (
-            <Spinner />
-            ) : (
-            <div className=" cursor-pointer p-1 bg-black w-6 h-6 rounded-full justify-center items-center gap-2 flex">
-              <XMarkIcon className="h-4 w-4 fill-white stroke-white" onClick={() => {
-                setFileNameStr("")
-              }} />
+              {isUploading ? (
+                <Spinner />
+                ) : (
+                <div className=" cursor-pointer p-1 bg-black w-6 h-6 rounded-full justify-center items-center gap-2 flex">
+                  <XMarkIcon className="h-4 w-4 fill-white stroke-white" onClick={() => {
+                    setFileNameStr("")
+                  }} />
+                </div>
+              )}
             </div>
           )}
-        </div>
+          {accept === "image" && (
+            <div className=" relative w-full h-full px-6 bg-zinc-800 rounded-xl justify-between items-center gap-3 inline-flex">
+          
+              { fileUrl && (
+                <Image
+                  fill={true}
+                  alt={fileUrl}
+                  className=" grow shrink basis-0 self-stretch rounded-xl flex-none object-cover"
+                  src={fileUrl}
+                />
+              )}
+              <div className=" absolute left-4 bottom-4 justify-start items-center gap-3 flex text-white text-base font-normal font-['Inter'] leading-normal">
+                {fileNameIcon && (
+                  <div className="w-6 h-6 justify-center items-center flex">
+                    {fileNameIcon}
+                  </div>
+                )}
+                <div className="text-slate-100 text-base font-normal font-['Inter'] leading-normal">
+                  {fileNameStr}
+                </div>
+              </div>
+              <div className=" absolute top-4 right-4">
+              {isUploading ? (
+                <Spinner />
+                ) : (
+                <div className=" cursor-pointer p-1 bg-white w-6 h-6 rounded-full justify-center items-center gap-2 flex">
+                  <XMarkIcon className="h-4 w-4 fill-black stroke-black" onClick={() => {
+                    setFileNameStr("")
+                  }} />
+                </div>
+              )}
+              </div>
+
+
+              
+            </div>
+          )}
+        </>
       ): (
         <div className="w-full h-full">
           <Dropzone onDrop={onDropHander} accept={dropzoneAccept}>
@@ -154,7 +199,6 @@ function UploadFile({
             )}
           </Dropzone>
         </div>
-        
       )}
     </div>
   );

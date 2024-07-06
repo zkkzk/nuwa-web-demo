@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import {
   Button,
-  Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
@@ -249,7 +248,7 @@ function PublishVoiceModelModal({
             <>
               <ModalHeader></ModalHeader>
               <ModalBody>
-                <div className="sm:px-0 md:[px-50px] lg:px-[100px] xl:px-[150px] 2xl:px-[198px]">
+                <div className="sm:px-0 md:[px-50px] lg:px-[100px] xl:px-[150px] 2xl:px-[200px] w-full py-16 inline-flex">
                   {step === 1 && (
                     <>
                       {variant === 'SELECT' && (
@@ -278,37 +277,35 @@ function PublishVoiceModelModal({
                 </div>
               </ModalBody>
               <ModalFooter>
-                <div className="px-[198px]">
-                  <div className="px-8 inline-flex gap-4">
-                    {step === 1 && (
+                <div className="sm:px-0 md:[px-50px] lg:px-[100px] xl:px-[150px] 2xl:px-[200px] w-full flex flex-row justify-end gap-4">
+                  {step === 1 && (
+                    <Button
+                      size="lg"
+                      color="primary"
+                      variant="ghost"
+                      endContent={<ArrowRightIcon className="w-6 h-6 fill-primary" />}
+                      onPress={() => {
+                        nextButtonHandler();
+                      }}
+                    >Next</Button>
+                  )}
+                  {step === 2 && (
+                    <>
+                      <Button
+                        size="lg"
+                        color="default"
+                        variant="ghost"
+                        startContent={<ArrowLeftIcon className="w-6 h-6 fill-white" />}
+                        onPress={() => setStep(1)}
+                      >Previous</Button>
                       <Button
                         size="lg"
                         color="primary"
-                        variant="solid"
-                        endContent={<ArrowRightIcon className="w-6 h-6 fill-white" />}
-                        onPress={() => {
-                          nextButtonHandler();
-                        }}
-                      >Next</Button>
-                    )}
-                    {step === 2 && (
-                      <>
-                        <Button
-                          size="lg"
-                          color="default"
-                          variant="ghost"
-                          startContent={<ArrowLeftIcon className="w-6 h-6 fill-white" />}
-                          onPress={() => setStep(1)}
-                        >Previous</Button>
-                        <Button
-                          size="lg"
-                          color="primary"
-                          variant="solid"
-                          onPress={publishHandler}
-                        >Publish</Button>
-                      </>
-                    )}
-                  </div>
+                        variant="ghost"
+                        onPress={publishHandler}
+                      >Publish</Button>
+                    </>
+                  )}
                 </div>
               </ModalFooter>
             </>

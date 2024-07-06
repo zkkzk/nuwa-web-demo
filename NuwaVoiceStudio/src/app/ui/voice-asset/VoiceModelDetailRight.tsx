@@ -9,6 +9,8 @@ import { downloadVoiceModel } from "@/app/lib/voice.api";
 import { getStarNumStr } from "@/app/lib/utils";
 import moment from 'moment';
 import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
+import VoiceModelCollectButton from "./VoiceModelCollectButton";
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 
 function VoiceAssetDetailRight({
   voicePublishInfo, 
@@ -73,6 +75,12 @@ function VoiceAssetDetailRight({
   };
   return (
     <div className="flex-col justify-start items-start gap-6 inline-flex">
+      <div className="self-stretch justify-between items-end inline-flex">
+        <div className="w-full shrink-0 self-stretch justify-end items-center gap-2 flex">
+          <VoiceModelCollectButton like={voicePublishInfo.like} publishId={voicePublishInfo.publish_id} starNum={voicePublishInfo.star_num} />
+					<Button size="lg" variant="bordered"  startContent={<EllipsisHorizontalIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} />
+        </div>
+      </div>
       <div className="justify-start items-start gap-2 inline-flex">
         <Button size="lg" color="primary" variant="solid" className="w-[230px]" startContent={<DCubeIcon className="h-6 w-6 fill-white" />}>Run on WorkStation</Button>
         {voicePublishInfo.publish_info.permission.download_permission && (<Button size="lg" variant="bordered" startContent={<ArrowDownTrayIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} onPress={downloadVoiceModelServer} />) }

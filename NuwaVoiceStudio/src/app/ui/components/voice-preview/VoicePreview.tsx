@@ -4,12 +4,8 @@ import { useWavesurfer } from '@wavesurfer/react'
 import PlayButton from "./PlayButton";
 import { cn, Skeleton } from "@nextui-org/react";
 
-
-const formatTime = (seconds: any) => [seconds / 60, seconds % 60].map((v) => `0${Math.floor(v)}`.slice(-2)).join(':')
-
 function VoicePreview({
 	voiceSrc,
-	hideTimeline = true,
 	classNames = {
 		voicePreview: "",
 		playButton: ""
@@ -17,7 +13,6 @@ function VoicePreview({
 	onTimeChange,
 }: {
   voiceSrc: string
-	hideTimeline?: boolean,
 	classNames?: {
 		voicePreview?: string,
 		playButton?: string
@@ -53,36 +48,42 @@ function VoicePreview({
 	}, [currentTime, duration])
 
   return (
-		<div className="self-stretch h-full w-full flex-col justify-start items-start gap-2 flex overflow-hidden">
-			<div className={[classNames.voicePreview, hideTimeline ? 'h-10' : 'h-16 p-4', 'w-full rounded-xl justify-start items-center gap-3 inline-flex scrollbar-hide overflow-scroll'].join(' ')}>
-				<div className={`shrink-0 `}>
+		<div className="h-full w-full flex justify-center items-start gap-2 overflow-hidden">
+			<div
+				className={cn(
+					classNames.voicePreview,
+					'h-12 w-full rounded-xl justify-start items-center gap-3 inline-flex scrollbar-hide overflow-scroll'
+				)}
+			>
+				<div className="shrink-0 h-full">
 					{isReady ? (
-						<PlayButton isPlay={isPlaying} onChange={onChangePlay} classNames={{
-							base: classNames.playButton
-						}} />
+						<div className="py-1">
+							<PlayButton isPlay={isPlaying} onChange={onChangePlay} classNames={{
+								base: classNames.playButton
+							}} />
+						</div>
 					): (
-						<Skeleton className="w-10 h-10 rounded-lg"/>
+						<Skeleton className="w-12 h-12 rounded-lg"/>
 					)}
-					
 				</div>
-				<div className="w-full relative">
-					<div ref={containerRef}  className="w-full" />
+				<div className="w-full h-full relative">
+					<div ref={containerRef}  className="w-full py-1" />
 					<div
 						className={cn(
 							isReady ? "hidden" : "flex",
 							" absolute top-0 left-0 w-full h-full items-center justify-start"
 						)}
 					>
-						<Skeleton className="w-full h-10 rounded-lg"/>
+						<Skeleton className="w-full h-full rounded-lg"/>
 					</div>
 				</div>
 			</div>
-			{!hideTimeline && (
+			{/* {!hideTimeline && (
 				<div className="self-stretch justify-between items-center inline-flex">
 					<div className="text-gray-500 text-xs font-medium font-['Inter']">{formatTime(currentTime)}</div>
 					<div className="text-gray-500 text-xs font-medium font-['Inter']">{formatTime(duration)}</div>
 				</div>
-			)}
+			)} */}
 		</div>
   );
 }

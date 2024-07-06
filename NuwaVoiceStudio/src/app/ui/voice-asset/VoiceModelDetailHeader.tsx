@@ -1,67 +1,16 @@
 "use client";
 import GPTSovitsIcon from "@/app/icons/GPTSovitsIcon";
-import { EllipsisHorizontalIcon, StarIcon } from "@heroicons/react/24/solid";
-import { Button, cn } from "@nextui-org/react";
-import React, { useState } from "react";
+import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
+import { Button } from "@nextui-org/react";
+import React from "react";
 import { voicePublishInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
-import { voiceModelCancelCollect, voiceModelCollect } from "@/app/lib/voice.api";
-import numbro from "numbro";
-import { getStarNumStr } from "@/app/lib/utils";
+import VoiceModelCollectButton from "./VoiceModelCollectButton";
 
 function VoiceAssetDetailHeader({
   voicePublishInfo, 
 }: {
   voicePublishInfo: voicePublishInfoType
 }) {
-  const [collecting, setCollecting] = useState(false);
-  const [isCollected, setIsCollected] = useState(voicePublishInfo.like);
-
-  const voiceModelCollectApi = voiceModelCollect();
-  const voiceModelCollectServer = async () => {
-    if (collecting) {
-      return;
-    }
-    setCollecting(true);
-
-    const res = await voiceModelCollectApi.send({
-      "publish_id": voicePublishInfo.publish_id,
-    });
-    if (res && res.code === 0) {
-      setIsCollected(true);
-    }
-
-    setCollecting(false);
-  };
-
-  const voiceModelCancelCollectApi = voiceModelCancelCollect();
-  const voiceModelCancelCollectServer = async () => {
-    if (collecting) {
-      return;
-    }
-    setCollecting(true);
-
-    const res = await voiceModelCancelCollectApi.send({
-      "publish_id": voicePublishInfo.publish_id,
-    });
-    if (res && res.code === 0) {
-      setIsCollected(false);
-    }
-
-    setCollecting(false);
-  };
-
-  const computerStarNumStr = () => {
-    let realStarNum = voicePublishInfo.star_num;
-    if (voicePublishInfo.like && !isCollected) {
-      realStarNum--
-    }
-    if (!voicePublishInfo.like && isCollected) {
-      realStarNum++
-    }
-    return getStarNumStr(realStarNum)
-  }
-  
-
   return (
     <div className="w-full h-[82px] flex-col justify-start items-start gap-2.5 flex">
       <div className="self-stretch justify-between items-end inline-flex">
@@ -78,15 +27,8 @@ function VoiceAssetDetailHeader({
             </div>
           </div>
         </div>
-        <div className="w-[191px] self-stretch justify-start items-center gap-2 flex">
-					<Button
-            isDisabled={collecting}
-            size="lg"
-            variant="flat" 
-            startContent={<StarIcon className={cn("w-6 h-6",(isCollected ? "fill-amber-500" : "fill-zinc-400"))} />}
-            onPress={isCollected ? voiceModelCancelCollectServer : voiceModelCollectServer}
-            className="w-40"
-          >Star {computerStarNumStr()} </Button>
+        <div className="w-[360px] shrink-0 self-stretch justify-end items-center gap-2 flex">
+          <VoiceModelCollectButton like={voicePublishInfo.like} publishId={voicePublishInfo.publish_id} starNum={voicePublishInfo.star_num} />
 					<Button size="lg" variant="bordered"  startContent={<EllipsisHorizontalIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} />
         </div>
       </div>

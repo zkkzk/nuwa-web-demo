@@ -113,6 +113,7 @@ function VoiceListHeader({
         <Button size="lg" className="text-zinc-400" variant="light" endContent={<FilterIcon className="w-6 h-6 fill-zinc-500" />}>Filters</Button>
       </div>
         <PublishVoiceModelModal
+          key={'uploadModalOpen' + uploadModalOpen.toString()}
           variant="UPLOAD"
           isOpen={uploadModalOpen}
           onChange={(isOpen) => {setUploadModalOpen(isOpen)}}
@@ -122,6 +123,7 @@ function VoiceListHeader({
           }}
         />
         <PublishVoiceModelModal
+          key={'selectModalOpen'+ selectModalOpen.toString()}
           variant="SELECT"
           isOpen={selectModalOpen}
           onChange={(isOpen) => {setSelectModalOpen(isOpen)}}

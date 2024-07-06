@@ -10,7 +10,7 @@ function VoiceHistoryItemVoiceRreview({voiceSrc}: {
 
   return (
     <div className="w-full">
-		  <VoicePreview voiceSrc={voiceSrc} hideTimeline={false} classNames={{
+		  <VoicePreview voiceSrc={voiceSrc} classNames={{
         voicePreview: "bg-neutral-900",
         playButton: "w-8 h-8"
       }} />

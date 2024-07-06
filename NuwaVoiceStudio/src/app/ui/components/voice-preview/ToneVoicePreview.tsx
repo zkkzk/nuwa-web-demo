@@ -30,7 +30,7 @@ function ToneVoicePreview({
         )}
         
         <div className="self-stretch pl-3 pr-4 py-3 bg-neutral-900 rounded-xl justify-start items-start gap-6 inline-flex">
-            <div className="w-28 h-10 px-4 py-2 bg-zinc-800 rounded-xl justify-start items-center gap-2 flex">
+            <div className="w-28 h-12 px-4 py-2 bg-zinc-800 rounded-xl justify-start items-center gap-2 flex">
                 <div className="justify-start items-center gap-2 flex">
                     {/* <div className="text-slate-100 text-lg font-semibold font-['Archivo'] leading-normal">😄</div> */}
                     <div className="text-white text-sm font-medium font-['Inter'] leading-tight">{tone.tone_type}</div>

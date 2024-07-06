@@ -7,15 +7,18 @@ import ToneVoiceFile from "./ToneVoiceFile";
 import UploadFile from "../upload-file/UploadFile";
 import ExportIcon from "@/app/icons/ExportIcon";
 import UploadVoiceModelFile from "../upload-file/UploadVoiceModelFile";
+import SelectToneListModal from "./SelectToneListModal";
 
 
 function ToneVoiceFileList({
   toneList,
   modelId,
+  selectToneList,
   onChange,
 }: {
   toneList: Array<VoiceModelToneType>
   modelId: string
+  selectToneList?: Array<VoiceModelToneType>
   onChange: (newToneList: Array<VoiceModelToneType>) => void
 }) {
 
@@ -57,26 +60,38 @@ function ToneVoiceFileList({
           }}
         />
       ))}
-      <div className="h-32 w-full">
-        <UploadVoiceModelFile
-          key={uploadKey}
-          label={<div>Drag and drop files here or click to upload<br />CKPT format</div>}
-          icon={<ExportIcon className="w-6 h-6" />}
-          modelId={modelId}
-          type="audio"
-          onDone={(res) => {
-            onChange([
-              ...toneList,
-              {
-                audio_url: res.url,
-                text: "",
-                tone_type: toneListEn[0].value
-              }
-            ])
-            setUploadKey(uploadKey + 1)
-          }}
-        >
-        </UploadVoiceModelFile>
+      <div className="h-32 w-full flex flex-row items-center justify-center gap-3">
+        {selectToneList && (
+          <div className="h-full grow shrink">
+            <SelectToneListModal toneList={selectToneList} onDone={(newToneList) => {
+              onChange([
+                ...toneList,
+                ...newToneList
+              ])
+            }} />
+          </div>
+        )}
+        <div className="h-32 w-32">
+          <UploadVoiceModelFile
+            key={uploadKey}
+            label={<div>Drag and drop files here or click to upload<br />CKPT format</div>}
+            icon={<ExportIcon className="w-6 h-6" />}
+            modelId={modelId}
+            type="audio"
+            onDone={(res) => {
+              onChange([
+                ...toneList,
+                {
+                  audio_url: res.url,
+                  text: "",
+                  tone_type: toneListEn[0].value
+                }
+              ])
+              setUploadKey(uploadKey + 1)
+            }}
+          >
+          </UploadVoiceModelFile>
+        </div>
       </div>
     </div>
   );

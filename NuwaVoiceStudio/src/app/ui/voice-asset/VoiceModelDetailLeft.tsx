@@ -3,6 +3,7 @@ import React from "react";
 import Image from "next/image";
 import ToneVoicePreview from "../components/voice-preview/ToneVoicePreview";
 import { voicePublishInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
+import GPTSovitsIcon from "@/app/icons/GPTSovitsIcon";
 
 function VoiceAssetDetailLeft({
   voicePublishInfo, 
@@ -11,6 +12,31 @@ function VoiceAssetDetailLeft({
 }) {
   return (
     <div className="w-full flex-col justify-start items-start gap-8 flex">
+      <div className="justify-center items-start gap-2.5 flex flex-col">
+        <div className="text-white text-4xl font-semibold font-['Inter'] leading-10 inline-flex">
+          {voicePublishInfo.publish_info.name}
+          <div className=" shrink-0 pl-1 pr-2 py-1 bg-black/opacity-30 rounded-[36px] backdrop-blur-[21px] justify-start items-center gap-1.5 flex">
+            <div className="w-6 h-6 bg-blue-500 rounded-full justify-center items-center flex">
+              <GPTSovitsIcon className="fill-white h-4 w-4" />
+            </div>
+            <div className="text-white text-sm font-normal font-['Inter'] leading-tight">
+              GPT-Sovits
+            </div>
+          </div>
+        </div>
+        <div className="justify-start items-center gap-1 inline-flex">
+          {voicePublishInfo.publish_info.tag.map((tag, index) => {
+            return (
+              <div key={index} className="px-2 py-0.5 bg-zinc-800 rounded justify-center items-center gap-2 flex">
+                <div className="text-white text-xs font-semibold font-['Inter'] leading-tight">
+                  {tag}
+                </div>
+              </div>
+            )
+          })}
+        </div>
+        </div>
+
       <div className="shrink-0 self-stretch justify-start items-start gap-6 flex flex-row">
         <div className="shrink-0 w-[200px] h-[200px] rounded-xl relative">
           <Image
@@ -35,7 +61,6 @@ function VoiceAssetDetailLeft({
           {voicePublishInfo.tone.map((toneItem, index) => (
             <ToneVoicePreview key={index} tone={toneItem} />
           ))}
-          
         </div>
       </div>
     </div>
