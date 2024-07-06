@@ -2,55 +2,54 @@
 import React, { useCallback, useRef, useState } from "react";
 import { useWavesurfer } from "@wavesurfer/react";
 import VoicePreview from "./VoicePreview";
-import { Input } from "@nextui-org/react";
+import { VoiceModelToneType } from "@/app/lib/definitions.InstantGenerateParamster";
 
 const formatTime = (seconds: any) =>
   [seconds / 60, seconds % 60]
     .map((v) => `0${Math.floor(v)}`.slice(-2))
     .join(":");
 
-function ToneVoicePreview({ voiceSrc }: { voiceSrc: string }) {
-  const [isPlay, setIsPlay] = useState(false);
-
-  const containerRef = useRef(null);
-
-  const { wavesurfer, isPlaying, currentTime } = useWavesurfer({
-    container: containerRef,
-    height: 40,
-    barWidth: 3,
-    barRadius: 3,
-    waveColor: "#eee",
-    progressColor: "#0178FF",
-    cursorColor: "OrangeRed",
-    url: "https://www.mfiles.co.uk/mp3-downloads/brahms-st-anthony-chorale-theme-two-pianos.mp3",
-  });
-
-  const onPlayPause = useCallback(() => {
-    wavesurfer && wavesurfer.playPause();
-  }, [wavesurfer]);
-
-  const duration = wavesurfer && wavesurfer.getDuration();
+function ToneVoicePreview({
+  tone
+} : {
+  tone: VoiceModelToneType
+}) {
+  
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
 
   return (
-    <div className="self-stretch bg-zinc-600 rounded-xl justify-start items-center gap-4 inline-flex p-4">
-      <div className="grow shrink basis-0 flex-col justify-start items-start gap-4 inline-flex">
-        <div className="self-stretch justify-start items-start gap-3 inline-flex">
-          <VoicePreview voiceSrc={voiceSrc} hideTimeline={true} classNames={{playButton: 'h-10 w-10'}} />
-        </div>
-        <div className="self-stretch justify-between items-start gap-3 inline-flex">
-          <div className="w-[120px] h-full pl-3.5 py-3.5 bg-zinc-800 rounded-xl shadow justify-start items-center flex">
-            <div className="pr-2 flex-row justify-start items-start inline-flex">
-              <div className="text-slate-100 text-lg font-semibold font-['Archivo'] leading-normal">
-              😄
-							</div>
-							<div className="text-slate-100 text-base font-medium font-['Inter']">
-								Happy
-							</div>
+    <div className="w-full p-4 bg-zinc-800 rounded-xl justify-start items-center gap-4 inline-flex">
+      <div className="grow shrink basis-0 self-stretch flex-col justify-start items-start gap-4 inline-flex">
+        {tone.text && (
+          <div className="self-stretch flex-col justify-start items-start gap-2.5 flex">
+            <div className="self-stretch">
+              {tone.text}
             </div>
           </div>
-					<Input classNames={{
-						base: 'grow',
-					}} type="text" variant="flat" color="default" placeholder="With Error Message" />
+        )}
+        
+        <div className="self-stretch pl-3 pr-4 py-3 bg-neutral-900 rounded-xl justify-start items-start gap-6 inline-flex">
+            <div className="w-28 h-10 px-4 py-2 bg-zinc-800 rounded-xl justify-start items-center gap-2 flex">
+                <div className="justify-start items-center gap-2 flex">
+                    {/* <div className="text-slate-100 text-lg font-semibold font-['Archivo'] leading-normal">😄</div> */}
+                    <div className="text-white text-sm font-medium font-['Inter'] leading-tight">{tone.tone_type}</div>
+                </div>
+            </div>
+            <div className="grow shrink basis-0 self-stretch justify-start items-center gap-3 flex">
+              <VoicePreview
+                voiceSrc={tone.audio_url}
+                classNames={{playButton: 'h-10 w-10'}}
+                onTimeChange={res => {
+                  setCurrentTime(res.currentTime);
+                  setDuration(res.duration || 0);
+                }}
+              />
+            </div>
+            <div className="w-24 h-full flex flex-row items-center justify-end">
+              <span className="text-zinc-200 text-sm font-normal font-['Inter'] leading-tight">{formatTime(currentTime)}</span>
+              <span className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">/ {formatTime(duration)}</span>
+            </div>
         </div>
       </div>
     </div>

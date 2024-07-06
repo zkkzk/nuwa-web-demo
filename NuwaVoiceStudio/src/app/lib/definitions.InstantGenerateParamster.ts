@@ -114,6 +114,26 @@ export type VoiceModelInfoType = {
   }
 }
 
+export type voicePublishInfoType = {
+  id: string,
+  publish_info: VoiceModelInfoType
+  publish_id: string
+  tone: Array<VoiceModelToneType>,
+  model_id: string
+  publish_type: 1 | 2
+  star_num: number
+  d_num: number
+  inf_num: number
+  local_model: {
+    type: string
+    "gpt-weights_url": string
+    "sovits-weights_url": string
+  },
+  basic_params: {
+    language: string
+  },
+}
+
 export const languageListEn = [{
   value: "auto",
   label: "Automatic Recognition"
@@ -199,3 +219,8 @@ export const segmentationMethodListEn = [{
   value: "cut5",
   label: "Segment by Punctuation"
 }];
+
+export type voiceModelFilterType = {
+  type: "gril" | "boy" | "male" | "female" | ""
+  name: string
+};

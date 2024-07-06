@@ -1,9 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import {
-  Select,
-  SelectItem
-} from "@nextui-org/react";
+import { Select, SelectItem } from "@nextui-org/react";
 import {
   languageListEn,
   VoiceModelFormDataProps,
@@ -40,7 +37,8 @@ function SelectVoiceModelForm({
   const [isInit, setInit] = useState(false);
   const [myModelList, setMyModelList] = useState<Array<myModelType>>([])
   const getModelListApi = getModelList();
-  const getModelIdToServer = async () => {
+
+  const getModelListToServer = async () => {
 
     if (loading) {
       return;
@@ -66,7 +64,7 @@ function SelectVoiceModelForm({
   const [selectModalOpen, setSelectModalOpen] = useState(false);
 
   useEffect(() => {
-    getModelIdToServer();
+    getModelListToServer();
   }, []);
   
   return (
@@ -82,8 +80,15 @@ function SelectVoiceModelForm({
                 size="md"
                 placeholder="Select model type"
                 labelPlacement="outside"
-                selectedKeys={[type]}
-                onChange={(e) => setType(e.target.value)}
+                selectedKeys={[formData.model_id]}
+                onChange={(e) => {
+                  if (onChange) {
+                    onChange({
+                      ...formData,
+                      model_id: e.target.value,
+                    });
+                  }
+                }}
               >
                 {myModelList.map((mtItem) => (
                   <SelectItem
@@ -99,7 +104,7 @@ function SelectVoiceModelForm({
               </Select>
             </LabelForm>
             
-            <LabelForm label='Basic Parameters' isRequired={true}>
+            {/* <LabelForm label='Basic Parameters' isRequired={true}>
               <Select
                 disallowEmptySelection={true}
                 variant="bordered"
@@ -107,7 +112,7 @@ function SelectVoiceModelForm({
                 label="Language"
                 placeholder="Select an language"
                 labelPlacement="outside"
-                selectedKeys={[formData.basic_params.language as string]}
+                selectedKeys={[formData.basic_params.language]}
                 classNames={{
                   label: "group[data-filled=true]:text-gray-500 group-data-[filled=true]:text-gray-500 text-gray-500 text-sm font-semibold font-['Inter'] leading-normal",
                 }}
@@ -121,26 +126,30 @@ function SelectVoiceModelForm({
                   } as VoiceModelFormDataProps)
                 }}
               >
-                {languageListEn.map((Language) => (
+                {languageListEn.map((lang) => (
                     <SelectItem
-                      key={Language.value}
-                      value={Language.value}
+                      key={lang.value}
+                      value={lang.value}
                       classNames={{
                         base: 'h-12 pl-2 pr-3 py-2 rounded-xl gap-4',
                       }}
                     >
-                      {Language.label}
+                      {lang.label}
                     </SelectItem>
                 ))}
               </Select>
-            </LabelForm>
+            </LabelForm> */}
             <LabelForm label='Tone Audio Files（Sentimental Voices）' subTitle="You may add up to 21 different tones, and the first one will be set as default." isRequired={true}>
-              <ToneVoiceFileList toneList={formData.tone} onChange={(newTone) => {
-                onChange && onChange({
-                  ...formData,
-                  tone: newTone
-                } as VoiceModelFormDataProps)
-              }} />
+              <ToneVoiceFileList
+                toneList={formData.tone}
+                modelId={formData.model_id}
+                onChange={(newTone) => {
+                  onChange && onChange({
+                    ...formData,
+                    tone: newTone
+                  } as VoiceModelFormDataProps)
+                }}
+              />
             </LabelForm>
           </div>
         </div>

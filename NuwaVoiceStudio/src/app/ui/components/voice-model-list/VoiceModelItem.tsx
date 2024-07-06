@@ -48,7 +48,11 @@ function VocieItem({
             <GPTSovitsIcon className="w-5 h-5 fill-blue-500" />
             <div className="text-white text-xs font-normal font-['Inter'] leading-none">GPT-Sovits</div>
           </div>
-          <div className="absolute right-4 -bottom-4">
+          <div className="absolute right-4 -bottom-4" 
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
             <PlayButton
               isPlay={isPlay}
               voiceSrc={voice.tone[0].audio_url}

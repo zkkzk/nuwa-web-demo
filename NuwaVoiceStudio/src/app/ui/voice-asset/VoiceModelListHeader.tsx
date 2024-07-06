@@ -6,29 +6,39 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid"
 import FilterIcon from "@/app/icons/FilterIcon";
 import DCubeIcon from "@/app/icons/3DCubeIcon";
 import PublishVoiceModelModal from "../components/publish-select-voice-model/PublishVoiceModelModal";
+import { filter } from "lodash-es";
+import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParamster";
 
 type TypeFilterItem = {
   label: string;
   value: string;
 };
 
+const types: Array<TypeFilterItem> = [{
+  label: "Girl",
+  value: "gril",
+}, {
+  label: "Boy",
+  value: "boy",
+}, {
+  label: "Male",
+  value: "male",
+}, {
+  label: "Female",
+  value: "female",
+}] 
 
-function VoiceListHeader() {
-  const [selectedFilter, setSelectedFilter] = useState<TypeFilterItem | null>();
-  const [filters, setFilters] = useState<Array<TypeFilterItem>>([{
-    label: "Girl-12",
-    value: "gril",
-  }, {
-    label: "Boy-23",
-    value: "boy",
-  }, {
-    label: "Male-23",
-    value: "male",
-  }, {
-    label: "Female-23",
-    value: "female",
-  }]);
 
+function VoiceListHeader({
+  filters= {
+    type: "",
+    name: "",
+  },
+  onChange
+}: {
+  filters: voiceModelFilterType,
+  onChange: (newFilters: voiceModelFilterType) => void
+}) {
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [selectModalOpen, setSelectModalOpen] = useState(false);
 
@@ -70,17 +80,30 @@ function VoiceListHeader() {
       </div>
 
       <div className="justify-start items-center gap-6 flex w-full">
-        <Input size="sm" className="w-[400px]" type="text" variant="bordered" placeholder="Search" startContent={<MagnifyingGlassIcon className="w-6 h-6 fill-zinc-400" />} />
+        <Input
+          size="sm"
+          className="w-[400px]"
+          type="text"
+          variant="bordered"
+          placeholder="Search"
+          startContent={<MagnifyingGlassIcon className="w-6 h-6 fill-zinc-400" />}
+          value={filters.name || ""}
+          onChange={(e: any) => {
+            onChange({
+              ...filters,
+              name: e.target.value
+            })
+          }}
+        />
         <div className="grow justify-start items-center gap-2.5 flex">
           <NuwaChipRadioGroup
-            items={filters}
-            value={selectedFilter}
+            items={types}
+            value={filters.type}
             onChange={(e: any) => {
-              if (e) {
-                setSelectedFilter(e.target.value)
-              } else {
-                setSelectedFilter(null)
-              }
+              onChange({
+                ...filters,
+                type: e ? e.target.value : null
+              })
             }}
           />
         </div>

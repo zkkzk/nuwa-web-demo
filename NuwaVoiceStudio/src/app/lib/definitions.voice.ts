@@ -4,6 +4,7 @@ export type TypeVoiceModel = {
   name: string,
   count: number,
   star: boolean,
+  publish_id: string,
 };
 
 export type TypeVoice = {

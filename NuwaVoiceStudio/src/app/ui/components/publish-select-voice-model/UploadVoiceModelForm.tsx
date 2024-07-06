@@ -6,7 +6,6 @@ import {
   VoiceModelFormDataProps,
 } from "@/app/lib/definitions.InstantGenerateParamster";
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
-import UploadFile from "../upload-file/UploadFile";
 import LabelForm from "../form/LabelForm";
 import TitleModal from "./TitleModal";
 import ToneVoiceFileList from "../voice-preview/ToneVoiceFileList";
@@ -135,15 +134,15 @@ function UploadVoiceModelForm({
                 } as VoiceModelFormDataProps)
               }}
             >
-              {languageListEn.map((Language) => (
+              {languageListEn.map((lang) => (
                   <SelectItem
-                    key={Language.value}
-                    value={Language.value}
+                    key={lang.value}
+                    value={lang.value}
                     classNames={{
                       base: 'h-12 pl-2 pr-3 py-2 rounded-xl gap-4',
                     }}
                   >
-                    {Language.label}
+                    {lang.label}
                   </SelectItem>
               ))}
             </Select>

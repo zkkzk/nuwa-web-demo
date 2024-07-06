@@ -2,27 +2,37 @@
 import React, { useState } from "react";
 import VoiceModelListHeader from "./VoiceModelListHeader";
 import VoiceModelList from "../components/voice-model-list/VoiceModelList";
-import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
+import { Button, cn, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Modal, ModalBody, ModalContent, ModalHeader, useDisclosure } from "@nextui-org/react";
 import VoiceAssetDetail from "./VoiceModelDetail";
 import DrawerModal from "../components/DrawerModal";
 import EmptyIcon from "@/app/icons/EmptyIcon";
-import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import DCubeIcon from "@/app/icons/3DCubeIcon";
 import PublishVoiceModelModal from "../components/publish-select-voice-model/PublishVoiceModelModal";
+import { TypeVoiceModel } from "@/app/lib/definitions.voice";
+import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParamster";
 
 function VoiceAsse() {
 
-  const voiceDetailModal = useDisclosure();
+  const voiceDetailModal = useDisclosure({onChange: (isOpen) => {
+    !isOpen && setSelectedVoiceModel(null)
+  }});
   const [isEmpty, setIsEmpty] = useState(false);
 
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [selectModalOpen, setSelectModalOpen] = useState(false);
+  const [selectedVoiceModel, setSelectedVoiceModel] = useState<TypeVoiceModel | null >(null);
+
+  const [filters, setFilters] = useState<voiceModelFilterType>({
+    type: "",
+    name: ""
+  })
 
   return (
     <div className="w-full h-screen pt-14 overflow-hidden bg-neutral-900 rounded-bl-xl rounded-br-xl justify-start items-end inline-flex">
       <div className="w-full self-stretch justify-start items-start flex h-screen">
-        <div className="fixed top-14 left-0 w-full z-40">
-        {!isEmpty && (<VoiceModelListHeader />)}
+        <div className="fixed top-20 left-0 w-full z-40">
+        {/* {!isEmpty && (<VoiceModelListHeader filters={filters} onChange={(newFilters) => setFilters(newFilters)} />)}
         {isEmpty && (
           <div className="self-stretch justify-between items-center flex flex-col bg-neutral-900 px-8 pt-10 w-full">
             <div className="h-[40px] justify-between items-center gap-6 flex w-full mb-4">
@@ -31,13 +41,16 @@ function VoiceAsse() {
               </div>
             </div>
           </div>
-        )}
+        )} */}
+        <VoiceModelListHeader filters={filters} onChange={(newFilters) => setFilters(newFilters)} />
           
         </div>
         <div className="self-stretch pt-[170px] overflow-hidden w-full">
-          {!isEmpty && (
+          <div className={cn(isEmpty ? 'hidden' : 'block')}>
             <VoiceModelList
-              onItemClick={() => {
+              selectedVoiceModel={selectedVoiceModel}
+              onItemClick={(voiceModel) => {
+                setSelectedVoiceModel(voiceModel);
                 voiceDetailModal.onOpen();
               }}
               onChange={(voiceList) => {
@@ -46,9 +59,10 @@ function VoiceAsse() {
                 } else {
                   setIsEmpty(false);
                 }
-              }
-            } />
-          )}
+              }}
+              filters={filters}
+            />
+          </div>
 
           {isEmpty && (
             <div className="w-full h-full flex flex-col justify-center items-center gap-12">
@@ -98,7 +112,9 @@ function VoiceAsse() {
             <>
               <ModalHeader></ModalHeader>
               <ModalBody>
-                <VoiceAssetDetail />
+                {selectedVoiceModel && (
+                  <VoiceAssetDetail key={selectedVoiceModel.publish_id} publishId={selectedVoiceModel.publish_id} />
+                )}
               </ModalBody>
             </>
           )}

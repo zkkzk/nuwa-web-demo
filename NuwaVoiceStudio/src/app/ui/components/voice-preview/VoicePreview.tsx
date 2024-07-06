@@ -1,5 +1,5 @@
 "use client";
-import React, { useCallback, useRef, useState } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useWavesurfer } from '@wavesurfer/react'
 import PlayButton from "./PlayButton";
 import { cn, Skeleton } from "@nextui-org/react";
@@ -14,13 +14,15 @@ function VoicePreview({
 		voicePreview: "",
 		playButton: ""
 	},
+	onTimeChange,
 }: {
   voiceSrc: string
-	hideTimeline: boolean,
+	hideTimeline?: boolean,
 	classNames?: {
 		voicePreview?: string,
 		playButton?: string
-	}
+	},
+	onTimeChange?: (res: { currentTime: number, duration: number| null }) => void
 }) {
 	const containerRef = useRef(null)
 
@@ -45,6 +47,10 @@ function VoicePreview({
 	const onChangePlay = (play:boolean) => {
 		onPlayPause();
 	}
+
+	useEffect(()=>{
+		onTimeChange && onTimeChange({ currentTime: currentTime, duration: duration })
+	}, [currentTime, duration])
 
   return (
 		<div className="self-stretch h-full w-full flex-col justify-start items-start gap-2 flex overflow-hidden">

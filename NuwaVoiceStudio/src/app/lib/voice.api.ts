@@ -12,6 +12,10 @@ const voiceUrlList = {
   createVoiceTrain: `/ddream/api/v1/voice/train`,
   getVoiceInfHistory: `/ddream/api/v1/voice/inf/history`,
   uploadModelFile: `/ddream/api/v1/voice/upload_model_file`,
+  getVoicePublishInfo: `/ddream/api/v1/voice/publish/info`,
+  voiceCollect: `/ddream/api/v1/voice/collect`,
+  voiceCancelCollect: `/ddream/api/v1/voice/cancel_collect`,
+  downloadVoiceModel: `/ddream/api/v1/voice/download_model`,
 }
 
 export function getPublishSquare() {
@@ -99,3 +103,38 @@ export function uploadModelFile() {
   })
 }
 
+export function getVoicePublishInfo() {
+  const t = useTranslations();
+  return baseApiHander({
+    url: voiceUrlList.getVoicePublishInfo,
+    mustLogin: true,
+    noLoginGotoLogin: true,
+  })
+}
+
+export function voiceModelCollect() {
+  const t = useTranslations();
+  return baseApiHander({
+    url: voiceUrlList.voiceCollect,
+    mustLogin: true,
+    noLoginGotoLogin: true,
+  })
+}
+
+export function voiceModelCancelCollect() {
+  const t = useTranslations();
+  return baseApiHander({
+    url: voiceUrlList.voiceCancelCollect,
+    mustLogin: true,
+    noLoginGotoLogin: true,
+  })
+}
+
+export function downloadVoiceModel() {
+  const t = useTranslations();
+  return baseApiHander({
+    url: voiceUrlList.downloadVoiceModel,
+    mustLogin: true,
+    noLoginGotoLogin: true,
+  })
+}

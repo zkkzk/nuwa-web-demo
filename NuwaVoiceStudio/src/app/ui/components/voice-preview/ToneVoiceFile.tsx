@@ -36,7 +36,7 @@ function ToneVoiceFile({
       {isDisabled && (<div className="w-full h-full absolute top-0 left-0 z-10" />)}
       <div className="grow shrink basis-0 flex-col justify-start items-start gap-4 inline-flex">
         <div className="self-stretch justify-start items-start gap-3 inline-flex">
-          <VoicePreview voiceSrc={voiceSrc} hideTimeline={true} classNames={{playButton: 'h-10 w-10'}} />
+          <VoicePreview voiceSrc={voiceSrc} classNames={{playButton: 'h-10 w-10'}} />
         </div>
         <div className="self-stretch justify-between items-start gap-3 inline-flex">
           <div className="w-[240px] h-full">
