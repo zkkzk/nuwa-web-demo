@@ -6,8 +6,8 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid"
 import FilterIcon from "@/app/icons/FilterIcon";
 import DCubeIcon from "@/app/icons/3DCubeIcon";
 import PublishVoiceModelModal from "../components/publish-select-voice-model/PublishVoiceModelModal";
-import { filter } from "lodash-es";
 import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { useRouter } from "@/navigation";
 
 type TypeFilterItem = {
   label: string;
@@ -42,6 +42,7 @@ function VoiceListHeader({
   filters: voiceModelFilterType,
   onChange: (newFilters: voiceModelFilterType) => void
 }) {
+  const router = useRouter();
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [selectModalOpen, setSelectModalOpen] = useState(false);
 
@@ -78,7 +79,15 @@ function VoiceListHeader({
               <DropdownItem key="online">From My Voice Lib</DropdownItem>
             </DropdownMenu>
           </Dropdown>
-          <Button size="lg" variant="flat" className="w-[200px]" startContent={<DCubeIcon className="h-6 w-6 fill-zinc-400" />}>Train My Voice</Button>
+          <Button
+            size="lg"
+            variant="flat"
+            className="w-[200px]"
+            startContent={<DCubeIcon className="h-6 w-6 fill-zinc-400" />}
+            onPress={() => {
+              router.push('/myvoicemodels');
+            }}
+          >Train My Voice</Button>
         </div>
       </div>
 

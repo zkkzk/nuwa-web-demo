@@ -22,7 +22,7 @@ export default function HeaderAvatar() {
     <>
       <div onClick={() => {
         if (isLogin) {
-          gotoMePage()
+          // gotoMePage()
         } else {
           setIsOpen(true);
         }

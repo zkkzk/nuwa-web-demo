@@ -27,11 +27,13 @@ import { findIndex, uniqBy } from "lodash-es";
 function PublishVoiceModelModal({
   isOpen = false,
   variant,
+  modelId,
   onChange = () => {},
   onSuccess = () => {},
 }: {
   isOpen: boolean
   variant: 'SELECT' | 'UPLOAD'
+  modelId?: string
   onChange: (isOpen: boolean) => void // 类型定义为函数，用于处理模态框的打开和关闭
   onSuccess: () => void
 }) {
@@ -57,7 +59,8 @@ function PublishVoiceModelModal({
 
   const [formData, setFormData] = useState({
     ...DefaultVoiceModelFormData,
-    publish_type: variant === 'UPLOAD' ? 2 : 1
+    publish_type: variant === 'UPLOAD' ? 2 : 1,
+    model_id: modelId ? modelId : ''
   } as VoiceModelFormDataProps);
 
   const UploadFormSchema = z.object({
@@ -230,14 +233,8 @@ function PublishVoiceModelModal({
     if (isOpen) {
       if (variant === 'UPLOAD') {
         getModelIdToServer();
-      } else {
-        setFormData({
-          ...formData,
-          model_id: '',
-        })
       }
     }
-    
   }, [isOpen]);
 
   return (
@@ -254,6 +251,7 @@ function PublishVoiceModelModal({
                       {variant === 'SELECT' && (
                         <SelectVoiceModelForm
                           formData={formData}
+                          modelId={modelId}
                           onChange={(newFormData: VoiceModelFormDataProps) => setFormData(newFormData) }
                         />
                       )}

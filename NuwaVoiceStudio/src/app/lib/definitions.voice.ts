@@ -46,5 +46,8 @@ export type voiceTrainRecordType = {
   task_id: number
   task_name: string
   status: number
-  result: number
+  result: number,
+  task_param: {
+    model_id: string,
+  }
 }

@@ -21,13 +21,16 @@ type myModelType = {
 
 function SelectVoiceModelForm({
   formData,
+  modelId,
   onChange
 }: {
   formData: VoiceModelFormDataProps
+  modelId?: string | undefined,
   onChange?: (newFormData: VoiceModelFormDataProps) => void,
 }) {
   const [loading, setLoading] = useState(false);
   const [myModelList, setMyModelList] = useState<Array<myModelType>>([])
+
   const [selectToneList, setSelectToneList] = useState<Array<VoiceModelToneType>>([])
   const getModelListApi = getModelList();
 
@@ -41,6 +44,10 @@ function SelectVoiceModelForm({
     });
     if (res && res.code === 0) {
       setMyModelList(res.data.list);
+      if (modelId) {
+        const initSelectToneList = res.data.list.find((item: any) => item.model_id === modelId)?.tones;
+        setSelectToneList(initSelectToneList ?? [])
+      }
     }
 
     setLoading(false);
@@ -59,12 +66,14 @@ function SelectVoiceModelForm({
         <div className="self-stretch flex-col justify-start items-start gap-8 flex">
           <LabelForm label='Select' isRequired={true}>
             <Select
+              isDisabled={!!modelId ? true : false}
               disallowEmptySelection={true}
               variant="bordered"
               size="md"
               placeholder="Select model type"
               labelPlacement="outside"
               selectedKeys={[formData.model_id]}
+              defaultSelectedKeys={[modelId || '']}
               onChange={(e) => {
                 if (onChange) {
                   onChange({
@@ -127,7 +136,7 @@ function SelectVoiceModelForm({
           </LabelForm>
           <LabelForm label='Tone Audio Files（Sentimental Voices）' subTitle="You may add up to 21 different tones, and the first one will be set as default." isRequired={true}>
             <ToneVoiceFileList
-              key={formData.model_id}
+              key={formData.model_id + "-" + selectToneList.length}
               toneList={formData.tone}
               modelId={formData.model_id}
               selectToneList={selectToneList}

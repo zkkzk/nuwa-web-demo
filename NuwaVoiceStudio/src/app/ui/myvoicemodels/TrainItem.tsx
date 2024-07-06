@@ -5,6 +5,7 @@ import { BeakerIcon } from "@heroicons/react/20/solid";
 import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { Button, Checkbox, cn } from "@nextui-org/react";
 import React, { useState } from "react";
+import PublishVoiceModelModal from "../components/publish-select-voice-model/PublishVoiceModelModal";
 
 function TrainItem({
   value,
@@ -15,6 +16,8 @@ function TrainItem({
   isSelected?: boolean;
   onSelectedChange?: (selected: boolean) => void;
 }) {
+  const [selectModalOpen, setSelectModalOpen] = useState(false);
+
   return (
     <div className="w-full h-[76px] px-4 py-2.5 bg-zinc-800 rounded-2xl justify-between items-center inline-flex">
       <div className="justify-start items-center gap-2.5 flex">
@@ -57,13 +60,26 @@ function TrainItem({
           
         </div>
       </div>
-      {status !== 'completing' && (
-        <div className="justify-start items-center gap-2 flex">
-          <Button variant="light" className="text-zinc-400" startContent={<BeakerIcon className="w-5 h-5" />}>Run on WorkStation</Button>
-          <Button variant="light" className="text-zinc-400">Download</Button>
-          <Button variant="light" className="text-zinc-400">Publish</Button>
-        </div>
+      {(value.status === 3 && value.result === 1) && (
+        <>
+          <div className="justify-start items-center gap-2 flex">
+            <Button variant="light" className="text-zinc-400" startContent={<BeakerIcon className="w-5 h-5" />}>Run on WorkStation</Button>
+            <Button variant="light" className="text-zinc-400">Download</Button>
+            <Button variant="light" className="text-zinc-400" onPress={() => {setSelectModalOpen(true)}}>Publish</Button>
+          </div>
+          <PublishVoiceModelModal
+            key={'selectModalOpen'+ selectModalOpen.toString()}
+            variant="SELECT"
+            modelId={value.task_param.model_id}
+            isOpen={selectModalOpen}
+            onChange={(isOpen) => {setSelectModalOpen(isOpen)}}
+            onSuccess={() => {
+              setSelectModalOpen(false);
+            }}
+          />
+        </>
       )}
+
     </div>
   );
 }
