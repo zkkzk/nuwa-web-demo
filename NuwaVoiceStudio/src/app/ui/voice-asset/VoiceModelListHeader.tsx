@@ -15,6 +15,9 @@ type TypeFilterItem = {
 };
 
 const types: Array<TypeFilterItem> = [{
+  label: "All",
+  value: "",
+}, {
   label: "Girl",
   value: "gril",
 }, {
@@ -81,8 +84,8 @@ function VoiceListHeader({
 
       <div className="justify-start items-center gap-6 flex w-full">
         <Input
-          size="sm"
-          className="w-[400px]"
+          size="md"
+          className="max-w-[400px] min-w-[200px]"
           type="text"
           variant="bordered"
           placeholder="Search"
@@ -95,7 +98,7 @@ function VoiceListHeader({
             })
           }}
         />
-        <div className="grow justify-start items-center gap-2.5 flex">
+        <div className="grow shrink-0 justify-start items-center gap-2.5 flex">
           <NuwaChipRadioGroup
             items={types}
             value={filters.type}

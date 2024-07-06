@@ -1,5 +1,6 @@
 "use client";
 
+import numbro from "numbro";
 import { useState } from "react";
 
 export const uuid = () => {
@@ -44,3 +45,12 @@ export const useCoverHandler = () => {
 
   return { isReplacingTheCoverLoding, handleReplacingTheCover };
 };
+
+export const getStarNumStr = (num: number) => {
+  return numbro(num).format({
+    average: true,
+    mantissa: 2,
+    optionalMantissa: true,
+    spaceSeparated: true
+  })
+}

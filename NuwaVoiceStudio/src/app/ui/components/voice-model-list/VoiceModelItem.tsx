@@ -10,6 +10,7 @@ import DownloadIcon from "@/app/icons/DownloadIcon";
 import { BeakerIcon } from "@heroicons/react/24/outline";
 import GPTSovitsIcon from "@/app/icons/GPTSovitsIcon";
 import { TypeVoiceModel } from "@/app/lib/definitions.voice";
+import { getStarNumStr } from "@/app/lib/utils";
 
 function VocieItem({
   voice,
@@ -91,28 +92,19 @@ function VocieItem({
               <div className="justify-end items-center gap-0.5 flex">
                 <StarIcon className={`w-4 h-4 ${voice.star ? 'fill-amber-500' : 'fill-zinc-400'}`} />
                 <div className="text-white text-xs font-normal font-['Inter'] leading-none">
-                  {numbro(voice.star_num).format({average: true,
-                    mantissa: 2,
-                    optionalMantissa: true,
-                    spaceSeparated: true})}
+                  {getStarNumStr(voice.star_num)}
                 </div>
               </div>
               <div className="justify-end items-center gap-0.5 flex">
                 <DownloadIcon className="w-4 h-4" />
                 <div className="text-white text-xs font-normal font-['Inter'] leading-none">
-                  {numbro(voice.d_num).format({average: true,
-                    mantissa: 2,
-                    optionalMantissa: true,
-                    spaceSeparated: true})}
+                  {getStarNumStr(voice.d_num)}
                 </div>
               </div>
               <div className="justify-start items-center gap-0.5 flex">
                 <BeakerIcon className="w-4 h-4 relative" />
                 <div className="text-white text-xs font-normal font-['Inter'] leading-none">
-                  {numbro(voice.inf_num).format({average: true,
-                    mantissa: 2,
-                    optionalMantissa: true,
-                    spaceSeparated: true})}
+                  {getStarNumStr(voice.inf_num)}
                 </div>
               </div>
             </div>

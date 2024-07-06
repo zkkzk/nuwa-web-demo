@@ -18,7 +18,7 @@ function VoiceModelList({
   onItemClick?: (voiceModel: TypeVoiceModel | null) => void;
   onChange?: (voiceModelList: TypeVoiceModel[]) => void;
   selectedVoiceModel?: TypeVoiceModel | null;
-  filters: voiceModelFilterType
+  filters?: voiceModelFilterType
 }) {
 
   const sleep = (delay: number) => new Promise((resolve) => setTimeout(resolve, delay))
@@ -45,8 +45,8 @@ function VoiceModelList({
     const res = await getPublishSquareApi.send({
       page_token: isFirst ? '' : nextPageToken,
       size: isFirst ? 20 : 10,
-      type: filters.type || '',
-      name: filters.name || ''
+      type: filters?.type || '',
+      name: filters?.name || ''
     });
     if (res && res.code === 0) {
       onChange && onChange(res.data.list);
@@ -67,10 +67,14 @@ function VoiceModelList({
     setLoading(false);
   };
 
-  if (prevFilters.type !== filters.type || prevFilters.name !== filters.name) {
-    setPrevFilters(filters);
-    getPublishSquareToServer({isFirst: true});
+  if (filters) {
+    if (prevFilters?.type !== filters.type || prevFilters.name !== filters.name) {
+      setPrevFilters(filters);
+      getPublishSquareToServer({isFirst: true});
+    }
   }
+
+  
 
   useEffect(() => {
     setInit(true);

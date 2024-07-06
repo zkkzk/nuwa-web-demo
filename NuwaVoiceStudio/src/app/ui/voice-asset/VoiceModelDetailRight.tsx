@@ -2,19 +2,18 @@
 import DCubeIcon from "@/app/icons/3DCubeIcon";
 import { ArrowDownTrayIcon, ShareIcon } from "@heroicons/react/24/solid";
 import { CheckBadgeIcon, CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
-import { Button, cn } from "@nextui-org/react";
+import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
 import { voicePublishInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
-import numbro from "numbro";
 import { downloadVoiceModel } from "@/app/lib/voice.api";
+import { getStarNumStr } from "@/app/lib/utils";
+import moment from 'moment';
 
 function VoiceAssetDetailRight({
   voicePublishInfo, 
 }: {
   voicePublishInfo: voicePublishInfoType
 }) {
-
-
   const [downlanding, setDownlanding] = useState(false);
 
   const downloadVoiceModelApi = downloadVoiceModel();
@@ -49,21 +48,16 @@ function VoiceAssetDetailRight({
         sovitsA.click();
         document.body.removeChild(sovitsA);
       }
-
-
-
       setDownlanding(false);
-
     }
 
     setDownlanding(false);
   };
-
   return (
     <div className="flex-col justify-start items-start gap-6 inline-flex">
       <div className="justify-start items-start gap-2 inline-flex">
         <Button size="lg" color="primary" variant="solid" className="w-[230px]" startContent={<DCubeIcon className="h-6 w-6 fill-white" />}>Run on WorkStation</Button>
-        <Button size="lg" variant="bordered" startContent={<ArrowDownTrayIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} onPress={downloadVoiceModelServer} />
+        {voicePublishInfo.publish_info.permission.download_permission && (<Button size="lg" variant="bordered" startContent={<ArrowDownTrayIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} onPress={downloadVoiceModelServer} />) }
         <Button size="lg" variant="bordered" startContent={<ShareIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} />
       </div>
       <div className="self-stretch h-[396px] flex-col justify-start items-start flex">
@@ -73,10 +67,7 @@ function VoiceAssetDetailRight({
               Runnings
             </div>
             <div className="self-stretch text-white text-sm font-semibold font-['Inter'] leading-tight">
-              {numbro(voicePublishInfo.inf_num).format({average: true,
-                mantissa: 2,
-                optionalMantissa: true,
-                spaceSeparated: true})}
+              {getStarNumStr(voicePublishInfo.inf_num)}
             </div>
           </div>
           <div className="grow shrink basis-0 py-3 border-t border-white/opacity-10 flex-col justify-center items-start gap-2 inline-flex">
@@ -84,10 +75,7 @@ function VoiceAssetDetailRight({
               Downloads
             </div>
             <div className="self-stretch text-white text-sm font-semibold font-['Inter'] leading-tight">
-              {numbro(voicePublishInfo.d_num).format({average: true,
-                mantissa: 2,
-                optionalMantissa: true,
-                spaceSeparated: true})}
+              {getStarNumStr(voicePublishInfo.d_num)}
             </div>
           </div>
           <div className="grow shrink basis-0 py-3 border-t border-white/opacity-10 flex-col justify-center items-start gap-2 inline-flex">
@@ -95,10 +83,7 @@ function VoiceAssetDetailRight({
               Sharing
             </div>
             <div className="self-stretch text-white text-sm font-semibold font-['Inter'] leading-tight">
-              {numbro(voicePublishInfo.star_num).format({average: true,
-                mantissa: 2,
-                optionalMantissa: true,
-                spaceSeparated: true})}
+              {getStarNumStr(voicePublishInfo.star_num)}
             </div>
           </div>
         </div>
@@ -120,7 +105,7 @@ function VoiceAssetDetailRight({
             Time
           </div>
           <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">
-            21:30 March 25 2024
+          {moment(voicePublishInfo.created_at).format('hh:mm MMMM DD YYYY')}
           </div>
         </div>
         <div className="self-stretch h-[68px] py-3 border-t border-white/opacity-10 flex-col justify-center items-start gap-2 flex">

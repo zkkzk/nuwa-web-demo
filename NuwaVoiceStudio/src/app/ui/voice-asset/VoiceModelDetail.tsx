@@ -12,14 +12,9 @@ function VoiceAssetDetail({
   publishId: string;
 }) {
   const getVoicePublishInfoApi = getVoicePublishInfo();
-
   const [voicePublishInfo, setVoicePublishInfo] = useState<voicePublishInfoType>();
-
-
   const [loading, setLoading] = useState(false);
-  const [isInit, setInit] = useState(false);
   
-
   const getVoicePublishInfoToServer = async () => {
     if (loading) {
       return;
@@ -34,11 +29,7 @@ function VoiceAssetDetail({
     }
 
     setLoading(false);
-    if (!isInit) {
-      setInit(true);
-    }
   };
-
 
   useEffect(() => {
     if (publishId) {

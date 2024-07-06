@@ -67,10 +67,26 @@ function MainStationControlParameters() {
               }}
             >
               <Tab key="basics" title="Basics">
-                <VoiceParametersBasics value={parameters} onChange={setParameters} />
+                <VoiceParametersBasics 
+                  value={parameters}
+                  onChange={(value) => {
+                    setParameters({
+                      ...parameters,
+                      ...value,
+                    })
+                  }}
+                />
               </Tab>
               <Tab key="advanced" title="Advanced">
-                <VoiceParametersAdvanced value={parameters} onChange={setParameters} />
+                <VoiceParametersAdvanced 
+                  value={parameters}
+                  onChange={(value) => {
+                    setParameters({
+                      ...parameters,
+                      ...value,
+                    })
+                  }}
+                />
               </Tab>
             </Tabs>
           </div>

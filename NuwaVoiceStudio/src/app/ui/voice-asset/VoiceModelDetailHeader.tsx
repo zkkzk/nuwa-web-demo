@@ -5,6 +5,8 @@ import { Button, cn } from "@nextui-org/react";
 import React, { useState } from "react";
 import { voicePublishInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
 import { voiceModelCancelCollect, voiceModelCollect } from "@/app/lib/voice.api";
+import numbro from "numbro";
+import { getStarNumStr } from "@/app/lib/utils";
 
 function VoiceAssetDetailHeader({
   voicePublishInfo, 
@@ -12,7 +14,7 @@ function VoiceAssetDetailHeader({
   voicePublishInfo: voicePublishInfoType
 }) {
   const [collecting, setCollecting] = useState(false);
-  const [isCollected, setIsCollected] = useState(false);
+  const [isCollected, setIsCollected] = useState(voicePublishInfo.like);
 
   const voiceModelCollectApi = voiceModelCollect();
   const voiceModelCollectServer = async () => {
@@ -48,6 +50,18 @@ function VoiceAssetDetailHeader({
     setCollecting(false);
   };
 
+  const computerStarNumStr = () => {
+    let realStarNum = voicePublishInfo.star_num;
+    if (voicePublishInfo.like && !isCollected) {
+      realStarNum--
+    }
+    if (!voicePublishInfo.like && isCollected) {
+      realStarNum++
+    }
+    return getStarNumStr(realStarNum)
+  }
+  
+
   return (
     <div className="w-full h-[82px] flex-col justify-start items-start gap-2.5 flex">
       <div className="self-stretch justify-between items-end inline-flex">
@@ -72,7 +86,7 @@ function VoiceAssetDetailHeader({
             startContent={<StarIcon className={cn("w-6 h-6",(isCollected ? "fill-amber-500" : "fill-zinc-400"))} />}
             onPress={isCollected ? voiceModelCancelCollectServer : voiceModelCollectServer}
             className="w-40"
-          >Star {voicePublishInfo.star_num}</Button>
+          >Star {computerStarNumStr()} </Button>
 					<Button size="lg" variant="bordered"  startContent={<EllipsisHorizontalIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} />
         </div>
       </div>

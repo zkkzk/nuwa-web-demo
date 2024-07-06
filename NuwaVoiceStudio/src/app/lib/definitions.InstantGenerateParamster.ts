@@ -1,5 +1,3 @@
-
-
 const defaultLanguage = 'auto';
 const defaultSegmentationMethod = 'auto_cut';
 const defaultSpeed = 1;
@@ -11,25 +9,16 @@ const defaultTemperature = 0.8;
 
 export const DefaultInstantGenerateParamster = {
   language: defaultLanguage,
-  segmentationMethod: defaultSegmentationMethod,
+  seg_method: defaultSegmentationMethod,
   speed: defaultSpeed,
-  maxWords: defaultMaxWords,
+  m_w_a_p_s: defaultMaxWords,
   seed: defaultSeed,
-  topK: defaultTopK,
-  topP: defaultTopP,
+  top_k: defaultTopK,
+  top_p: defaultTopP,
   temperature: defaultTemperature,
 };
 
-export type TypeInstantGenerateParamster = {
-  language: string,
-  segmentationMethod: string,
-  speed: number,
-  maxWords: number,
-  seed: number,
-  topK: number,
-  topP: number,
-  temperature: number,
-};
+export type TypeInstantGenerateParamster = VoiceModelBasicParamsType & VoiceModelAdvancedParamsType;
 
 export const DefaultVoiceModelFormData: VoiceModelFormDataProps = {
   model_id: '',
@@ -115,7 +104,9 @@ export type VoiceModelInfoType = {
 }
 
 export type voicePublishInfoType = {
+  like: boolean,
   id: string,
+  created_at: string,
   publish_info: VoiceModelInfoType
   publish_id: string
   tone: Array<VoiceModelToneType>,
