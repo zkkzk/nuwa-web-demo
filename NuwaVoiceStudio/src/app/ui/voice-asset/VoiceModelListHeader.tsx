@@ -84,7 +84,7 @@ function VoiceListHeader({
 
       <div className="justify-start items-center gap-6 flex w-full">
         <Input
-          size="md"
+          size="sm"
           className="max-w-[400px] min-w-[200px]"
           type="text"
           variant="bordered"
@@ -112,8 +112,24 @@ function VoiceListHeader({
         </div>
         <Button size="lg" className="text-zinc-400" variant="light" endContent={<FilterIcon className="w-6 h-6 fill-zinc-500" />}>Filters</Button>
       </div>
-      <PublishVoiceModelModal isOpen={uploadModalOpen} onChange={(isOpen) => {setUploadModalOpen(isOpen)}} variant="UPLOAD"  />
-      <PublishVoiceModelModal isOpen={selectModalOpen} onChange={(isOpen) => {setSelectModalOpen(isOpen)}} variant="SELECT" />
+        <PublishVoiceModelModal
+          variant="UPLOAD"
+          isOpen={uploadModalOpen}
+          onChange={(isOpen) => {setUploadModalOpen(isOpen)}}
+          onSuccess={() => {
+            onChange && onChange(filters);
+            setUploadModalOpen(false);
+          }}
+        />
+        <PublishVoiceModelModal
+          variant="SELECT"
+          isOpen={selectModalOpen}
+          onChange={(isOpen) => {setSelectModalOpen(isOpen)}}
+          onSuccess={() => {
+            onChange && onChange(filters);
+            setSelectModalOpen(false);
+          }}
+        />
     </div>
   );
 }

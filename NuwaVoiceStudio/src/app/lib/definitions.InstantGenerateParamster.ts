@@ -22,11 +22,13 @@ export type TypeInstantGenerateParamster = VoiceModelBasicParamsType & VoiceMode
 
 export const DefaultVoiceModelFormData: VoiceModelFormDataProps = {
   model_id: '',
-  publish_type: 1,
+  publish_type: 2,
   local_model: {
     type: "shide",
-    "gpt-weights_url": "https://us-west-ddream-audiomodel.s3.us-west-2.amazonaws.com/model_24070510070079/lisa123-e15.ckpt",
-    "sovits-weights_url": "https://us-west-ddream-audiomodel.s3.us-west-2.amazonaws.com/model_24070510070079/lisa123_e8_s96.pth"
+    // "gpt-weights_url": "https://us-west-ddream-audiomodel.s3.us-west-2.amazonaws.com/model_24070510070079/lisa123-e15.ckpt",
+    // "sovits-weights_url": "https://us-west-ddream-audiomodel.s3.us-west-2.amazonaws.com/model_24070510070079/lisa123_e8_s96.pth",
+    "gpt-weights_url": "",
+    "sovits-weights_url": ""
   },
   basic_params: {
     language: defaultLanguage

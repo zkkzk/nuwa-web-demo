@@ -4,7 +4,6 @@ import Image from "next/image";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { Avatar, Button, cn, Tooltip } from "@nextui-org/react";
 import CommercialStarIcon from "@/app/icons/CommercialStarIcon";
-import numbro from "numbro";
 import PlayButton from "../voice-preview/PlayButton";
 import DownloadIcon from "@/app/icons/DownloadIcon";
 import { BeakerIcon } from "@heroicons/react/24/outline";
@@ -65,8 +64,10 @@ function VocieItem({
         </div>
         
         <div className="w-full px-4 py-3 flex-col justify-start items-start gap-2 inline-flex">
-          <div className="h-7 justify-start items-center inline-flex">
-            <div className="text-white text-lg font-semibold font-['Inter'] leading-7">{voice.publish_info.name}</div>
+          <div className="h-7 w-full overflow-hidden justify-start items-center inline-flex">
+            <div className="text-white text-lg font-semibold font-['Inter'] leading-7 truncate">
+              {voice.publish_info.name}
+            </div>
             {voice.publish_info.permission.commercial_license && (
               <Tooltip color="warning" showArrow={true} size="lg" content="Commercial">
                 <Button

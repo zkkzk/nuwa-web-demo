@@ -8,6 +8,7 @@ import { voicePublishInfoType } from "@/app/lib/definitions.InstantGenerateParam
 import { downloadVoiceModel } from "@/app/lib/voice.api";
 import { getStarNumStr } from "@/app/lib/utils";
 import moment from 'moment';
+import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 
 function VoiceAssetDetailRight({
   voicePublishInfo, 
@@ -15,6 +16,7 @@ function VoiceAssetDetailRight({
   voicePublishInfo: voicePublishInfoType
 }) {
   const [downlanding, setDownlanding] = useState(false);
+  const amDispatch = useAmDispatch();
 
   const downloadVoiceModelApi = downloadVoiceModel();
   const downloadVoiceModelServer = async () => {
@@ -38,6 +40,14 @@ function VoiceAssetDetailRight({
         document.body.appendChild(gptA);
         gptA.click();
         document.body.removeChild(gptA);
+      } else {
+        amDispatch({
+          type: "add",
+          payload: {
+            message: 'gpt file not exist',
+            type: "error"
+          },
+        })
       }
 
       if (res.data.sovits_path) {
@@ -47,6 +57,14 @@ function VoiceAssetDetailRight({
         document.body.appendChild(sovitsA);
         sovitsA.click();
         document.body.removeChild(sovitsA);
+      } else {
+        amDispatch({
+          type: "add",
+          payload: {
+            message: 'sovits file not exist',
+            type: "error"
+          },
+         })
       }
       setDownlanding(false);
     }

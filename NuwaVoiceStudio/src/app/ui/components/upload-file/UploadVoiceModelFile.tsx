@@ -78,6 +78,17 @@ function UploadVoiceModelFile({
     const file = acceptedFiles[0]; // 获取文件
     if (!file) return;
 
+    if (modelId === '') {
+      amDispatch({
+        type: "add",
+        payload: {
+          message: 'Please select a model first',
+          type: "error",
+        },
+      })
+      return
+    }
+
     const formData = new FormData(); // 创建FormData对象
     if (type === 'gpt_weights_file') {
       formData.append('gpt_weights_file', file); // 将文件添加到FormData中
@@ -92,11 +103,6 @@ function UploadVoiceModelFile({
 
     const filename = file.name
     setFileNameStr(filename);
-    // const modelname = filename.split('.')[0]
-    // const extName = filename.split('.')[1]
-
-    // const newFilenameWithoutExt = generateId()
-    // const newFilename = `${newFilenameWithoutExt}.${extName}`
 
     try {
       setIsUploading(true)

@@ -26,15 +26,7 @@ function SelectVoiceModelForm({
   formData: VoiceModelFormDataProps
   onChange?: (newFormData: VoiceModelFormDataProps) => void,
 }) {
-
-  const modalTypeList = [
-    {
-      value: "shide",
-      label: "GPT-Sovits",
-    }
-  ];
   const [loading, setLoading] = useState(false);
-  const [isInit, setInit] = useState(false);
   const [myModelList, setMyModelList] = useState<Array<myModelType>>([])
   const getModelListApi = getModelList();
 
@@ -48,19 +40,11 @@ function SelectVoiceModelForm({
     });
     if (res && res.code === 0) {
       setMyModelList(res.data.list);
-      // setFormData({
-      //   ...formData,
-      //   model_id: res.data.modelId,
-      // })
     }
 
     setLoading(false);
-    if (!isInit) {
-      setInit(true);
-    }
   };
 
-  const [type, setType] = useState<string>("shide");
   const [selectModalOpen, setSelectModalOpen] = useState(false);
 
   useEffect(() => {
@@ -104,7 +88,7 @@ function SelectVoiceModelForm({
               </Select>
             </LabelForm>
             
-            {/* <LabelForm label='Basic Parameters' isRequired={true}>
+            <LabelForm label='Basic Parameters' isRequired={true}>
               <Select
                 disallowEmptySelection={true}
                 variant="bordered"
@@ -138,7 +122,7 @@ function SelectVoiceModelForm({
                     </SelectItem>
                 ))}
               </Select>
-            </LabelForm> */}
+            </LabelForm>
             <LabelForm label='Tone Audio Files（Sentimental Voices）' subTitle="You may add up to 21 different tones, and the first one will be set as default." isRequired={true}>
               <ToneVoiceFileList
                 toneList={formData.tone}

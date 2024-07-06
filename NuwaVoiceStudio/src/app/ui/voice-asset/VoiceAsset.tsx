@@ -28,6 +28,8 @@ function VoiceAsse() {
     name: ""
   })
 
+  const [voiceModelListKey, setVoiceModelListKey] = useState(0);
+
   return (
     <div className="w-full h-screen pt-14 overflow-hidden bg-neutral-900 rounded-bl-xl rounded-br-xl justify-start items-end inline-flex">
       <div className="w-full self-stretch justify-start items-start flex h-screen">
@@ -42,12 +44,16 @@ function VoiceAsse() {
             </div>
           </div>
         )} */}
-        <VoiceModelListHeader filters={filters} onChange={(newFilters) => setFilters(newFilters)} />
+        <VoiceModelListHeader filters={filters} onChange={(newFilters) => {
+          setFilters(newFilters)
+          setVoiceModelListKey(voiceModelListKey + 1)
+        }} />
           
         </div>
         <div className="self-stretch pt-[170px] overflow-hidden w-full">
           <div className={cn(isEmpty ? 'hidden' : 'block')}>
             <VoiceModelList
+              key={voiceModelListKey}
               selectedVoiceModel={selectedVoiceModel}
               onItemClick={(voiceModel) => {
                 setSelectedVoiceModel(voiceModel);
@@ -121,8 +127,24 @@ function VoiceAsse() {
         </ModalContent>
       </DrawerModal>
 
-      <PublishVoiceModelModal isOpen={uploadModalOpen} onChange={(isOpen) => {setUploadModalOpen(isOpen)}} variant="UPLOAD"  />
-      <PublishVoiceModelModal isOpen={selectModalOpen} onChange={(isOpen) => {setSelectModalOpen(isOpen)}} variant="SELECT" />
+      <PublishVoiceModelModal
+        variant="UPLOAD"
+        isOpen={uploadModalOpen}
+        onChange={(isOpen) => {setUploadModalOpen(isOpen)}}
+        onSuccess={() => {
+          setVoiceModelListKey(voiceModelListKey + 1);
+          setUploadModalOpen(false);
+        }}
+      />
+      <PublishVoiceModelModal
+        variant="SELECT"
+        isOpen={selectModalOpen}
+        onChange={(isOpen) => {setSelectModalOpen(isOpen)}}
+        onSuccess={() => {
+          setVoiceModelListKey(voiceModelListKey + 1);
+          setSelectModalOpen(false);
+        }}
+      />
     </div>
   );
 }

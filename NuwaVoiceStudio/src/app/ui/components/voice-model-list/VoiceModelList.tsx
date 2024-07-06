@@ -29,7 +29,6 @@ function VoiceModelList({
   const [count, setCount] = useState(0);
 
   const [loading, setLoading] = useState(false);
-  const [isInit, setInit] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [nextPageToken, setNextPageToken] = useState("");
   const [voiceModelList, setVoiceModelList] = useState<TypeVoiceModel[]>(initVoiceModelList);
@@ -77,7 +76,6 @@ function VoiceModelList({
   
 
   useEffect(() => {
-    setInit(true);
     getPublishSquareToServer({isFirst: true});
   }, []);
 
