@@ -7,35 +7,36 @@ import { Tab, Tabs } from "@nextui-org/react";
 import FilterIcon from "@/app/icons/FilterIcon";
 
 function VoiceHistoryControl({
+	type,
   onChange,
 }: {
+	type: 'audio' | 'code'
   onChange?: (infType: 'audio' | 'code') => void;
 }) {
   const router = useRouter();
   const t = useTranslations();
-  const [selected, setSelected] = useState("Voices");
 
   return (
     <>
 			<div className="self-stretch justify-between items-center inline-flex w-full mb-5">
 					<div className="text-white text-xl font-semibold font-['Archivo'] leading-normal">History</div>
-					<div className="w-[106px] self-stretch px-4 py-3 rounded-[48px] border-2 border-neutral-800 justify-start items-center gap-2 flex">
+					{/* <div className="w-[106px] self-stretch px-4 py-3 rounded-[48px] border-2 border-neutral-800 justify-start items-center gap-2 flex">
 							<div className="text-slate-100 text-sm font-medium font-['Inter']">Filters</div>
 							<FilterIcon className="w-6 h-6" />
-					</div>
+					</div> */}
 			</div>
 			<Tabs
 				aria-label="Options"     
-				selectedKey={selected}
-				onSelectionChange={(key) => setSelected(key as string)}
+				selectedKey={type}
+				onSelectionChange={(key) => onChange && onChange(key as 'audio' | 'code')}
 				classNames={{
 					panel: "p-0 w-full"
 				}}
 				fullWidth
 			>
-				<Tab key="Voices" title="Voices">
+				<Tab key="audio" title="Voices">
 				</Tab>
-				<Tab key="API" title="API">
+				<Tab key="code" title="API">
 				</Tab>
 			</Tabs>
 		</>

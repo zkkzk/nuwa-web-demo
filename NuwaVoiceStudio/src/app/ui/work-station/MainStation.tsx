@@ -3,11 +3,12 @@ import React, { useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
-import MainStationControl from "./MainStationControl";
 import VoiceModelListHeader from "./VoiceModelListHeader";
 import VoiceModelList from "../components/voice-model-list/VoiceModelList";
 import { TypeVoiceModel } from "@/app/lib/definitions.voice";
 import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParamster";
+import MainStationControl from "../components/voice-inf/MainStationControl";
+
 
 function MainStation() {
   const router = useRouter();
@@ -59,7 +60,13 @@ function MainStation() {
       </div>
 
       <div className="fixed bottom-0 left-0 pr-[382px] w-full">
-        <MainStationControl key={selectedVoiceModel?.publish_id} isOpen={isOpen} voiceModel={selectedVoiceModel} />
+        <MainStationControl
+          key={selectedVoiceModel?.publish_id}
+          isOpen={isOpen}
+          publishId={selectedVoiceModel?.publish_id || ''}
+          modelId={selectedVoiceModel?.model_id || ""}
+          tones={selectedVoiceModel?.tone || []}
+        />
       </div>
     </div>
   );

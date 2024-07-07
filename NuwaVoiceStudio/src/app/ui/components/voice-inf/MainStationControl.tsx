@@ -1,30 +1,33 @@
 "use client";
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
-import { toneListEn, TypeTone } from "@/app/lib/definitions.tone";
+import { toneListEn } from "@/app/lib/definitions.tone";
 import { UserIcon } from "@heroicons/react/24/outline";
 import MainStationControlParameters from "./MainStationControlParameters";
 import { Input, Select, SelectItem } from "@nextui-org/react";
-import { TypeVoiceModel } from "@/app/lib/definitions.voice";
 import { DefaultVoiceModelAdvancedParams, DefaultVoiceModelBasicParams, InstantGenerateParamsterType, VoiceModelToneType } from "@/app/lib/definitions.InstantGenerateParamster";
 import MainStationInfButton from "./MainStationInfButton";
 import { handleConfetti } from "@/app/lib/utils";
 
 function MainStationControl({
   isOpen = false,
-  voiceModel
+  publishId = "",
+  modelId = "",
+  tones = [],
+  onSuccess,
 } : {
   isOpen: boolean;
-  voiceModel: TypeVoiceModel | null
+  publishId: string;
+  modelId: string;
+  tones: VoiceModelToneType[];
+  onSuccess?: () => void
 }) {
   const t = useTranslations();
-  const amDispatch = useAmDispatch();
   const toneList: Array<VoiceModelToneType> = [];
   const toneTypeList: Array<string> = [];
   const initInstantGenerateParamster:InstantGenerateParamsterType = {
-    publish_id: voiceModel?.publish_id ?? '',
-    model_id: voiceModel?.model_id ?? '',
+    publish_id: publishId,
+    model_id: modelId,
     inf_type: "audio",
     text: '',
     basic_params: DefaultVoiceModelBasicParams,
@@ -36,8 +39,8 @@ function MainStationControl({
     }
   }
 
-  if (voiceModel) {
-    voiceModel.tone.map((tone) => {
+  if (tones) {
+    tones.map((tone) => {
       if (tone.tone_type === 'neutral') {
         initInstantGenerateParamster.tone = tone;
       }
@@ -46,6 +49,11 @@ function MainStationControl({
     })
   }
   const [instantGenerateParamster, setInstantGenerateParamster] = useState<InstantGenerateParamsterType>(initInstantGenerateParamster);
+
+  const onSuccessHandler = () => {
+    handleConfetti()
+    onSuccess && onSuccess();
+  }
 
   return (
     <div className="flex-col justify-end items-center flex bottom-0 w-full">
@@ -66,7 +74,7 @@ function MainStationControl({
         />
         <div className="self-stretch justify-between items-start inline-flex">
           <Select
-            isDisabled={!voiceModel}
+            isDisabled={!modelId}
             items={toneListEn}
             variant="bordered"
             size="sm"
@@ -97,15 +105,15 @@ function MainStationControl({
           <div className="justify-start items-start gap-3 flex">
             <MainStationInfButton
               type="audio"
-              isDisabled={!voiceModel || instantGenerateParamster.text.length === 0}
+              isDisabled={!modelId || instantGenerateParamster.text.length === 0}
               value={instantGenerateParamster}
-              onSuccess={() => {handleConfetti()}}
+              onSuccess={() => {onSuccessHandler()}}
             />
             <MainStationInfButton
               type="code"
-              isDisabled={!voiceModel || instantGenerateParamster.text.length === 0}
+              isDisabled={!modelId || instantGenerateParamster.text.length === 0}
               value={instantGenerateParamster}
-              onSuccess={() => {handleConfetti()}}
+              onSuccess={() => {onSuccessHandler()}}
             />
           </div>
         </div>

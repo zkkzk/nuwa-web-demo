@@ -1,15 +1,9 @@
 "use client";
 import React, { useState } from "react";
-
 import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import FlashIcon from "@/app/icons/FlashIcon";
-import { toneListEn, TypeTone } from "@/app/lib/definitions.tone";
-import { UserIcon } from "@heroicons/react/24/outline";
-import MainStationControlParameters from "./MainStationControlParameters";
-import { Button, Input, Select, SelectItem } from "@nextui-org/react";
-import { TypeVoiceModel } from "@/app/lib/definitions.voice";
-import { DefaultVoiceModelAdvancedParams, DefaultVoiceModelBasicParams, InstantGenerateParamsterType, VoiceModelToneType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { Button } from "@nextui-org/react";
+import { InstantGenerateParamsterType } from "@/app/lib/definitions.InstantGenerateParamster";
 import { voiceInf } from "@/app/lib/voice.api";
 
 function MainStationInfButton({

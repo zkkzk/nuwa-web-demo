@@ -2,12 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import { Accordion, AccordionItem, Button, Tab, Tabs } from "@nextui-org/react";
 import ResetIcon from "@/app/icons/ResetIcon";
 import { DefaultVoiceModelAdvancedParams, DefaultVoiceModelBasicParams, InstantGenerateParamsterType } from "@/app/lib/definitions.InstantGenerateParamster";
-import VoiceParametersBasics from "../components/voice-parameters/VoiceParametersBasics";
-import VoiceParametersAdvanced from "../components/voice-parameters/VoiceParametersAdvanced";
+import VoiceParametersBasics from "../voice-parameters/VoiceParametersBasics";
+import VoiceParametersAdvanced from "../voice-parameters/VoiceParametersAdvanced";
 
 function MainStationControlParameters({
   isOpen = false,
@@ -20,7 +19,6 @@ function MainStationControlParameters({
 }) {
   const router = useRouter();
   const t = useTranslations();
-  const amDispatch = useAmDispatch();
   const [selected, setSelected] = useState("basics");
   const [isReset, setIsReset] = useState(false);
 

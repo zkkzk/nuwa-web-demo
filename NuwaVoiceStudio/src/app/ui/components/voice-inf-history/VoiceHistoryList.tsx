@@ -13,8 +13,10 @@ import InfiniteScroll from "../infinite-scroll/InfiniteScroll";
 const limit = 4;
 
 function VoiceHistoryList({
+  type = 'audio',
   onChange,
 }: {
+  type?: 'audio' | 'code';
   onChange?: (voiceList: VoiceInfHistoryType[]) => void;
 }) {
   const router = useRouter();
@@ -42,7 +44,7 @@ function VoiceHistoryList({
 
     const res = await getVoiceInfHistoryApi.send({
       "page_token": nextPageToken,
-      "type": "collection",
+      "inf_type": type,
     });
     if (res && res.code === 0) {
       let newVoiceList: VoiceInfHistoryType[] = res.data.list || [];
@@ -52,17 +54,6 @@ function VoiceHistoryList({
       setHasMore(res.data.has_more)
       setNextPageToken(res.data.next_page_token)
     }
-
-    // await sleep(1000);
-    // for (let i = 1; i < limit+1; i++) {
-    //   newVoiceList.push({
-    //     id: i + count,
-    //     src: 'https://via.placeholder.com/160x90',
-    //     name: `大叔成熟男声音${i + count}`,
-    //     count: 3500000,
-    //     star: i%2 === 1,
-    //   })
-    // }
     setLoading(false);
     if (!isInit) {
       setInit(true);
@@ -100,7 +91,7 @@ function VoiceHistoryList({
         </div>
       )}
 
-			<ScrollShadow size={32} visibility="top" hideScrollBar id="scrollableVoiceHistoryDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto py-8">
+			<ScrollShadow size={16} visibility="top" hideScrollBar id="scrollableVoiceHistoryDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto py-4">
 				<InfiniteScroll
 					dataLength={voiceList.length}
 					next={loadMoreData}

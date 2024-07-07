@@ -36,6 +36,7 @@ export type VoiceInfHistoryType = {
   audio_url: string
   inf_id: string
   created_at: string
+  name:string
   code: Array<{
     code: string,
     type: string,

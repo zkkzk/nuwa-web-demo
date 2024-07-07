@@ -19,7 +19,7 @@ function VoiceHistory() {
       <div className="fixed top-20 right-0 w-[380px] z-40">
         <div className="px-8 pt-8 bg-neutral-900">
           {voiceList !== null && voiceList.length > 0 && (
-            <VoiceHistoryControl />
+            <VoiceHistoryControl type={infType} onChange={(setInfType)} />
           )}
           {voiceList === null && (
             <div className="w-full gap-5 flex flex-col">
@@ -27,9 +27,9 @@ function VoiceHistory() {
                 <Skeleton className="rounded-lg">
                 <div className="h-8 w-24"></div>
                 </Skeleton>
-                <Skeleton className="rounded-lg">
+                {/* <Skeleton className="rounded-lg">
                   <div className="h-8 w-24"></div>
-                </Skeleton>
+                </Skeleton> */}
               </div>
               <div>
                 <Skeleton className="w-full h-8 rounded-lg">
@@ -41,8 +41,8 @@ function VoiceHistory() {
         </div>
       </div>
       
-      <div className="self-stretch pt-[118px] overflow-hidden">
-			  <VoiceHistoryList onChange={(newVoiceList) => setVoiceList(newVoiceList)} />
+      <div className="self-stretch pt-[98px] overflow-hidden">
+			  <VoiceHistoryList key={infType} type={infType} onChange={(newVoiceList) => setVoiceList(newVoiceList)} />
       </div>
     </div>
   );

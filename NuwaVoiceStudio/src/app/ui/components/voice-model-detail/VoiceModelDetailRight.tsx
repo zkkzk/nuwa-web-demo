@@ -10,6 +10,7 @@ import moment from 'moment';
 import VoiceModelCollectButton from "./VoiceModelCollectButton";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import VoiceModelDownloadButton from "../voice-model-download-button/VoiceModelDownloadButton";
+import VoiceInfDrawerModal from "../voice-inf/VoiceInfDrawerModal";
 
 function VoiceAssetDetailRight({
   voicePublishInfo, 
@@ -17,6 +18,7 @@ function VoiceAssetDetailRight({
   voicePublishInfo: voicePublishInfoType
 }) {
   const [startDownload, setStartDownload] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
   
   return (
     <div className="flex-col justify-start items-start gap-6 inline-flex">
@@ -27,7 +29,16 @@ function VoiceAssetDetailRight({
         </div>
       </div>
       <div className="justify-start items-start gap-2 inline-flex">
-        <Button size="lg" color="primary" variant="solid" className="w-[230px]" startContent={<DCubeIcon className="h-6 w-6 fill-white" />}>Run on WorkStation</Button>
+        <Button
+          size="lg"
+          color="primary"
+          variant="solid"
+          className="w-[230px]"
+          startContent={<DCubeIcon className="h-6 w-6 fill-white" />}
+          onPress={() => {
+            setIsOpen(true)
+          }}
+        >Run on WorkStation</Button>
         {voicePublishInfo.publish_info.permission.download_permission && (
           <>
             <VoiceModelDownloadButton publishId={voicePublishInfo.publish_id} startDownload={startDownload} />
@@ -170,6 +181,16 @@ function VoiceAssetDetailRight({
           </div>
         </div>
       </div>
+
+      <VoiceInfDrawerModal
+        key={voicePublishInfo.publish_id}
+        isOpen={isOpen}
+        publishId={voicePublishInfo.publish_id}
+        modelId={voicePublishInfo.model_id}
+        tones={voicePublishInfo.tone}
+        onChange={(isOpen) => { setIsOpen(isOpen); }}
+        onSuccess={() => { setIsOpen(false); }}
+      />
     </div>
   );
 }
