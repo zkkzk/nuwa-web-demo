@@ -11,11 +11,11 @@ import VoiceModelDownloadButton from "../components/voice-model-download-button/
 function TrainItem({
   value,
   isSelected = false,
-  onSelectedChange,
+  onValueChange,
 }: {
   value: voiceTrainRecordType,
   isSelected?: boolean;
-  onSelectedChange?: (selected: boolean) => void;
+  onValueChange?: (selected: boolean) => void;
 }) {
   const [selectModalOpen, setSelectModalOpen] = useState(false);
   const [startDownload, setStartDownload] = useState(0);
@@ -25,7 +25,7 @@ function TrainItem({
       <div className="justify-start items-center gap-2.5 flex">
         <div className="justify-start items-center gap-2.5 flex">
           <div className="justify-center items-center flex">
-            <Checkbox isSelected={isSelected} onValueChange={onSelectedChange} size="sm" defaultSelected></Checkbox>
+            <Checkbox isSelected={isSelected} onValueChange={onValueChange} size="sm" defaultSelected></Checkbox>
           </div>
           <div className="w-[200px] text-zinc-400 text-base font-semibold font-['Inter'] leading-normal">
             {value.task_name}

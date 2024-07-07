@@ -43,7 +43,7 @@ export const voiceModelTypeList = [{
 
 export type voiceTrainRecordType = {
   id: string
-  task_id: number
+  task_id: string
   task_name: string
   status: number
   result: number,

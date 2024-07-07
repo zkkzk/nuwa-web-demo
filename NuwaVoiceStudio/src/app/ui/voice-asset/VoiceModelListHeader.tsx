@@ -94,7 +94,10 @@ function VoiceListHeader({
       <div className="justify-start items-center gap-6 flex w-full">
         <Input
           size="sm"
-          className="max-w-[400px] min-w-[200px]"
+          classNames={{
+            base: 'max-w-[400px] min-w-[200px]',
+            inputWrapper: 'h-10'
+          }}
           type="text"
           variant="bordered"
           placeholder="Search"

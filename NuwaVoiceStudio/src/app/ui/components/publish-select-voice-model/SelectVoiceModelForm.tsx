@@ -69,7 +69,7 @@ function SelectVoiceModelForm({
               isDisabled={!!modelId ? true : false}
               disallowEmptySelection={true}
               variant="bordered"
-              size="md"
+              size="lg"
               placeholder="Select model type"
               labelPlacement="outside"
               selectedKeys={[formData.model_id]}

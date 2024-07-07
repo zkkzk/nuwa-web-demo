@@ -1,14 +1,12 @@
 "use client";
 import React, { useState } from "react";
-import { Button } from "@nextui-org/react";
 import { toneListEn } from "@/app/lib/definitions.tone";
 import { VoiceModelToneType } from "@/app/lib/definitions.InstantGenerateParamster";
 import ToneVoiceFile from "./ToneVoiceFile";
-import UploadFile from "../upload-file/UploadFile";
 import ExportIcon from "@/app/icons/ExportIcon";
 import UploadVoiceModelFile from "../upload-file/UploadVoiceModelFile";
 import SelectToneListModal from "./SelectToneListModal";
-
+import { cn } from "@nextui-org/react";
 
 function ToneVoiceFileList({
   toneList,
@@ -71,7 +69,7 @@ function ToneVoiceFileList({
             }} />
           </div>
         )}
-        <div className="h-32 w-32">
+        <div className={cn(selectToneList ? "w-32" : "w-full", "h-32")}>
           <UploadVoiceModelFile
             key={uploadKey}
             label={<div>Drag and drop files here or click to upload<br />CKPT format</div>}

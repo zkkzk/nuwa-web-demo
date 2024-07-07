@@ -16,6 +16,7 @@ const voiceUrlList = {
   voiceCollect: `/ddream/api/v1/voice/collect`,
   voiceCancelCollect: `/ddream/api/v1/voice/cancel_collect`,
   downloadVoiceModel: `/ddream/api/v1/voice/download_model`,
+  deleteVoiceTrain: `/ddream/api/v1/voice/train/delete`,
 }
 
 export function getPublishSquare() {
@@ -134,6 +135,15 @@ export function downloadVoiceModel() {
   const t = useTranslations();
   return baseApiHander({
     url: voiceUrlList.downloadVoiceModel,
+    mustLogin: true,
+    noLoginGotoLogin: true,
+  })
+}
+
+export function deleteVoiceTrain() {
+  const t = useTranslations();
+  return baseApiHander({
+    url: voiceUrlList.deleteVoiceTrain,
     mustLogin: true,
     noLoginGotoLogin: true,
   })

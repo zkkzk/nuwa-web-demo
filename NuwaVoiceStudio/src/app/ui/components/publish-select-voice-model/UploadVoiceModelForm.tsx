@@ -34,7 +34,7 @@ function UploadVoiceModelForm({
         <LabelForm label='Type' isRequired={true}>
           <Select
             variant="bordered"
-            size="md"
+            size="sm"
             isRequired
             placeholder="Select type"
             selectedKeys={[formData.local_model.type as string]}
@@ -134,15 +134,15 @@ function UploadVoiceModelForm({
             }}
           >
             {languageListEn.map((lang) => (
-                <SelectItem
-                  key={lang.value}
-                  value={lang.value}
-                  classNames={{
-                    base: 'h-12 pl-2 pr-3 py-2 rounded-xl gap-4',
-                  }}
-                >
-                  {lang.label}
-                </SelectItem>
+              <SelectItem
+                key={lang.value}
+                value={lang.value}
+                classNames={{
+                  base: 'h-12 pl-2 pr-3 py-2 rounded-xl gap-4',
+                }}
+              >
+                {lang.label}
+              </SelectItem>
             ))}
           </Select>
         </LabelForm>
