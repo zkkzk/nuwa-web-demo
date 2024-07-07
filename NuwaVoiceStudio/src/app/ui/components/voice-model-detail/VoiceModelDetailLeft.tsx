@@ -1,9 +1,9 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import ToneVoicePreview from "../components/voice-preview/ToneVoicePreview";
 import { voicePublishInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
 import GPTSovitsIcon from "@/app/icons/GPTSovitsIcon";
+import ToneVoicePreview from "../voice-preview/ToneVoicePreview";
 
 function VoiceAssetDetailLeft({
   voicePublishInfo, 

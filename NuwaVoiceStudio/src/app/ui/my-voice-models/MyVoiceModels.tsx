@@ -1,22 +1,14 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import UploadFile from "../components/upload-file/UploadFile";
+
 import TrainIcon from "@/app/icons/TrainIcon";
 import TrainList from "./TrainList";
 import TrainVoiceModelModal from "./TrainVoiceModelModal";
-import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
-import { getVoiceTrainRecords } from "@/app/lib/voice.api";
 
-type voiceTrainRecordType = {
-  id: number;
-}
 
 function MyVoiceModels() {
 
   const [trainVoiceModelOpen, setTrainVoiceModelOpen] = useState(false);
-  const amDispatch = useAmDispatch();
-  const [loading, setLoading] = useState(false);
-  const [isInit, setInit] = useState(false);
   const [voiceTrainRecordsList, setVoiceTrainRecordsList] = useState<any[]>([]) 
   const [refreshKey, setRefreshKey] = useState(0);
 

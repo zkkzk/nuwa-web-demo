@@ -113,7 +113,7 @@ function TrainList({
           startContent={<TrashIcon className="w-5 h-5" />}
           isDisabled={selectedIds.length === 0}
           onPress={deleteVoiceTrainServer}
-        >delete</Button>
+        >Delete</Button>
       </div>
       {voiceTrainRecordsList.map((item) => (
         <TrainItem key={item.id} value={item} isSelected={selectedIds.includes(item.task_id)} onValueChange={(checked) => {

@@ -30,9 +30,9 @@ export default function Header() {
 
   return (
     <>
-      <div className="fixed top-0 left-0 z-[60] w-full h-[82px] px-6 bg-zinc-800 justify-between items-center inline-flex">
+      <div className="fixed top-0 left-0 z-[60] w-full h-[82px] px-6 bg-zinc-800 justify-between items-center inline-flex border-[#898989] border-b border-solid">
         <div className="self-stretch justify-start items-center gap-6 flex">
-          <div className="rounded-lg flex-col justify-center items-center gap-2 inline-flex">
+          <div className=" w-[200px] z-40 rounded-lg flex-col justify-center items-center gap-2 inline-flex">
             <div className="rounded-lg justify-start items-center gap-3 inline-flex">
               <div
                 className={`w-[320px] p-[5px] fixed top-0 left-0 bottom-0 pointer-events-none bg-transparent`}
@@ -44,13 +44,13 @@ export default function Header() {
                 ></DDLSidebar>
               </div>
 
-              <div className="ml-[250px] text-slate-100 text-lg font-semibold font-['Inter'] leading-7 text-nowrap">
+              {/* <div className="ml-[250px] text-slate-100 text-lg font-semibold font-['Inter'] leading-7 text-nowrap">
                 Voice Studio
-              </div>
+              </div> */}
             </div>
           </div>
 
-          <div className="w-[2px] h-[27px] bg-white/10"></div>
+          {/* <div className="w-[2px] h-[27px] bg-white/10"></div> */}
 
           <div className="justify-start items-center gap-1 flex">
             {navigation.map((item, index) => (
@@ -65,14 +65,14 @@ export default function Header() {
                   <item.icon
                     className={cn(
                       item.current
-                        ? 'fill-white stroke-white'
-                        : 'group-hover/item:fill-white group-hover/item:stroke-white fill-zinc-400 stroke-zinc-400',
+                        ? 'fill-[#CEFF1C] stroke-[#CEFF1C]'
+                        : 'group-hover/item:fill-[#CEFF1C] group-hover/item:stroke-[#CEFF1C] fill-zinc-400 stroke-zinc-400',
                       ' w-6 h-6 relative'
                     )}
                   />
                   <div
                     className={cn(
-                      item.current ? 'text-white' : 'group-hover/item:text-white text-zinc-400',
+                      item.current ? 'text-[#CEFF1C]' : 'group-hover/item:text-[#CEFF1C] text-zinc-400',
                       " text-sm font-medium font-['Inter'] leading-tight"
                     )}
                   >

@@ -1,4 +1,4 @@
-import MyVoiceModels from "@/app/ui/myvoicemodels/MyVoiceModels";
+import MyVoiceModels from "@/app/ui/my-voice-models/MyVoiceModels";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 
 export default function myVoiceModels() {

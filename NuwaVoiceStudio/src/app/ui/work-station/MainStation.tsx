@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Link, useRouter } from "@/navigation";
+import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import MainStationControl from "./MainStationControl";
@@ -9,18 +9,10 @@ import VoiceModelList from "../components/voice-model-list/VoiceModelList";
 import { TypeVoiceModel } from "@/app/lib/definitions.voice";
 import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParamster";
 
-type TypeFilterItem = {
-  label: string;
-  value: string;
-};
-
-
 function MainStation() {
   const router = useRouter();
   const t = useTranslations();
   const amDispatch = useAmDispatch();
-  const [selected, setSelected] = useState("recent");
-  const [selectedFilter, setSelectedFilter] = useState<TypeFilterItem | null>();
   const [isOpen, setIsOpen] = useState(false);
 
   const [isEmpty, setIsEmpty] = useState(false);

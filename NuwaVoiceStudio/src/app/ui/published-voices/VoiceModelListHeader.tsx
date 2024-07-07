@@ -48,7 +48,7 @@ function VoiceListHeader({
 
   return (
     <div className="self-stretch justify-between items-center flex flex-col bg-neutral-900 px-8 pt-6 w-full">
-      <div className="h-[40px] justify-between items-center gap-6 flex w-full mb-4">
+      <div className="h-[40px] justify-between items-center gap-6 flex w-full">
         <div className="text-white text-xl font-semibold font-['Archivo'] leading-normal">
           Voices
         </div>
@@ -79,51 +79,9 @@ function VoiceListHeader({
               <DropdownItem key="online">From My Voice Lib</DropdownItem>
             </DropdownMenu>
           </Dropdown>
-          <Button
-            size="lg"
-            variant="flat"
-            className="w-[200px]"
-            startContent={<DCubeIcon className="h-6 w-6 fill-zinc-400" />}
-            onPress={() => {
-              router.push('/myvoicemodels');
-            }}
-          >Train My Voice</Button>
         </div>
       </div>
 
-      <div className="justify-start items-center gap-6 flex w-full">
-        <Input
-          size="sm"
-          classNames={{
-            base: 'max-w-[400px] min-w-[200px]',
-            inputWrapper: 'h-10'
-          }}
-          type="text"
-          variant="bordered"
-          placeholder="Search"
-          startContent={<MagnifyingGlassIcon className="w-6 h-6 fill-zinc-400" />}
-          value={filters.name || ""}
-          onChange={(e: any) => {
-            onChange({
-              ...filters,
-              name: e.target.value
-            })
-          }}
-        />
-        <div className="grow shrink-0 justify-start items-center gap-2.5 flex">
-          <NuwaChipRadioGroup
-            items={types}
-            value={filters.type}
-            onChange={(e: any) => {
-              onChange({
-                ...filters,
-                type: e ? e.target.value : null
-              })
-            }}
-          />
-        </div>
-        <Button size="lg" className="text-zinc-400" variant="light" endContent={<FilterIcon className="w-6 h-6 fill-zinc-500" />}>Filters</Button>
-      </div>
         <PublishVoiceModelModal
           key={'uploadModalOpen' + uploadModalOpen.toString()}
           variant="UPLOAD"

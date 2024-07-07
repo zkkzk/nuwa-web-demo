@@ -2,7 +2,7 @@
 import TrainIcon from "@/app/icons/TrainIcon";
 import { voiceTrainRecordType } from "@/app/lib/definitions.voice";
 import { BeakerIcon } from "@heroicons/react/20/solid";
-import { CheckCircleIcon, XCircleIcon } from "@heroicons/react/24/solid";
+import { CheckCircleIcon, ClockIcon, XCircleIcon } from "@heroicons/react/24/solid";
 import { Button, Checkbox, cn } from "@nextui-org/react";
 import React, { useState } from "react";
 import PublishVoiceModelModal from "../components/publish-select-voice-model/PublishVoiceModelModal";
@@ -32,6 +32,9 @@ function TrainItem({
           </div>
         </div>
         <div className="px-0.5 rounded-xl justify-center items-center gap-1 flex">
+          {value.status === 1 && (
+            <ClockIcon className="w-5 h-5 fill-zinc-400" />
+          )}
           {value.status === 2 && (
             <TrainIcon className="w-5 h-5 fill-violet-500" />
           )}
@@ -44,10 +47,14 @@ function TrainItem({
           <div className="px-0.5 justify-center items-center flex">
             <div className={cn([
               "text-sm font-normal font-['Inter'] leading-tight",
+              value.status === 1 && 'text-zinc-400',
               value.status === 2 && 'text-violet-500',
               (value.status === 3 && value.result === 1) && 'text-green-500',
               (value.status === 3 && value.result === 2) && 'text-rose-600'
             ])}>
+              {value.status === 1 && (
+                <span>In Queue...</span>
+              )}
               {value.status === 2 && (
                 <span>Training: completing in 20 mins...</span>
               )}

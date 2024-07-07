@@ -9,7 +9,7 @@ import { getStarNumStr } from "@/app/lib/utils";
 import moment from 'moment';
 import VoiceModelCollectButton from "./VoiceModelCollectButton";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
-import VoiceModelDownloadButton from "../components/voice-model-download-button/VoiceModelDownloadButton";
+import VoiceModelDownloadButton from "../voice-model-download-button/VoiceModelDownloadButton";
 
 function VoiceAssetDetailRight({
   voicePublishInfo, 

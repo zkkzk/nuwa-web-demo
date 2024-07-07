@@ -5,7 +5,7 @@ import { TypeVoiceModel } from "@/app/lib/definitions.voice";
 import VoiceModelItemSkeleton from "./VoiceModelItemSkeleton";
 import { ScrollShadow } from "@nextui-org/react";
 import InfiniteScroll from "../infinite-scroll/InfiniteScroll";
-import { getPublishSquare, getRunVoiceModelList } from "@/app/lib/voice.api";
+import { getMyPublish, getPublishSquare } from "@/app/lib/voice.api";
 import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParamster";
 
 
@@ -18,12 +18,16 @@ function VoiceModelList({
 }: {
   filters?: voiceModelFilterType
   selectedVoiceModel?: TypeVoiceModel | null;
-  type?: 'workstation' | 'all';
+  type?: 'workstation' | 'my' | 'all';
   onItemClick?: (voiceModel: TypeVoiceModel | null) => void;
   onChange?: (voiceModelList: TypeVoiceModel[]) => void;
 }) {
   let getVoiceModelListApi: any;
-  getVoiceModelListApi = getPublishSquare();
+  if (type === 'my') {
+    getVoiceModelListApi = getMyPublish();
+  } else {
+    getVoiceModelListApi = getPublishSquare();
+  }
 
   const initVoiceModelList:Array<TypeVoiceModel> = []
   const [count, setCount] = useState(0);
@@ -80,7 +84,7 @@ function VoiceModelList({
   return (
     <div className="self-stretch flex-col justify-start items-start gap-8 flex h-full">
       {voiceModelList.length > 0 && (
-        <ScrollShadow size={32} visibility="top" hideScrollBar id="scrollableVoiceModelDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto py-8 px-8">
+        <ScrollShadow size={16} visibility="top" hideScrollBar id="scrollableVoiceModelDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto py-4 px-8">
           <InfiniteScroll
             dataLength={voiceModelList.length}
             next={() => {getPublishSquareToServer({isFirst: false})}}

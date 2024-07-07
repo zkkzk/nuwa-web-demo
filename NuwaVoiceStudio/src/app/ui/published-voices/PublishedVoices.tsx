@@ -11,7 +11,7 @@ import { TypeVoiceModel } from "@/app/lib/definitions.voice";
 import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParamster";
 import VoiceModelDetailDrawerModal from "../components/voice-model-detail/VoiceModelDetailDrawerModal";
 
-function VoiceAsset() {
+function PublishedVoices() {
   const [isEmpty, setIsEmpty] = useState(false);
 
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
@@ -29,16 +29,17 @@ function VoiceAsset() {
     <div className="w-full h-screen pt-20 overflow-hidden bg-neutral-900 rounded-bl-xl rounded-br-xl justify-start items-end inline-flex">
       <div className="w-full self-stretch justify-start items-start flex h-screen">
         <div className="fixed top-20 left-0 w-full z-40">
-        <VoiceModelListHeader filters={filters} onChange={(newFilters) => {
-          setFilters(newFilters)
-          setVoiceModelListKey(voiceModelListKey + 1)
-        }} />
+          <VoiceModelListHeader filters={filters} onChange={(newFilters) => {
+            setFilters(newFilters)
+            setVoiceModelListKey(voiceModelListKey + 1)
+          }} />
           
         </div>
-        <div className="self-stretch pt-[150px] overflow-hidden w-full">
+        <div className="self-stretch pt-[80px] overflow-hidden w-full">
           <div className={cn(isEmpty ? 'hidden' : 'block')}>
             <VoiceModelList
               key={voiceModelListKey}
+              type="my"
               selectedVoiceModel={selectedVoiceModel}
               onItemClick={(voiceModel) => {
                 setSelectedVoiceModel(voiceModel);
@@ -125,4 +126,4 @@ function VoiceAsset() {
   );
 }
 
-export default VoiceAsset;
+export default PublishedVoices;

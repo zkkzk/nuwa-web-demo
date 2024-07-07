@@ -1,5 +1,5 @@
 
-import WorkStation from "@/app/ui/work-station/WorkStation";
+import PublishedVoices from "@/app/ui/published-voices/PublishedVoices";
 import { NextIntlClientProvider, useMessages } from "next-intl";
 
 export default function publishedVoices() {
@@ -7,7 +7,7 @@ export default function publishedVoices() {
   return (
     <>
       <NextIntlClientProvider messages={messages}>
-        <WorkStation />
+        <PublishedVoices />
       </NextIntlClientProvider>
     </>
   );
