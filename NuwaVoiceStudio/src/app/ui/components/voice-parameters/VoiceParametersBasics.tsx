@@ -83,7 +83,6 @@ function VoiceParametersBasics({
         value={value.m_w_a_p_s as number}
         onChange={(m_w_a_p_s) => onChange({ ...value, m_w_a_p_s: m_w_a_p_s })}
       />
-
     </div>
   );
 }

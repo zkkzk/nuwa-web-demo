@@ -20,7 +20,7 @@ import TrainVoiceFilePreview from "../components/voice-preview/TrainVoiceFilePre
 import { createVoiceTrain } from "@/app/lib/voice.api";
 import { z } from "zod";
 import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
-import confetti from "canvas-confetti";
+import { handleConfetti } from "@/app/lib/utils";
 
 function TrainVoiceModelModal({
   isOpen = false,
@@ -48,14 +48,6 @@ function TrainVoiceModelModal({
   const amDispatch = useAmDispatch();
 
   const createVoiceTrainApi = createVoiceTrain();
-
-  const handleConfetti = () => {
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
-  };
   
   const createVoiceTrainServer = async () => {
 

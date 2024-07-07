@@ -1,3 +1,5 @@
+import { VoiceModelToneType } from "./definitions.InstantGenerateParamster";
+
 export type TypeVoiceModel = {
   id: number;
   src: string,
@@ -5,6 +7,8 @@ export type TypeVoiceModel = {
   count: number,
   star: boolean,
   publish_id: string,
+  model_id: string,
+  tone: Array<VoiceModelToneType>,
 };
 
 export type TypeVoice = {

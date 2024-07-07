@@ -17,6 +17,9 @@ const voiceUrlList = {
   voiceCancelCollect: `/ddream/api/v1/voice/cancel_collect`,
   downloadVoiceModel: `/ddream/api/v1/voice/download_model`,
   deleteVoiceTrain: `/ddream/api/v1/voice/train/delete`,
+  getRunVoiceModelList: `/ddream/api/v1/voice/run_model/list`,
+  voiceBrowse: `/ddream/api/v1/voice/browse`,
+  voiceInf: `/ddream/api/v1/voice/inf`,
 }
 
 export function getPublishSquare() {
@@ -87,7 +90,7 @@ export function createVoiceTrain() {
 export function getVoiceInfHistory() {
   const t = useTranslations();
   return baseApiHander({
-    url: voiceUrlList.createVoiceTrain,
+    url: voiceUrlList.getVoiceInfHistory,
     mustLogin: true,
     noLoginGotoLogin: true,
   })
@@ -144,6 +147,33 @@ export function deleteVoiceTrain() {
   const t = useTranslations();
   return baseApiHander({
     url: voiceUrlList.deleteVoiceTrain,
+    mustLogin: true,
+    noLoginGotoLogin: true,
+  })
+}
+
+export function getRunVoiceModelList() {
+  const t = useTranslations();
+  return baseApiHander({
+    url: voiceUrlList.getRunVoiceModelList,
+    mustLogin: true,
+    noLoginGotoLogin: true,
+  })
+}
+
+export function voiceBrowse() {
+  const t = useTranslations();
+  return baseApiHander({
+    url: voiceUrlList.voiceBrowse,
+    mustLogin: true,
+    noLoginGotoLogin: true,
+  })
+}
+
+export function voiceInf() {
+  const t = useTranslations();
+  return baseApiHander({
+    url: voiceUrlList.voiceInf,
     mustLogin: true,
     noLoginGotoLogin: true,
   })

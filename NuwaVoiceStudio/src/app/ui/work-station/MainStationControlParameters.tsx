@@ -5,23 +5,38 @@ import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import { Accordion, AccordionItem, Button, Tab, Tabs } from "@nextui-org/react";
 import ResetIcon from "@/app/icons/ResetIcon";
-import { DefaultInstantGenerateParamster, TypeInstantGenerateParamster } from "@/app/lib/definitions.InstantGenerateParamster";
+import { DefaultVoiceModelAdvancedParams, DefaultVoiceModelBasicParams, InstantGenerateParamsterType } from "@/app/lib/definitions.InstantGenerateParamster";
 import VoiceParametersBasics from "../components/voice-parameters/VoiceParametersBasics";
 import VoiceParametersAdvanced from "../components/voice-parameters/VoiceParametersAdvanced";
 
-
-function MainStationControlParameters() {
+function MainStationControlParameters({
+  isOpen = false,
+  value,
+  onChange,
+} : {
+  isOpen: boolean;
+  value: InstantGenerateParamsterType;
+  onChange: (newValue: InstantGenerateParamsterType) => void;
+}) {
   const router = useRouter();
   const t = useTranslations();
   const amDispatch = useAmDispatch();
   const [selected, setSelected] = useState("basics");
   const [isReset, setIsReset] = useState(false);
 
-  const [parameters, setParameters] = useState<TypeInstantGenerateParamster>(DefaultInstantGenerateParamster)
+  const initSelectedKeys = new Set<string>([])
+  if (isOpen) {
+    initSelectedKeys.add("1")
+  }
+  const [selectedKeys, setSelectedKeys] = useState(new Set<string>(initSelectedKeys))
 
   const handleReset = () => {
     setIsReset(true);
-    setParameters(DefaultInstantGenerateParamster)
+    onChange({
+      ...value,
+      basic_params: DefaultVoiceModelBasicParams,
+      advance_params: DefaultVoiceModelAdvancedParams
+    })
   };
 
   useEffect(() => {
@@ -35,15 +50,16 @@ function MainStationControlParameters() {
 
   return (
     <div className="w-full px-6">
-
       <Accordion
+       selectedKeys={selectedKeys}
+       onSelectionChange={setSelectedKeys as any}
       >
         <AccordionItem
           key="1"
           aria-label="Parameters"
           title="Parameters"
           classNames={{
-            base: "px-8 w-full bg-neutral-800 rounded-tl-2xl rounded-tr-2xl shadow backdrop-blur-[100px]",
+            base: "px-8 w-full bg-neutral-800/90 rounded-tl-2xl rounded-tr-2xl shadow backdrop-blur-[100px]",
             content: "pb-8"
           }}
         >
@@ -63,27 +79,27 @@ function MainStationControlParameters() {
               selectedKey={selected}
               onSelectionChange={(key) => setSelected(key as string)}
               classNames={{
-                panel: "p-0 w-full"
+                panel: "p-0 w-full h-[190px]"
               }}
             >
               <Tab key="basics" title="Basics">
                 <VoiceParametersBasics 
-                  value={parameters}
-                  onChange={(value) => {
-                    setParameters({
-                      ...parameters,
+                  value={value.basic_params}
+                  onChange={(newValue) => {
+                    onChange({
                       ...value,
+                      basic_params: newValue,
                     })
                   }}
                 />
               </Tab>
               <Tab key="advanced" title="Advanced">
                 <VoiceParametersAdvanced 
-                  value={parameters}
-                  onChange={(value) => {
-                    setParameters({
-                      ...parameters,
+                  value={value.advance_params}
+                  onChange={(newValue) => {
+                    onChange({
                       ...value,
+                      advance_params: newValue,
                     })
                   }}
                 />

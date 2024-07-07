@@ -20,6 +20,16 @@ export const DefaultInstantGenerateParamster = {
 
 export type TypeInstantGenerateParamster = VoiceModelBasicParamsType & VoiceModelAdvancedParamsType;
 
+export type InstantGenerateParamsterType = {
+  publish_id: string,
+  model_id: string,
+  inf_type: "audio" | "code",
+  text: string,
+  basic_params: VoiceModelBasicParamsType,
+  advance_params: VoiceModelAdvancedParamsType,
+  tone: VoiceModelToneType
+}
+
 export const DefaultVoiceModelFormData: VoiceModelFormDataProps = {
   model_id: '',
   publish_type: 2,
@@ -68,18 +78,33 @@ export type VoiceModelFormDataProps = {
   publish_info: VoiceModelInfoType
 }
 
+export const DefaultVoiceModelBasicParams = {
+  language: defaultLanguage,
+  seg_method: defaultSegmentationMethod,
+  speed: defaultSpeed,
+  m_w_a_p_s: defaultMaxWords,
+};
+
 export type VoiceModelBasicParamsType = {
-  language: string | null
-  speed: number | null
-  seg_method: string | null
-  "m_w_a_p_s": number | null
+  language: string
+  speed: number
+  seg_method: string
+  "m_w_a_p_s": number
 }
 
+
+export const DefaultVoiceModelAdvancedParams = {
+  seed: defaultSeed,
+  top_k: defaultTopK,
+  top_p: defaultTopP,
+  temperature: defaultTemperature,
+};
+
 export type VoiceModelAdvancedParamsType = {
-  seed: number | null
-  top_k: number | null
-  top_p: number | null
-  temperature: number | null
+  seed: number
+  top_k: number
+  top_p: number
+  temperature: number
 }
 
 export type VoiceModelToneType = {
@@ -214,6 +239,6 @@ export const segmentationMethodListEn = [{
 }];
 
 export type voiceModelFilterType = {
-  type: "gril" | "boy" | "male" | "female" | ""
+  type: "gril" | "boy" | "male" | "female" | "collection" | "browse" | ""
   name: string
 };

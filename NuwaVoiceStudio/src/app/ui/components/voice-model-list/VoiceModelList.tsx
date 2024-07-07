@@ -5,29 +5,28 @@ import { TypeVoiceModel } from "@/app/lib/definitions.voice";
 import VoiceModelItemSkeleton from "./VoiceModelItemSkeleton";
 import { ScrollShadow } from "@nextui-org/react";
 import InfiniteScroll from "../infinite-scroll/InfiniteScroll";
-import { getPublishSquare } from "@/app/lib/voice.api";
+import { getPublishSquare, getRunVoiceModelList } from "@/app/lib/voice.api";
 import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParamster";
 
 
 function VoiceModelList({
+  filters,
+  selectedVoiceModel,
+  type = 'all',
   onItemClick,
   onChange,
-  selectedVoiceModel,
-  filters,
 }: {
+  filters?: voiceModelFilterType
+  selectedVoiceModel?: TypeVoiceModel | null;
+  type?: 'workstation' | 'all';
   onItemClick?: (voiceModel: TypeVoiceModel | null) => void;
   onChange?: (voiceModelList: TypeVoiceModel[]) => void;
-  selectedVoiceModel?: TypeVoiceModel | null;
-  filters?: voiceModelFilterType
 }) {
-
-  const sleep = (delay: number) => new Promise((resolve) => setTimeout(resolve, delay))
-  const getPublishSquareApi = getPublishSquare();
+  let getVoiceModelListApi: any;
+  getVoiceModelListApi = getPublishSquare();
 
   const initVoiceModelList:Array<TypeVoiceModel> = []
-
   const [count, setCount] = useState(0);
-
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const [nextPageToken, setNextPageToken] = useState("");
@@ -41,7 +40,7 @@ function VoiceModelList({
     }
     setLoading(true);
 
-    const res = await getPublishSquareApi.send({
+    const res = await getVoiceModelListApi.send({
       page_token: isFirst ? '' : nextPageToken,
       size: isFirst ? 20 : 10,
       type: filters?.type || '',
@@ -73,8 +72,6 @@ function VoiceModelList({
     }
   }
 
-  
-
   useEffect(() => {
     getPublishSquareToServer({isFirst: true});
   }, []);
@@ -93,13 +90,7 @@ function VoiceModelList({
             className="w-full self-stretch items-start grid gap-8 grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
           >
             {voiceModelList.map((voice) => (
-              <div key={voice.id} onClick={() => {
-                // onItemClick && onItemClick(voice);
-                // if(selectedVoiceModel && (voice.id === selectedVoiceModel.id)) {
-                //   onItemClick && onItemClick(null);
-                //   return;
-                // };
-              }}>
+              <div key={voice.id}>
                 <VoiceModelItem onItemClick={onItemClick} voice={voice} key={voice.id} isSelected={!!selectedVoiceModel && selectedVoiceModel.id === voice.id} />
               </div>
             ))}

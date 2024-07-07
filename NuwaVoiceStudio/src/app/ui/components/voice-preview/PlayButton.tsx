@@ -56,7 +56,9 @@ function PlayButton({
         )
       }
       {voiceSrc && (
-        <audio src={voiceSrc} ref={audioRef as any} />
+        <audio src={voiceSrc} ref={audioRef as any} onProgress={(e) => {
+          // console.log("onProgress", e)
+        }} />
       )}
     </div>
   );

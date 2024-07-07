@@ -12,26 +12,6 @@ function VoiceParametersAdvanced({
   onChange: (value:VoiceModelAdvancedParamsType)=>void,
 }) {
 
-  const languageList = [{
-    value: "en",
-    label: "English"
-  }, {
-    value: "zh",
-    label: "中文"
-  }, {
-    value: "ja",
-    label: "日本語"
-  }, {
-    value: "ko",
-    label: "한국어"
-  }, {
-    value: "es",
-    label: "Español"
-  }, {
-    value: "fr",
-    label: "Français"
-  }];
-
   return (
     <div className="self-stretch rounded-xl justify-end items-center gap-x-12 gap-y-7 grid grid-cols-1 lg:grid-cols-2">
       <Input

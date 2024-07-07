@@ -15,7 +15,6 @@ import {
 } from "@heroicons/react/24/solid";
 import SelectVoiceModelForm from "./SelectVoiceModelForm";
 import VoiceInformationForm from "./VoiceInformationForm";
-import confetti from 'canvas-confetti';
 import UploadVoiceModelForm from "./UploadVoiceModelForm";
 import { DefaultVoiceModelFormData, VoiceModelFormDataProps, VoiceModelInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
 import { z } from "zod";
@@ -23,6 +22,7 @@ import { useAmDispatch } from "../alter-message/AlterMessageContextProvider";
 import { getModelId, voiceModelPublish } from "@/app/lib/voice.api";
 import PublishResultModal from "./PublishResultModal";
 import { findIndex, uniqBy } from "lodash-es";
+import { handleConfetti } from "@/app/lib/utils";
 
 function PublishVoiceModelModal({
   isOpen = false,
@@ -37,14 +37,6 @@ function PublishVoiceModelModal({
   onChange: (isOpen: boolean) => void // 类型定义为函数，用于处理模态框的打开和关闭
   onSuccess: () => void
 }) {
-  const handleConfetti = () => {
-    confetti({
-      particleCount: 100,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
-  };
-
   const uploadModal = useDisclosure({
     isOpen,
     onClose: () => onChange(false),

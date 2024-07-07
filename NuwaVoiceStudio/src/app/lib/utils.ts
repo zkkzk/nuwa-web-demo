@@ -1,5 +1,6 @@
 "use client";
 
+import confetti from "canvas-confetti";
 import numbro from "numbro";
 import { useState } from "react";
 
@@ -54,3 +55,12 @@ export const getStarNumStr = (num: number) => {
     spaceSeparated: true
   })
 }
+
+
+export const handleConfetti = () => {
+  confetti({
+    particleCount: 100,
+    spread: 70,
+    origin: { y: 0.6 }
+  });
+};
