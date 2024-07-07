@@ -2,18 +2,16 @@
 import React, { useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import VoiceHistoryControl from "./VoiceHistoryControl";
 import VoiceHistoryList from "./VoiceHistoryList";
-import { TypeVoice } from "@/app/lib/definitions.voice";
 import { Card, Skeleton } from "@nextui-org/react";
+import { VoiceInfHistoryType } from "@/app/lib/definitions.InstantGenerateParamster";
 
 function VoiceHistory() {
   const router = useRouter();
   const t = useTranslations();
-  const amDispatch = useAmDispatch();
   const [selected, setSelected] = useState("Voices");
-  const [voiceList, setVoiceList] = useState<TypeVoice[] | null>(null);
+  const [voiceList, setVoiceList] = useState<VoiceInfHistoryType[] | null>(null);
   const [infType, setInfType] = useState<'audio' | 'code'>("audio");
 
   return (

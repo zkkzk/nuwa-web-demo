@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Link, useRouter } from "@/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import { Tab, Tabs } from "@nextui-org/react";
 import FilterIcon from "@/app/icons/FilterIcon";
 
@@ -14,7 +13,6 @@ function VoiceHistoryControl({
 }) {
   const router = useRouter();
   const t = useTranslations();
-  const amDispatch = useAmDispatch();
   const [selected, setSelected] = useState("Voices");
 
   return (

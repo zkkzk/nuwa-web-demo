@@ -33,7 +33,8 @@ function MainStationInfButton({
     setLoading(true);
 
     const res = await voiceInfApi.send({
-      ...value
+      ...value,
+      inf_type: type,
     });
     if (res && res.code === 0) {
       onSuccess();

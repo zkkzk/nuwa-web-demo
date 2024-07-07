@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
-import VoicePreview from "../components/voice-preview/VoicePreview";
-
-
+import VoicePreview from "../voice-preview/VoicePreview";
 
 function VoiceHistoryItemVoiceRreview({voiceSrc}: {
   voiceSrc: string

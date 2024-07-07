@@ -30,6 +30,18 @@ export type InstantGenerateParamsterType = {
   tone: VoiceModelToneType
 }
 
+
+export type VoiceInfHistoryType = {
+  id: string
+  audio_url: string
+  inf_id: string
+  created_at: string
+  code: Array<{
+    code: string,
+    type: string,
+  }>
+} & InstantGenerateParamsterType;
+
 export const DefaultVoiceModelFormData: VoiceModelFormDataProps = {
   model_id: '',
   publish_type: 2,

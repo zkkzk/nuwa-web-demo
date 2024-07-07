@@ -1,14 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { TypeVoice } from "@/app/lib/definitions.voice";
 import { Snippet, Tab, Tabs } from "@nextui-org/react";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { VoiceInfHistoryType } from "@/app/lib/definitions.InstantGenerateParamster";
 
-function VoiceHistoryItemAPI({voice}: {
-  voice: TypeVoice
+function VoiceHistoryItemAPI({voiceInfHistory}: {
+  voiceInfHistory: VoiceInfHistoryType
 }) {
-	const tagsList = voice.tags.split(",");
   const [selected, setSelected] = useState("GET");
 
   return (

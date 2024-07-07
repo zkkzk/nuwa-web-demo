@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import MainStation from "./MainStation";
-import VoiceHistory from "./VoiceHistory";
+import VoiceHistory from "../components/voice-inf-history/VoiceHistory";
 
 function WorkStation() {
   const router = useRouter();
