@@ -97,7 +97,7 @@ export function getVoiceInfHistory() {
   })
 }
 
-export function uploadModelFile() {
+export function uploadModelFile(onUploadProgress: any) {
   const t = useTranslations();
   return baseApiHander({
     url: voiceUrlList.uploadModelFile,
@@ -105,6 +105,7 @@ export function uploadModelFile() {
     noLoginGotoLogin: true,
     isBody: true,
     isUpload: true,
+    onUploadProgress: onUploadProgress
   })
 }
 

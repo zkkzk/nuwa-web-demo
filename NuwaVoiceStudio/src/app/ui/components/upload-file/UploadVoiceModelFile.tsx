@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../alter-message/AlterMessageContextProvider";
 import Dropzone from 'react-dropzone'
 import { uploadFileToServer } from "@/app/lib/common.api";
-import { Spinner } from "@nextui-org/react";
+import { Progress, Spinner } from "@nextui-org/react";
 import { customAlphabet } from "nanoid";
 import { uploadModelFile } from "@/app/lib/voice.api";
 
@@ -62,6 +62,8 @@ function UploadVoiceModelFile({
 
   const [ dropzoneAccept, setDropzoneAccept ] = useState(initDropzoneAccept);
   const amDispatch = useAmDispatch();
+  const [loaded, setLoaded] = useState(0);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     setIsUnmount(false);
@@ -70,7 +72,10 @@ function UploadVoiceModelFile({
     };
   }, [])
 
-  const uploadModelFileApi = uploadModelFile();
+  const uploadModelFileApi = uploadModelFile((progressEvent: any) => {
+    setLoaded(progressEvent.loaded);
+    setTotal(progressEvent.total);
+  });
 
   const onDropHander = async (acceptedFiles: any) => {
     console.log(acceptedFiles)
@@ -139,30 +144,35 @@ function UploadVoiceModelFile({
   }
 
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full h-full relative rounded-2xl overflow-hidden">
       {fileNameStr ? (
-        <div className="w-full h-full px-6 bg-zinc-800 rounded-xl justify-between items-center gap-3 inline-flex">
-          <div className="justify-start items-center gap-3 flex text-slate-100 text-base font-normal font-['Inter'] leading-normal">
-            {fileNameIcon && (
-              <div className="w-6 h-6 justify-center items-center flex">
-                {fileNameIcon}
+        <>
+          <div className="w-full h-full px-6 bg-zinc-800 rounded-xl justify-between items-center gap-3 inline-flex">
+            <div className="justify-start items-center gap-3 flex text-slate-100 text-base font-normal font-['Inter'] leading-normal">
+              {fileNameIcon && (
+                <div className="w-6 h-6 justify-center items-center flex">
+                  {fileNameIcon}
+                </div>
+              )}
+              <div className="text-slate-100 text-base font-normal font-['Inter'] leading-normal">
+                {fileNameStr}
+              </div>
+              
+            </div>
+            {isUploading ? (
+              <Spinner />
+            ) : (
+              <div className=" cursor-pointer p-1 bg-black w-6 h-6 rounded-full justify-center items-center gap-2 flex">
+                <XMarkIcon className="h-4 w-4 fill-white stroke-white" onClick={() => {
+                  setFileNameStr("")
+                }} />
               </div>
             )}
-            <div className="text-slate-100 text-base font-normal font-['Inter'] leading-normal">
-              {fileNameStr}
-            </div>
-            
           </div>
-          {isUploading ? (
-            <Spinner />
-            ) : (
-            <div className=" cursor-pointer p-1 bg-black w-6 h-6 rounded-full justify-center items-center gap-2 flex">
-              <XMarkIcon className="h-4 w-4 fill-white stroke-white" onClick={() => {
-                setFileNameStr("")
-              }} />
-            </div>
-          )}
-        </div>
+          <div className="w-full absolute bottom-0 left-0">
+            <Progress size="sm" aria-label="Loading..." value={loaded} maxValue={total} />
+          </div>
+        </>
       ): (
         <div className="w-full h-full">
           <Dropzone onDrop={onDropHander} accept={dropzoneAccept}>
@@ -179,7 +189,6 @@ function UploadVoiceModelFile({
             )}
           </Dropzone>
         </div>
-        
       )}
     </div>
   );

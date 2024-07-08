@@ -5,6 +5,7 @@ import { useLocale, useTranslations } from "next-intl";
 import { getCookie, removeCookie } from 'typescript-cookie'
 import { usePathname, useRouter } from "@/navigation";
 import { useLoginDispatch } from "@ddreamland/common";
+import axios from "axios";
 
 export const NUWAUID = "nuwa_uid"
 export const NUWASESSION = "nuwa_session"
@@ -34,6 +35,7 @@ export const baseApiHander = ({
   successMsg,
   isBody = false,
   isUpload = false,
+  onUploadProgress,
 }: {
   url: string
   mustLogin?: boolean
@@ -42,6 +44,7 @@ export const baseApiHander = ({
   successMsg?: string
   isBody?: boolean
   isUpload?: boolean
+  onUploadProgress?: (progressEvent: any) => void
 }) => {
   const t = useTranslations();
   const locale = useLocale();
@@ -81,20 +84,23 @@ export const baseApiHander = ({
     try {
       let fetchParams = {
         method: 'POST',
-        body: isBody ? params : JSON.stringify(params),
+        data: isBody ? params : JSON.stringify(params),
         headers: {
           'Accept-Language': locale
-        } as any
+        } as any,
+        onUploadProgress: (progressEvent: any) => {
+          onUploadProgress && onUploadProgress(progressEvent)
+        },
       }
 
       if (!isUpload) {
         fetchParams.headers['Content-Type'] = 'application/json'
       }
       
-      const response = await fetch(fetchUrl, fetchParams);
-
-      if(response.ok){
-        const data = await response.json();
+      const response = await axios(fetchUrl, fetchParams);
+      
+      if(response.status === 200){
+        const data = response.data;
         // if (isSt) {
         //   return data;
         // }

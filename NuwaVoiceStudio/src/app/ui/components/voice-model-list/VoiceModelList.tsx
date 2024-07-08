@@ -99,7 +99,7 @@ function VoiceModelList({
           next={() => {getPublishSquareToServer({isFirst: false})}}
           hasMore={hasMore}
           loader={<>
-            {Array.from({ length: rowCount * 2 }, (_, i) => i).map((item) => (<VoiceModelItemSkeleton />))}
+            {Array.from({ length: rowCount * 2 }, (_, i) => i).map((item, index) => (<VoiceModelItemSkeleton key={index} />))}
           </>}
           scrollableTarget="scrollableVoiceModelDiv"
           className="w-full self-stretch items-start grid gap-8 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6"
