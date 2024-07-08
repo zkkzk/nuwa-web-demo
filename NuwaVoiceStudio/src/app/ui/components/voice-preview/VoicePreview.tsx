@@ -3,6 +3,7 @@ import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useWavesurfer } from '@wavesurfer/react'
 import PlayButton from "./PlayButton";
 import { cn, Skeleton } from "@nextui-org/react";
+import { usePlayBtnDispatch } from "./PlayButtonContextProvider";
 
 function VoicePreview({
 	voiceSrc,
@@ -18,6 +19,7 @@ function VoicePreview({
 	onTimeChange?: (res: { currentTime: number, duration: number| null }) => void
 }) {
 	const containerRef = useRef(null)
+  const playBtnDispatch = usePlayBtnDispatch();
 
   const { wavesurfer, isPlaying, currentTime, isReady } = useWavesurfer({
     container: containerRef,
@@ -39,6 +41,14 @@ function VoicePreview({
 
 	const onChangePlay = (play:boolean) => {
 		onPlayPause();
+		if (play) {
+			playBtnDispatch({
+        type: "pause",
+        payload: {
+          audio: wavesurfer
+        },
+      })
+		}
 	}
 
 	useEffect(()=>{
@@ -50,9 +60,14 @@ function VoicePreview({
 			<div className="shrink-0 h-full">
 				{isReady ? (
 					<div className="h-12 w-12 flex items-center justify-center">
-						<PlayButton isPlay={isPlaying} onChange={onChangePlay} classNames={{
-							base: classNames.playButton
-						}} />
+						<PlayButton
+							isPlay={isPlaying}
+							onChange={onChangePlay}
+							wavesurfer={wavesurfer}
+							classNames={{
+								base: classNames.playButton
+							}}
+						/>
 					</div>
 				): (
 					<Skeleton className="w-12 h-12 rounded-lg"/>

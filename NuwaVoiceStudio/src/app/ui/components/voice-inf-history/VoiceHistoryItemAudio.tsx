@@ -13,14 +13,11 @@ function VoiceHistoryItemAudio({
 }: {
   voiceInfHistory: VoiceInfHistoryType
 }) {
-
-  const [downlanding, setDownlanding] = useState(false);
 	const [showCode, setShowCode] = useState(false);
-
 
   return (
 		<>
-			<VoiceHistoryItemVoiceRreview voiceSrc={voiceInfHistory.audio_url} />
+			{voiceInfHistory.audio_url && voiceInfHistory.audio_url !== '' && <VoiceHistoryItemVoiceRreview voiceSrc={voiceInfHistory.audio_url} />}
 			{showCode && <VoiceHistoryItemAPI code={voiceInfHistory.code} />}
 			
 			<div className="self-stretch justify-start items-start gap-4 inline-flex">
