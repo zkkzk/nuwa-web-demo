@@ -14,7 +14,7 @@
     "@heroicons/react": "^2.0.18",
     "@metaplex-foundation/js": "^0.20.1",
     "@metaplex-foundation/umi": "^0.9.1",
-    "@nextui-org/react": "^2.2.9",
+    "@nextui-org/react": "^2.4.2",
     "@solana/wallet-adapter-base": "^0.9.3",
     "@solana/wallet-adapter-react": "^0.15.3",
     "@solana/wallet-adapter-react-ui": "^0.9.5",

@@ -1,8 +1,8 @@
 "use client";
 import DCubeIcon from "@/app/icons/3DCubeIcon";
-import { ArrowDownTrayIcon, ShareIcon } from "@heroicons/react/24/solid";
+import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import { CheckBadgeIcon, CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
-import { Button } from "@nextui-org/react";
+import { Button, Snippet } from "@nextui-org/react";
 import React, { useState } from "react";
 import { VoiceModelPublishType } from "@/app/lib/definitions.voice";
 import { getStarNumStr } from "@/app/lib/utils";
@@ -11,6 +11,7 @@ import VoiceModelCollectButton from "./VoiceModelCollectButton";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import VoiceModelDownloadButton from "../voice-model-download-button/VoiceModelDownloadButton";
 import VoiceInfDrawerModal from "../voice-inf/VoiceInfDrawerModal";
+import ShareIcon from "@/app/icons/ShareIcon";
 
 function VoiceAssetDetailRight({
   voicePublishInfo, 
@@ -20,7 +21,10 @@ function VoiceAssetDetailRight({
   const [startDownload, setStartDownload] = useState(0);
   const [downloading, setDownlanding] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  
+  const pathname = typeof window !== 'undefined' && window.location.pathname ? window.location.pathname : '';
+  const origin = typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
+  const url = `${origin}${pathname}?publishId=${voicePublishInfo.publish_id}`
+
   return (
     <div className="flex-col justify-start items-start gap-6 inline-flex">
       <div className="self-stretch justify-between items-end inline-flex">
@@ -62,7 +66,18 @@ function VoiceAssetDetailRight({
             />
           </>
         ) }
-        <Button size="lg" variant="bordered" startContent={<ShareIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} />
+        <Snippet
+          variant="bordered"
+          copyIcon={<ShareIcon className="fill-zinc-400 w-4 h-4" />}
+          classNames={{
+            pre: 'hidden',
+            base: 'px-1.5'
+          }}
+          size="md"
+          hideSymbol={true}
+        >
+          {url}
+        </Snippet>
       </div>
       <div className="self-stretch h-[396px] flex-col justify-start items-start flex">
         <div className="self-stretch justify-start items-start inline-flex">

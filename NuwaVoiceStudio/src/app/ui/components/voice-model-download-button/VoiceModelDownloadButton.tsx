@@ -27,7 +27,7 @@ function VoiceModelDownloadButton({
     onDownloading(true);
 
     const res = await downloadVoiceModelApi.send({
-      "model_if": modelId || '',
+      "model_id": modelId || '',
       "publish_id": publishId || ''
     });
     if (res && res.code === 0) {
@@ -57,7 +57,10 @@ function VoiceModelDownloadButton({
         })
       }
 
-      downloadFiles(files);
+      if (files.length > 0) {
+        downloadFiles(files);
+      }
+
       setDownlanding(false);
       onDownloading(false);
     }

@@ -16,6 +16,7 @@ function PublishedVoices() {
 
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [selectModalOpen, setSelectModalOpen] = useState(false);
+  
   const [selectedVoiceModel, setSelectedVoiceModel] = useState<TypeVoiceModel | null >(null);
 
   const [filters, setFilters] = useState<VoiceModelFilterType>({
@@ -94,7 +95,7 @@ function PublishedVoices() {
           )}
         </div>
       </div>
-
+      
       <VoiceModelDetailDrawerModal
         publishId={selectedVoiceModel?.publish_id}
         isOpen={selectedVoiceModel !== null}

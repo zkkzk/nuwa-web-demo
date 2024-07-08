@@ -10,6 +10,7 @@ import PublishVoiceModelModal from "../components/publish-select-voice-model/Pub
 import { TypeVoiceModel } from "@/app/lib/definitions.voice";
 import { VoiceModelFilterType } from "@/app/lib/definitions.voice";
 import VoiceModelDetailDrawerModal from "../components/voice-model-detail/VoiceModelDetailDrawerModal";
+import { useSearchParams } from "next/navigation";
 
 function VoiceAsset() {
   const [isEmpty, setIsEmpty] = useState(false);
@@ -17,6 +18,10 @@ function VoiceAsset() {
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
   const [selectModalOpen, setSelectModalOpen] = useState(false);
   const [selectedVoiceModel, setSelectedVoiceModel] = useState<TypeVoiceModel | null >(null);
+
+  const searchParams = useSearchParams()
+  const searchPublishId = searchParams.get('publishId') || ''
+  const [defaultOpened, setDefaultOpened] = useState(true)
 
   const [filters, setFilters] = useState<VoiceModelFilterType>({
     type: "",
@@ -93,6 +98,15 @@ function VoiceAsset() {
           )}
         </div>
       </div>
+
+      {searchPublishId && (
+        <VoiceModelDetailDrawerModal
+        publishId={searchPublishId}
+        isOpen={defaultOpened}
+        onChange={(isOpen) => {
+          setDefaultOpened(isOpen);
+        }} />
+      )}
 
       <VoiceModelDetailDrawerModal
         publishId={selectedVoiceModel?.publish_id}

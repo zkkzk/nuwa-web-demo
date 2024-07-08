@@ -10,7 +10,6 @@ function VoiceHistoryItem({
 }: {
   voiceInfHistory: VoiceInfHistoryType
 }) {
-  const [selected, setSelected] = useState("GET");
 
   return (
 		<div className="self-stretch flex-col justify-center items-start gap-6 flex">
@@ -47,7 +46,7 @@ function VoiceHistoryItem({
 				<div className="self-stretch h-6 flex-col justify-start items-end flex">
 					<div className="self-stretch justify-between items-center inline-flex">
 						<div className="justify-start items-start gap-2 flex">
-							<div className="text-gray-500 text-xs font-medium font-['Inter']">{moment(voiceInfHistory.created_at).format('hh:mm MMMM DD YYYY')}</div>
+							<div className="text-gray-500 text-xs font-medium font-['Inter']">{moment(voiceInfHistory.seq, 'X').format('hh:mm MMMM DD YYYY')}</div>
 						</div>
 					</div>
 				</div>

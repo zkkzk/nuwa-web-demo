@@ -27,11 +27,14 @@ function VoiceHistoryItemAPI({code}: {
 			>
 				{code.map((code, index) => (
 					<Tab key={code.type} title={code.type}>				
-						<Snippet classNames={{
-							base: "bg-zinc-900 rounded-none overflow-scroll w-full relative",
-							content: "",
-							copyButton: " top-5 right-6 absolute"
-						}}>
+						<Snippet
+							classNames={{
+								base: "bg-zinc-900 rounded-none overflow-scroll w-full relative",
+								content: "",
+								copyButton: " top-5 right-6 absolute"
+							}}
+							hideSymbol={true}
+						>
 							{/* <CopyIcon className=" cursor-pointer w-5 h-5 fill-neutral-900 stroke-neutral-900 absolute top-5 right-6" /> */}				
 								<SyntaxHighlighter
 									language={code.type}
