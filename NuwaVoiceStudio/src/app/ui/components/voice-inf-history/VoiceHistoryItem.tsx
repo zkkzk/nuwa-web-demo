@@ -1,5 +1,6 @@
 "use client";
 import React, { useState } from "react";
+import Image from "next/image";
 import VoiceHistoryItemAPI from "./VoiceHistoryItemAPI";
 import { VoiceInfHistoryType } from "@/app/lib/definitions.voice";
 import moment from "moment";
@@ -15,15 +16,16 @@ function VoiceHistoryItem({
 		<div className="self-stretch flex-col justify-center items-start gap-6 flex">
 			<div className="self-stretch rounded-xl flex-col justify-start items-start gap-2 flex">
 				<div className="self-stretch p-6 bg-neutral-800 rounded-xl flex-col justify-start items-start gap-4 flex">
-					<div className="self-stretch min-h-[120px] flex-col justify-start items-start gap-2.5 flex">
+					<div className="self-stretch flex-col justify-start items-start gap-2.5 flex">
 						<div className="self-stretch justify-start items-start gap-6 inline-flex">
-							{false && (
-								<div className="justify-start items-start gap-2 flex">
-									<div className="rounded-2xl justify-end items-center flex">
-										<img className="w-16 h-16" src={'voiceInfHistory.cover_url'} />
-									</div>
-								</div>
-							)}
+							<div className="relative w-16 h-16 rounded-xl">
+								<Image
+									fill={true}
+									alt={voiceInfHistory.cover_url}
+									className=" grow shrink basis-0 self-stretch rounded-xl flex-none object-cover"
+									src={voiceInfHistory.cover_url}
+								/>
+							</div>
 								
 							<div className="grow shrink basis-0 self-stretch flex-col justify-between items-start inline-flex">
 								<div className="self-stretch text-white text-lg font-semibold font-['Archivo'] leading-normal">{voiceInfHistory.name}</div>

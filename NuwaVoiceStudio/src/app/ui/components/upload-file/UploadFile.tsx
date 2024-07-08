@@ -5,9 +5,8 @@ import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../alter-message/AlterMessageContextProvider";
 import Dropzone from 'react-dropzone'
 import { uploadFileToServer } from "@/app/lib/common.api";
-import { Spinner } from "@nextui-org/react";
+import { Spinner, Image } from "@nextui-org/react";
 import { customAlphabet } from "nanoid";
-import Image from "next/image";
 
 export function generateId() {
   /**
@@ -146,13 +145,14 @@ function UploadFile({
             </div>
           )}
           {accept === "image" && (
-            <div className=" relative w-full h-full px-6 bg-zinc-800 rounded-xl justify-between items-center gap-3 inline-flex">
-          
+            <div className="w-full h-full px-6 bg-zinc-800 rounded-xl justify-center items-center gap-3 inline-flex">
               { fileUrl && (
                 <Image
-                  fill={true}
                   alt={fileUrl}
-                  className=" grow shrink basis-0 self-stretch rounded-xl flex-none object-cover"
+                  classNames={{
+                    wrapper: "h-full",
+                    img: "h-full"
+                  }}
                   src={fileUrl}
                 />
               )}
@@ -177,9 +177,6 @@ function UploadFile({
                 </div>
               )}
               </div>
-
-
-              
             </div>
           )}
         </>

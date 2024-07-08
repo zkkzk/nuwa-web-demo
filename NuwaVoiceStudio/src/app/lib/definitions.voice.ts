@@ -23,6 +23,7 @@ export type VoiceInfHistoryType = {
   inf_id: string
   created_at: string
   name:string
+  cover_url: string
   seq: number,
   code: Array<{
     code: string,
