@@ -3,21 +3,24 @@ import React, { useState } from "react";
 import Image from "next/image";
 import { StarIcon } from "@heroicons/react/24/solid";
 import { Avatar, Button, cn, Tooltip } from "@nextui-org/react";
-import CommercialStarIcon from "@/app/icons/CommercialStarIcon";
 import PlayButton from "../voice-preview/PlayButton";
 import DownloadIcon from "@/app/icons/DownloadIcon";
 import { BeakerIcon } from "@heroicons/react/24/outline";
 import GPTSovitsIcon from "@/app/icons/GPTSovitsIcon";
 import { TypeVoiceModel } from "@/app/lib/definitions.voice";
 import { getStarNumStr } from "@/app/lib/utils";
+import CommercialLicenseIcon from "./commercialLicenseIcon";
+import VoiceModelCollectButton from "./VoiceModelCollectButton";
 
-function VocieItem({
+function VoiceModelItem({
   voice,
   isSelected = false,
+  type,
   onItemClick
 }: {
   voice: any,
   isSelected: boolean,
+  type: 'workstation' | 'my' | 'all';
   onItemClick?: (voiceModel: TypeVoiceModel) => void;
 }) {
   const [isPlay, setIsPlay] = useState(false);
@@ -44,10 +47,27 @@ function VocieItem({
               }}
             />
           </div>
-          <div className="justify-start items-center gap-1 inline-flex absolute top-4 left-4">
-            <GPTSovitsIcon className="w-5 h-5 fill-blue-500" />
-            <div className="text-white text-xs font-normal font-['Inter'] leading-none">GPT-Sovits</div>
+          <div className="justify-start items-center gap-1 inline-flex absolute top-4 left-3">
+            {type !== 'workstation' && (
+              <>
+                <GPTSovitsIcon className="w-5 h-5 fill-blue-500" />
+                <div className="text-white text-xs font-normal font-['Inter'] leading-none">GPT-Sovits</div>
+              </>
+            )}
+            {voice.publish_info.permission.commercial_license && type === 'workstation' && (
+              <>
+                <CommercialLicenseIcon />
+                <div className="text-white text-xs font-normal font-['Inter'] leading-none">Commercial</div>
+              </>
+            )}
           </div>
+
+          <div className="justify-start items-center gap-1 inline-flex absolute top-4 right-3">
+            {type === 'workstation' && (
+              <VoiceModelCollectButton like={voice.like} publishId={voice.publish_id} />
+            )}
+          </div>
+
           <div className="absolute right-4 -bottom-4" 
               onClick={(e) => {
                 e.stopPropagation();
@@ -68,42 +88,43 @@ function VocieItem({
             <div className="text-white text-lg font-semibold font-['Inter'] leading-7 truncate">
               {voice.publish_info.name}
             </div>
-            {voice.publish_info.permission.commercial_license && (
-              <Tooltip color="warning" showArrow={true} size="lg" content="Commercial">
-                <Button
-                  isIconOnly
-                  color="default" 
-                  variant="light"
-                  className="data-[hover=true]:bg-transparent"
-                >
-                  <CommercialStarIcon className="w-5 h-5" />
-                </Button>
-              </Tooltip>
+            {voice.publish_info.permission.commercial_license && type !== 'workstation' && (
+              <CommercialLicenseIcon />
             )}
           </div>
-          <div className="self-stretch justify-between items-center inline-flex">
-            <div className="justify-center items-center gap-1.5 flex">
-              <Avatar src="https://i.pravatar.cc/150?u=a04258a2462d826712d" size="sm" />
-              <div className="text-zinc-400 text-xs font-normal font-['Inter'] leading-none">
-                SoulCurry
+          <div className="self-stretch justify-between items-center inline-flex gap-2">
+            <div className="justify-center items-center gap-1.5 flex overflow-hidden">
+              <Avatar className="shrink-0" name={voice.publisher.name} src={voice.publisher.avatar} size="sm" />
+              <div className="text-zinc-400 text-xs font-normal font-['Inter'] leading-none truncate">
+                {voice.publisher.name}
               </div>
             </div>
 
             <div className="justify-end items-center gap-2 flex">
-              <div className="justify-end items-center gap-0.5 flex">
-                <StarIcon className={`w-4 h-4 ${voice.star ? 'fill-amber-500' : 'fill-zinc-400'}`} />
-                <div className="text-white text-xs font-normal font-['Inter'] leading-none">
-                  {getStarNumStr(voice.star_num)}
-                </div>
-              </div>
-              <div className="justify-end items-center gap-0.5 flex">
-                <DownloadIcon className="w-4 h-4" />
-                <div className="text-white text-xs font-normal font-['Inter'] leading-none">
-                  {getStarNumStr(voice.d_num)}
-                </div>
-              </div>
+              {type !== 'workstation' && (
+                <>
+                  <div className="justify-end items-center gap-0.5 flex">
+                    <StarIcon className={`w-4 h-4 ${voice.star ? 'fill-amber-500' : 'fill-zinc-400'}`} />
+                    <div className="text-white text-xs font-normal font-['Inter'] leading-none">
+                      {getStarNumStr(voice.star_num)}
+                    </div>
+                  </div>
+                  <div className="justify-end items-center gap-0.5 flex">
+                    <DownloadIcon className="w-4 h-4" />
+                    <div className="text-white text-xs font-normal font-['Inter'] leading-none">
+                      {getStarNumStr(voice.d_num)}
+                    </div>
+                  </div>
+                </>
+              )}
+              
               <div className="justify-start items-center gap-0.5 flex">
-                <BeakerIcon className="w-4 h-4 relative" />
+                {type !== 'workstation' && (
+                  <BeakerIcon className="w-4 h-4 relative" />
+                )}
+                {type === 'workstation' && (
+                  <div className="text-zinc-400 text-xs font-normal font-['Inter'] leading-none">Run</div>
+                )}
                 <div className="text-white text-xs font-normal font-['Inter'] leading-none">
                   {getStarNumStr(voice.inf_num)}
                 </div>
@@ -116,4 +137,4 @@ function VocieItem({
   );
 }
 
-export default VocieItem;
+export default VoiceModelItem;

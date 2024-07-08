@@ -2,7 +2,7 @@
 import DCubeIcon from "@/app/icons/3DCubeIcon";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import { CheckBadgeIcon, CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
-import { Button, Snippet, Image, Avatar } from "@nextui-org/react";
+import { Button, Snippet, Avatar } from "@nextui-org/react";
 import React, { useState } from "react";
 import { VoiceModelPublishType } from "@/app/lib/definitions.voice";
 import { getStarNumStr } from "@/app/lib/utils";

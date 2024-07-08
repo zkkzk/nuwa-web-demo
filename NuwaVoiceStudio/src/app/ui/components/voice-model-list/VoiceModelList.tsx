@@ -105,7 +105,13 @@ function VoiceModelList({
           >
             {voiceModelList.map((voice) => (
               <div key={voice.id}>
-                <VoiceModelItem onItemClick={onItemClick} voice={voice} key={voice.id} isSelected={!!selectedVoiceModel && selectedVoiceModel.id === voice.id} />
+                <VoiceModelItem
+                  onItemClick={onItemClick}
+                  voice={voice}
+                  key={voice.id}
+                  type={type}
+                  isSelected={!!selectedVoiceModel && selectedVoiceModel.id === voice.id}
+                />
               </div>
             ))}
           </InfiniteScroll>
