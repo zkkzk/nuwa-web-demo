@@ -18,6 +18,7 @@ function VoiceAssetDetailRight({
   voicePublishInfo: voicePublishInfoType
 }) {
   const [startDownload, setStartDownload] = useState(0);
+  const [downloading, setDownlanding] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   
   return (
@@ -41,10 +42,24 @@ function VoiceAssetDetailRight({
         >Run on WorkStation</Button>
         {voicePublishInfo.publish_info.permission.download_permission && (
           <>
-            <VoiceModelDownloadButton publishId={voicePublishInfo.publish_id} startDownload={startDownload} />
-            <Button disableRipple={false} size="lg" variant="bordered" startContent={<ArrowDownTrayIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} onPress={() => {
-              setStartDownload(startDownload + 1);
-            }} />
+            <VoiceModelDownloadButton
+              publishId={voicePublishInfo.publish_id}
+              startDownload={startDownload}
+              onDownloading={(newDownloading) => {
+                setDownlanding(newDownloading);
+              }}
+            />
+            <Button
+              disableRipple={false}
+              size="lg"
+              variant="bordered"
+              startContent={<ArrowDownTrayIcon className="fill-zinc-400 w-6 h-6" />}
+              isIconOnly={true}
+              onPress={() => {
+                setStartDownload(startDownload + 1);
+              }}
+              isDisabled={downloading}
+            />
           </>
         ) }
         <Button size="lg" variant="bordered" startContent={<ShareIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} />

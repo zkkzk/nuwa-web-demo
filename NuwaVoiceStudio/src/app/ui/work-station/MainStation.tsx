@@ -10,7 +10,11 @@ import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParam
 import MainStationControl from "../components/voice-inf/MainStationControl";
 
 
-function MainStation() {
+function MainStation({
+  onInfSuccess
+}: {
+  onInfSuccess: () => void;
+}) {
   const router = useRouter();
   const t = useTranslations();
   const amDispatch = useAmDispatch();
@@ -66,6 +70,9 @@ function MainStation() {
           publishId={selectedVoiceModel?.publish_id || ''}
           modelId={selectedVoiceModel?.model_id || ""}
           tones={selectedVoiceModel?.tone || []}
+          onSuccess={() => {
+            onInfSuccess();
+          }}
         />
       </div>
     </div>

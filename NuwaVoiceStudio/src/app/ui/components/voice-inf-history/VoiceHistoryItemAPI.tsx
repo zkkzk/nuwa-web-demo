@@ -5,13 +5,17 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { VoiceInfHistoryType } from "@/app/lib/definitions.InstantGenerateParamster";
 
-function VoiceHistoryItemAPI({voiceInfHistory}: {
-  voiceInfHistory: VoiceInfHistoryType
+function VoiceHistoryItemAPI({code}: {
+  code: Array<{
+    code: string,
+    type: string,
+  }>
+
 }) {
   const [selected, setSelected] = useState("GET");
 
   return (
-		<div className="w-[268px] rounded-xl border border-zinc-700 flex-col justify-start items-start inline-flex overflow-hidden">
+		<div className="w-full rounded-xl border border-zinc-700 flex-col justify-start items-start inline-flex overflow-hidden">
 			<Tabs
 				aria-label="Options"     
 				selectedKey={selected}
@@ -21,44 +25,28 @@ function VoiceHistoryItemAPI({voiceInfHistory}: {
 				}}
 				fullWidth
 			>
-				<Tab key="GET" title="get">				
-					<Snippet classNames={{
-						base: "bg-zinc-900 rounded-none overflow-scroll w-full relative",
-						content: "",
-						copyButton: " top-5 right-6 absolute"
-					}}>
-						{/* <CopyIcon className=" cursor-pointer w-5 h-5 fill-neutral-900 stroke-neutral-900 absolute top-5 right-6" /> */}
-						<SyntaxHighlighter
-							language="javascript"
-							style={a11yDark}
-							wrapLongLines={true}
-							customStyle={{
-								margin: '0 0',
-								background: 'transparent',
-							}}
-						>
-							{"function get(classNames) {\n  return classNames.join(' ');\n}\n"}
-						</SyntaxHighlighter>
-					</Snippet>
-				</Tab>
-				<Tab key="POST" title="Post">
-
-				<Snippet classNames={{
-						base: "bg-zinc-900 rounded-none"
-					}}>
-						<SyntaxHighlighter
-							language="javascript"
-							style={a11yDark}
-							wrapLongLines={true}
-							customStyle={{
-								margin: '0 0',
-								background: 'transparent',
-							}}
-						>
-							{"function post(classNames) {\n  return classNames.join(' ');\n}\n"}
-						</SyntaxHighlighter>
-					</Snippet>
-				</Tab>
+				{code.map((code, index) => (
+					<Tab key={code.type} title={code.type}>				
+						<Snippet classNames={{
+							base: "bg-zinc-900 rounded-none overflow-scroll w-full relative",
+							content: "",
+							copyButton: " top-5 right-6 absolute"
+						}}>
+							{/* <CopyIcon className=" cursor-pointer w-5 h-5 fill-neutral-900 stroke-neutral-900 absolute top-5 right-6" /> */}				
+								<SyntaxHighlighter
+									language={code.type}
+									style={a11yDark}
+									wrapLongLines={true}
+									customStyle={{
+										margin: '0 0',
+										background: 'transparent',
+									}}
+								>
+									{code.code}
+								</SyntaxHighlighter>
+						</Snippet>
+					</Tab>
+				))}
 			</Tabs>
 		</div>
   );

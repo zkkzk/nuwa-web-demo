@@ -1,17 +1,19 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { voicePublishInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
 import { downloadVoiceModel } from "@/app/lib/voice.api";
 import { useAmDispatch } from "../alter-message/AlterMessageContextProvider";
+import { downloadFiles, sleep } from "@/app/lib/utils";
 
 function VoiceModelDownloadButton({
   publishId,
   modelId,
   startDownload = 0,
+  onDownloading
 }: {
   publishId?: string
   modelId?: string
   startDownload: number
+  onDownloading: (downlading: boolean) => void
 }) {
   const [downlanding, setDownlanding] = useState(false);
   const amDispatch = useAmDispatch();
@@ -22,21 +24,17 @@ function VoiceModelDownloadButton({
       return;
     }
     setDownlanding(true);
+    onDownloading(true);
 
     const res = await downloadVoiceModelApi.send({
       "model_if": modelId || '',
       "publish_id": publishId || ''
     });
     if (res && res.code === 0) {
-      setDownlanding(true);
 
+      const files = []
       if (res.data.gpt_path) {
-        const gptA = document.createElement("a");
-        gptA.href = res.data.gpt_path;
-        gptA.download = res.data.gpt_path;
-        document.body.appendChild(gptA);
-        gptA.click();
-        document.body.removeChild(gptA);
+        files.push(res.data.gpt_path)
       } else {
         amDispatch({
           type: "add",
@@ -48,12 +46,7 @@ function VoiceModelDownloadButton({
       }
 
       if (res.data.sovits_path) {
-        const sovitsA = document.createElement("a");
-        sovitsA.href = res.data.sovits_path;
-        sovitsA.download = res.data.sovits_path;
-        document.body.appendChild(sovitsA);
-        sovitsA.click();
-        document.body.removeChild(sovitsA);
+        files.push(res.data.sovits_path)
       } else {
         amDispatch({
           type: "add",
@@ -61,9 +54,12 @@ function VoiceModelDownloadButton({
             message: 'sovits file not exist',
             type: "error"
           },
-         })
+        })
       }
+
+      downloadFiles(files);
       setDownlanding(false);
+      onDownloading(false);
     }
 
     setDownlanding(false);

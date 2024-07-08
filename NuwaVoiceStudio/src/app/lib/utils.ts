@@ -64,3 +64,23 @@ export const handleConfetti = () => {
     origin: { y: 0.6 }
   });
 };
+
+export const downloadFiles = (urls: string[]) => {
+
+  const download = (urls: string[]) => {
+    const url = urls.pop();
+
+    var a = document.createElement("a");
+    a.setAttribute('href', url as string);
+    a.setAttribute('download', '');
+    a.setAttribute('target', '_blank');
+    a.click();
+
+    if (urls.length == 0) {
+      clearInterval(interval);
+    }
+  }
+  const interval = setInterval(download, 300, urls);
+}
+
+export const sleep = (delay: number) => new Promise((resolve) => setTimeout(resolve, delay))
