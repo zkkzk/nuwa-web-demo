@@ -93,32 +93,30 @@ function VoiceModelList({
 
   return (
     <div className="self-stretch flex-col justify-start items-start gap-8 flex h-full">
-      {voiceModelList.length > 0 && (
-        <ScrollShadow size={16} visibility="top" hideScrollBar id="scrollableVoiceModelDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto py-4 px-8">
-          <InfiniteScroll
-            dataLength={voiceModelList.length}
-            next={() => {getPublishSquareToServer({isFirst: false})}}
-            hasMore={hasMore}
-            loader={<><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /></>}
-            scrollableTarget="scrollableVoiceModelDiv"
-            className="w-full self-stretch items-start grid gap-8 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6"
-          >
-            {voiceModelList.map((voice) => (
-              <div key={voice.id}>
-                <VoiceModelItem
-                  onItemClick={onItemClick}
-                  voice={voice}
-                  key={voice.id}
-                  type={type}
-                  isSelected={!!selectedVoiceModel && selectedVoiceModel.id === voice.id}
-                />
-              </div>
-            ))}
-          </InfiniteScroll>
-        </ScrollShadow>
-      )}
-
-
+      <ScrollShadow size={16} visibility="top" hideScrollBar id="scrollableVoiceModelDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto py-4 px-8">
+        <InfiniteScroll
+          dataLength={voiceModelList.length}
+          next={() => {getPublishSquareToServer({isFirst: false})}}
+          hasMore={hasMore}
+          loader={<>
+            {Array.from({ length: rowCount * 2 }, (_, i) => i).map((item) => (<VoiceModelItemSkeleton />))}
+          </>}
+          scrollableTarget="scrollableVoiceModelDiv"
+          className="w-full self-stretch items-start grid gap-8 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6"
+        >
+          {voiceModelList.map((voice) => (
+            <div key={voice.id}>
+              <VoiceModelItem
+                onItemClick={onItemClick}
+                voice={voice}
+                key={voice.id}
+                type={type}
+                isSelected={!!selectedVoiceModel && selectedVoiceModel.id === voice.id}
+              />
+            </div>
+          ))}
+        </InfiniteScroll>
+      </ScrollShadow>
       <div className="h-14" />
     </div>
   );

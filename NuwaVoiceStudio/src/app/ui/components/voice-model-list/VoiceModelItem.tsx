@@ -94,9 +94,9 @@ function VoiceModelItem({
           </div>
           <div className="self-stretch justify-between items-center inline-flex gap-2">
             <div className="justify-center items-center gap-1.5 flex overflow-hidden">
-              <Avatar className="shrink-0" name={voice.publisher.name} src={voice.publisher.avatar} size="sm" />
+              <Avatar className="shrink-0" name={voice?.publisher?.name} src={voice?.publisher?.avatar} size="sm" />
               <div className="text-zinc-400 text-xs font-normal font-['Inter'] leading-none truncate">
-                {voice.publisher.name}
+                {voice?.publisher?.name}
               </div>
             </div>
 
