@@ -12,8 +12,8 @@ import {
   Textarea,
 } from "@nextui-org/react";
 import {
-  VoiceModelInfoType,
-} from "@/app/lib/definitions.InstantGenerateParamster";
+  VoicePublishInfoType,
+} from "@/app/lib/definitions.voice";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
 import UploadFile from "../upload-file/UploadFile";
 import LabelForm from "../form/LabelForm";
@@ -25,8 +25,8 @@ function VoiceInformationForm({
   value,
   onChange,
 }: {
-  value: VoiceModelInfoType,
-  onChange: (value: VoiceModelInfoType) => void,
+  value: VoicePublishInfoType,
+  onChange: (value: VoicePublishInfoType) => void,
 }) {
 
   const [sourceType, setSourceType] = useState(value.source);

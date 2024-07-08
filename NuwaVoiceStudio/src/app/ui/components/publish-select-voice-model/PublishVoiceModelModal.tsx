@@ -16,7 +16,7 @@ import {
 import SelectVoiceModelForm from "./SelectVoiceModelForm";
 import VoiceInformationForm from "./VoiceInformationForm";
 import UploadVoiceModelForm from "./UploadVoiceModelForm";
-import { DefaultVoiceModelFormData, VoiceModelFormDataProps, VoiceModelInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { DefaultVoiceModelFormData, VoiceModelFormDataProps, VoicePublishInfoType } from "@/app/lib/definitions.voice";
 import { z } from "zod";
 import { useAmDispatch } from "../alter-message/AlterMessageContextProvider";
 import { getModelId, voiceModelPublish } from "@/app/lib/voice.api";
@@ -258,7 +258,7 @@ function PublishVoiceModelModal({
                   {step === 2 && (
                     <VoiceInformationForm
                       value={formData.publish_info}
-                      onChange={(newPublishInfo: VoiceModelInfoType) => setFormData({
+                      onChange={(newPublishInfo: VoicePublishInfoType) => setFormData({
                         ...formData,
                         publish_info: newPublishInfo,
                       }) }

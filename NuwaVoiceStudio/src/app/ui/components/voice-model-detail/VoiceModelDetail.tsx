@@ -1,10 +1,9 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import VoiceAssetDetailHeader from "./VoiceModelDetailHeader";
 import VoiceAssetDetailLeft from "./VoiceModelDetailLeft";
 import VoiceAssetDetailRight from "./VoiceModelDetailRight";
 import { getVoicePublishInfo } from "@/app/lib/voice.api";
-import { voicePublishInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelPublishType } from "@/app/lib/definitions.voice";
 
 function VoiceAssetDetail({
   publishId,
@@ -12,7 +11,7 @@ function VoiceAssetDetail({
   publishId: string;
 }) {
   const getVoicePublishInfoApi = getVoicePublishInfo();
-  const [voicePublishInfo, setVoicePublishInfo] = useState<voicePublishInfoType>();
+  const [voicePublishInfo, setVoicePublishInfo] = useState<VoiceModelPublishType>();
   const [loading, setLoading] = useState(false);
   
   const getVoicePublishInfoToServer = async () => {

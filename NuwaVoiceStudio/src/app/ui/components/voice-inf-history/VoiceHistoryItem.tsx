@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import VoiceHistoryItemAPI from "./VoiceHistoryItemAPI";
-import { VoiceInfHistoryType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceInfHistoryType } from "@/app/lib/definitions.voice";
 import moment from "moment";
 import VoiceHistoryItemAudio from "./VoiceHistoryItemAudio";
 

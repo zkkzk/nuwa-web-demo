@@ -2,7 +2,7 @@
 import React from "react";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/react";
 import MainStationControl from "./MainStationControl";
-import { VoiceModelToneType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelToneType } from "@/app/lib/definitions.voice";
 
 function VoiceInfDrawerModal({
   isOpen,

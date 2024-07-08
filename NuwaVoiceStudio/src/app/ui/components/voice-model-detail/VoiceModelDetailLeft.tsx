@@ -1,14 +1,14 @@
 "use client";
 import React from "react";
 import Image from "next/image";
-import { voicePublishInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelPublishType } from "@/app/lib/definitions.voice";
 import GPTSovitsIcon from "@/app/icons/GPTSovitsIcon";
 import ToneVoicePreview from "../voice-preview/ToneVoicePreview";
 
 function VoiceAssetDetailLeft({
   voicePublishInfo, 
 }: {
-  voicePublishInfo: voicePublishInfoType
+  voicePublishInfo: VoiceModelPublishType
 }) {
   return (
     <div className="w-full flex-col justify-start items-start gap-8 flex">

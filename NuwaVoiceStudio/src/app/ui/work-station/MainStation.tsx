@@ -6,7 +6,7 @@ import { useAmDispatch } from "../components/alter-message/AlterMessageContextPr
 import VoiceModelListHeader from "./VoiceModelListHeader";
 import VoiceModelList from "../components/voice-model-list/VoiceModelList";
 import { TypeVoiceModel } from "@/app/lib/definitions.voice";
-import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelFilterType } from "@/app/lib/definitions.voice";
 import MainStationControl from "../components/voice-inf/MainStationControl";
 
 
@@ -24,7 +24,7 @@ function MainStation({
 
   const [selectedVoiceModel, setSelectedVoiceModel] = useState<TypeVoiceModel | null >(null);
 
-  const [filters, setFilters] = useState<voiceModelFilterType>({
+  const [filters, setFilters] = useState<VoiceModelFilterType>({
     type: "browse",
     name: ""
   })

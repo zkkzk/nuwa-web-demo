@@ -75,7 +75,7 @@ function TrainItem({
         <>
           <div className="justify-start items-center gap-2 flex">
             <Button variant="light" className="text-zinc-400" startContent={<BeakerIcon className="w-5 h-5" />} onPress={() => {setIsOpen(true)}}>Run on WorkStation</Button>
-            <VoiceModelDownloadButton modelId={value.task_param.model_id} startDownload={startDownload} />
+            <VoiceModelDownloadButton modelId={value.task_param.model_id} startDownload={startDownload} onDownloading={() => {}} />
             <Button variant="light" className="text-zinc-400" onPress={() => {setStartDownload(startDownload + 1)}}>Download</Button>
             <Button variant="light" className="text-zinc-400" onPress={() => {setSelectModalOpen(true)}}>Publish</Button>
           </div>

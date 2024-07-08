@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import VoiceHistoryControl from "./VoiceHistoryControl";
 import VoiceHistoryList from "./VoiceHistoryList";
 import { Card, Skeleton } from "@nextui-org/react";
-import { VoiceInfHistoryType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceInfHistoryType } from "@/app/lib/definitions.voice";
 
 function VoiceHistory() {
   const router = useRouter();

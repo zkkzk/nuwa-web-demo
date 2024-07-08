@@ -2,7 +2,7 @@
 import React, { ReactNode, useEffect, useState } from "react";
 import { useAmDispatch } from "../alter-message/AlterMessageContextProvider";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
-import { VoiceModelToneType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelToneType } from "@/app/lib/definitions.voice";
 import { Button, Modal, ModalBody, ModalContent, ModalFooter, ModalHeader, useDisclosure } from "@nextui-org/react";
 import ToneVoiceFile from "./ToneVoiceFile";
 

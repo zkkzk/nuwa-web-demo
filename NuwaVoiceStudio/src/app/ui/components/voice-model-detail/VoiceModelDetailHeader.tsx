@@ -3,13 +3,13 @@ import GPTSovitsIcon from "@/app/icons/GPTSovitsIcon";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import { Button } from "@nextui-org/react";
 import React from "react";
-import { voicePublishInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelPublishType } from "@/app/lib/definitions.voice";
 import VoiceModelCollectButton from "./VoiceModelCollectButton";
 
 function VoiceAssetDetailHeader({
   voicePublishInfo, 
 }: {
-  voicePublishInfo: voicePublishInfoType
+  voicePublishInfo: VoiceModelPublishType
 }) {
   return (
     <div className="w-full h-[82px] flex-col justify-start items-start gap-2.5 flex">

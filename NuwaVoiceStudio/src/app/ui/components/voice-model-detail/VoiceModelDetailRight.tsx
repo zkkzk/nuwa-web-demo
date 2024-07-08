@@ -4,7 +4,7 @@ import { ArrowDownTrayIcon, ShareIcon } from "@heroicons/react/24/solid";
 import { CheckBadgeIcon, CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
 import { Button } from "@nextui-org/react";
 import React, { useState } from "react";
-import { voicePublishInfoType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelPublishType } from "@/app/lib/definitions.voice";
 import { getStarNumStr } from "@/app/lib/utils";
 import moment from 'moment';
 import VoiceModelCollectButton from "./VoiceModelCollectButton";
@@ -15,7 +15,7 @@ import VoiceInfDrawerModal from "../voice-inf/VoiceInfDrawerModal";
 function VoiceAssetDetailRight({
   voicePublishInfo, 
 }: {
-  voicePublishInfo: voicePublishInfoType
+  voicePublishInfo: VoiceModelPublishType
 }) {
   const [startDownload, setStartDownload] = useState(0);
   const [downloading, setDownlanding] = useState(false);

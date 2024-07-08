@@ -7,7 +7,7 @@ import VoiceHistoryItem from "./VoiceHistoryItem";
 import VoiceHistoryItemSkeleton from "./VoiceHistoryItemSkeleton";
 import { getVoiceInfHistory } from "@/app/lib/voice.api";
 import EmptyIcon from "@/app/icons/EmptyIcon";
-import { VoiceInfHistoryType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceInfHistoryType } from "@/app/lib/definitions.voice";
 import InfiniteScroll from "../infinite-scroll/InfiniteScroll";
 
 const limit = 4;

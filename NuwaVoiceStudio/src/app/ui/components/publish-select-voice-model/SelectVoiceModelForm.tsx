@@ -2,15 +2,16 @@
 import React, { useEffect, useState } from "react";
 import { Select, SelectItem } from "@nextui-org/react";
 import {
-  languageListEn,
   VoiceModelFormDataProps,
   VoiceModelToneType,
-} from "@/app/lib/definitions.InstantGenerateParamster";
+} from "@/app/lib/definitions.voice";
 import SelectVoiceModelModal from "./SelectVoiceModelModal";
 import LabelForm from "../form/LabelForm";
 import TitleModal from "./TitleModal";
 import ToneVoiceFileList from "../voice-preview/ToneVoiceFileList";
-import { getModelList } from "@/app/lib/voice.api";
+import { getModelList, getVoiceModelInfo } from "@/app/lib/voice.api";
+import { VoiceModelInfoType } from "@/app/lib/definitions.voice";
+import { languageListEn } from "@/app/lib/definitions.select";
 
 type myModelType = {
   task_id: string
@@ -32,6 +33,7 @@ function SelectVoiceModelForm({
   const [myModelList, setMyModelList] = useState<Array<myModelType>>([])
 
   const [selectToneList, setSelectToneList] = useState<Array<VoiceModelToneType>>([])
+  const [selectVoiceModelInfo, setSelectVoiceModelInfo] = useState<VoiceModelInfoType | null>(null)
   const getModelListApi = getModelList();
 
   const getModelListToServer = async () => {
@@ -44,10 +46,27 @@ function SelectVoiceModelForm({
     });
     if (res && res.code === 0) {
       setMyModelList(res.data.list);
+      
       if (modelId) {
-        const initSelectToneList = res.data.list.find((item: any) => item.model_id === modelId)?.tones;
-        setSelectToneList(initSelectToneList ?? [])
+        getVoiceModelInfoServer(modelId);
       }
+    }
+
+    setLoading(false);
+  };
+
+  const getVoiceModelInfoApi = getVoiceModelInfo();
+  const getVoiceModelInfoServer = async (modelId: string) => {
+    if (loading) {
+      return;
+    }
+    setLoading(true);
+    const res = await getVoiceModelInfoApi.send({
+      model_id: modelId
+    });
+    if (res && res.code === 0) {
+      setSelectVoiceModelInfo(res.data);
+      setSelectToneList(res.data.slicer)
     }
 
     setLoading(false);
@@ -75,14 +94,17 @@ function SelectVoiceModelForm({
               selectedKeys={[formData.model_id]}
               defaultSelectedKeys={[modelId || '']}
               onChange={(e) => {
+                const selectedModelId = e.target.value;
                 if (onChange) {
                   onChange({
                     ...formData,
-                    model_id: e.target.value,
+                    model_id: selectedModelId,
                   });
                 }
 
-                setSelectToneList(myModelList.find((item) => item.model_id === e.target.value)?.tones ?? [])
+                getVoiceModelInfoServer(selectedModelId);
+
+                // setSelectToneList(myModelList.find((item) => item.model_id === selectedModelId)?.tones ?? [])
               }}
             >
               {myModelList.map((mtItem) => (

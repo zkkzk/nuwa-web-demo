@@ -20,6 +20,7 @@ const voiceUrlList = {
   getRunVoiceModelList: `/ddream/api/v1/voice/run_model/list`,
   voiceBrowse: `/ddream/api/v1/voice/browse`,
   voiceInf: `/ddream/api/v1/voice/inf`,
+  getVoiceModelInfo: `/ddream/api/v1/voice/model/info`,
 }
 
 export function getPublishSquare() {
@@ -174,6 +175,15 @@ export function voiceInf() {
   const t = useTranslations();
   return baseApiHander({
     url: voiceUrlList.voiceInf,
+    mustLogin: true,
+    noLoginGotoLogin: true,
+  })
+}
+
+export function getVoiceModelInfo() {
+  const t = useTranslations();
+  return baseApiHander({
+    url: voiceUrlList.getVoiceModelInfo,
     mustLogin: true,
     noLoginGotoLogin: true,
   })

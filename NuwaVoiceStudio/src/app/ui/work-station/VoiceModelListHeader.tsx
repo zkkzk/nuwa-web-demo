@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import { Tab, Tabs } from "@nextui-org/react";
 import NuwaChipRadioGroup from "../components/NuwaChipRadioGroup";
-import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelFilterType } from "@/app/lib/definitions.voice";
 
 type TypeFilterItem = {
   label: string;
@@ -19,8 +19,8 @@ function VoiceListHeader({
   },
   onChange
 }: {
-  filters: voiceModelFilterType,
-  onChange: (newFilters: voiceModelFilterType) => void
+  filters: VoiceModelFilterType,
+  onChange: (newFilters: VoiceModelFilterType) => void
 }) {
   const router = useRouter();
 

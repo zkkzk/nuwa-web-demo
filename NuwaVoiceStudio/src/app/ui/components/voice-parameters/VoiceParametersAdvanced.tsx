@@ -1,6 +1,6 @@
 "use client";
 import React from "react";
-import { VoiceModelAdvancedParamsType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelAdvancedParamsType } from "@/app/lib/definitions.voice";
 import { Input } from "@nextui-org/react";
 import NuwaSliderInput from "../NuwaSliderInput";
 

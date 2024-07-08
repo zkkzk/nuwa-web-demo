@@ -8,7 +8,7 @@ import { ChevronDownIcon } from "@heroicons/react/24/solid";
 import DCubeIcon from "@/app/icons/3DCubeIcon";
 import PublishVoiceModelModal from "../components/publish-select-voice-model/PublishVoiceModelModal";
 import { TypeVoiceModel } from "@/app/lib/definitions.voice";
-import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelFilterType } from "@/app/lib/definitions.voice";
 import VoiceModelDetailDrawerModal from "../components/voice-model-detail/VoiceModelDetailDrawerModal";
 
 function PublishedVoices() {
@@ -18,7 +18,7 @@ function PublishedVoices() {
   const [selectModalOpen, setSelectModalOpen] = useState(false);
   const [selectedVoiceModel, setSelectedVoiceModel] = useState<TypeVoiceModel | null >(null);
 
-  const [filters, setFilters] = useState<voiceModelFilterType>({
+  const [filters, setFilters] = useState<VoiceModelFilterType>({
     type: "",
     name: ""
   })

@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { Snippet, Tab, Tabs } from "@nextui-org/react";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { VoiceInfHistoryType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceInfHistoryType } from "@/app/lib/definitions.voice";
 
 function VoiceHistoryItemAPI({code}: {
   code: Array<{

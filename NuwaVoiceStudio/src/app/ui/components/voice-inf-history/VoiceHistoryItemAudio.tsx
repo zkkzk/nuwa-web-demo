@@ -4,7 +4,7 @@ import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import APIIcon from "@/app/icons/APIIcon";
 import { Button } from "@nextui-org/react";
 import VoiceHistoryItemVoiceRreview from "./VoiceHistoryItemVoicePreview";
-import { VoiceInfHistoryType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceInfHistoryType } from "@/app/lib/definitions.voice";
 import { downloadFiles } from "@/app/lib/utils";
 import VoiceHistoryItemAPI from "./VoiceHistoryItemAPI";
 

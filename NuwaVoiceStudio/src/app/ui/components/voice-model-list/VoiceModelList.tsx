@@ -6,7 +6,7 @@ import VoiceModelItemSkeleton from "./VoiceModelItemSkeleton";
 import { ScrollShadow } from "@nextui-org/react";
 import InfiniteScroll from "../infinite-scroll/InfiniteScroll";
 import { getMyPublish, getPublishSquare } from "@/app/lib/voice.api";
-import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelFilterType } from "@/app/lib/definitions.voice";
 
 
 function VoiceModelList({
@@ -16,7 +16,7 @@ function VoiceModelList({
   onItemClick,
   onChange,
 }: {
-  filters?: voiceModelFilterType
+  filters?: VoiceModelFilterType
   selectedVoiceModel?: TypeVoiceModel | null;
   type?: 'workstation' | 'my' | 'all';
   onItemClick?: (voiceModel: TypeVoiceModel | null) => void;

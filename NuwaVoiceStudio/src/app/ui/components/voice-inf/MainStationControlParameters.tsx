@@ -4,7 +4,7 @@ import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { Accordion, AccordionItem, Button, Tab, Tabs } from "@nextui-org/react";
 import ResetIcon from "@/app/icons/ResetIcon";
-import { DefaultVoiceModelAdvancedParams, DefaultVoiceModelBasicParams, InstantGenerateParamsterType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { DefaultVoiceModelAdvancedParams, DefaultVoiceModelBasicParams, InstantGenerateParamsterType } from "@/app/lib/definitions.voice";
 import VoiceParametersBasics from "../voice-parameters/VoiceParametersBasics";
 import VoiceParametersAdvanced from "../voice-parameters/VoiceParametersAdvanced";
 

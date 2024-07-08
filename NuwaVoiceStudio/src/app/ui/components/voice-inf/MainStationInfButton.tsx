@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import FlashIcon from "@/app/icons/FlashIcon";
 import { Button } from "@nextui-org/react";
-import { InstantGenerateParamsterType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { InstantGenerateParamsterType } from "@/app/lib/definitions.voice";
 import { voiceInf } from "@/app/lib/voice.api";
 
 function MainStationInfButton({

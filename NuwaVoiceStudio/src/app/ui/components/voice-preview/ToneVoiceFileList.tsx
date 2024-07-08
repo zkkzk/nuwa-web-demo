@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { toneListEn } from "@/app/lib/definitions.tone";
-import { VoiceModelToneType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelToneType } from "@/app/lib/definitions.voice";
 import ToneVoiceFile from "./ToneVoiceFile";
 import ExportIcon from "@/app/icons/ExportIcon";
 import UploadVoiceModelFile from "../upload-file/UploadVoiceModelFile";
@@ -19,7 +19,6 @@ function ToneVoiceFileList({
   selectToneList?: Array<VoiceModelToneType>
   onChange: (newToneList: Array<VoiceModelToneType>) => void
 }) {
-
   const [uploadKey, setUploadKey] = useState(0)
 
   return (

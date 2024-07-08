@@ -5,7 +5,7 @@ import { toneListEn } from "@/app/lib/definitions.tone";
 import { UserIcon } from "@heroicons/react/24/outline";
 import MainStationControlParameters from "./MainStationControlParameters";
 import { Input, Select, SelectItem } from "@nextui-org/react";
-import { DefaultVoiceModelAdvancedParams, DefaultVoiceModelBasicParams, InstantGenerateParamsterType, VoiceModelToneType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { DefaultVoiceModelAdvancedParams, DefaultVoiceModelBasicParams, InstantGenerateParamsterType, VoiceModelToneType } from "@/app/lib/definitions.voice";
 import MainStationInfButton from "./MainStationInfButton";
 import { handleConfetti } from "@/app/lib/utils";
 

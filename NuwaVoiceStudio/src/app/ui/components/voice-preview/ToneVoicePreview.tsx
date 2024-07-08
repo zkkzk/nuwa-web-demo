@@ -2,7 +2,7 @@
 import React, { useCallback, useRef, useState } from "react";
 import { useWavesurfer } from "@wavesurfer/react";
 import VoicePreview from "./VoicePreview";
-import { VoiceModelToneType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelToneType } from "@/app/lib/definitions.voice";
 
 const formatTime = (seconds: any) =>
   [seconds / 60, seconds % 60]

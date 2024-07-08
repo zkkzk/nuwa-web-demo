@@ -1,9 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { useTranslations } from "next-intl";
-import { languageListEn, segmentationMethodListEn, VoiceModelBasicParamsType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelBasicParamsType } from "@/app/lib/definitions.voice";
 import { Select, SelectItem } from "@nextui-org/react";
 import NuwaSliderInput from "../NuwaSliderInput";
+import { languageListEn, segmentationMethodListEn } from "@/app/lib/definitions.select";
 
 
 function VoiceParametersBasics({

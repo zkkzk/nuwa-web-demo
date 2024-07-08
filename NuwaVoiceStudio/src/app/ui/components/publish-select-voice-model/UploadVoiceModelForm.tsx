@@ -2,14 +2,14 @@
 import React, { useState } from "react";
 import { Select, SelectItem } from "@nextui-org/react";
 import {
-  languageListEn,
   VoiceModelFormDataProps,
-} from "@/app/lib/definitions.InstantGenerateParamster";
+} from "@/app/lib/definitions.voice";
 import { ArrowUpTrayIcon } from "@heroicons/react/24/solid";
 import LabelForm from "../form/LabelForm";
 import TitleModal from "./TitleModal";
 import ToneVoiceFileList from "../voice-preview/ToneVoiceFileList";
 import UploadVoiceModelFile from "../upload-file/UploadVoiceModelFile";
+import { languageListEn } from "@/app/lib/definitions.select";
 
 
 function UploadVoiceModelForm({

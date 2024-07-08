@@ -6,7 +6,7 @@ import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid"
 import FilterIcon from "@/app/icons/FilterIcon";
 import DCubeIcon from "@/app/icons/3DCubeIcon";
 import PublishVoiceModelModal from "../components/publish-select-voice-model/PublishVoiceModelModal";
-import { voiceModelFilterType } from "@/app/lib/definitions.InstantGenerateParamster";
+import { VoiceModelFilterType } from "@/app/lib/definitions.voice";
 import { useRouter } from "@/navigation";
 
 type TypeFilterItem = {
@@ -39,8 +39,8 @@ function VoiceListHeader({
   },
   onChange
 }: {
-  filters: voiceModelFilterType,
-  onChange: (newFilters: voiceModelFilterType) => void
+  filters: VoiceModelFilterType,
+  onChange: (newFilters: VoiceModelFilterType) => void
 }) {
   const router = useRouter();
   const [uploadModalOpen, setUploadModalOpen] = useState(false);
