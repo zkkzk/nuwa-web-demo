@@ -34,6 +34,7 @@
     "next-auth": "^5.0.0-beta.15",
     "next-intl": "^3.1.4",
     "next-themes": "^0.2.1",
+    "nextjs-toploader": "^1.6.12",
     "numbro": "^2.5.0",
     "png-chunk-text": "^1.0.0",
     "png-chunks-encode": "^1.0.0",

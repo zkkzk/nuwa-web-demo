@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import { notFound } from "next/navigation";
 import "./globals.css";
 import { Providers } from "./providers";
+import NextTopLoader from 'nextjs-toploader';
 import '@ddreamland/common/style.css'
 
 const locales = ["en"];
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={inter.className}>
+        <NextTopLoader />
         <Providers>{children}</Providers>
       </body>
     </html>
