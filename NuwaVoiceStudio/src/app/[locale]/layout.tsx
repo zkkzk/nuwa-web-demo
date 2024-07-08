@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={inter.className}>
-        <NextTopLoader />
+        <NextTopLoader showSpinner={false} />
         <Providers>{children}</Providers>
       </body>
     </html>
