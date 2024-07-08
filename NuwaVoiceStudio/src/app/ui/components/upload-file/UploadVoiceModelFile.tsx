@@ -170,7 +170,9 @@ function UploadVoiceModelFile({
             )}
           </div>
           <div className="w-full absolute bottom-0 left-0">
-            <Progress size="sm" aria-label="Loading..." value={loaded} maxValue={total} />
+            {loaded !== total && (
+              <Progress size="sm" aria-label="Loading..." value={loaded} maxValue={total} />
+            )}
           </div>
         </>
       ): (

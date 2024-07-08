@@ -5,7 +5,7 @@ import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../alter-message/AlterMessageContextProvider";
 import Dropzone from 'react-dropzone'
 import { uploadFileToServer } from "@/app/lib/common.api";
-import { Spinner, Image } from "@nextui-org/react";
+import { Spinner, Image, Progress } from "@nextui-org/react";
 import { customAlphabet } from "nanoid";
 
 export function generateId() {
@@ -55,6 +55,8 @@ function UploadFile({
 
   const [ dropzoneAccept, setDropzoneAccept ] = useState(initDropzoneAccept);
   const amDispatch = useAmDispatch();
+  const [loaded, setLoaded] = useState(0);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     setIsUnmount(false);
@@ -63,7 +65,10 @@ function UploadFile({
     };
   }, [])
 
-  const uploadFileApi = uploadFileToServer();
+  const uploadFileApi = uploadFileToServer((progressEvent: any) => {
+    setLoaded(progressEvent.loaded);
+    setTotal(progressEvent.total);
+  });
 
   const onDropHander = async (acceptedFiles: any) => {
     console.log(acceptedFiles)
@@ -117,7 +122,7 @@ function UploadFile({
   }
 
   return (
-    <div className="w-full h-full relative">
+    <div className="w-full h-full rounded-2xl overflow-hidden relative">
       {fileNameStr ? (
         <>
           {accept !== "image" && (
@@ -173,12 +178,19 @@ function UploadFile({
                 <div className=" cursor-pointer p-1 bg-white w-6 h-6 rounded-full justify-center items-center gap-2 flex">
                   <XMarkIcon className="h-4 w-4 fill-black stroke-black" onClick={() => {
                     setFileNameStr("")
+                    setFileUrl("")
                   }} />
                 </div>
               )}
               </div>
             </div>
           )}
+
+          <div className="w-full absolute bottom-0 left-0">
+            {loaded !== total && (
+              <Progress size="sm" aria-label="Loading..." value={loaded} maxValue={total} />
+            )}
+          </div>
         </>
       ): (
         <div className="w-full h-full">
