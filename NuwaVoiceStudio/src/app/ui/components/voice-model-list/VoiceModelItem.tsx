@@ -9,7 +9,7 @@ import { BeakerIcon } from "@heroicons/react/24/outline";
 import GPTSovitsIcon from "@/app/icons/GPTSovitsIcon";
 import { TypeVoiceModel } from "@/app/lib/definitions.voice";
 import { getStarNumStr } from "@/app/lib/utils";
-import CommercialLicenseIcon from "./commercialLicenseIcon";
+import CommercialLicenseIcon from "./CommercialLicenseIcon";
 import VoiceModelCollectButton from "./VoiceModelCollectButton";
 
 function VoiceModelItem({

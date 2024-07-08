@@ -109,9 +109,10 @@ function VoiceListHeader({
           </Dropdown>
           <Button
             size="lg"
-            variant="flat"
+            color="primary"
+            variant="ghost"
             className="w-[200px]"
-            startContent={<DCubeIcon className="h-6 w-6 fill-zinc-400" />}
+            startContent={<DCubeIcon className="h-6 w-6 fill-primary group-hover:fill-white" />}
             onPress={() => {
               router.push('/myvoicemodels');
             }}
