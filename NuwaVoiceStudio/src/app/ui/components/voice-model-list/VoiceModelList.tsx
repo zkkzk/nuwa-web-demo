@@ -91,7 +91,7 @@ function VoiceModelList({
             hasMore={hasMore}
             loader={<><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /><VoiceModelItemSkeleton /></>}
             scrollableTarget="scrollableVoiceModelDiv"
-            className="w-full self-stretch items-start grid gap-8 grid-cols-2 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4"
+            className="w-full self-stretch items-start grid gap-8 grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6"
           >
             {voiceModelList.map((voice) => (
               <div key={voice.id}>

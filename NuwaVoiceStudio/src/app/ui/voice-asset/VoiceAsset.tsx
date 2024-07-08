@@ -29,13 +29,13 @@ function VoiceAsset() {
     <div className="w-full h-screen pt-20 overflow-hidden bg-neutral-900 rounded-bl-xl rounded-br-xl justify-start items-end inline-flex">
       <div className="w-full self-stretch justify-start items-start flex h-screen">
         <div className="fixed top-20 left-0 w-full z-40">
-        <VoiceModelListHeader filters={filters} onChange={(newFilters) => {
-          setFilters(newFilters)
-          setVoiceModelListKey(voiceModelListKey + 1)
-        }} />
-          
+          <VoiceModelListHeader filters={filters} onChange={(newFilters) => {
+            setFilters(newFilters)
+            setVoiceModelListKey(voiceModelListKey + 1)
+          }} />
+            
         </div>
-        <div className="self-stretch pt-[150px] overflow-hidden w-full">
+        <div className="self-stretch pt-[80px] overflow-hidden w-full">
           <div className={cn(isEmpty ? 'hidden' : 'block')}>
             <VoiceModelList
               key={voiceModelListKey}
