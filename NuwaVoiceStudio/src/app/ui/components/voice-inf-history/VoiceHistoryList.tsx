@@ -91,7 +91,7 @@ function VoiceHistoryList({
         </div>
       )}
 
-			<ScrollShadow size={16} visibility="top" hideScrollBar id="scrollableVoiceHistoryDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto py-4">
+			<ScrollShadow size={16} hideScrollBar id="scrollableVoiceHistoryDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto py-4">
 				<InfiniteScroll
 					dataLength={voiceList.length}
 					next={loadMoreData}

@@ -48,7 +48,7 @@ function ToneVoiceFile({
             <Select
               disallowEmptySelection={true}
               variant="flat"
-              size="sm"
+              size="lg"
               placeholder="Select an tone"
               selectedKeys={[toneType as string]}
               classNames={{

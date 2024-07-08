@@ -38,6 +38,16 @@ function VoiceModelList({
   
   const [prevFilters, setPrevFilters] = useState(filters);
 
+
+  const sWidth = window.innerWidth;
+  let rowCount = 2
+  if (sWidth > 1024) {
+    rowCount = 4
+  }
+  if (sWidth > 1536) {
+    rowCount = 6
+  }
+
   const getPublishSquareToServer = async ({isFirst = false}) => {
     if (loading) {
       return;
@@ -46,7 +56,7 @@ function VoiceModelList({
 
     const res = await getVoiceModelListApi.send({
       page_token: isFirst ? '' : nextPageToken,
-      size: isFirst ? 20 : 10,
+      size: isFirst ? rowCount * 6 : rowCount * 2,
       type: filters?.type || '',
       name: filters?.name || ''
     });

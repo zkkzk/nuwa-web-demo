@@ -77,7 +77,7 @@ function MainStationControl({
             isDisabled={!modelId}
             items={toneListEn}
             variant="bordered"
-            size="sm"
+            size="lg"
             className="w-[180px]"
             startContent={<div className="w-40 text-gray-500 text-sm font-semibold font-['Inter'] leading-normal"><p>Tones | </p></div>}
             selectedKeys={[instantGenerateParamster?.tone.tone_type as string]}

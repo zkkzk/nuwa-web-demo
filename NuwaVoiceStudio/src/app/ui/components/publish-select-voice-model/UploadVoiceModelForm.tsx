@@ -34,7 +34,7 @@ function UploadVoiceModelForm({
         <LabelForm label='Type' isRequired={true}>
           <Select
             variant="bordered"
-            size="sm"
+            size="lg"
             isRequired
             placeholder="Select type"
             selectedKeys={[formData.local_model.type as string]}

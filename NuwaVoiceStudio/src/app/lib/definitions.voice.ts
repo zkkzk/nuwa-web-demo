@@ -142,6 +142,7 @@ export type VoiceModelPublishType = {
   star_num: number
   d_num: number
   inf_num: number
+  seq: number
   local_model: {
     type: string
     "gpt-weights_url": string
@@ -150,6 +151,11 @@ export type VoiceModelPublishType = {
   basic_params: {
     language: string
   },
+  publisher: {
+    avatar: string
+    name: string
+    created_at: string
+  }
 }
 
 export type VoiceModelFilterType = {

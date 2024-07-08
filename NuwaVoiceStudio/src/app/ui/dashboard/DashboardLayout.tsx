@@ -26,7 +26,7 @@ export default function DashboardLayout({
 
   const [userInfo, setUserInfo] = useState<TypeUser>({
     uid: '',
-    username: '',
+    name: '',
     email: '',
     wallet: '',
     avatar: ''
@@ -44,7 +44,7 @@ export default function DashboardLayout({
       if (res && res.code === 0) {
         const user = {
           uid: res.data.uid,
-          username: res.data.name,
+          name: res.data.name,
           email: res.data.email,
           wallet: res.data.wallet,
           avatar: res.data.avatar

@@ -29,7 +29,7 @@ function VoiceAssetDetailHeader({
         </div>
         <div className="w-[360px] shrink-0 self-stretch justify-end items-center gap-2 flex">
           <VoiceModelCollectButton like={voicePublishInfo.like} publishId={voicePublishInfo.publish_id} starNum={voicePublishInfo.star_num} />
-					<Button size="lg" variant="bordered"  startContent={<EllipsisHorizontalIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} />
+					{/* <Button size="lg" variant="bordered"  startContent={<EllipsisHorizontalIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} /> */}
         </div>
       </div>
       <div className="justify-start items-center gap-1 inline-flex">

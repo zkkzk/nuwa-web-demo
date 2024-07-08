@@ -27,7 +27,7 @@ export default function HeaderAvatar() {
           setIsOpen(true);
         }
       }} className="w-full h-full bg-zinc-800 rounded-full">
-        <Avatar src={user?.avatar} alt="avatar" className="h-full w-full" />
+        <Avatar name={user?.name} src={user?.avatar} alt="avatar" className="h-full w-full" />
       </div>
       <LoginModal
         isOpen={isOpen}

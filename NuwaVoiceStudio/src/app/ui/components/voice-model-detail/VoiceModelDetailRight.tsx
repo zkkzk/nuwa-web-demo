@@ -2,7 +2,7 @@
 import DCubeIcon from "@/app/icons/3DCubeIcon";
 import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
 import { CheckBadgeIcon, CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
-import { Button, Snippet } from "@nextui-org/react";
+import { Button, Snippet, Image, Avatar } from "@nextui-org/react";
 import React, { useState } from "react";
 import { VoiceModelPublishType } from "@/app/lib/definitions.voice";
 import { getStarNumStr } from "@/app/lib/utils";
@@ -12,6 +12,9 @@ import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import VoiceModelDownloadButton from "../voice-model-download-button/VoiceModelDownloadButton";
 import VoiceInfDrawerModal from "../voice-inf/VoiceInfDrawerModal";
 import ShareIcon from "@/app/icons/ShareIcon";
+import { StarIcon } from "@heroicons/react/24/solid";
+import DownloadIcon from "@/app/icons/DownloadIcon";
+import { BeakerIcon } from "@heroicons/react/24/outline";
 
 function VoiceAssetDetailRight({
   voicePublishInfo, 
@@ -30,7 +33,7 @@ function VoiceAssetDetailRight({
       <div className="self-stretch justify-between items-end inline-flex">
         <div className="w-full shrink-0 self-stretch justify-end items-center gap-2 flex">
           <VoiceModelCollectButton like={voicePublishInfo.like} publishId={voicePublishInfo.publish_id} starNum={voicePublishInfo.star_num} />
-					<Button size="lg" variant="bordered"  startContent={<EllipsisHorizontalIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} />
+					{/* <Button size="lg" variant="bordered"  startContent={<EllipsisHorizontalIcon className="fill-zinc-400 w-6 h-6" />} isIconOnly={true} /> */}
         </div>
       </div>
       <div className="justify-start items-start gap-2 inline-flex">
@@ -79,7 +82,7 @@ function VoiceAssetDetailRight({
           {url}
         </Snippet>
       </div>
-      <div className="self-stretch h-[396px] flex-col justify-start items-start flex">
+      <div className="self-stretch flex-col justify-start items-start flex">
         <div className="self-stretch justify-start items-start inline-flex">
           <div className="grow shrink basis-0 py-3 border-t border-white/opacity-10 flex-col justify-center items-start gap-2 inline-flex">
             <div className="self-stretch text-zinc-400 text-xs font-normal font-['Inter'] leading-none">
@@ -124,7 +127,7 @@ function VoiceAssetDetailRight({
             Time
           </div>
           <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">
-          {moment(voicePublishInfo.created_at).format('hh:mm MMMM DD YYYY')}
+          {moment(voicePublishInfo.seq, "X").format('hh:mm MMMM DD YYYY')}
           </div>
         </div>
         <div className="self-stretch h-[68px] py-3 border-t border-white/opacity-10 flex-col justify-center items-start gap-2 flex">
@@ -211,6 +214,41 @@ function VoiceAssetDetailRight({
           </div>
         </div>
       </div>
+
+      <div className="w-full px-4 py-3 bg-zinc-800 rounded-xl border border-zinc-700 justify-start items-start gap-4 inline-flex">
+        <div className="justify-start items-start flex">
+          {/* {voicePublishInfo.publisher.avatar && (
+            <div className="h-10 rounded-full justify-center items-center flex">
+              <Image className="grow shrink basis-0 h-10 rounded-full" src={voicePublishInfo.publisher.avatar} />
+            </div>
+          )}
+          {!voicePublishInfo.publisher.avatar && ( */}
+            <Avatar name={voicePublishInfo.publisher.name} size="md" src={voicePublishInfo.publisher.avatar} />
+          {/* )} */}
+        </div>
+        <div className="grow shrink basis-0 flex-col justify-start items-start inline-flex divide-y">
+          <div className="flex-col justify-start items-start gap-0.5 flex pb-2">
+            <div className="text-white text-base font-medium font-['Inter'] leading-normal">{voicePublishInfo.publisher.name}</div>
+            <div className="text-zinc-400 text-xs font-normal font-['Inter'] leading-none">Joined {moment(voicePublishInfo.publisher.created_at, "X").format('MMMM DD YYYY')}</div>
+          </div>
+          <div className="justify-start items-center gap-2.5 inline-flex pt-2">
+            <div className="h-4 justify-start items-center gap-1 flex">
+                <StarIcon className="w-4 h-4 fill-zinc-400" />
+                <div className="text-white text-xs font-normal font-['Inter'] leading-none">{getStarNumStr(2352352)}</div>
+            </div>
+            <div className="h-4 justify-start items-center gap-1 flex">
+              <div className="w-4 h-4 justify-center items-center flex">
+                <DownloadIcon className="w-4 h-4 relative" />
+              </div>
+              <div className="text-white text-xs font-normal font-['Inter'] leading-none">{getStarNumStr(235235224)}</div>
+            </div>
+              <div className="h-4 justify-start items-center gap-1 flex">
+                <BeakerIcon className="w-4 h-4 relative" />
+                <div className="text-white text-xs font-normal font-['Inter'] leading-none">{getStarNumStr(23424)}</div>
+              </div>
+            </div>
+          </div>
+        </div>
 
       <VoiceInfDrawerModal
         key={voicePublishInfo.publish_id}

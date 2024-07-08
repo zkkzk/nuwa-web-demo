@@ -15,7 +15,7 @@ function VoiceHistory() {
   const [infType, setInfType] = useState<'audio' | 'code'>("audio");
 
   return (
-    <div className=" overflow-y-scroll h-auto w-[380px] self-stretch p-8 rounded-br-[20px] flex-col justify-start items-start gap-5 inline-flex">
+    <div className=" overflow-y-scroll h-auto w-[380px] self-stretch px-8 pt-8 rounded-br-[20px] flex-col justify-start items-start gap-5 inline-flex">
       <div className="fixed top-20 right-0 w-[380px] z-40">
         <div className="px-8 pt-8 bg-neutral-900">
           {voiceList !== null && voiceList.length > 0 && (
