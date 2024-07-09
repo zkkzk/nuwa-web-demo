@@ -5,15 +5,17 @@ import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import VoiceModelListHeader from "./VoiceModelListHeader";
 import VoiceModelList from "../components/voice-model-list/VoiceModelList";
-import { TypeVoiceModel } from "@/app/lib/definitions.voice";
+import { InfType, TypeVoiceModel, VoiceInfHistoryType } from "@/app/lib/definitions.voice";
 import { VoiceModelFilterType } from "@/app/lib/definitions.voice";
 import MainStationControl from "../components/voice-inf/MainStationControl";
 
 
 function MainStation({
-  onInfSuccess
+  onInfSuccess,
+  onSendingChanege
 }: {
-  onInfSuccess: () => void;
+  onInfSuccess: (newInf: VoiceInfHistoryType) => void
+  onSendingChanege?: ({sending, infType} : {sending: boolean, infType: InfType}) => void
 }) {
   const router = useRouter();
   const t = useTranslations();
@@ -70,9 +72,10 @@ function MainStation({
           publishId={selectedVoiceModel?.publish_id || ''}
           modelId={selectedVoiceModel?.model_id || ""}
           tones={selectedVoiceModel?.tone || []}
-          onSuccess={() => {
-            onInfSuccess();
+          onSuccess={(newInf: VoiceInfHistoryType) => {
+            onInfSuccess(newInf);
           }}
+          onSendingChanege={onSendingChanege}
         />
       </div>
     </div>

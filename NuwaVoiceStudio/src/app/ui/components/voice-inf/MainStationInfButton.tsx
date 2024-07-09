@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { useTranslations } from "next-intl";
 import FlashIcon from "@/app/icons/FlashIcon";
 import { Button } from "@nextui-org/react";
-import { InstantGenerateParamsterType } from "@/app/lib/definitions.voice";
+import { InfType, InstantGenerateParamsterType, VoiceInfHistoryType } from "@/app/lib/definitions.voice";
 import { voiceInf } from "@/app/lib/voice.api";
 
 function MainStationInfButton({
@@ -11,30 +11,40 @@ function MainStationInfButton({
   value,
   type,
   onSuccess,
+  onSendingChanege,
 } : {
   isDisabled: boolean;
   value: InstantGenerateParamsterType;
   type: "audio" | "code"
-  onSuccess: () => void
+  onSuccess: (newInf: VoiceInfHistoryType) => void
+  onSendingChanege?: ({sending, infType} : {sending: boolean, infType: InfType}) => void
 }) {
-  const [loading, setLoading] = useState(false);
+  const [sending, setSending] = useState(false);
 
   const voiceInfApi = voiceInf();
   const voiceInfApiServer = async () => {
-    if (loading) {
+    if (sending) {
       return;
     }
-    setLoading(true);
+    setSending(true);
+    onSendingChanege && onSendingChanege({
+      sending: true,
+      infType: type,
+    });
 
     const res = await voiceInfApi.send({
       ...value,
       inf_type: type,
     });
     if (res && res.code === 0) {
-      onSuccess();
+      onSuccess(res.data.inf_info);
     }
 
-    setLoading(false);
+    onSendingChanege && onSendingChanege({
+      sending: false,
+      infType: type,
+    });
+    setSending(false);
   };
 
   return (
@@ -42,7 +52,7 @@ function MainStationInfButton({
       {type === "audio" && (
         <Button
           isDisabled={isDisabled}
-          isLoading={loading}
+          isLoading={sending}
           color="primary"
           size="lg"
           endContent={

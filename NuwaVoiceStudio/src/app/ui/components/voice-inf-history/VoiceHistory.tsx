@@ -1,25 +1,40 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import VoiceHistoryControl from "./VoiceHistoryControl";
 import VoiceHistoryList from "./VoiceHistoryList";
 import { Card, Skeleton } from "@nextui-org/react";
-import { VoiceInfHistoryType } from "@/app/lib/definitions.voice";
+import { InfType, VoiceInfHistoryType } from "@/app/lib/definitions.voice";
+import { SparklesIcon } from "@heroicons/react/24/solid";
 
-function VoiceHistory() {
+function VoiceHistory({
+  sending,
+  newInfList = [],
+  infType = 'audio'
+}: {
+  sending: boolean
+  newInfList: Array<VoiceInfHistoryType>
+  infType: InfType
+}) {
   const router = useRouter();
   const t = useTranslations();
-  const [selected, setSelected] = useState("Voices");
   const [voiceList, setVoiceList] = useState<VoiceInfHistoryType[] | null>(null);
-  const [infType, setInfType] = useState<'audio' | 'code'>("audio");
 
+  const [vhInfType, setVhInfType] = useState<InfType>(infType);
+
+  useEffect(() => {
+    setVhInfType(infType)
+  }, [newInfList])
+  // inf_type
   return (
     <div className=" overflow-y-scroll h-auto w-[380px] self-stretch px-8 pt-8 rounded-br-[20px] flex-col justify-start items-start gap-5 inline-flex">
       <div className="fixed top-20 right-0 w-[380px] z-40">
         <div className="px-8 pt-8 bg-neutral-900">
           {voiceList !== null && voiceList.length > 0 && (
-            <VoiceHistoryControl type={infType} onChange={(setInfType)} />
+            <VoiceHistoryControl type={vhInfType} onChange={(newInfType) => {
+              setVhInfType(newInfType)
+            }} />
           )}
           {voiceList === null && (
             <div className="w-full gap-5 flex flex-col">
@@ -42,7 +57,14 @@ function VoiceHistory() {
       </div>
       
       <div className="self-stretch pt-[100px] h-[calc(100vh-100px)] overflow-hidden">
-			  <VoiceHistoryList key={infType} type={infType} onChange={(newVoiceList) => setVoiceList(newVoiceList)} />
+        {sending && (
+          <div className="justify-start items-start gap-5 inline-flex mt-2">
+            <SparklesIcon className="w-6 h-6 fill-violet-500" />
+            <div className="text-gray-500 text-base font-normal font-['Archivo'] leading-normal">Generating for you…</div>
+          </div>
+        )}
+        
+			  <VoiceHistoryList key={vhInfType} type={vhInfType} newInfList={newInfList} onChange={(newVoiceList) => setVoiceList(newVoiceList)} />
       </div>
     </div>
   );

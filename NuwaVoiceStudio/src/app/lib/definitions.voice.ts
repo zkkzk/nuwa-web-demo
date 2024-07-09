@@ -163,6 +163,8 @@ export type VoiceModelFilterType = {
   name: string
 };
 
+export type InfType = 'audio' | 'code';
+
 export type TypeVoiceModel = {
   id: number;
   src: string,

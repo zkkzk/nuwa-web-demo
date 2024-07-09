@@ -1,16 +1,37 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import VoiceHistoryItemAPI from "./VoiceHistoryItemAPI";
 import { VoiceInfHistoryType } from "@/app/lib/definitions.voice";
 import moment from "moment";
 import VoiceHistoryItemAudio from "./VoiceHistoryItemAudio";
+import { motion, useAnimationControls } from "framer-motion";
 
 function VoiceHistoryItem({
 	voiceInfHistory
 }: {
   voiceInfHistory: VoiceInfHistoryType
 }) {
+  const wrapperVariants = {
+    enter: { 
+      y: -1*100 + '%',
+      transition: {
+        duration: 2
+      }
+    },
+    visible: {
+      y: 0*100 + '%',
+      transition: {
+        duration: 2
+      }
+    },
+    exit: {
+      y: 0*100 + '%',
+      transition: {
+        duration: 2
+      }
+    }
+  };
 
   return (
 		<div className="self-stretch flex-col justify-center items-start gap-6 flex">
@@ -39,7 +60,7 @@ function VoiceHistoryItem({
 						<div className="self-stretch text-white text-sm font-medium font-['Inter']">{voiceInfHistory.text}</div>
 					</div>
 					{voiceInfHistory.inf_type === 'audio' ? (
-						<VoiceHistoryItemAudio voiceInfHistory={voiceInfHistory} />
+						useMemo(() => <VoiceHistoryItemAudio voiceInfHistory={voiceInfHistory} />, [voiceInfHistory])
 					) : (
 						<VoiceHistoryItemAPI code={voiceInfHistory.code} />
 					)}

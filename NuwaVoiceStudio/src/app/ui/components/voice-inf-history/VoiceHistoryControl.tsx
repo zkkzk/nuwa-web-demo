@@ -5,13 +5,14 @@ import Image from "next/image";
 import { useTranslations } from "next-intl";
 import { Tab, Tabs } from "@nextui-org/react";
 import FilterIcon from "@/app/icons/FilterIcon";
+import { InfType } from "@/app/lib/definitions.voice";
 
 function VoiceHistoryControl({
 	type,
   onChange,
 }: {
-	type: 'audio' | 'code'
-  onChange?: (infType: 'audio' | 'code') => void;
+	type: InfType
+  onChange?: (infType: InfType) => void;
 }) {
   const router = useRouter();
   const t = useTranslations();
@@ -28,7 +29,7 @@ function VoiceHistoryControl({
 			<Tabs
 				aria-label="Options"     
 				selectedKey={type}
-				onSelectionChange={(key) => onChange && onChange(key as 'audio' | 'code')}
+				onSelectionChange={(key) => onChange && onChange(key as InfType)}
 				classNames={{
 					panel: "p-0 w-full"
 				}}

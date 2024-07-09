@@ -2,7 +2,7 @@
 import React from "react";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/react";
 import MainStationControl from "./MainStationControl";
-import { VoiceModelToneType } from "@/app/lib/definitions.voice";
+import { VoiceInfHistoryType, VoiceModelToneType } from "@/app/lib/definitions.voice";
 
 function VoiceInfDrawerModal({
   isOpen,
@@ -17,7 +17,7 @@ function VoiceInfDrawerModal({
   modelId: string;
   tones: VoiceModelToneType[];
   onChange?: (isOpen: boolean) => void;
-  onSuccess?: () => void;
+  onSuccess?: (newInf: VoiceInfHistoryType) => void;
 }) {
   
   return (
@@ -49,7 +49,9 @@ function VoiceInfDrawerModal({
                   publishId={publishId}
                   modelId={modelId}
                   tones={tones}
-                  onSuccess={onSuccess}
+                  onSuccess={(newInf) => {
+                    onSuccess && onSuccess(newInf);
+                  }}
                 />
               )}
             </ModalBody>

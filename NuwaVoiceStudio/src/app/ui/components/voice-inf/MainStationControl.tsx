@@ -5,7 +5,7 @@ import { toneListEn } from "@/app/lib/definitions.tone";
 import { UserIcon } from "@heroicons/react/24/outline";
 import MainStationControlParameters from "./MainStationControlParameters";
 import { Input, Select, SelectItem } from "@nextui-org/react";
-import { DefaultVoiceModelAdvancedParams, DefaultVoiceModelBasicParams, InstantGenerateParamsterType, VoiceModelToneType } from "@/app/lib/definitions.voice";
+import { DefaultVoiceModelAdvancedParams, DefaultVoiceModelBasicParams, InfType, InstantGenerateParamsterType, VoiceInfHistoryType, VoiceModelToneType } from "@/app/lib/definitions.voice";
 import MainStationInfButton from "./MainStationInfButton";
 import { handleConfetti } from "@/app/lib/utils";
 
@@ -15,12 +15,14 @@ function MainStationControl({
   modelId = "",
   tones = [],
   onSuccess,
+  onSendingChanege,
 } : {
   isOpen: boolean;
   publishId: string;
   modelId: string;
   tones: VoiceModelToneType[];
-  onSuccess?: () => void
+  onSuccess: (newInf: VoiceInfHistoryType) => void
+  onSendingChanege?: ({sending, infType} : {sending: boolean, infType: InfType}) => void
 }) {
   const t = useTranslations();
   const toneList: Array<VoiceModelToneType> = [];
@@ -50,9 +52,9 @@ function MainStationControl({
   }
   const [instantGenerateParamster, setInstantGenerateParamster] = useState<InstantGenerateParamsterType>(initInstantGenerateParamster);
 
-  const onSuccessHandler = () => {
+  const onSuccessHandler = (newInf: VoiceInfHistoryType) => {
     handleConfetti()
-    onSuccess && onSuccess();
+    onSuccess && onSuccess(newInf);
   }
 
   return (
@@ -107,13 +109,15 @@ function MainStationControl({
               type="audio"
               isDisabled={!modelId || instantGenerateParamster.text.length === 0}
               value={instantGenerateParamster}
-              onSuccess={() => {onSuccessHandler()}}
+              onSuccess={(newInf) => {onSuccessHandler(newInf)}}
+              onSendingChanege={onSendingChanege}
             />
             <MainStationInfButton
               type="code"
               isDisabled={!modelId || instantGenerateParamster.text.length === 0}
               value={instantGenerateParamster}
-              onSuccess={() => {onSuccessHandler()}}
+              onSuccess={(newInf) => {onSuccessHandler(newInf)}}
+              onSendingChanege={onSendingChanege}
             />
           </div>
         </div>
