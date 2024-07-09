@@ -150,7 +150,7 @@ function UploadFile({
             </div>
           )}
           {accept === "image" && (
-            <div className="w-full h-full px-6 bg-zinc-800 rounded-xl justify-center items-center gap-3 inline-flex">
+            <div className=" relative w-full h-full px-6 bg-zinc-800 rounded-xl justify-center items-center gap-3 inline-flex">
               { fileUrl && (
                 <Image
                   alt={fileUrl}

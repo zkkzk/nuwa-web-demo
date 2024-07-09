@@ -69,7 +69,7 @@ export const baseApiHander = ({
             isCloseable: false,
             onLogin: () => {
               loginDispatch({type: "close"});
-              router.refresh();
+              window.location.reload();
             }
           },
         })
@@ -125,7 +125,7 @@ export const baseApiHander = ({
                 isCloseable: false,
                 onLogin: () => {
                   loginDispatch({type: "close"});
-                  router.refresh();
+                  window.location.reload();
                 }
               },
             })

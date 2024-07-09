@@ -114,11 +114,12 @@ function VoiceAssetDetailRight({
             By
           </div>
           <div className="self-stretch justify-center items-start gap-2.5 inline-flex">
-            <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">
+            {/* <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">
               fuhsi Voice Studio
-            </div>
+            </div> */}
             <div className="grow shrink basis-0 text-white text-sm font-semibold font-['Inter'] leading-tight">
-              Self-trained
+            { voicePublishInfo.publish_type === 1  && 'DDream Voice Studio'}
+            { voicePublishInfo.publish_type === 2  && 'Self-trained'}
             </div>
           </div>
         </div>

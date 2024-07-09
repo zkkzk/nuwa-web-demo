@@ -36,7 +36,7 @@ function VoiceModelItem({
         )}
       >
         <div className="relative">
-          <div className="w-full pb-[44%] rounded-xl">
+          <div className="w-full pb-[44%] rounded-xl relative">
             <Image
               fill={true}
               alt={voice.publish_info.cover_url}

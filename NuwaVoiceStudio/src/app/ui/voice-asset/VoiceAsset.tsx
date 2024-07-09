@@ -41,7 +41,7 @@ function VoiceAsset() {
             
         </div>
         <div className="self-stretch pt-[80px] overflow-hidden w-full">
-          <div className={cn(isEmpty ? 'hidden' : 'block')}>
+          <div className={cn(isEmpty ? 'hidden' : 'block', 'h-[calc(100vh-80px)] w-full')}>
             <VoiceModelList
               key={voiceModelListKey}
               selectedVoiceModel={selectedVoiceModel}

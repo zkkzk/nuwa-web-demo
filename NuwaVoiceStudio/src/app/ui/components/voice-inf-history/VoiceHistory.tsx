@@ -41,7 +41,7 @@ function VoiceHistory() {
         </div>
       </div>
       
-      <div className="self-stretch pt-[98px] pb-[100px] overflow-hidden">
+      <div className="self-stretch pt-[100px] h-[calc(100vh-100px)] overflow-hidden">
 			  <VoiceHistoryList key={infType} type={infType} onChange={(newVoiceList) => setVoiceList(newVoiceList)} />
       </div>
     </div>
