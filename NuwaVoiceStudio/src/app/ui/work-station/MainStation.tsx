@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "@/navigation";
 import { useTranslations } from "next-intl";
 import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
@@ -7,9 +7,10 @@ import VoiceModelListHeader from "./VoiceModelListHeader";
 import VoiceModelList from "../components/voice-model-list/VoiceModelList";
 import { InfType, TypeVoiceModel, VoiceInfHistoryType } from "@/app/lib/definitions.voice";
 import { VoiceModelFilterType } from "@/app/lib/definitions.voice";
-import MainStationControl from "../components/voice-inf/MainStationControl";
 import { cn } from "@nextui-org/react";
 import VoiceInfDrawerModal from "../components/voice-inf/VoiceInfDrawerModal";
+import { useSearchParams } from "next/navigation";
+import { getPublishSquare } from "@/app/lib/voice.api";
 
 
 function MainStation({
@@ -27,6 +28,9 @@ function MainStation({
 
   const [isEmpty, setIsEmpty] = useState(false);
 
+  const searchParams = useSearchParams()
+  const searchPublishId = searchParams.get('publishId') || ''
+
   const [selectedVoiceModel, setSelectedVoiceModel] = useState<TypeVoiceModel | null >(null);
 
   const [filters, setFilters] = useState<VoiceModelFilterType>({
@@ -35,6 +39,31 @@ function MainStation({
   })
 
   const [voiceModelListKey, setVoiceModelListKey] = useState(0);
+
+  const getVoiceModelListApi = getPublishSquare();
+
+  const getPublishSquareToServer = async () => {
+    const res = await getVoiceModelListApi.send({
+      page_token: '',
+      size: 20,
+      type: 'browse',
+      name: ''
+    });
+    if (res && res.code === 0) {
+      let newVoiceModelList: TypeVoiceModel[] = res.data.list;
+      let selectNewVoiceModelItem = newVoiceModelList.find(voiceModel => voiceModel.publish_id === searchPublishId)
+      if (selectNewVoiceModelItem) {
+        setSelectedVoiceModel(selectNewVoiceModelItem);
+        setIsOpen(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    if (searchPublishId) {
+      getPublishSquareToServer();
+    }
+  }, [])
 
   return (
     <div className="grow shrink basis-0 self-stretch rounded-bl-[20px] border-r border-neutral-800 flex-col justify-between items-center inline-flex">

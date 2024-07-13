@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { Button, Dropdown, DropdownItem, DropdownMenu, DropdownTrigger, Input } from "@nextui-org/react";
 import NuwaChipRadioGroup from "../components/NuwaChipRadioGroup";
 import { ChevronDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/solid";
-import FilterIcon from "@/app/icons/FilterIcon";
 import DCubeIcon from "@/app/icons/3DCubeIcon";
 import PublishVoiceModelModal from "../components/publish-select-voice-model/PublishVoiceModelModal";
 import { VoiceModelFilterType } from "@/app/lib/definitions.voice";

@@ -10,20 +10,20 @@ import moment from 'moment';
 import VoiceModelCollectButton from "./VoiceModelCollectButton";
 import { EllipsisHorizontalIcon } from "@heroicons/react/24/solid";
 import VoiceModelDownloadButton from "../voice-model-download-button/VoiceModelDownloadButton";
-import VoiceInfDrawerModal from "../voice-inf/VoiceInfDrawerModal";
 import ShareIcon from "@/app/icons/ShareIcon";
 import { StarIcon } from "@heroicons/react/24/solid";
 import DownloadIcon from "@/app/icons/DownloadIcon";
 import { BeakerIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "@/navigation";
 
 function VoiceAssetDetailRight({
   voicePublishInfo, 
 }: {
   voicePublishInfo: VoiceModelPublishType
 }) {
+  const router = useRouter();
   const [startDownload, setStartDownload] = useState(0);
   const [downloading, setDownlanding] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
   const pathname = typeof window !== 'undefined' && window.location.pathname ? window.location.pathname : '';
   const origin = typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
   const url = `${origin}${pathname}?publishId=${voicePublishInfo.publish_id}`
@@ -44,7 +44,8 @@ function VoiceAssetDetailRight({
           className="w-[230px]"
           startContent={<DCubeIcon className="h-6 w-6 fill-white" />}
           onPress={() => {
-            setIsOpen(true)
+            // setIsOpen(true)
+            router.push(`/workstation?publishId=${voicePublishInfo.publish_id}`);
           }}
         >Run on WorkStation</Button>
         {voicePublishInfo.publish_info.permission.download_permission && (
@@ -250,16 +251,6 @@ function VoiceAssetDetailRight({
             </div>
           </div>
         </div>
-
-      <VoiceInfDrawerModal
-        key={voicePublishInfo.publish_id}
-        isOpen={isOpen}
-        publishId={voicePublishInfo.publish_id}
-        modelId={voicePublishInfo.model_id}
-        tones={voicePublishInfo.tone}
-        onChange={(isOpen) => { setIsOpen(isOpen); }}
-        onSuccess={() => { setIsOpen(false); }}
-      />
     </div>
   );
 }

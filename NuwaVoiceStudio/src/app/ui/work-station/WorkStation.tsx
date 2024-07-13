@@ -35,7 +35,7 @@ function WorkStation() {
               ])
             }
           }}
-          onSendingChanege={({sending, infType}) => {
+          onSendingChange={({sending, infType}) => {
             setSending(sending)
             // setInfType(infType)
           }}
