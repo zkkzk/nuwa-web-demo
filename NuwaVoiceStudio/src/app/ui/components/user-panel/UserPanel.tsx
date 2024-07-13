@@ -163,7 +163,7 @@ export default function UserPanel({ className }: UserPanelProps) {
             <ListboxItem
               key="profile"
               textValue="profile"
-              className="p-0 cursor-default"
+              className="p-0 cursor-default data-[hover=true]:bg-transparent"
               isReadOnly
             >
               <div className='flex flex-row justify-between items-center'>
