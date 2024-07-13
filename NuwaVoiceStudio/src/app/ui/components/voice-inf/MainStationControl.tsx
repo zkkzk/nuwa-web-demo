@@ -114,7 +114,7 @@ function MainStationControl({
             />
             <MainStationInfButton
               type="code"
-              isDisabled={!modelId || instantGenerateParamster.text.length === 0}
+              isDisabled={!modelId}
               value={instantGenerateParamster}
               onSuccess={(newInf) => {onSuccessHandler(newInf)}}
               onSendingChanege={onSendingChanege}

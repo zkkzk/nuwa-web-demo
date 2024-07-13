@@ -5,88 +5,88 @@ export type TypeTone = {
 
 export const toneListEn:Array<TypeTone> = [{
   value: "neutral",
-  label: "neutral",
+  label: "Neutral",
 }, {
   value: "admiration",
-  label: "admiration",
+  label: "Admiration",
 }, {
   value: "amusement",
-  label: "amusement",
+  label: "Amusement",
 }, {
   value: "anger",
-  label: "anger",
+  label: "Anger",
 }, {
   value: "annoyance",
-  label: "annoyance",
+  label: "Annoyance",
 }, {
   value: "approval",
-  label: "approval",
+  label: "Approval",
 }, {
   value: "caring",
-  label: "caring",
+  label: "Caring",
 }, {
   value: "confusion",
-  label: "confusion",
+  label: "Confusion",
 }, {
   value: "curiosity",
-  label: "curiosity",
+  label: "Curiosity",
 }, {
   value: "desire",
-  label: "desire",
+  label: "Desire",
 }, {
   value: "disappointment",
-  label: "disappointment",
+  label: "Disappointment",
 }, {
   value: "disapproval",
-  label: "disapproval",
+  label: "Disapproval",
 }, {
   value: "disgust",
-  label: "disgust",
+  label: "Disgust",
 }, {
   value: "embarrassment",
-  label: "embarrassment",
+  label: "Embarrassment",
 }, {
   value: "excitement",
-  label: "excitement",
+  label: "Excitement",
 }, {
   value: "fear",
-  label: "fear",
+  label: "Fear",
 }, {
   value: "gratitude",
-  label: "gratitude",
+  label: "Gratitude",
 }, {
   value: "grief",
-  label: "grief",
+  label: "Grief",
 }, {
   value: "joy",
-  label: "joy",
+  label: "Joy",
 }, {
   value: "love",
-  label: "love",
+  label: "Love",
 }, {
   value: "nervousness",
-  label: "nervousness",
+  label: "Nervousness",
 }, {
   value: "optimism",
-  label: "optimism",
+  label: "Optimism",
 }, {
   value: "pride",
-  label: "pride",
+  label: "Pride",
 }, {
   value: "realization",
-  label: "realization",
+  label: "Realization",
 }, {
   value: "relief",
-  label: "relief",
+  label: "Relief",
 }, {
   value: "remorse",
-  label: "remorse",
+  label: "Remorse",
 }, {
   value: "sadness",
-  label: "sadness",
+  label: "Sadness",
 }, {
   value: "surprise",
-  label: "surprise",
+  label: "Surprise",
 }]
 
 export const toneListZhcn:Array<TypeTone> = [{

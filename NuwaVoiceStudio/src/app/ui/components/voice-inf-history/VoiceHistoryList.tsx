@@ -39,7 +39,7 @@ function VoiceHistoryList({
 
     const res = await getVoiceInfHistoryApi.send({
       "page_token": nextPageToken,
-      "inf_type": type,
+      "inf_type": '',
     });
     if (res && res.code === 0) {
       let newVoiceList: VoiceInfHistoryType[] = res.data.list || [];
@@ -112,17 +112,28 @@ function VoiceHistoryList({
 					scrollableTarget="scrollableVoiceHistoryDiv"
 					className="w-full self-stretch grow shrink basis-0 flex-col justify-start items-center gap-6 flex"
 				>
-          {[...newInfList, ...voiceList].map((voice, index) => (
-            <motion.div
-              className="w-full"
-              variants={wrapperVariants}
-              initial="enter"
-              animate={newInfList.length > 0 ? 'visible' : 'enter'}
-              exit="exit"
-            >
-              <VoiceHistoryItem voiceInfHistory={voice} key={`${index}-${voice.seq}-${voice.id}-${voice.inf_id}`} />
-		        </motion.div>
-          ))}
+          {newInfList.length > 0 ? (
+            <>
+              {[...newInfList, ...voiceList].map((voice, index) => (
+                // <motion.div
+                //   className="w-full"
+                //   variants={wrapperVariants}
+                //   initial="enter"
+                //   animate='visible'
+                //   exit="exit"
+                //   key={`${index}-${voice.seq}-${voice.id}-${voice.inf_id}`} 
+                // >
+                  <VoiceHistoryItem voiceInfHistory={voice} key={`${index}-${voice.seq}-${voice.id}-${voice.inf_id}`} />
+                // </motion.div>
+              ))}
+            </>
+          ) : (
+            <>
+              {[...voiceList].map((voice, index) => (
+                <VoiceHistoryItem voiceInfHistory={voice} key={`${index}-${voice.seq}-${voice.id}-${voice.inf_id}`} />
+              ))}
+            </>
+          )}
 				</InfiniteScroll>
 			</ScrollShadow>
 		</div>

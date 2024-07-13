@@ -37,7 +37,7 @@ function WorkStation() {
           }}
           onSendingChanege={({sending, infType}) => {
             setSending(sending)
-            setInfType(infType)
+            // setInfType(infType)
           }}
         />
         <VoiceHistory key={voiceHistoryKey} sending={sending} infType={infType} newInfList={newInfList}/>

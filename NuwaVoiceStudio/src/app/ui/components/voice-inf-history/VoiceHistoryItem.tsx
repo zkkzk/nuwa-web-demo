@@ -6,6 +6,7 @@ import { VoiceInfHistoryType } from "@/app/lib/definitions.voice";
 import moment from "moment";
 import VoiceHistoryItemAudio from "./VoiceHistoryItemAudio";
 import { motion, useAnimationControls } from "framer-motion";
+import { toneListEn } from "@/app/lib/definitions.tone";
 
 function VoiceHistoryItem({
 	voiceInfHistory
@@ -50,8 +51,8 @@ function VoiceHistoryItem({
 								
 							<div className="grow shrink basis-0 self-stretch flex-col justify-between items-start inline-flex">
 								<div className="self-stretch text-white text-lg font-semibold font-['Archivo'] leading-normal">{voiceInfHistory.name}</div>
-								<div className="px-2 py-1 bg-neutral-800 rounded-md justify-center items-center gap-2 inline-flex">
-									<div className="text-white text-sm font-medium font-['Inter']">{voiceInfHistory.tone.tone_type}</div>
+								<div className="px-2 py-1 bg-neutral-900 rounded-md justify-center items-center gap-2 inline-flex">
+									<div className="text-white text-sm font-medium font-['Inter']">{toneListEn.find((item) => item.value === voiceInfHistory.tone.tone_type)?.label}</div>
 								</div>
 							</div>
 						</div>
@@ -62,7 +63,9 @@ function VoiceHistoryItem({
 					{voiceInfHistory.inf_type === 'audio' ? (
 						useMemo(() => <VoiceHistoryItemAudio voiceInfHistory={voiceInfHistory} />, [voiceInfHistory])
 					) : (
-						<VoiceHistoryItemAPI code={voiceInfHistory.code} />
+						<>
+							{voiceInfHistory.code !== null && voiceInfHistory.code.length > 0 && (<VoiceHistoryItemAPI code={voiceInfHistory.code} />)}
+						</>
 					)}
 					
 				</div>
