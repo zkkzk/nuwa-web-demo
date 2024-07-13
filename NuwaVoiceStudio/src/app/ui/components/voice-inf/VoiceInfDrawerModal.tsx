@@ -2,7 +2,7 @@
 import React from "react";
 import { Modal, ModalBody, ModalContent, ModalHeader } from "@nextui-org/react";
 import MainStationControl from "./MainStationControl";
-import { VoiceInfHistoryType, VoiceModelToneType } from "@/app/lib/definitions.voice";
+import { InfType, VoiceInfHistoryType, VoiceModelToneType } from "@/app/lib/definitions.voice";
 
 function VoiceInfDrawerModal({
   isOpen,
@@ -11,6 +11,7 @@ function VoiceInfDrawerModal({
   tones = [],
   onChange,
   onSuccess,
+  onSendingChange,
 }: {
   isOpen: boolean;
   publishId: string;
@@ -18,24 +19,47 @@ function VoiceInfDrawerModal({
   tones: VoiceModelToneType[];
   onChange?: (isOpen: boolean) => void;
   onSuccess?: (newInf: VoiceInfHistoryType) => void;
+  onSendingChange?: ({sending, infType} : {sending: boolean, infType: InfType}) => void
 }) {
   
   return (
     <Modal
-      size="4xl"
+      size="full"
+      placement="bottom"
       isOpen={isOpen}
-      scrollBehavior="inside"
       onOpenChange={(isOpen) => {
-        onChange && onChange(false);
+        onChange && onChange(isOpen);
       }}
       classNames={{
-        base: "",
-        header: "",
-        body: "",
-        footer: "",
+        wrapper: "w-full",
+        base: "bg-transparent w-full h-auto",
+        header: "hidden shadow-none",
+        body: "bg-transparent p-0 justify-end w-full h-auto",
+        footer: "hidden",
       }}
-      hideCloseButton={false}
-      isDismissable={false}
+      motionProps={{
+        variants: {
+          enter: {
+            y: 0,
+            opacity: 1,
+            transition: {
+              opacity: {
+                duration: 0.15,
+              },
+            },
+          },
+          exit: {
+            y: "50%",
+            opacity: 0,
+            transition: {
+              opacity: {
+                duration: 0.1,
+              },
+            },
+          },
+        },
+      }}
+      hideCloseButton={true}
     >
       <ModalContent>
         {(onClose) => (
@@ -43,16 +67,18 @@ function VoiceInfDrawerModal({
             <ModalHeader></ModalHeader>
             <ModalBody>
               {publishId && (
-                <MainStationControl
-                  key={publishId}
-                  isOpen={false}
-                  publishId={publishId}
-                  modelId={modelId}
-                  tones={tones}
-                  onSuccess={(newInf) => {
-                    onSuccess && onSuccess(newInf);
-                  }}
-                />
+                <div className="pr-[382px] w-full">
+                  <MainStationControl
+                    key={publishId}
+                    publishId={publishId}
+                    modelId={modelId}
+                    tones={tones}
+                    onSuccess={(newInf) => {
+                      onSuccess && onSuccess(newInf);
+                    }}
+                    onSendingChange={onSendingChange}
+                  />
+                </div>
               )}
             </ModalBody>
           </>

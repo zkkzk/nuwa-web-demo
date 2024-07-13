@@ -93,7 +93,7 @@ function VoiceModelList({
 
   return (
     <div className="self-stretch flex-col justify-start items-start gap-8 flex h-full">
-      <ScrollShadow size={16} visibility="top" hideScrollBar id="scrollableVoiceModelDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto py-4 px-8">
+      <ScrollShadow size={16} hideScrollBar id="scrollableVoiceModelDiv" className="w-full flex-col justify-start items-start gap-8 inline-flex h-dvh overflow-auto py-4 px-8">
         <InfiniteScroll
           dataLength={voiceModelList.length}
           next={() => {getPublishSquareToServer({isFirst: false})}}
@@ -117,7 +117,6 @@ function VoiceModelList({
           ))}
         </InfiniteScroll>
       </ScrollShadow>
-      <div className="h-14" />
     </div>
   );
 }

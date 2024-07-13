@@ -11,13 +11,13 @@ function MainStationInfButton({
   value,
   type,
   onSuccess,
-  onSendingChanege,
+  onSendingChange,
 } : {
   isDisabled: boolean;
   value: InstantGenerateParamsterType;
   type: "audio" | "code"
   onSuccess: (newInf: VoiceInfHistoryType) => void
-  onSendingChanege?: ({sending, infType} : {sending: boolean, infType: InfType}) => void
+  onSendingChange?: ({sending, infType} : {sending: boolean, infType: InfType}) => void
 }) {
   const [sending, setSending] = useState(false);
 
@@ -27,7 +27,7 @@ function MainStationInfButton({
       return;
     }
     setSending(true);
-    onSendingChanege && onSendingChanege({
+    onSendingChange && onSendingChange({
       sending: true,
       infType: type,
     });
@@ -40,7 +40,7 @@ function MainStationInfButton({
       onSuccess(res.data.inf_info);
     }
 
-    onSendingChanege && onSendingChanege({
+    onSendingChange && onSendingChange({
       sending: false,
       infType: type,
     });

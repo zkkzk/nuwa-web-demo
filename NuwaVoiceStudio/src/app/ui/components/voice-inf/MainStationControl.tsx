@@ -10,19 +10,19 @@ import MainStationInfButton from "./MainStationInfButton";
 import { handleConfetti } from "@/app/lib/utils";
 
 function MainStationControl({
-  isOpen = false,
+  isOpenParams = false,
   publishId = "",
   modelId = "",
   tones = [],
   onSuccess,
-  onSendingChanege,
+  onSendingChange,
 } : {
-  isOpen: boolean;
+  isOpenParams?: boolean;
   publishId: string;
   modelId: string;
   tones: VoiceModelToneType[];
   onSuccess: (newInf: VoiceInfHistoryType) => void
-  onSendingChanege?: ({sending, infType} : {sending: boolean, infType: InfType}) => void
+  onSendingChange?: ({sending, infType} : {sending: boolean, infType: InfType}) => void
 }) {
   const t = useTranslations();
   const toneList: Array<VoiceModelToneType> = [];
@@ -59,10 +59,11 @@ function MainStationControl({
 
   return (
     <div className="flex-col justify-end items-center flex bottom-0 w-full">
-      <MainStationControlParameters isOpen={isOpen} value={instantGenerateParamster} onChange={setInstantGenerateParamster} />
+      <MainStationControlParameters isOpen={isOpenParams} value={instantGenerateParamster} onChange={setInstantGenerateParamster} />
       <div className="self-stretch h-[188px] p-8 bg-neutral-900 shadow border-t border-neutral-800 flex-col justify-start items-start gap-5 flex">
         <Input
           color="primary"
+          size="lg"
           type="text"
           variant="bordered"
           placeholder="Type context you want to convert here."
@@ -110,14 +111,14 @@ function MainStationControl({
               isDisabled={!modelId || instantGenerateParamster.text.length === 0}
               value={instantGenerateParamster}
               onSuccess={(newInf) => {onSuccessHandler(newInf)}}
-              onSendingChanege={onSendingChanege}
+              onSendingChange={onSendingChange}
             />
             <MainStationInfButton
               type="code"
               isDisabled={!modelId}
               value={instantGenerateParamster}
               onSuccess={(newInf) => {onSuccessHandler(newInf)}}
-              onSendingChanege={onSendingChanege}
+              onSendingChange={onSendingChange}
             />
           </div>
         </div>

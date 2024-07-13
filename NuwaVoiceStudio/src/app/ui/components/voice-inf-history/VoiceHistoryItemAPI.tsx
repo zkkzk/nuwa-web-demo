@@ -31,7 +31,8 @@ function VoiceHistoryItemAPI({code}: {
 							classNames={{
 								base: "bg-zinc-900 rounded-none overflow-scroll w-full relative",
 								content: "",
-								copyButton: " top-5 right-6 absolute"
+								copyButton: " top-5 right-6 absolute",
+								pre: "w-full overflow-scroll",
 							}}
 							hideSymbol={true}
 						>
