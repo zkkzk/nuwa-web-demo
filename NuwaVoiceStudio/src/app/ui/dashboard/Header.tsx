@@ -10,6 +10,7 @@ import VoiceAssetIcon from '@/app/icons/VoiceAssetIcon'
 import { BeakerIcon } from '@heroicons/react/24/solid'
 import DCubeIcon from '@/app/icons/3DCubeIcon'
 import Send2Icon from '@/app/icons/Send2Icon'
+import UserPanel from '../components/user-panel/UserPanel'
 
 const navigation = [
   { name: 'Navigation.voiceasset', href: '/voiceasset', icon: VoiceAssetIcon, current: false },
@@ -92,7 +93,8 @@ export default function Header() {
           </div>
           <div className="w-9 h-9 relative">
             <div className="w-9 h-9 left-0 top-0 absolute rounded-[40px] justify-center items-center inline-flex">
-              <HeaderAvatar />
+              {/* <HeaderAvatar /> */}
+              <UserPanel />
             </div>
             <div className="w-3 h-3 left-[26px] top-[-2px] absolute bg-orange-400 rounded-full border-2 border-zinc-800" />
           </div>

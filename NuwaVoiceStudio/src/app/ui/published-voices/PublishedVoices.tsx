@@ -37,7 +37,7 @@ function PublishedVoices() {
           
         </div>
         <div className="self-stretch pt-[80px] overflow-hidden w-full">
-          <div className={cn(isEmpty ? 'hidden' : 'block', 'h-[calc(100vh-80px)]')}>
+          <div className={cn(isEmpty ? 'hidden' : 'block', 'h-[calc(100vh-200px)]')}>
             <VoiceModelList
               key={voiceModelListKey}
               type="my"
