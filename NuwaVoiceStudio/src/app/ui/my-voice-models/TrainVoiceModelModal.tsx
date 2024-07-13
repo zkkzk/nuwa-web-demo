@@ -131,7 +131,7 @@ function TrainVoiceModelModal({
             <ModalHeader>
               <div className="flex flex-col">
                 <div className="text-white text-2xl font-bold font-['Inter'] leading-loose">Train My Voice Model</div>
-                <div className="self-stretch"><span className="text-white text-sm font-normal font-['Inter'] leading-tight">For best result, upload a clear 6-12 mins audio clip (anything beyond 12 mins will be clipped). Avoid background noise.</span><span className="text-blue-600 text-sm font-normal font-['Inter'] leading-tight"> </span><span className="text-blue-600 text-sm font-semibold font-['Inter'] leading-tight">{'Learn More >'}</span></div>
+                <div className="self-stretch"><span className="text-white text-sm font-normal font-['Inter'] leading-tight">For best result, upload a clear 6-12 mins audio clip (anything beyond 12 mins will be clipped). Avoid background noise.</span><span className="text-blue-600 text-sm font-normal font-['Inter'] leading-tight"> </span><a href="https://docs.ddream.land/ddream-open-api/ai-voice-services/voice-tone-training" target="_blank" className="text-blue-600 text-sm font-semibold font-['Inter'] leading-tight">{'Learn More >'}</a></div>
               </div>
             </ModalHeader>
             <ModalBody>

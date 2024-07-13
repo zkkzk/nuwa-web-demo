@@ -1,6 +1,6 @@
 "use client";
 import DCubeIcon from "@/app/icons/3DCubeIcon";
-import { ArrowDownTrayIcon } from "@heroicons/react/24/solid";
+import { ArrowDownTrayIcon, RocketLaunchIcon } from "@heroicons/react/24/solid";
 import { CheckBadgeIcon, CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
 import { Button, Snippet, Avatar } from "@nextui-org/react";
 import React, { useState } from "react";
@@ -40,9 +40,9 @@ function VoiceAssetDetailRight({
         <Button
           size="lg"
           color="primary"
-          variant="solid"
-          className="w-[230px]"
-          startContent={<DCubeIcon className="h-6 w-6 fill-white" />}
+          variant="ghost"
+          className="w-[236px]"
+          startContent={<RocketLaunchIcon className="h-6 w-6 fill-primary group-hover:fill-white" />}
           onPress={() => {
             // setIsOpen(true)
             router.push(`/workstation?publishId=${voicePublishInfo.publish_id}`);
@@ -231,7 +231,7 @@ function VoiceAssetDetailRight({
         <div className="grow shrink basis-0 flex-col justify-start items-start inline-flex divide-y">
           <div className="flex-col justify-start items-start gap-0.5 flex pb-2">
             <div className="text-white text-base font-medium font-['Inter'] leading-normal">{voicePublishInfo.publisher.name}</div>
-            <div className="text-zinc-400 text-xs font-normal font-['Inter'] leading-none">Joined {moment(voicePublishInfo.publisher.created_at, "X").format('MMMM DD YYYY')}</div>
+            <div className="text-zinc-400 text-xs font-normal font-['Inter'] leading-none">Joined {moment(voicePublishInfo.publisher.created_at).format('MMMM DD YYYY')}</div>
           </div>
           <div className="justify-start items-center gap-2.5 inline-flex pt-2">
             <div className="h-4 justify-start items-center gap-1 flex">

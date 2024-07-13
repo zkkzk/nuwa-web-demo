@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import TrainItem from "./TrainItem";
 import { Button, Input, Pagination } from "@nextui-org/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
@@ -7,6 +7,7 @@ import { TrashIcon } from "@heroicons/react/24/outline";
 import { deleteVoiceTrain, getVoiceTrainRecords } from "@/app/lib/voice.api";
 import { useAmDispatch } from "../components/alter-message/AlterMessageContextProvider";
 import { voiceTrainRecordType } from "@/app/lib/definitions.voice";
+import TrainItemSkeleton from "./TrainItemSkeleton";
 
 const TaskStatusMap = {
   '1': 'notstart',
@@ -29,7 +30,9 @@ function TrainList({
   const [total, setTotal] = useState(0)
   const pageSize = 10;
   const [currentPage, setCurrentPage] = useState(1);
+  const currentPageRef = useRef(currentPage)
   const [search, setSearch] = useState('')
+  const searchRef = useRef(search)
   const [selectedIds, setSelectedIds] = useState<string[]>([])
   const [deleting, setDeleting] = useState(false)
 
@@ -39,14 +42,16 @@ function TrainList({
   const getVoiceTrainRecordsServer = async ({
     page,
     search,
+    isRefresh = false,
   }: {
-    page: number,
-    search: string,
+    page?: number,
+    search?: string,
+    isRefresh?: boolean,
   }) => {
-    // if (loading) {
-    //   return;
-    // }
-    // setLoading(true);
+    if (loading) {
+      return;
+    }
+    !isRefresh && setLoading(true);
     const res = await getVoiceTrainRecordsApi.send({
       page_size: pageSize,
       page: page,
@@ -74,15 +79,33 @@ function TrainList({
         page: 1,
         search: search,
       });
+      setSelectedIds([])
     }
     setDeleting(false);
   };
+
+  useEffect(() => {
+    currentPageRef.current = currentPage
+    searchRef.current = search
+  })
 
   useEffect(() => {
     getVoiceTrainRecordsServer({
       page: 1,
       search: '',
     });
+
+    const gvtInterval = setInterval(() => {
+      getVoiceTrainRecordsServer({
+        page: currentPageRef.current,
+        search: searchRef.current,
+        isRefresh: true,
+      })
+    }, 10*1000)
+
+    return (() => {
+      clearInterval(gvtInterval)
+    })
   }, []);
   
   return (
@@ -118,18 +141,29 @@ function TrainList({
         )}
         
       </div>
-      {voiceTrainRecordsList.map((item) => (
-        <TrainItem key={item.id} value={item} isSelected={selectedIds.includes(item.task_id)} onValueChange={(checked) => {
-          if (checked) {
-            setSelectedIds([
-              ...selectedIds,
-              item.task_id,
-            ])
-          } else {
-            setSelectedIds(selectedIds.filter((id) => id !== item.task_id))
-          }
-        }} />
-      ))}
+      
+
+      {loading ? (
+        <>
+          {Array.from({ length: pageSize }, (_, i) => i).map((item, index) => (<TrainItemSkeleton key={index} />))}
+        </>
+      ) : (
+        <>
+          {voiceTrainRecordsList.map((item) => (
+            <TrainItem key={item.id} value={item} isSelected={selectedIds.includes(item.task_id)} onValueChange={(checked) => {
+              if (checked) {
+                setSelectedIds([
+                  ...selectedIds,
+                  item.task_id,
+                ])
+              } else {
+                setSelectedIds(selectedIds.filter((id) => id !== item.task_id))
+              }
+            }} />
+          ))}
+        </>
+      )}
+
       <div className="w-full h-8 justify-between items-center inline-flex">
         <div className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">
           {(currentPage-1)*pageSize+1}-{currentPage === Math.ceil(total/pageSize) ? total : pageSize*currentPage} of {total} items
@@ -143,7 +177,6 @@ function TrainList({
             setCurrentPage(page)
           }} />
         )}
-        
       </div>
     </div>
   );

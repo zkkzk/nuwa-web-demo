@@ -7,7 +7,7 @@ import { Button, Checkbox, cn } from "@nextui-org/react";
 import React, { useState } from "react";
 import PublishVoiceModelModal from "../components/publish-select-voice-model/PublishVoiceModelModal";
 import VoiceModelDownloadButton from "../components/voice-model-download-button/VoiceModelDownloadButton";
-import VoiceInfDrawerModal from "../components/voice-inf/VoiceInfDrawerModal";
+
 
 function TrainItem({
   value,
@@ -20,7 +20,6 @@ function TrainItem({
 }) {
   const [selectModalOpen, setSelectModalOpen] = useState(false);
   const [startDownload, setStartDownload] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
 
   return (
     <div className="w-full h-[76px] px-4 py-2.5 bg-zinc-800 rounded-2xl justify-between items-center inline-flex">
@@ -79,18 +78,6 @@ function TrainItem({
             <Button variant="light" className="text-zinc-400" onPress={() => {setStartDownload(startDownload + 1)}}>Download</Button>
             <Button variant="light" className="text-zinc-400" onPress={() => {setSelectModalOpen(true)}}>Publish</Button>
           </div>
-          {/* <VoiceInfDrawerModal
-            key={value.task_param.model_id}
-            isOpen={isOpen}
-            publishId={""}
-            modelId={value.task_param.model_id}
-            tones={[
-              audio_url: value.task_param.audio_url
-              
-            ]}
-            onChange={(isOpen) => { setIsOpen(isOpen); }}
-            onSuccess={() => { setIsOpen(false); }}
-          /> */}
           <PublishVoiceModelModal
             key={'selectModalOpen'+ selectModalOpen.toString()}
             variant="SELECT"
@@ -103,7 +90,6 @@ function TrainItem({
           />
         </>
       )}
-
     </div>
   );
 }

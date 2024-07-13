@@ -16,7 +16,6 @@ function VoiceHistoryItemSkeleton() {
           <div className="h-3 w-full rounded-lg bg-secondary-200"></div>
         </Skeleton>
       </div>
-
     </Card>
   );
 }
