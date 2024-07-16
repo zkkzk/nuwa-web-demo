@@ -19,6 +19,8 @@ function TrainItem({
   onValueChange?: (selected: boolean) => void;
 }) {
   const [selectModalOpen, setSelectModalOpen] = useState(false);
+  const [startGptDownload, setStartGptDownload] = useState(0);
+  const [startSovitsDownload, setStartSovitsDownload] = useState(0);
   const [startDownload, setStartDownload] = useState(0);
 
   return (
@@ -74,8 +76,20 @@ function TrainItem({
         <>
           <div className="justify-start items-center gap-2 flex">
             {/* <Button variant="light" className="text-zinc-400" startContent={<BeakerIcon className="w-5 h-5" />} onPress={() => {setIsOpen(true)}}>Run on WorkStation</Button> */}
-            <VoiceModelDownloadButton modelId={value.task_param.model_id} startDownload={startDownload} onDownloading={() => {}} />
-            <Button variant="light" className="text-zinc-400" onPress={() => {setStartDownload(startDownload + 1)}}>Download</Button>
+            <VoiceModelDownloadButton
+              modelId={value.task_param.model_id}
+              type="gpt"
+              startDownload={startGptDownload}
+              onDownloading={() => {}}
+              />
+            <VoiceModelDownloadButton
+              modelId={value.task_param.model_id}
+              type="sovits"
+              startDownload={startSovitsDownload}
+              onDownloading={() => {}}
+            />
+            <Button variant="light" className="text-zinc-400" onPress={() => {setStartGptDownload(startGptDownload + 1)}}>Download Gpt</Button>
+            <Button variant="light" className="text-zinc-400" onPress={() => {setStartSovitsDownload(startSovitsDownload + 1)}}>Download Sovits</Button>
             <Button variant="light" className="text-zinc-400" onPress={() => {setSelectModalOpen(true)}}>Publish</Button>
           </div>
           <PublishVoiceModelModal
