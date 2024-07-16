@@ -23,6 +23,8 @@ function VoiceAssetDetailRight({
 }) {
   const router = useRouter();
   const [startDownload, setStartDownload] = useState(0);
+  const [startGptDownload, setStartGptDownload] = useState(0);
+  const [startSovitsDownload, setStartSovitsDownload] = useState(0);
   const [downloading, setDownlanding] = useState(false);
   const pathname = typeof window !== 'undefined' && window.location.pathname ? window.location.pathname : '';
   const origin = typeof window !== 'undefined' && window.location.origin ? window.location.origin : '';
@@ -51,8 +53,17 @@ function VoiceAssetDetailRight({
         {voicePublishInfo.publish_info.permission.download_permission && (
           <>
             <VoiceModelDownloadButton
+              type="gpt"
               publishId={voicePublishInfo.publish_id}
-              startDownload={startDownload}
+              startDownload={startGptDownload}
+              onDownloading={(newDownloading) => {
+                setDownlanding(newDownloading);
+              }}
+            />
+            <VoiceModelDownloadButton
+              type="sovits"
+              publishId={voicePublishInfo.publish_id}
+              startDownload={startSovitsDownload}
               onDownloading={(newDownloading) => {
                 setDownlanding(newDownloading);
               }}
@@ -64,9 +75,20 @@ function VoiceAssetDetailRight({
               startContent={<ArrowDownTrayIcon className="fill-zinc-400 w-6 h-6" />}
               isIconOnly={true}
               onPress={() => {
-                setStartDownload(startDownload + 1);
+                setStartGptDownload(startGptDownload + 1);
               }}
               isDisabled={downloading}
+              />
+              <Button
+                disableRipple={false}
+                size="lg"
+                variant="bordered"
+                startContent={<ArrowDownTrayIcon className="fill-zinc-400 w-6 h-6" />}
+                isIconOnly={true}
+                onPress={() => {
+                  setStartSovitsDownload(startSovitsDownload + 1);
+                }}
+                isDisabled={downloading}
             />
           </>
         ) }

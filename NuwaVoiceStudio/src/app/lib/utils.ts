@@ -73,7 +73,7 @@ export const downloadFiles = (urls: string[]) => {
     var a = document.createElement("a");
     a.setAttribute('href', url as string);
     a.setAttribute('download', '');
-    a.setAttribute('target', '_blank');
+    // a.setAttribute('target', '_blank');
     a.click();
 
     if (urls.length == 0) {
