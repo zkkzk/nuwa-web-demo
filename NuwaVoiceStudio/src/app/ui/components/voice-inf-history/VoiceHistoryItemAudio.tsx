@@ -20,7 +20,7 @@ function VoiceHistoryItemAudio({
   return (
 		<>
 			{voiceInfHistory.audio_url && voiceInfHistory.audio_url !== '' && <VoiceHistoryItemVoiceRreview voiceSrc={voiceInfHistory.audio_url} />}
-			{showCode && voiceInfHistory.code !== null && voiceInfHistory.code.length > 0 && <VoiceHistoryItemAPI userToken={userToken} voiceInfHistory={voiceInfHistory} />}
+			{showCode && <VoiceHistoryItemAPI userToken={userToken} voiceInfHistory={voiceInfHistory} />}
 			
 			<div className="self-stretch justify-start items-start gap-4 inline-flex">
 				<Button

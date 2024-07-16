@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Select, SelectItem } from "@nextui-org/react";
 import {
   VoiceModelFormDataProps,
@@ -26,6 +26,12 @@ function UploadVoiceModelForm({
       label: "GPT-Sovits",
     }
   ];
+
+  const currentFormData= useRef(formData)
+
+  useEffect(() => {
+    currentFormData.current = formData
+  })
 
   return (
     <div className="w-full flex-col justify-start items-start gap-12 flex">
@@ -78,9 +84,9 @@ function UploadVoiceModelForm({
               type="gpt_weights_file"
               onDone={(res) => {
                 onChange && onChange({
-                  ...formData,
+                  ...currentFormData.current,
                   local_model: {
-                    ...formData.local_model,
+                    ...currentFormData.current.local_model,
                     "gpt-weights_url": res.url
                   }
                 } as VoiceModelFormDataProps)
@@ -101,9 +107,9 @@ function UploadVoiceModelForm({
               type="sovits_weights_file"
               onDone={(res) => {
                 onChange && onChange({
-                  ...formData,
+                  ...currentFormData.current,
                   local_model: {
-                    ...formData.local_model,
+                    ...currentFormData.current.local_model,
                     "sovits-weights_url": res.url
                   }
                 } as VoiceModelFormDataProps)
@@ -153,7 +159,7 @@ function UploadVoiceModelForm({
             modelId={formData.model_id}
             onChange={(newTone) => {
               onChange && onChange({
-                ...formData,
+                ...currentFormData.current,
                 tone: newTone
               } as VoiceModelFormDataProps)
             }}

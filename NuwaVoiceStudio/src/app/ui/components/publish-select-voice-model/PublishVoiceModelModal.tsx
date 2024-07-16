@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import {
   Button,
   ModalBody,
@@ -54,6 +54,12 @@ function PublishVoiceModelModal({
     publish_type: variant === 'UPLOAD' ? 2 : 1,
     model_id: modelId ? modelId : ''
   } as VoiceModelFormDataProps);
+
+  const currentFormData= useRef(formData)
+
+  // useEffect(() => {
+  //   currentFormData.current = formData
+  // })
 
   const UploadFormSchema = z.object({
     gptWeightsUrl: z.string({

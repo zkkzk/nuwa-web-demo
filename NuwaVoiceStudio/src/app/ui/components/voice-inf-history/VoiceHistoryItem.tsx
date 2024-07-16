@@ -65,9 +65,7 @@ function VoiceHistoryItem({
 					{voiceInfHistory.inf_type === 'audio' ? (
 						useMemo(() => <VoiceHistoryItemAudio userToken={userToken} voiceInfHistory={voiceInfHistory} />, [voiceInfHistory])
 					) : (
-						<>
-							{voiceInfHistory.code !== null && voiceInfHistory.code.length > 0 && (<VoiceHistoryItemAPI userToken={userToken} voiceInfHistory={voiceInfHistory} />)}
-						</>
+						<VoiceHistoryItemAPI userToken={userToken} voiceInfHistory={voiceInfHistory} />
 					)}
 					
 				</div>

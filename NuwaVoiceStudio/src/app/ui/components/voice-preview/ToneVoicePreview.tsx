@@ -3,6 +3,7 @@ import React, { useCallback, useRef, useState } from "react";
 import { useWavesurfer } from "@wavesurfer/react";
 import VoicePreview from "./VoicePreview";
 import { VoiceModelToneType } from "@/app/lib/definitions.voice";
+import { toneListEn } from "@/app/lib/definitions.tone";
 
 const formatTime = (seconds: any) =>
   [seconds / 60, seconds % 60]
@@ -33,7 +34,7 @@ function ToneVoicePreview({
             <div className="w-28 h-12 px-4 py-2 bg-zinc-800 rounded-xl justify-start items-center gap-2 flex">
                 <div className="justify-start items-center gap-2 flex">
                     {/* <div className="text-slate-100 text-lg font-semibold font-['Archivo'] leading-normal">😄</div> */}
-                    <div className="text-white text-sm font-medium font-['Inter'] leading-tight">{tone.tone_type}</div>
+                    <div className="text-white text-sm font-medium font-['Inter'] leading-tight">{toneListEn.find((item) => item.value === tone.tone_type)?.label}</div>
                 </div>
             </div>
             <div className="grow shrink basis-0 self-stretch justify-start items-center gap-3 flex">
