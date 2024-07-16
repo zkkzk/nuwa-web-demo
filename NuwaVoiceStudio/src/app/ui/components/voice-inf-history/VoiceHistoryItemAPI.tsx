@@ -4,15 +4,76 @@ import { Snippet, Tab, Tabs } from "@nextui-org/react";
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { VoiceInfHistoryType } from "@/app/lib/definitions.voice";
+import { template } from "lodash-es";
 
-function VoiceHistoryItemAPI({code}: {
-  code: Array<{
-    code: string,
-    type: string,
-  }>
+const CODE_TEMPLATE = 
+`import requests
+import json
 
+url = "https://service.ddream.land/ddream/api/v1/voice/quick_inf"
+
+headers = {"Content-Type": "application/json", "da_token": "<%= userToken %>/json"}
+payload = {
+    "publish_id": "<%= publish_id %>",
+    "model_id": "<%= model_id %>",
+    ",
+    "text": "<%= text %>",
+    "basic_params": {
+        "language": "<%= bpLanguage %>"
+        "seg_method": "<%= bpSegMethod %>",
+        "speed": "<%= bpSpeed %>",
+        "m_w_a_p_s": "<%= bpMwaps %>"
+    },
+    "advance_params": {
+        "seed": "<%= apSeed %>",
+        "top_k": "<%= apTopK %>",
+        "top_p": "<%= apTopP %>",
+        "temperature": "<%= apTemperature %>"
+    },
+    "tone": {
+        "tone_type": "<%= toneType %>",
+        "audio_url": "<%= toneAudioUrl %>",
+        "text": "<%= toneText %>"
+    }
+}
+
+response = requests.post(url, headers=headers, do_body=json.dumps(payload))
+
+print(response.text)`
+
+
+function VoiceHistoryItemAPI({
+	userToken,
+	voiceInfHistory,
+}: {
+	userToken: string
+  voiceInfHistory: VoiceInfHistoryType
 }) {
   const [selected, setSelected] = useState("GET");
+
+	const compiled = template(CODE_TEMPLATE);
+	const codeText = compiled({
+		userToken: userToken,
+		publish_id: voiceInfHistory.publish_id,
+		model_id: voiceInfHistory.model_id,
+		text: voiceInfHistory.text,
+		bpLanguage: voiceInfHistory.basic_params.language,
+		bpSegMethod: voiceInfHistory.basic_params.seg_method,
+		bpSpeed: voiceInfHistory.basic_params.speed,
+		bpMwaps: voiceInfHistory.basic_params.m_w_a_p_s,
+		apSeed: voiceInfHistory.advance_params.seed,
+		apTopK: voiceInfHistory.advance_params.top_k,
+		apTopP: voiceInfHistory.advance_params.top_p,
+		apTemperature: voiceInfHistory.advance_params.temperature,
+		toneType: voiceInfHistory.tone.tone_type,
+		toneAudioUrl: voiceInfHistory.tone.audio_url,
+		toneText: voiceInfHistory.tone.text,
+	});
+
+	const codeList = [{
+	  type: 'python',
+		code: codeText
+	}]
 
   return (
 		<div className="w-full rounded-xl border border-zinc-700 flex-col justify-start items-start inline-flex overflow-hidden">
@@ -25,7 +86,7 @@ function VoiceHistoryItemAPI({code}: {
 				}}
 				fullWidth
 			>
-				{code.map((code, index) => (
+				{codeList.map((code, index) => (
 					<Tab key={code.type} title={code.type}>				
 						<Snippet
 							classNames={{
@@ -40,7 +101,7 @@ function VoiceHistoryItemAPI({code}: {
 								<SyntaxHighlighter
 									language={code.type}
 									style={a11yDark}
-									wrapLongLines={true}
+									wrapLongLines={false}
 									customStyle={{
 										margin: '0 0',
 										background: 'transparent',

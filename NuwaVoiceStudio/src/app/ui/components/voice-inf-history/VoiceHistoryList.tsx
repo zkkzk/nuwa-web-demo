@@ -9,6 +9,7 @@ import EmptyIcon from "@/app/icons/EmptyIcon";
 import { InfType, VoiceInfHistoryType } from "@/app/lib/definitions.voice";
 import InfiniteScroll from "../infinite-scroll/InfiniteScroll";
 import { motion } from "framer-motion";
+import { getUserToken } from "@/app/lib/user.api";
 
 function VoiceHistoryList({
   type = 'audio',
@@ -29,7 +30,26 @@ function VoiceHistoryList({
   const [hasMore, setHasMore] = useState(true);
   const [nextPageToken, setNextPageToken] = useState("");
   const [voiceList, setVoiceList] = useState<VoiceInfHistoryType[]>(initVoiceList);
+  const [userToken, setUserToken] = useState("");
+  const [getUserTokenLoading, setUserTokenLoading] = useState(false);
   const getVoiceInfHistoryApi = getVoiceInfHistory();
+  const getUserTokenApi = getUserToken();
+
+  const getUserTokenServer = async () => {
+    if (getUserTokenLoading) {
+      return;
+    }
+    setUserTokenLoading(true);
+
+    const res = await getUserTokenApi.send({
+      "page_token": nextPageToken,
+      "inf_type": '',
+    });
+    if (res && res.code === 0) {
+      setUserToken(res.data)
+    }
+    setUserTokenLoading(false);
+  };
 
   const getVoiceInfHistoryoServer = async () => {
     if (loading) {
@@ -61,6 +81,7 @@ function VoiceHistoryList({
 
   useEffect(() => {
     loadMoreData();
+    getUserTokenServer();
   }, []);
 
   useEffect(() => {
@@ -123,14 +144,14 @@ function VoiceHistoryList({
                 //   exit="exit"
                 //   key={`${index}-${voice.seq}-${voice.id}-${voice.inf_id}`} 
                 // >
-                  <VoiceHistoryItem voiceInfHistory={voice} key={`${index}-${voice.seq}-${voice.id}-${voice.inf_id}`} />
+                  <VoiceHistoryItem userToken={userToken} voiceInfHistory={voice} key={`${index}-${voice.seq}-${voice.id}-${voice.inf_id}`} />
                 // </motion.div>
               ))}
             </>
           ) : (
             <>
               {[...voiceList].map((voice, index) => (
-                <VoiceHistoryItem voiceInfHistory={voice} key={`${index}-${voice.seq}-${voice.id}-${voice.inf_id}`} />
+                <VoiceHistoryItem userToken={userToken} voiceInfHistory={voice} key={`${index}-${voice.seq}-${voice.id}-${voice.inf_id}`} />
               ))}
             </>
           )}

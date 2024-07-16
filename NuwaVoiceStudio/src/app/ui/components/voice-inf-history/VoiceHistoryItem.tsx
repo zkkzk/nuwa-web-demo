@@ -9,9 +9,11 @@ import { motion, useAnimationControls } from "framer-motion";
 import { toneListEn } from "@/app/lib/definitions.tone";
 
 function VoiceHistoryItem({
-	voiceInfHistory
+	voiceInfHistory,
+	userToken
 }: {
   voiceInfHistory: VoiceInfHistoryType
+	userToken: string
 }) {
   const wrapperVariants = {
     enter: { 
@@ -61,10 +63,10 @@ function VoiceHistoryItem({
 						<div className="self-stretch text-white text-sm font-medium font-['Inter']">{voiceInfHistory.text}</div>
 					</div>
 					{voiceInfHistory.inf_type === 'audio' ? (
-						useMemo(() => <VoiceHistoryItemAudio voiceInfHistory={voiceInfHistory} />, [voiceInfHistory])
+						useMemo(() => <VoiceHistoryItemAudio userToken={userToken} voiceInfHistory={voiceInfHistory} />, [voiceInfHistory])
 					) : (
 						<>
-							{voiceInfHistory.code !== null && voiceInfHistory.code.length > 0 && (<VoiceHistoryItemAPI code={voiceInfHistory.code} />)}
+							{voiceInfHistory.code !== null && voiceInfHistory.code.length > 0 && (<VoiceHistoryItemAPI userToken={userToken} voiceInfHistory={voiceInfHistory} />)}
 						</>
 					)}
 					

@@ -9,8 +9,10 @@ import { downloadFiles } from "@/app/lib/utils";
 import VoiceHistoryItemAPI from "./VoiceHistoryItemAPI";
 
 function VoiceHistoryItemAudio({
-	voiceInfHistory
+	userToken,
+	voiceInfHistory,
 }: {
+	userToken: string
   voiceInfHistory: VoiceInfHistoryType
 }) {
 	const [showCode, setShowCode] = useState(false);
@@ -18,7 +20,7 @@ function VoiceHistoryItemAudio({
   return (
 		<>
 			{voiceInfHistory.audio_url && voiceInfHistory.audio_url !== '' && <VoiceHistoryItemVoiceRreview voiceSrc={voiceInfHistory.audio_url} />}
-			{showCode && voiceInfHistory.code !== null && voiceInfHistory.code.length > 0 && <VoiceHistoryItemAPI code={voiceInfHistory.code} />}
+			{showCode && voiceInfHistory.code !== null && voiceInfHistory.code.length > 0 && <VoiceHistoryItemAPI userToken={userToken} voiceInfHistory={voiceInfHistory} />}
 			
 			<div className="self-stretch justify-start items-start gap-4 inline-flex">
 				<Button
