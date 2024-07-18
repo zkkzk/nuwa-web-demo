@@ -71,7 +71,7 @@ function MainStationInfButton({
       {type === "code" && (
         <Button
           isDisabled={isDisabled}
-          color="default"
+          color="primary"
           size="lg"
           onPress={() => {
             voiceInfApiServer()

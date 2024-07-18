@@ -2,7 +2,7 @@
 import DCubeIcon from "@/app/icons/3DCubeIcon";
 import { ArrowDownTrayIcon, RocketLaunchIcon } from "@heroicons/react/24/solid";
 import { CheckBadgeIcon, CheckCircleIcon, XCircleIcon } from "@heroicons/react/20/solid";
-import { Button, Snippet, Avatar } from "@nextui-org/react";
+import { Button, Snippet, Avatar, Tooltip } from "@nextui-org/react";
 import React, { useState } from "react";
 import { VoiceModelPublishType } from "@/app/lib/definitions.voice";
 import { getStarNumStr } from "@/app/lib/utils";
@@ -15,6 +15,7 @@ import { StarIcon } from "@heroicons/react/24/solid";
 import DownloadIcon from "@/app/icons/DownloadIcon";
 import { BeakerIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "@/navigation";
+import VoiceModelDetailPublisher from "./VoiceModelDetailPublisher";
 
 function VoiceAssetDetailRight({
   voicePublishInfo, 
@@ -68,17 +69,20 @@ function VoiceAssetDetailRight({
                 setDownlanding(newDownloading);
               }}
             />
-            <Button
-              disableRipple={false}
-              size="lg"
-              variant="bordered"
-              startContent={<ArrowDownTrayIcon className="fill-zinc-400 w-6 h-6" />}
-              isIconOnly={true}
-              onPress={() => {
-                setStartGptDownload(startGptDownload + 1);
-              }}
-              isDisabled={downloading}
-              />
+            <Tooltip content="Download CKPT File">
+              <Button
+                disableRipple={false}
+                size="lg"
+                variant="bordered"
+                startContent={<ArrowDownTrayIcon className="fill-zinc-400 w-6 h-6" />}
+                isIconOnly={true}
+                onPress={() => {
+                  setStartGptDownload(startGptDownload + 1);
+                }}
+                isDisabled={downloading}
+                />
+            </Tooltip>
+            <Tooltip content="Download PTH File">
               <Button
                 disableRipple={false}
                 size="lg"
@@ -89,7 +93,8 @@ function VoiceAssetDetailRight({
                   setStartSovitsDownload(startSovitsDownload + 1);
                 }}
                 isDisabled={downloading}
-            />
+              />
+            </Tooltip>
           </>
         ) }
         <Snippet
@@ -239,40 +244,7 @@ function VoiceAssetDetailRight({
         </div>
       </div>
 
-      <div className="w-full px-4 py-3 bg-zinc-800 rounded-xl border border-zinc-700 justify-start items-start gap-4 inline-flex">
-        <div className="justify-start items-start flex">
-          {/* {voicePublishInfo.publisher.avatar && (
-            <div className="h-10 rounded-full justify-center items-center flex">
-              <Image className="grow shrink basis-0 h-10 rounded-full" src={voicePublishInfo.publisher.avatar} />
-            </div>
-          )}
-          {!voicePublishInfo.publisher.avatar && ( */}
-            <Avatar name={voicePublishInfo.publisher.name} size="md" src={voicePublishInfo.publisher.avatar} />
-          {/* )} */}
-        </div>
-        <div className="grow shrink basis-0 flex-col justify-start items-start inline-flex divide-y">
-          <div className="flex-col justify-start items-start gap-0.5 flex pb-2">
-            <div className="text-white text-base font-medium font-['Inter'] leading-normal">{voicePublishInfo.publisher.name}</div>
-            <div className="text-zinc-400 text-xs font-normal font-['Inter'] leading-none">Joined {moment(voicePublishInfo.publisher.created_at).format('MMMM DD YYYY')}</div>
-          </div>
-          <div className="justify-start items-center gap-2.5 inline-flex pt-2">
-            <div className="h-4 justify-start items-center gap-1 flex">
-                <StarIcon className="w-4 h-4 fill-zinc-400" />
-                <div className="text-white text-xs font-normal font-['Inter'] leading-none">{getStarNumStr(2352352)}</div>
-            </div>
-            <div className="h-4 justify-start items-center gap-1 flex">
-              <div className="w-4 h-4 justify-center items-center flex">
-                <DownloadIcon className="w-4 h-4 relative" />
-              </div>
-              <div className="text-white text-xs font-normal font-['Inter'] leading-none">{getStarNumStr(235235224)}</div>
-            </div>
-              <div className="h-4 justify-start items-center gap-1 flex">
-                <BeakerIcon className="w-4 h-4 relative" />
-                <div className="text-white text-xs font-normal font-['Inter'] leading-none">{getStarNumStr(23424)}</div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <VoiceModelDetailPublisher publisher={voicePublishInfo.publisher} />
     </div>
   );
 }

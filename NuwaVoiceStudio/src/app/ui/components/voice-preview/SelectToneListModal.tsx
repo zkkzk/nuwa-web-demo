@@ -101,6 +101,16 @@ function SelectToneListModal({
               <ModalFooter>
                 <Button color="primary" variant="ghost" onPress={() => {
                   const selectedToneList = opToneList.filter((toneItem) => toneItem.selected).map((toneItem) => toneItem.tone);
+                  if (selectedToneList.length === 0) {
+                    amDispatch({
+                      type: "add",
+                      payload: {
+                        type: "error",
+                        message: "Please select at least one tone",
+                      },
+                    })
+                    return
+                  }
                   onDone && onDone(selectedToneList);
                   onClose();
                 }}>

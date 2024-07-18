@@ -75,6 +75,7 @@ function VoiceInfDrawerModal({
                     tones={tones}
                     onSuccess={(newInf) => {
                       onSuccess && onSuccess(newInf);
+                      onChange && onChange(false);
                     }}
                     onSendingChange={onSendingChange}
                   />

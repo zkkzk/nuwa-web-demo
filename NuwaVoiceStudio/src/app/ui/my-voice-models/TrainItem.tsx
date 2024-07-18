@@ -88,8 +88,8 @@ function TrainItem({
               startDownload={startSovitsDownload}
               onDownloading={() => {}}
             />
-            <Button variant="light" className="text-zinc-400" onPress={() => {setStartGptDownload(startGptDownload + 1)}}>Download Gpt</Button>
-            <Button variant="light" className="text-zinc-400" onPress={() => {setStartSovitsDownload(startSovitsDownload + 1)}}>Download Sovits</Button>
+            <Button variant="light" className="text-zinc-400" onPress={() => {setStartGptDownload(startGptDownload + 1)}}>Download CKPT File</Button>
+            <Button variant="light" className="text-zinc-400" onPress={() => {setStartSovitsDownload(startSovitsDownload + 1)}}>Download PTH File</Button>
             <Button variant="light" className="text-zinc-400" onPress={() => {setSelectModalOpen(true)}}>Publish</Button>
           </div>
           <PublishVoiceModelModal

@@ -151,7 +151,16 @@ export type VoiceModelPublishType = {
   basic_params: {
     language: string
   },
-  publisher: {
+  publisher: VoiceModelPublisher
+}
+
+export type VoiceModelPublisher = {
+  UserBusiPO: {
+    down_load: number
+    run: number
+    starts: number
+  },
+  UserPO: {
     avatar: string
     name: string
     created_at: string
@@ -185,16 +194,16 @@ export type TypeVoiceApi = {
 
 export const voiceModelTypeList = [{
   value: "male",
-  label: "male",
+  label: "Male",
 }, {
   value: "female",
-  label: "female",
+  label: "Female",
 }, {
   value: "boy",
-  label: "boy",
+  label: "Boy",
 }, {
   value: "girl",
-  label: "girl",
+  label: "Girl",
 }]
 
 export type voiceTrainRecordType = {
