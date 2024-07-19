@@ -7,11 +7,11 @@ import ExchangeModal, { ExchangeModalProps } from './ExchangeModal';
 export const ExchangeContext = createContext({} as ExchangeModalProps);
 export const ExchangeDispatchContext = createContext(null as any);
 
-const initialState : ExchangeModalProps = { isOpen: false };
+const initialState : ExchangeModalProps = { isOpen: false, regetCount: 0 };
 
 export function ExchangeContextProvider({ children }: {children: React.ReactNode}) {
   const [props , dispatch] = useImmerReducer(
-    loginReducer,
+    exchangeReducer,
     initialState
   );
 
@@ -38,7 +38,7 @@ export function useExchangeDispatch() {
   return useContext(ExchangeDispatchContext);
 }
 
-function loginReducer(draft: ExchangeModalProps, action: any) {
+function exchangeReducer(draft: ExchangeModalProps, action: any) {
   switch (action.type) {
     case 'open': {
       draft.isOpen = true;
@@ -47,6 +47,14 @@ function loginReducer(draft: ExchangeModalProps, action: any) {
       action.payload.onChange !== undefined && (draft.onChange = action.payload.onChange);
       action.payload.onSuccess !== undefined && (draft.onSuccess = action.payload.onSuccess);
 
+      return draft
+    }
+    case 'set': {
+      draft.value = action.payload;
+      return draft
+    }
+    case 'reget': {
+      draft.regetCount = draft.regetCount + 1;
       return draft
     }
     case 'close': {
