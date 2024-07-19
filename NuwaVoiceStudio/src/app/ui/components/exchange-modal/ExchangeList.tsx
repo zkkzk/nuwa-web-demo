@@ -48,9 +48,11 @@ function ExchangeList({
       <div className="flex flex-row gap-5 relative">
         {productList.map((product) => (
           <div className="flex flex-col gap-2 items-center justify-center">
-            <div className="w-[180px] h-60 rounded-2xl border border-lime-300 bg-gradient-to-tl from-black to-neutral-800 flex flex-col-reverse items-center justify-start">
-              <div className="text-center text-gray-200 text-[42px] font-bold  my-6">+{product.product_num}</div>
-              <WholeNoteIcon className="w-[58px] h-[58px]" />
+            <div className="w-[180px] h-60 rounded-2xl border border-lime-300 bg-gradient-to-tl from-black to-neutral-800">
+              <div className="bg-[url('/imgs/exchange-bg.png')] bg-cover w-full h-full flex flex-col-reverse items-center justify-start">
+                <div className="text-center text-gray-200 text-[42px] font-bold  my-6">+{product.product_num}</div>
+                <WholeNoteIcon className="w-[58px] h-[58px]" />
+              </div>
 
               <div className="left-0 -top-6 absolute h-7 px-3 py-1 bg-gradient-to-r from-lime-300 to-cyan-400 rounded-tl-full rounded-bl-none rounded-tr-full rounded-br-full justify-center items-center flex flex-row">
                 <div className="text-center text-black text-sm font-semibold ">额外</div>
