@@ -1,8 +1,7 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, usePathname } from '@/navigation'
 import { useTranslations } from 'next-intl'
-import HeaderAvatar from './HeaderAvatar'
 import FlashIcon from '@/app/icons/FlashIcon'
 import { DDLSidebar } from '@ddreamland/common'
 import { cn } from '@nextui-org/react'
@@ -11,6 +10,9 @@ import { BeakerIcon } from '@heroicons/react/24/solid'
 import DCubeIcon from '@/app/icons/3DCubeIcon'
 import Send2Icon from '@/app/icons/Send2Icon'
 import UserPanel from '../components/user-panel/UserPanel'
+import { useExchangeDispatch } from '../components/exchange-modal/ExchangeContextProvider'
+import { getFinanceBags } from '@/app/lib/finance.api'
+import ExchangeBags from './ExchangeBags'
 
 const navigation = [
   { name: 'Navigation.voiceasset', href: '/voiceasset', icon: VoiceAssetIcon, current: false },
@@ -28,6 +30,29 @@ export default function Header() {
       item.current = true
     }
   })
+
+
+  const exchangeDispatch = useExchangeDispatch();
+
+  const [isGetFinanceBagsing, setIsGetFianceBagsing] = useState(false)
+  const [exchangeBags, setExchangeBags] = useState<number>(0)
+  const getFinanceBagsApi = getFinanceBags()
+  const getBagsApiServer = async () => {
+    if (isGetFinanceBagsing) return
+    setIsGetFianceBagsing(true)
+    const res = await getFinanceBagsApi.send({});
+    if (res && res.code === 0) {
+      if (res.data && res.data['101']) {
+        setExchangeBags(res.data['100'])
+      }
+    }
+
+    setIsGetFianceBagsing(false)
+  }
+
+  useEffect(() => {
+    getBagsApiServer();
+  }, [])
 
   return (
     <>
@@ -85,12 +110,7 @@ export default function Header() {
           </div>
         </div>
         <div className="h-9 justify-end items-center gap-3 flex">
-          <div className="rounded-lg justify-center items-center gap-0.5 flex">
-            <FlashIcon className="w-4 h-4 fill-green-500 stroke-green-500 relative" />
-            <div className="text-center text-green-500 text-xs font-bold font-['Inter'] leading-normal">
-              255
-            </div>
-          </div>
+          <ExchangeBags />
           <div className="w-9 h-9 relative">
             <div className="w-9 h-9 left-0 top-0 absolute rounded-[40px] justify-center items-center inline-flex">
               {/* <HeaderAvatar /> */}
