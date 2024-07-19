@@ -43,19 +43,19 @@ function ExchangeList({
   return (
     <div className="px-[96px]">
       <div className="py-[70px] flex flex-row items-end justify-center">
-        <WholeNoteIcon className="w-[35px] h-[35px]" /><span className="text-white text-2xl font-normal font-['Abel'] leading-normal">兑换后，音符+42</span>
+        <WholeNoteIcon className="w-[35px] h-[35px]" /><span className="text-white text-2xl font-normal leading-normal">兑换后，音符+42</span>
       </div>
       <div className="flex flex-row gap-5 relative">
         {productList.map((product) => (
           <div className="flex flex-col gap-2 items-center justify-center">
             <div className="w-[180px] h-60 rounded-2xl border border-lime-300 bg-gradient-to-tl from-black to-neutral-800 flex flex-col-reverse items-center justify-start">
-              <div className="text-center text-gray-200 text-[42px] font-bold font-['Sen'] my-6">+{product.product_num}</div>
+              <div className="text-center text-gray-200 text-[42px] font-bold  my-6">+{product.product_num}</div>
               <WholeNoteIcon className="w-[58px] h-[58px]" />
 
               <div className="left-0 -top-6 absolute h-7 px-3 py-1 bg-gradient-to-r from-lime-300 to-cyan-400 rounded-tl-full rounded-bl-none rounded-tr-full rounded-br-full justify-center items-center flex flex-row">
-                <div className="text-center text-black text-sm font-semibold font-['PingFang SC']">额外</div>
+                <div className="text-center text-black text-sm font-semibold ">额外</div>
                 <BlackWholeNoteIcon className="w-[15px] h-[15px] fill-black" />
-                <div className="text-black text-sm font-semibold font-['PingFang SC']">12</div>
+                <div className="text-black text-sm font-semibold ">12</div>
               </div>
             </div>
             <div className="flex flex-row justify-center items-center">
@@ -66,7 +66,7 @@ function ExchangeList({
                 alt=""
                 className="h-auto w-auto flex-none object-cover"
               />
-              <div className="text-center text-white text-2xl font-bold font-['Sen']">{product.price}</div>
+              <div className="text-center text-white text-2xl font-bold ">{product.price}</div>
             </div>
           </div>
         ))}
@@ -75,7 +75,7 @@ function ExchangeList({
 
       <div className="w-full flex flex-row items-center justify-center mt-[52px] mb-[42px]">
         <div className="w-[313px] h-[62px] bg-gradient-to-r from-lime-300 to-cyan-400 rounded-2xl flex flex-row items-center justify-center cursor-pointer">
-          <div className="text-black text-2xl font-semibold font-['PingFang SC'] leading-normal">兑换</div>
+          <div className="text-black text-2xl font-semibold  leading-normal">兑换</div>
         </div>
       </div>
       

@@ -127,7 +127,7 @@ function UploadVoiceModelForm({
             labelPlacement="outside"
             selectedKeys={[formData.basic_params.language as string]}
             classNames={{
-              label: "group[data-filled=true]:text-gray-500 group-data-[filled=true]:text-gray-500 text-gray-500 text-sm font-semibold font-['Inter'] leading-normal",
+              label: "group[data-filled=true]:text-gray-500 group-data-[filled=true]:text-gray-500 text-gray-500 text-sm font-semibold leading-normal",
             }}
             onChange={(e) => {
               onChange && onChange({

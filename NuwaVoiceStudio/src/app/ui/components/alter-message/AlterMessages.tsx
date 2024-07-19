@@ -78,8 +78,8 @@ function AlterMessages({
                       <div className="grow shrink basis-0 flex-col justify-start items-start gap-2 inline-flex">
                           <div className="self-stretch justify-start items-start gap-2 inline-flex">
                               <div className="grow shrink basis-0 flex-col justify-start items-start gap-1 inline-flex">
-                                  { msg.title && (<div className="text-white text-base font-medium font-['Inter'] leading-normal">{msg.title}</div>)}
-                                  <div className="pt-1 self-stretch text-white text-sm font-normal font-['Inter'] leading-tight">{msg.message}</div>
+                                  { msg.title && (<div className="text-white text-base font-medium leading-normal">{msg.title}</div>)}
+                                  <div className="pt-1 self-stretch text-white text-sm font-normal leading-tight">{msg.message}</div>
                               </div>
                               <div className="justify-start items-center gap-1 flex">
                                   <div className="w-4 h-4 relative" />

@@ -36,7 +36,7 @@ function SelectToneListModal({
       <div className="w-full h-full relative" onClick={onOpen}>
         <div className="cursor-pointer w-full h-full p-4 rounded-2xl border-dashed border-2 border-zinc-700 flex-col justify-center items-center gap-2 inline-flex" >
         <PlusCircleIcon className="w-6 h-6 stroke-zinc-400" />
-          <div className="text-center text-zinc-400 text-xs font-medium font-['Inter']">
+          <div className="text-center text-zinc-400 text-xs font-medium ">
             Select From Training Audio File
           </div>
         </div>

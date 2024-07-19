@@ -130,8 +130,8 @@ function TrainVoiceModelModal({
           <>
             <ModalHeader>
               <div className="flex flex-col">
-                <div className="text-white text-2xl font-bold font-['Inter'] leading-loose">Train My Voice Model</div>
-                <div className="self-stretch"><span className="text-white text-sm font-normal font-['Inter'] leading-tight">For best result, upload a clear 6-12 mins audio clip (anything beyond 12 mins will be clipped). Avoid background noise.</span><span className="text-blue-600 text-sm font-normal font-['Inter'] leading-tight"> </span><a href="https://docs.ddream.land/ddream-open-api/ai-voice-services/voice-tone-training" target="_blank" className="text-blue-600 text-sm font-semibold font-['Inter'] leading-tight">{'Learn More >'}</a></div>
+                <div className="text-white text-2xl font-bold leading-loose">Train My Voice Model</div>
+                <div className="self-stretch"><span className="text-white text-sm font-normal leading-tight">For best result, upload a clear 6-12 mins audio clip (anything beyond 12 mins will be clipped). Avoid background noise.</span><span className="text-blue-600 text-sm font-normal leading-tight"> </span><a href="https://docs.ddream.land/ddream-open-api/ai-voice-services/voice-tone-training" target="_blank" className="text-blue-600 text-sm font-semibold leading-tight">{'Learn More >'}</a></div>
               </div>
             </ModalHeader>
             <ModalBody>
@@ -142,8 +142,8 @@ function TrainVoiceModelModal({
                       <UploadFile
                         label={
                           <div className="flex-col justify-center items-center gap-2.5 flex">
-                            <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">Upload Sound File</div>
-                            <div className="w-[405px] text-center text-zinc-400 text-xs font-medium font-['Inter']">Click or drag to upload an audio file Supported formats: MP3/WAV/FLAC</div>
+                            <div className="text-white text-sm font-semibold leading-tight">Upload Sound File</div>
+                            <div className="w-[405px] text-center text-zinc-400 text-xs font-medium ">Click or drag to upload an audio file Supported formats: MP3/WAV/FLAC</div>
                           </div>
                         }
                         icon={<BDocumentIcon className='h-6 w-6' />}
@@ -191,14 +191,14 @@ function TrainVoiceModelModal({
                   <div className="self-stretch flex-col justify-start items-start flex">
                     <div className="self-stretch py-2 justify-start items-center gap-2 inline-flex">
                       <Checkbox isSelected={isAgree} onValueChange={setIsAgree} size="sm"></Checkbox>
-                      <div className="grow shrink basis-0 text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">I agree with the following information</div>
+                      <div className="grow shrink basis-0 text-zinc-400 text-sm font-normal leading-tight">I agree with the following information</div>
                     </div>
                     <div className="self-stretch px-12 justify-start items-start inline-flex">
                       <ul className="w-full list-disc">
-                        <li className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">Only English, Mandarin, and Japanese are supported currently. Please follow us for future updates...</li>
-                        <li className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">Please make sure the sound is clear and in single-character.</li>
-                        <li className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">Please ensure your audio file is free from intellectual property conflicts. We cannot differentiate user-generated content and therefore cannot assume any associated liability.</li>
-                        <li className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">Please ensure the audio quality meets the minimum standards for the training model. Extremely low quality may result in training failure, and any fees paid for this process will not be refundable.</li>
+                        <li className="text-zinc-400 text-sm font-normal leading-tight">Only English, Mandarin, and Japanese are supported currently. Please follow us for future updates...</li>
+                        <li className="text-zinc-400 text-sm font-normal leading-tight">Please make sure the sound is clear and in single-character.</li>
+                        <li className="text-zinc-400 text-sm font-normal leading-tight">Please ensure your audio file is free from intellectual property conflicts. We cannot differentiate user-generated content and therefore cannot assume any associated liability.</li>
+                        <li className="text-zinc-400 text-sm font-normal leading-tight">Please ensure the audio quality meets the minimum standards for the training model. Extremely low quality may result in training failure, and any fees paid for this process will not be refundable.</li>
                       </ul>
                     </div>
                   </div>
@@ -214,7 +214,7 @@ function TrainVoiceModelModal({
                 endContent={
                   <div className="h-6 pl-1 pr-2 py-0.5 bg-green-500 rounded-md justify-center items-center gap-1 flex">
                     <FlashIcon className="w-4 h-4 fill-neutral-900 stroke-neutral-900 relative" />
-                    <div className="text-center text-neutral-900 text-xs font-semibold font-['Inter']">
+                    <div className="text-center text-neutral-900 text-xs font-semibold ">
                       X 200
                     </div>
                   </div>

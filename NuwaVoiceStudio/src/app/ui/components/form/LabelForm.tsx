@@ -18,17 +18,17 @@ function LabelForm({
       <div className="self-stretch justify-start items-center gap-0.5 inline-flex">
         <div className="grow shrink basis-0 flex-col justify-center items-start gap-0.5 inline-flex">
           <div className="self-stretch">
-            <span className="text-white text-base font-semibold font-['Inter'] leading-normal">
+            <span className="text-white text-base font-semibold leading-normal">
               {label}
             </span>
             {isRequired && (
-              <span className="text-rose-600 text-base font-semibold font-['Inter'] leading-normal">
+              <span className="text-rose-600 text-base font-semibold leading-normal">
                 *
               </span>
             )}
           </div>
           {subTitle && (
-            <div className="self-stretch text-zinc-400 text-sm font-medium font-['Inter'] leading-tight">
+            <div className="self-stretch text-zinc-400 text-sm font-medium leading-tight">
               {subTitle}
             </div>
           )}

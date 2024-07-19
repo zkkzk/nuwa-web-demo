@@ -53,7 +53,7 @@ const CustomRadio = (props : any) => {
       <Chip
         classNames={{
           base: " cursor-pointer h-10 px-4 py-2 rounded-xl justify-center items-center inline-flex",
-          content: "text-white text-base font-normal font-['Inter'] leading-norma",
+          content: "text-white text-base font-normal leading-norma",
         }}
         color="default"
         variant={isSelected ? "solid" : "light"}

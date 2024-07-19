@@ -30,7 +30,7 @@ function TrainItem({
           <div className="justify-center items-center flex">
             <Checkbox isSelected={isSelected} onValueChange={onValueChange} size="sm" defaultSelected></Checkbox>
           </div>
-          <div className="w-[200px] text-zinc-400 text-base font-semibold font-['Inter'] leading-normal">
+          <div className="w-[200px] text-zinc-400 text-base font-semibold leading-normal">
             {value.task_name}
           </div>
         </div>
@@ -49,7 +49,7 @@ function TrainItem({
           )}
           <div className="px-0.5 justify-center items-center flex">
             <div className={cn([
-              "text-sm font-normal font-['Inter'] leading-tight",
+              "text-sm font-normal leading-tight",
               value.status === 1 && 'text-zinc-400',
               value.status === 2 && 'text-violet-500',
               (value.status === 3 && value.result === 1) && 'text-green-500',

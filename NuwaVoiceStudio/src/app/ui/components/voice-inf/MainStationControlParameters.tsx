@@ -65,7 +65,7 @@ function MainStationControlParameters({
             <div className="absolute right-0 top-0">
               <Button
                 variant="light"
-                className="text-gray-500 text-sm font-semibold font-['Inter']"
+                className="text-gray-500 text-sm font-semibold "
                 startContent={<ResetIcon className={`h-5 w-5 text-current ${isReset && "-animate-spin"}`} />}
                 onClick={handleReset}
               >

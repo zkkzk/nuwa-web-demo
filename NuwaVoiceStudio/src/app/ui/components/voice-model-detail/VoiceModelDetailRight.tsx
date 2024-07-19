@@ -113,62 +113,62 @@ function VoiceAssetDetailRight({
       <div className="self-stretch flex-col justify-start items-start flex">
         <div className="self-stretch justify-start items-start inline-flex">
           <div className="grow shrink basis-0 py-3 border-t border-white/opacity-10 flex-col justify-center items-start gap-2 inline-flex">
-            <div className="self-stretch text-zinc-400 text-xs font-normal font-['Inter'] leading-none">
+            <div className="self-stretch text-zinc-400 text-xs font-normal leading-none">
               Runnings
             </div>
-            <div className="self-stretch text-white text-sm font-semibold font-['Inter'] leading-tight">
+            <div className="self-stretch text-white text-sm font-semibold leading-tight">
               {getStarNumStr(voicePublishInfo.inf_num)}
             </div>
           </div>
           <div className="grow shrink basis-0 py-3 border-t border-white/opacity-10 flex-col justify-center items-start gap-2 inline-flex">
-            <div className="self-stretch text-zinc-400 text-xs font-normal font-['Inter'] leading-none">
+            <div className="self-stretch text-zinc-400 text-xs font-normal leading-none">
               Downloads
             </div>
-            <div className="self-stretch text-white text-sm font-semibold font-['Inter'] leading-tight">
+            <div className="self-stretch text-white text-sm font-semibold leading-tight">
               {getStarNumStr(voicePublishInfo.d_num)}
             </div>
           </div>
           <div className="grow shrink basis-0 py-3 border-t border-white/opacity-10 flex-col justify-center items-start gap-2 inline-flex">
-            <div className="self-stretch text-zinc-400 text-xs font-normal font-['Inter'] leading-none">
+            <div className="self-stretch text-zinc-400 text-xs font-normal leading-none">
               Sharing
             </div>
-            <div className="self-stretch text-white text-sm font-semibold font-['Inter'] leading-tight">
+            <div className="self-stretch text-white text-sm font-semibold leading-tight">
               {getStarNumStr(voicePublishInfo.star_num)}
             </div>
           </div>
         </div>
         <div className="self-stretch h-[68px] py-3 border-t border-white/opacity-10 flex-col justify-center items-start gap-2 flex">
-          <div className="self-stretch text-zinc-400 text-xs font-normal font-['Inter'] leading-none">
+          <div className="self-stretch text-zinc-400 text-xs font-normal leading-none">
             By
           </div>
           <div className="self-stretch justify-center items-start gap-2.5 inline-flex">
-            {/* <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">
+            {/* <div className="text-white text-sm font-semibold leading-tight">
               fuhsi Voice Studio
             </div> */}
-            <div className="grow shrink basis-0 text-white text-sm font-semibold font-['Inter'] leading-tight">
+            <div className="grow shrink basis-0 text-white text-sm font-semibold leading-tight">
             { voicePublishInfo.publish_type === 1  && 'DDream Voice Studio'}
             { voicePublishInfo.publish_type === 2  && 'Self-trained'}
             </div>
           </div>
         </div>
         <div className="self-stretch h-[68px] py-3 border-t border-white/opacity-10 flex-col justify-center items-start gap-2 flex">
-          <div className="self-stretch text-zinc-400 text-xs font-normal font-['Inter'] leading-none">
+          <div className="self-stretch text-zinc-400 text-xs font-normal leading-none">
             Time
           </div>
-          <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">
+          <div className="text-white text-sm font-semibold leading-tight">
           {moment(voicePublishInfo.seq, "X").format('hh:mm MMMM DD YYYY')}
           </div>
         </div>
         <div className="self-stretch h-[68px] py-3 border-t border-white/opacity-10 flex-col justify-center items-start gap-2 flex">
-          <div className="self-stretch text-zinc-400 text-xs font-normal font-['Inter'] leading-none">
+          <div className="self-stretch text-zinc-400 text-xs font-normal leading-none">
             Source
           </div>
           <div className="self-stretch justify-start items-center gap-2.5 inline-flex">
-            <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">
+            <div className="text-white text-sm font-semibold leading-tight">
               {voicePublishInfo.publish_info.source === 'original' ? 'Original' : 'Reprint'}
             </div>
             {voicePublishInfo.publish_info.source !== 'original' && voicePublishInfo.publish_info.source.length > 0 && (
-              <div className="grow shrink basis-0 text-white text-sm font-semibold font-['Inter'] leading-tight">
+              <div className="grow shrink basis-0 text-white text-sm font-semibold leading-tight">
                 From: {voicePublishInfo.publish_info.source}
               </div>
             )} 
@@ -176,7 +176,7 @@ function VoiceAssetDetailRight({
           </div>
         </div>
         <div className="self-stretch py-3 border-t border-white/opacity-10 flex-col justify-center items-start gap-2 flex">
-          <div className="self-stretch text-zinc-400 text-xs font-normal font-['Inter'] leading-none">
+          <div className="self-stretch text-zinc-400 text-xs font-normal leading-none">
             Permissions
           </div>
           <div className="flex-col justify-center items-start gap-2 flex">
@@ -186,7 +186,7 @@ function VoiceAssetDetailRight({
               ): (
                 <XCircleIcon className="w-5 h-5 fill-rose-600" />
               )}
-              <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">
+              <div className="text-white text-sm font-semibold leading-tight">
                 {voicePublishInfo.publish_info.permission.download_permission ? 'Free download' : 'Do not allow downloads'}
               </div>
             </div>
@@ -196,7 +196,7 @@ function VoiceAssetDetailRight({
               ): (
                 <XCircleIcon className="w-5 h-5 fill-rose-600" />
               )}
-              <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">
+              <div className="text-white text-sm font-semibold leading-tight">
                 {voicePublishInfo.publish_info.permission.credit_free ? 'Credit Free' : 'Credit Free'}
               </div>
             </div>
@@ -206,7 +206,7 @@ function VoiceAssetDetailRight({
               ): (
                 <XCircleIcon className="w-5 h-5 fill-rose-600" />
               )}
-              <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">
+              <div className="text-white text-sm font-semibold leading-tight">
                 {voicePublishInfo.publish_info.permission.reprint_allowed ? 'Reprint Allowed' : 'Reprint Allowed'}
               </div>
             </div>
@@ -216,7 +216,7 @@ function VoiceAssetDetailRight({
               ): (
                 <XCircleIcon className="w-5 h-5 fill-rose-600" />
               )}
-              <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">
+              <div className="text-white text-sm font-semibold leading-tight">
                 {voicePublishInfo.publish_info.permission.modification_allowed ? 'Modification Allowed' : 'Modification Declined'}
               </div>
             </div>
@@ -226,7 +226,7 @@ function VoiceAssetDetailRight({
               ): (
                 <XCircleIcon className="w-5 h-5 fill-rose-600" />
               )}
-              <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">
+              <div className="text-white text-sm font-semibold leading-tight">
                 {voicePublishInfo.publish_info.permission.permission_change_allowed ? 'Permission Change Allowed' : 'Permission Change Declined'}
               </div>
             </div>
@@ -236,7 +236,7 @@ function VoiceAssetDetailRight({
               ): (
                 <XCircleIcon className="w-5 h-5 fill-rose-600" />
               )}
-              <div className="text-white text-sm font-semibold font-['Inter'] leading-tight">
+              <div className="text-white text-sm font-semibold leading-tight">
                 {voicePublishInfo.publish_info.permission.commercial_license ? 'Commercial Use Allowed' : 'Commercial Use Declined'}
               </div>
             </div>

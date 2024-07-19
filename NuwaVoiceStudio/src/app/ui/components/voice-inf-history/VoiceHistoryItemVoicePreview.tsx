@@ -29,8 +29,8 @@ function VoiceHistoryItemVoiceRreview({voiceSrc}: {
       </div>
 		  
       <div className="self-stretch justify-between items-center inline-flex">
-        <div className="text-gray-500 text-xs font-medium font-['Inter']">{formatTime(currentTime)}</div>
-        <div className="text-gray-500 text-xs font-medium font-['Inter']">{formatTime(duration)}</div>
+        <div className="text-gray-500 text-xs font-medium ">{formatTime(currentTime)}</div>
+        <div className="text-gray-500 text-xs font-medium ">{formatTime(duration)}</div>
       </div>
     </div>
   );

@@ -19,7 +19,7 @@ function MyVoiceModels() {
   return (
     <>
       <div className="w-full h-screen pt-28 px-8 pb-6 bg-zinc-900 rounded-bl-xl rounded-br-xl flex-col justify-start items-start gap-6 inline-flex">
-        <div className="text-white text-xl font-semibold font-['Inter'] leading-7">
+        <div className="text-white text-xl font-semibold leading-7">
           My Voice Models
         </div>
         <div className="self-stretch h-[72px]">
@@ -29,7 +29,7 @@ function MyVoiceModels() {
             }}
             className=" cursor-pointer grow shrink basis-0 w-full h-full p-4 rounded-2xl border-dashed border-2 border-zinc-700 flex-col justify-center items-center gap-2 inline-flex"
           >
-            <div className="text-center text-zinc-400 text-xs font-medium font-['Inter']">
+            <div className="text-center text-zinc-400 text-xs font-medium ">
             <div className="justify-center items-center flex gap-3">
               <TrainIcon className="w-6 h-6 fill-blue-600" />
               <span>Train My Voice Model</span>
@@ -37,7 +37,7 @@ function MyVoiceModels() {
             </div>
           </div> 
         </div>
-        <div className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">
+        <div className="text-zinc-400 text-sm font-normal leading-tight">
           You haven't created any voice
         </div>
         <TrainList key={refreshKey} onChange={(voiceTrainRecordsList) => {

@@ -51,14 +51,14 @@ function VoiceModelItem({
             {type !== 'workstation' && (
               <>
                 <GPTSovitsIcon className="w-5 h-5 fill-blue-500" />
-                <div className="text-white text-xs font-normal font-['Inter'] leading-none">GPT-Sovits</div>
+                <div className="text-white text-xs font-normal leading-none">GPT-Sovits</div>
               </>
             )}
             {voice.publish_info.permission.commercial_license && type === 'workstation' && (
               <>
                 <CommercialLicenseIcon />
                 <div
-                  className="text-white text-xs font-normal font-['Inter'] leading-none"
+                  className="text-white text-xs font-normal leading-none"
                   onClick={() => {
                     onItemClick && onItemClick(voice);
                   }}
@@ -95,7 +95,7 @@ function VoiceModelItem({
           }}
         >
           <div className="h-7 w-full overflow-hidden justify-start items-center inline-flex pr-10">
-            <div className="text-white text-lg font-semibold font-['Inter'] leading-7 truncate">
+            <div className="text-white text-lg font-semibold leading-7 truncate">
               {voice.publish_info.name}
             </div>
             {voice.publish_info.permission.commercial_license && type !== 'workstation' && (
@@ -105,7 +105,7 @@ function VoiceModelItem({
           <div className="self-stretch justify-between items-center inline-flex gap-2">
             <div className="justify-center items-center gap-1.5 flex overflow-hidden">
               <Avatar className="shrink-0" name={voice?.publisher?.name} src={voice?.publisher?.avatar} size="sm" />
-              <div className="text-zinc-400 text-xs font-normal font-['Inter'] leading-none truncate">
+              <div className="text-zinc-400 text-xs font-normal leading-none truncate">
                 {voice?.publisher?.name}
               </div>
             </div>
@@ -115,13 +115,13 @@ function VoiceModelItem({
                 <>
                   <div className="justify-end items-center gap-0.5 flex">
                     <StarIcon className={`w-4 h-4 ${voice.star ? 'fill-amber-500' : 'fill-zinc-400'}`} />
-                    <div className="text-white text-xs font-normal font-['Inter'] leading-none">
+                    <div className="text-white text-xs font-normal leading-none">
                       {getStarNumStr(voice.star_num)}
                     </div>
                   </div>
                   <div className="justify-end items-center gap-0.5 flex">
                     <DownloadIcon className="w-4 h-4" />
-                    <div className="text-white text-xs font-normal font-['Inter'] leading-none">
+                    <div className="text-white text-xs font-normal leading-none">
                       {getStarNumStr(voice.d_num)}
                     </div>
                   </div>
@@ -133,9 +133,9 @@ function VoiceModelItem({
                   <BeakerIcon className="w-4 h-4 relative" />
                 )}
                 {type === 'workstation' && (
-                  <div className="text-zinc-400 text-xs font-normal font-['Inter'] leading-none">Run</div>
+                  <div className="text-zinc-400 text-xs font-normal leading-none">Run</div>
                 )}
-                <div className="text-white text-xs font-normal font-['Inter'] leading-none">
+                <div className="text-white text-xs font-normal leading-none">
                   {getStarNumStr(voice.inf_num)}
                 </div>
               </div>

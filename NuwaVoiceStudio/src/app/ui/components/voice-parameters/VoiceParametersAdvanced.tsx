@@ -25,7 +25,7 @@ function VoiceParametersAdvanced({
         labelPlacement="outside"
         value={String(value.seed)}
         classNames={{
-          label: "text-gray-500 text-sm font-semibold font-['Inter'] leading-normal",
+          label: "text-gray-500 text-sm font-semibold leading-normal",
         }}
         onChange={(e) => {
           let newSeed = Math.floor(Number(e.target.value))

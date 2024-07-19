@@ -49,7 +49,7 @@ function VoiceListHeader({
   return (
     <div className="self-stretch justify-between items-center flex flex-col bg-neutral-900 px-8 pt-6 w-full">
       <div className="h-[40px] justify-between items-center gap-6 flex w-full">
-        <div className="text-white text-xl font-semibold font-['Inter'] leading-normal">
+        <div className="text-white text-xl font-semibold leading-normal">
           Voices
         </div>
         <div className="justify-start items-center gap-2.5 flex">

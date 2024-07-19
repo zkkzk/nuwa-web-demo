@@ -46,8 +46,8 @@ function PublishResultModal({
               <div className="w-full h-[188px] py-8 bg-neutral-900 rounded-2xl flex-col justify-start items-center gap-6 inline-flex">
                 <div className="flex-col justify-start items-center gap-8 flex">
                   <div className="flex-col justify-start items-center gap-1 flex">
-                    <div className="text-center text-white text-xl font-semibold font-['Inter'] leading-7">Published Successfully!</div>
-                    <div className="text-center text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">Click confirm to return to the 'published voices' page</div>
+                    <div className="text-center text-white text-xl font-semibold leading-7">Published Successfully!</div>
+                    <div className="text-center text-zinc-400 text-sm font-normal leading-tight">Click confirm to return to the 'published voices' page</div>
                   </div>
                   <Button
                     color="primary"

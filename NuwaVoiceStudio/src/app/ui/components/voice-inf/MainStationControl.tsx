@@ -82,7 +82,7 @@ function MainStationControl({
             variant="bordered"
             size="lg"
             className="w-[180px]"
-            startContent={<div className="w-40 text-gray-500 text-sm font-semibold font-['Inter'] leading-normal"><p>Tones | </p></div>}
+            startContent={<div className="w-40 text-gray-500 text-sm font-semibold leading-normal"><p>Tones | </p></div>}
             selectedKeys={[instantGenerateParamster?.tone.tone_type as string]}
             onChange={(e) => {
               const selectTone = toneList.filter((tone) => tone.tone_type === e.target.value)[0]

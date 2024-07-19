@@ -165,7 +165,7 @@ function TrainList({
       )}
 
       <div className="w-full h-8 justify-between items-center inline-flex">
-        <div className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">
+        <div className="text-zinc-400 text-sm font-normal leading-tight">
           {(currentPage-1)*pageSize+1}-{currentPage === Math.ceil(total/pageSize) ? total : pageSize*currentPage} of {total} items
         </div>
         {total > 0 && (

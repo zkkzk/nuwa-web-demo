@@ -82,8 +82,8 @@ function ToneVoiceFile({
             />
           </div>
           <div className="w-24 h-full flex flex-row items-center justify-end">
-            <span className="text-zinc-200 text-sm font-normal font-['Inter'] leading-tight">{formatTime(currentTime)}</span>
-            <span className="text-zinc-400 text-sm font-normal font-['Inter'] leading-tight">/ {formatTime(duration)}</span>
+            <span className="text-zinc-200 text-sm font-normal leading-tight">{formatTime(currentTime)}</span>
+            <span className="text-zinc-400 text-sm font-normal leading-tight">/ {formatTime(duration)}</span>
           </div>
         </div>
         <div className="self-stretch justify-between items-start gap-3 inline-flex">

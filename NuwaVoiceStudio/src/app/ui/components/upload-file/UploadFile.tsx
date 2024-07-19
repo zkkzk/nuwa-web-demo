@@ -127,13 +127,13 @@ function UploadFile({
         <>
           {accept !== "image" && (
             <div className="w-full h-full px-6 bg-zinc-800 rounded-xl justify-between items-center gap-3 inline-flex">
-              <div className="justify-start items-center gap-3 flex text-slate-100 text-base font-normal font-['Inter'] leading-normal">
+              <div className="justify-start items-center gap-3 flex text-slate-100 text-base font-normal leading-normal">
                 {fileNameIcon && (
                   <div className="w-6 h-6 justify-center items-center flex">
                     {fileNameIcon}
                   </div>
                 )}
-                <div className="text-slate-100 text-base font-normal font-['Inter'] leading-normal">
+                <div className="text-slate-100 text-base font-normal leading-normal">
                   {fileNameStr}
                 </div>
                 
@@ -161,13 +161,13 @@ function UploadFile({
                   src={fileUrl}
                 />
               )}
-              <div className=" absolute left-4 bottom-4 justify-start items-center gap-3 flex text-white text-base font-normal font-['Inter'] leading-normal">
+              <div className=" absolute left-4 bottom-4 justify-start items-center gap-3 flex text-white text-base font-normal leading-normal">
                 {fileNameIcon && (
                   <div className="w-6 h-6 justify-center items-center flex">
                     {fileNameIcon}
                   </div>
                 )}
-                <div className="text-slate-100 text-base font-normal font-['Inter'] leading-normal">
+                <div className="text-slate-100 text-base font-normal leading-normal">
                   {fileNameStr}
                 </div>
               </div>
@@ -200,7 +200,7 @@ function UploadFile({
                 <div className="cursor-pointer w-full h-full p-4 rounded-2xl border-dashed border-2 border-zinc-700 flex-col justify-center items-center gap-2 inline-flex" {...getRootProps()}>
                   <input {...getInputProps()} />
                   {icon}
-                  <div className="text-center text-zinc-400 text-xs font-medium font-['Inter']">
+                  <div className="text-center text-zinc-400 text-xs font-medium ">
                     {label}
                   </div>
                 </div>

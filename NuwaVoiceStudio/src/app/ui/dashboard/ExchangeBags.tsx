@@ -43,7 +43,7 @@ export default function ExchangeBags() {
         })
       }}>
         <FlashIcon className="w-4 h-4 fill-green-500 stroke-green-500 relative" />
-        <div className="text-center text-green-500 text-xs font-bold font-['Inter'] leading-normal">
+        <div className="text-center text-green-500 text-xs font-bold leading-normal">
           {exchangeBags}
         </div>
       </div>

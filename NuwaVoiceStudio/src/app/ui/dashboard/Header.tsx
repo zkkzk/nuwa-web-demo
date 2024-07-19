@@ -70,7 +70,7 @@ export default function Header() {
                 ></DDLSidebar>
               </div>
 
-              {/* <div className="ml-[250px] text-slate-100 text-lg font-semibold font-['Inter'] leading-7 text-nowrap">
+              {/* <div className="ml-[250px] text-slate-100 text-lg font-semibold leading-7 text-nowrap">
                 Voice Studio
               </div> */}
             </div>
@@ -99,7 +99,7 @@ export default function Header() {
                   <div
                     className={cn(
                       item.current ? 'text-[#CEFF1C]' : 'group-hover/item:text-[#CEFF1C] text-zinc-400',
-                      " text-sm font-medium font-['Inter'] leading-tight"
+                      " text-sm font-medium leading-tight"
                     )}
                   >
                     {t(item.name)}

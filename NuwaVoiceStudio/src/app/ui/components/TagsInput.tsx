@@ -34,7 +34,7 @@ function TagsInput({
             key={`${index}-${tag}`}
           >
             <div className="justify-start items-center gap-2 flex">
-              <div className="text-white text-sm font-normal font-['Inter'] leading-tight">{tag}</div>
+              <div className="text-white text-sm font-normal leading-tight">{tag}</div>
             </div>
             <XMarkIcon className="cursor-pointer w-4 h-4 stroke-zinc-400" onClick={() => handleClose(tag)}/>
           </div>
@@ -45,7 +45,7 @@ function TagsInput({
               "bg-transparent w-[200px] grow hrink",
             ]),
             inputWrapper: "bg-transparent data-[hover=true]:bg-transparent group-data-[focus=true]:bg-transparent p-0 min-h-0 h-5",
-            label: "text-zinc-400 text-sm font-normal font-['Inter'] leading-tight",
+            label: "text-zinc-400 text-sm font-normal leading-tight",
             // inputWrapper: 'bg-zinc-700'
           }}
           type="text"

@@ -1,4 +1,4 @@
-import { Inter } from "next/font/google";
+import { Inter, Roboto } from "next/font/google";
 import { notFound } from "next/navigation";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -7,7 +7,7 @@ import '@ddreamland/common/style.css'
 
 const locales = ["en"];
 
-const inter = Inter({ subsets: ["latin"] });
+const roboto = Roboto({ weight: '400', subsets: ["latin"] });
 
 export default function RootLayout({
   children,
@@ -19,7 +19,7 @@ export default function RootLayout({
   if (!locales.includes(locale as any)) notFound();
   return (
     <html lang={locale} suppressHydrationWarning>
-      <body className={inter.className}>
+      <body className={roboto.className}>
         <NextTopLoader showSpinner={false} />
         <Providers>{children}</Providers>
       </body>

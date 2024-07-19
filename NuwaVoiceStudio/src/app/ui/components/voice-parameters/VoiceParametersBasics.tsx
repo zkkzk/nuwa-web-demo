@@ -27,7 +27,7 @@ function VoiceParametersBasics({
         labelPlacement="outside"
         selectedKeys={[value.language as string]}
         classNames={{
-          label: "group[data-filled=true]:text-gray-500 group-data-[filled=true]:text-gray-500 text-gray-500 text-sm font-semibold font-['Inter'] leading-normal",
+          label: "group[data-filled=true]:text-gray-500 group-data-[filled=true]:text-gray-500 text-gray-500 text-sm font-semibold leading-normal",
         }}
         onChange={(e) => onChange({ ...value, language: e.target.value })}
       >
@@ -61,7 +61,7 @@ function VoiceParametersBasics({
         selectedKeys={[value.seg_method as string]}
         onChange={(e) => onChange({ ...value, seg_method: e.target.value })}
         classNames={{
-          label: "group[data-filled=true]:text-gray-500 group-data-[filled=true]:text-gray-500 text-gray-500 text-sm font-semibold font-['Inter'] leading-normal",
+          label: "group[data-filled=true]:text-gray-500 group-data-[filled=true]:text-gray-500 text-gray-500 text-sm font-semibold leading-normal",
         }}
       >
         {segmentationMethodListEn.map((smItem) => (

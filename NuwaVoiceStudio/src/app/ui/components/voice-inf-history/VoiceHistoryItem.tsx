@@ -52,15 +52,15 @@ function VoiceHistoryItem({
 							</div>
 								
 							<div className="grow shrink basis-0 self-stretch flex-col justify-between items-start inline-flex">
-								<div className="self-stretch text-white text-lg font-semibold font-['Archivo'] leading-normal">{voiceInfHistory.name}</div>
+								<div className="self-stretch text-white text-lg font-semibold  leading-normal">{voiceInfHistory.name}</div>
 								<div className="px-2 py-1 bg-neutral-900 rounded-md justify-center items-center gap-2 inline-flex">
-									<div className="text-white text-sm font-medium font-['Inter']">{toneListEn.find((item) => item.value === voiceInfHistory.tone.tone_type)?.label}</div>
+									<div className="text-white text-sm font-medium ">{toneListEn.find((item) => item.value === voiceInfHistory.tone.tone_type)?.label}</div>
 								</div>
 							</div>
 						</div>
 						
-						{/* <div className="self-stretch"><span className="">Your audio has been successfully generated. You may</span><span className="text-white text-sm font-medium font-['Inter']"> further customize it or simply download it for use.</span></div> */}
-						<div className="self-stretch text-white text-sm font-medium font-['Inter']">{voiceInfHistory.text}</div>
+						{/* <div className="self-stretch"><span className="">Your audio has been successfully generated. You may</span><span className="text-white text-sm font-medium "> further customize it or simply download it for use.</span></div> */}
+						<div className="self-stretch text-white text-sm font-medium ">{voiceInfHistory.text}</div>
 					</div>
 					{voiceInfHistory.inf_type === 'audio' ? (
 						useMemo(() => <VoiceHistoryItemAudio userToken={userToken} voiceInfHistory={voiceInfHistory} />, [voiceInfHistory])
@@ -72,7 +72,7 @@ function VoiceHistoryItem({
 				<div className="self-stretch h-6 flex-col justify-start items-end flex">
 					<div className="self-stretch justify-between items-center inline-flex">
 						<div className="justify-start items-start gap-2 flex">
-							<div className="text-gray-500 text-xs font-medium font-['Inter']">{moment(voiceInfHistory.seq, 'X').format('hh:mm MMMM DD YYYY')}</div>
+							<div className="text-gray-500 text-xs font-medium ">{moment(voiceInfHistory.seq, 'X').format('hh:mm MMMM DD YYYY')}</div>
 						</div>
 					</div>
 				</div>
