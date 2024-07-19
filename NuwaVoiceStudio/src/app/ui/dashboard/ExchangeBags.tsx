@@ -1,7 +1,7 @@
 'use client'
 import { useEffect, useState } from 'react'
 import { useTranslations } from 'next-intl'
-import FlashIcon from '@/app/icons/FlashIcon'
+import WholeNoteIcon from '@/app/icons/WholeNoteIcon'
 import { useExchangeDispatch } from '../components/exchange-modal/ExchangeContextProvider'
 import { getFinanceBags } from '@/app/lib/finance.api'
 
@@ -42,8 +42,8 @@ export default function ExchangeBags() {
           },
         })
       }}>
-        <FlashIcon className="w-4 h-4 fill-green-500 stroke-green-500 relative" />
-        <div className="text-center text-green-500 text-xs font-bold leading-normal">
+        <WholeNoteIcon className="w-4 h-4 fill-green-500 stroke-green-500 relative" />
+        <div className="text-center text-green-500 text-xs font-bold">
           {exchangeBags}
         </div>
       </div>

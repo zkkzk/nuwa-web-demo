@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import { Link, usePathname } from '@/navigation'
 import { useTranslations } from 'next-intl'
-import FlashIcon from '@/app/icons/FlashIcon'
+import WholeNoteIcon from '@/app/icons/WholeNoteIcon'
 import { DDLSidebar } from '@ddreamland/common'
 import { cn } from '@nextui-org/react'
 import VoiceAssetIcon from '@/app/icons/VoiceAssetIcon'

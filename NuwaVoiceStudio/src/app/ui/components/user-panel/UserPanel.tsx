@@ -195,7 +195,7 @@ export default function UserPanel({ className }: UserPanelProps) {
                   </div>
                 </div>
                 <div className="h-full flex flex-row shrink-0 grow-0 cursor-pointer">
-                  <div className="text-zinc-400 text-xs font-normal font-['Inter'] leading-none">Profile</div>
+                  <div className="text-zinc-400 text-xs font-normal leading-none">Profile</div>
                   <ChevronRightIcon className="w-3 h-3 fill-zinc-400" />
                 </div>
               </div>
@@ -209,15 +209,15 @@ export default function UserPanel({ className }: UserPanelProps) {
               <div
                 className={`w-full h-[98px] rounded-xl border border-white px-4 py-3 flex flex-col justify-between bg-[url('/imgs/wallet-bg.png')] bg-cover`}
               >
-                <div className="text-white text-sm font-medium font-['Inter'] leading-tight">Balance</div>
+                <div className="text-white text-sm font-medium leading-tight">Balance</div>
                 <div className={`flex flex-row justify-between items-end`}>
                   <div className='flex flex-col justify-center items-start'>
-                    <div className="text-white text-2xl font-bold font-['Inter'] leading-loose">
+                    <div className="text-white text-2xl font-bold leading-loose">
                       {numbro(bags).format({
                         thousandSeparated: true,
                       })}
                     </div>
-                    <div className="opacity-75 text-white text-xs font-normal font-['Inter'] leading-none">Dream Token</div>
+                    <div className="opacity-75 text-white text-xs font-normal leading-none">Dream Token</div>
                   </div>
                   <Button
                     onClick={onTopUpClicked}
